@@ -1,0 +1,226 @@
+.person-communication__container {
+  display: flex;
+  margin: 0px;
+  width: 100%;
+}
+.person-communication__social {
+  margin: 0px 20px 0px 0px;
+  width: 100%;
+  max-width: 340px;
+}
+.person-communication__social-title {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.person-communication__social-list {
+  margin: 12px 0px 0px 0px;
+  padding: 20px 22px;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+}
+.person-communication__social-item {
+  margin: 0px 0px 20px 0px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.person-communication__social-item:last-of-type {
+  margin: 0px;
+}
+.person-communication__social-img {
+  margin: 0px 12px 0px 0px;
+  border-radius: var(--border-radius);
+  background: var(--gradient-blue-color);
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.person-communication__social-icon {
+  margin: 0px;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+.person-communication__social-form {
+  margin: 0px;
+  padding: 0px;
+  background: var(--main-white-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.person-communication__social-input {
+  margin: 0px;
+  padding: 11px 10px 11px 16px;
+  width: 100%;
+  border: none;
+  border-radius: var(--border-radius);
+  outline: none;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-blue-color);
+}
+.person-communication__social-input::placeholder {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
+}
+.person-communication__social-btn {
+  margin: 0px 10px 0px 0px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  flex-shrink: 0;
+  background-color: inherit;
+  background-image: url('../../../images/upload-color.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: all .3s ease-in-out;
+}
+.person-communication__social-btn:hover {
+  background-image: url('../../../images/upload-hover.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+.person-communication__classmates {
+  margin: 0px;
+  width: 100%;
+}
+.person-communication__classmates-title {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.person-communication__classmates-container {
+  width: 100%;
+  margin: 12px 0px 0px 0px;
+  padding: 20px 22px;
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  background: var(--main-grey-color);
+}
+.person-communication__classmates-list {
+  width: 100%;
+  max-height: 160px;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.person-communication__classmates-item {
+  margin: 0px 0px 20px 0px;
+}
+.person-communication__classmates-item:last-of-type {
+  margin: 0px;
+}
+.person-communication__classmates-name {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.person-communication__classmates-social-list {
+  margin: 8px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  padding: 0px;
+  list-style-type: none;
+}
+.person-communication__classmates-social-item {
+  margin: 0px 12px 0px 0px;
+  max-width: 184px;
+  width: 100%;
+  background: var(--main-white-color);
+  border-radius: var(--border-radius);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.person-communication__classmates-social-empty {
+  margin: 0px;
+  padding: 11px 16px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
+  user-select: none;
+  pointer-events: none;
+}
+.person-communication__classmates-social-link {
+  margin: 0px;
+  padding: 11px 16px;
+  max-width: calc(184px - 48px);
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-blue-color);
+  transition: all .3s ease-in-out;
+  overflow: hidden;
+}
+.person-communication__classmates-social-link:hover {
+  text-decoration: underline;
+}
+.person-communication__classmates-social-vk {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  background-image: url('../../../images/social/vk-color.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+.person-communication__classmates-social-inst {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  background-image: url('../../../images/social/instagram-color.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+.person-communication__classmates-social-telegram {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  background-image: url('../../../images/social/telegram-color.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}

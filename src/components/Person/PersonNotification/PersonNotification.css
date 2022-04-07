@@ -1,0 +1,101 @@
+.person-notification__container {
+  margin: 0px;
+  padding-right: 15px;
+}
+.person-notification__list {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.person-notification__item {
+  margin: 0px 0px 20px 0px;
+  display: flex;
+}
+.person-notification__item:last-of-type {
+  margin: 0px;
+}
+.person-notification__img {
+  margin: 0px 12px 0px 0px;
+  width: 40px;
+  height: 40px;
+  background: var(--slider-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.person-notification__item_type_unread .person-notification__img {
+  background: var(--gradient-blue-color);
+}
+.person-notification__icon {
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../../../images/success.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.person-notification__item_type_unread .person-notification__icon {
+  background-image: url('../../../images/attention.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.person-notification__info {
+  margin: 0px 20px 0px 0px;
+  display: flex;
+  align-items: center;
+  padding: 11px 20px;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  width: 100%;
+  position: relative;
+}
+.person-notification__info:hover {
+  cursor: pointer;
+  background: var(--slider-color);
+}
+.person-notification__item_type_unread .person-notification__info:hover  {
+  background: var(--gradient-blue-color);
+}
+.person-notification__date {
+  margin: 0px 20px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+  flex-shrink: 0;
+}
+.person-notification__item_type_unread .person-notification__date  {
+  font-weight: 500;
+  color: var(--accent-blue-color);
+}
+.person-notification__item_type_unread .person-notification__info:hover .person-notification__date {
+  color: var(--main-white-color);
+}
+.person-notification__text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.person-notification__item_type_unread .person-notification__text  {
+  font-weight: 500;
+  color: var(--accent-blue-color);
+}
+.person-notification__item_type_unread .person-notification__info:hover .person-notification__text {
+  color: var(--main-white-color);
+}

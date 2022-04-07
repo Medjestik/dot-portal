@@ -1,0 +1,122 @@
+.person-rating__container {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.person-rating__star-container {
+  padding: 0px 12px;
+}
+.person-rating__section-discipline {
+  margin: 0px 20px 0px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.person-rating__section-teacher {
+  margin: 0px 20px 0px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.person-rating__form {
+  margin: 12px 0px 0px 0px;
+  width: 100%;
+  height: 150px;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid var(--slider-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+}
+.person-rating__textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+  border: none;
+  outline: none;
+  transition: .3s ease-in-out;
+}
+.person-rating__textarea::placeholder {
+  color: var(--accent-grey-color);
+}
+.person-rating__form-separator {
+  margin: 0px 16px;
+  width: 1px;
+  height: 56px;
+  background-color: var(--slider-color);
+}
+.person-rating__button {
+  margin: 0px;
+}
+.person-rating__section-score {
+  margin: 0px;
+  padding: 20px 24px;
+  box-sizing: border-box;
+  width: 252px;
+  flex-shrink: 0;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+}
+.person-rating__score-title {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.person-rating__score-container {
+  margin: 20px 0px 0px 0px;
+  overflow-y: auto;
+  height: 160px;
+}
+.person-rating__score-list {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+.person-rating__score-item {
+  display: flex;
+  align-items: center;
+  margin: 0px 0px 20px 0px;
+}
+.person-rating__score-item:last-of-type {
+  margin: 0px;
+}
+.person-rating__score-count {
+  margin: 0px 12px 0px 0px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--main-white-color);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-blue-color);
+  border-radius: var(--border-radius);
+  flex-shrink: 0;
+  user-select: none;
+  pointer-events: none;
+}
+.person-rating__score-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

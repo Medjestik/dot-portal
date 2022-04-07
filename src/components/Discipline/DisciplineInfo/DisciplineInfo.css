@@ -1,0 +1,170 @@
+.discipline-info {
+  margin: 24px 0px 0px 0px;
+  width: 100%;
+}
+.discipline-info__container {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+}
+.discipline-info__teacher {
+  margin: 0px 20px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+}
+.discipline-info__teacher-container {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+}
+.discipline-info__teacher-img {
+  margin: 0px 20px 0px 0px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--main-grey-color);
+  flex-shrink: 0;
+}
+.discipline-info__teacher-info {
+  display: flex;
+  flex-direction: column;
+}
+.discipline-info__teacher-name {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 26px;
+  color: var(--main-black-color);
+}
+.discipline-info__teacher-info-list {
+  margin: 24px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  padding: 0px;
+  list-style-type: none;
+}
+.discipline-info__teacher-info-item {
+  margin: 0px 36px 0px 0px;
+}
+.discipline-info__teacher-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.discipline-info__teacher-text_margin_top {
+  margin: 12px 0px 0px 0px;
+}
+.discipline-info__teacher-comment {
+  margin: 24px 0px 0px 0px;
+  width: 100%;
+  min-height: calc(100vh - 438px);
+  padding: 16px 24px;
+  box-sizing: border-box;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+}
+.discipline-info__teacher-comment-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.discipline-info__document {
+  margin: 0px;
+  width: 100%;
+}
+.discipline-info__table {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.discipline-info__table-header {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.discipline-info__table-main-row {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--slider-color);
+}
+.discipline-info__table-row:last-of-type .discipline-info__table-main-row {
+  border: none;
+}
+.discipline-info__table-sub-row_type_header {
+  padding-right: 60px;
+  width: 5px;
+}
+.discipline-info__table-row {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.discipline-info__table-column {
+  margin: 0px 32px 0px 0px;
+  padding: 12px 0px;
+  box-sizing: border-box;
+}
+.discipline-info__table-main {
+  margin: 0px;
+  padding: 0px 20px 0px 0px;
+  list-style-type: none;
+  overflow-y: scroll;
+  max-height: calc(100vh - 335px);
+}
+.discipline-info__table-count {
+  width: 30px;
+  flex-shrink: 0;
+}
+.discipline-info__table-date {
+  width: 57px;
+  flex-shrink: 0;
+}
+.discipline-info__table-name {
+  width: 100%;
+  flex-shrink: 1;
+}
+.discipline-info__table-btn {
+  width: 40px;
+  min-height: 40px;
+  margin: 0px 0px 0px 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+.discipline-info__table-btn_type_header {
+  width: 72px;
+}
+.discipline-info__table-btn-download {
+  margin: 0px;
+}
+.discipline-info__table-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.discipline-info__table-text_type_header {
+  font-weight: 500;
+}

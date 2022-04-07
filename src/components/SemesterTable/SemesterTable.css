@@ -1,0 +1,79 @@
+.semester-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.semester-table__line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 12px 0px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--slider-color);
+}
+.semester-table__line:last-of-type {
+  border-bottom: none;
+}
+.semester-table__line-list {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+.semester-table__header {
+  padding: 0px 0px 12px 0px;
+}
+.semester-table__column {
+  margin: 0px 32px 0px 0px;
+}
+.semester-table__column-number {
+  width: 30px;
+  flex-shrink: 0;
+}
+.semester-table__column-time {
+  width: 98px;
+  flex-shrink: 0;
+}
+.semester-table__column-discipline {
+  width: 100%;
+  flex-shrink: 1;
+}
+.semester-table__column-teacher {
+  width: 100%;
+  flex-shrink: 1;
+}
+.semester-table__column-type {
+  width: 64px;
+  flex-shrink: 0;
+}
+.semester-table__column-score {
+  width: 81px;
+  flex-shrink: 0;
+}
+.semester-table__column-comment {
+  width: 153px;
+  flex-shrink: 0;
+}
+.semester-table__text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px; 
+  color: var(--main-black-color);
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: all .3s ease-in-out;
+}
+.semester-table__text_weight_bold {
+  font-weight: 500;
+}
+.semester-table__text_color_grey {
+  color: var(--accent-grey-color);
+}
+.semester-table__text_type_active:hover {
+  color: var(--accent-blue-color);
+  cursor: pointer;
+}

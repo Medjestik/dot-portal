@@ -1,0 +1,127 @@
+.person-education__container {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+}
+.person-education__status {
+  margin: 0px 20px 0px 0px;
+  width: 180px;
+  height: 180px;
+  background: var(--gradient-blue-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.person-education__status-icon {
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  object-position: center;
+}
+.person-education__status-count {
+  margin: 8px 0px 0px 0px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+  color: var(--main-white-color);
+}
+.person-education__status-text {
+  margin: 12px 0px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--main-white-color);
+}
+.person-education__list {
+  padding: 0px;
+  list-style-type: none;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  max-height: 180px;
+  overflow-y: auto;
+  width: 100%;
+}
+.person-education__item {
+  margin: 0px 20px 20px 0px;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 30px);
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  padding: 25px 32px;
+  box-sizing: border-box;
+}
+.person-education__item:last-of-type {
+  margin: 0px;
+}
+.person-education__indicators {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+.person-education__indicator {
+  display: flex;
+  align-items: center;
+  margin: 0px 44px 0px 0px;
+}
+.person-education__indicator:last-of-type {
+  margin: 0px 62px 0px 0px;
+}
+.person-education__indicator-count {
+  margin: 0px 12px 0px 0px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 30px;
+  color: var(--accent-blue-color);
+}
+.person-education__indicator-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.person-education__slider-background {
+  margin: 0px;
+  width: 100%;
+  height: 12px;
+  background: var(--main-white-color);
+  border-radius: var(--border-radius);
+}
+.person-education__slider {
+  margin: 0px;
+  width: 0%;
+  height: 12px;
+  background: var(--accent-blue-color);
+  border-radius: var(--border-radius);
+}
+.person-education__indicator-count_type_over {
+  color: var(--main-black-color);
+}
+.person-education__indicator-count_type_current {
+  color: var(--accent-blue-color);
+}
+.person-education__indicator-count_type_over {
+  color: var(--accent-grey-color);
+}
+.person-education__indicator-text_type_over {
+  color: var(--accent-grey-color);
+}
+.person-education__slider_type_over {
+  background: var(--accent-grey-color);
+}
