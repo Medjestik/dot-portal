@@ -36,7 +36,7 @@
 .accordion__info {
   display: none;
   margin: 0px;
-  background-image: url('../../images/question.png');
+  background-image: url('../../images/question.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -46,7 +46,7 @@
 }
 .accordion__info:hover {
   cursor: pointer;
-  background-image: url('../../images/question-color.png');
+  background-image: url('../../images/question-color.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

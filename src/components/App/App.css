@@ -31,6 +31,10 @@
   flex-direction: column;
   scroll-behavior: smooth;
 }
+.wrapper {
+  margin-left: calc(100vw - 100%);
+  width: calc(200% - 100vw);
+}
 .container {
   max-width: 1440px;
   width: 100%;
@@ -67,7 +71,7 @@
 .gear {
   width: 16px;
   height: 16px;
-  background: url('../../images/gear.png');
+  background: url('../../images/gear.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -75,7 +79,7 @@
 }
 .gear:hover {
   cursor: pointer;
-  background: url('../../images/gear-color.png');
+  background: url('../../images/gear-color.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

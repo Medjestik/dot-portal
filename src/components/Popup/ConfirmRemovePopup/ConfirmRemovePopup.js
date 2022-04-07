@@ -17,7 +17,7 @@ function ConfirmRemovePopup({ isOpen, onClose, file }) {
     <Popup isOpen={isOpen} onClose={onClose} >
       <form className='popup__form popup__form_type_small' name='person-area-confirm-remove-popup' action='#' noValidate onSubmit={handleSubmit}>
         <h2 className='popup__title'>Удаление файла</h2>
-        <p className='popup__subtitle'>Вы действительно хотите удалить файл?</p>
+        <p className='popup__subtitle'>Вы действительно хотите отправить запрос на&nbsp;удаление?</p>
 
         <div className='popup__btn-container'>
           <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>

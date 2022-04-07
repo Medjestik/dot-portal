@@ -9,25 +9,27 @@ function App() {
 
   return (
     <div className='page'>
-      <div className='container'>
-          <Header />
-          <div className='main-container'>
-            <Routes>
-              <Route 
-              exact 
-              path='/person' 
-              element={
-              <Person />}
-              />
-            </Routes>
-            <Routes>
-              <Route 
-              path='/education/*' 
-              element={
-              <Education />}
-              />
-            </Routes>
-          </div>
+      <div className='wrapper'>
+        <div className='container'>
+            <Header />
+            <div className='main-container'>
+              <Routes>
+                <Route 
+                exact 
+                path='/person' 
+                element={
+                <Person />}
+                />
+              </Routes>
+              <Routes>
+                <Route 
+                path='/education/*' 
+                element={
+                <Education />}
+                />
+              </Routes>
+            </div>
+        </div>
       </div>
     </div>
   );

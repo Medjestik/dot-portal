@@ -101,7 +101,7 @@
   height: 176px;
   display: flex;
   flex-direction: column;
-  padding: 20px 32px;
+  padding: 20px;
   box-sizing: border-box;
   background: var(--main-grey-color);
   border-radius: var(--border-radius);
@@ -140,7 +140,7 @@
   height: 176px;
   display: flex;
   flex-direction: column;
-  padding: 20px 32px;
+  padding: 20px;
   box-sizing: border-box;
   background: var(--main-grey-color);
   border-radius: var(--border-radius);

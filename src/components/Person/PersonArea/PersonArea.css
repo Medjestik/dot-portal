@@ -233,7 +233,7 @@
 .person-area__education {
   margin: 32px 0px 0px 0px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 112px 120px;
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 20px;

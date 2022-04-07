@@ -1,6 +1,6 @@
 import React from 'react';
 import './PersonArea.css';
-import groupIcon from '../../../images/group.png';
+import groupIcon from '../../../images/group.svg';
 import PersonAreaPhotoPopup from './PersonAreaPhotoPopup/PersonAreaPhotoPopup.js';
 import PersonAreaChangePasswordPopup from './PersonAreaChangePasswordPopup/PersonAreaChangePasswordPopup.js';
 import PersonAreaDatePopup from './PersonAreaDatePopup/PersonAreaDatePopup.js';

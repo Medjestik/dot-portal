@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ae9c65bd.css",
-    "main.js": "/static/js/main.426358a7.js",
+    "main.css": "/static/css/main.32dd050f.css",
+    "main.js": "/static/js/main.5004c555.js",
     "static/js/787.1955ab40.chunk.js": "/static/js/787.1955ab40.chunk.js",
     "static/media/dekan.png": "/static/media/dekan.4ec09b20b694930d6656.png",
     "static/media/Robotomediumitalic.ttf": "/static/media/Robotomediumitalic.35abcf5eb54b0c398e52.ttf",
@@ -40,13 +40,21 @@
     "static/media/Robotolight.woff2": "/static/media/Robotolight.95ff440a51f48ad36a98.woff2",
     "static/media/Roboto.woff2": "/static/media/Roboto.806e04d8241d87f99a68.woff2",
     "static/media/Robotothin.woff2": "/static/media/Robotothin.30581100ea069d04b86a.woff2",
+    "static/media/group-rating.svg": "/static/media/group-rating.5635b86108a6c8dc4ea000a7d3be1529.svg",
+    "static/media/group.svg": "/static/media/group.e5dac1189cba40fcb8510af384661055.svg",
+    "static/media/question-color.svg": "/static/media/question-color.d31a3144c75566f0a16c.svg",
+    "static/media/main-rating.svg": "/static/media/main-rating.eee3972d055bbc95b29e280300336a76.svg",
+    "static/media/question.svg": "/static/media/question.404f7341dd509455fab0.svg",
+    "static/media/gear-color.svg": "/static/media/gear-color.e2ddaafdc1333fc35be5.svg",
+    "static/media/gear.svg": "/static/media/gear.a92a562a52a667e56861.svg",
     "index.html": "/index.html",
-    "main.ae9c65bd.css.map": "/static/css/main.ae9c65bd.css.map",
-    "main.426358a7.js.map": "/static/js/main.426358a7.js.map",
+    "static/media/status-white.svg": "/static/media/status-white.5e2aa43d43fea8c6d9faa661361933d7.svg",
+    "main.32dd050f.css.map": "/static/css/main.32dd050f.css.map",
+    "main.5004c555.js.map": "/static/js/main.5004c555.js.map",
     "787.1955ab40.chunk.js.map": "/static/js/787.1955ab40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ae9c65bd.css",
-    "static/js/main.426358a7.js"
+    "static/css/main.32dd050f.css",
+    "static/js/main.5004c555.js"
   ]
 }

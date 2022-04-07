@@ -2,8 +2,8 @@ import React from 'react';
 import './PersonAchievement.css';
 import Accordion from '../../Accordion/Accordion.js';
 import achievementIcon from '../../../images/accordion/accordion-achievement.png';
-import groupRating from '../../../images/group-rating.png';
-import mainRating from '../../../images/main-rating.png';
+import groupRating from '../../../images/group-rating.svg';
+import mainRating from '../../../images/main-rating.svg';
 import PersonAchievementInfoPopup from './PersonAchievementInfoPopup/PersonAchievementInfoPopup.js';
 
 function PersonAchievement({ user }) {
@@ -27,7 +27,7 @@ function PersonAchievement({ user }) {
     <Accordion icon={achievementIcon} name='Рейтинг и достижения' height={322} openInfoPopup={openInfoPopup}>
       <div className='person-achievement'>
         <div className='person-achievement__rating'>
-          <p className='person-achievement__subtitle'>Ваша оценка достижений среди обучающихся.</p>
+          <p className='person-achievement__subtitle'>Ваша оценка достижений среди обучающихся</p>
           <div className='person-achievement__container'>
             <div className='person-achievement__group-rating'>
               <img className='person-achievement__group-rating-img' src={groupRating} alt="иконка место в группе"></img>
