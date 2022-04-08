@@ -39,6 +39,12 @@ function Header() {
             </div>
             <p className='header__nav-link-text'>Документы</p>
           </NavLink>
+          <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/library'>
+            <div className='header__nav-link-icon'>
+              <div className='header__nav-link-icon_type_library'></div>
+            </div>
+            <p className='header__nav-link-text'>Библиотека</p>
+          </NavLink>
         </nav>
         
         <button className='header__nav-link header__nav-link_type_logout'>

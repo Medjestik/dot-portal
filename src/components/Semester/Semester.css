@@ -29,7 +29,7 @@
 .semester__select-arrow {
   width: 24px;
   height: 24px;
-  background-image: url('../../images/arrow-big-color.png');
+  background-image: url('../../images/arrow.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
@@ -59,7 +59,7 @@
 .semester__btn-back-arrow {
   width: 24px;
   height: 24px;
-  background-image: url('../../images/arrow-big-color.png');
+  background-image: url('../../images/arrow.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
@@ -98,39 +98,52 @@
   background-color: inherit;
 }
 .semester__control-btn_type_notifications {
-  background-image: url('../../images/semester/notification-color.png');
+  background-image: url('../../images/menu/notification-color.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
 }
 .semester__control-item-container:hover  .semester__control-btn_type_notifications {
-  background-image: url('../../images/semester/notification.png');
+  background-image: url('../../images/menu/notification.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
   cursor: pointer;
 }
 .semester__control-btn_type_home {
-  background-image: url('../../images/semester/home-color.png');
+  background-image: url('../../images/menu/home-color.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
 }
 .semester__control-item-container:hover .semester__control-btn_type_home {
-  background-image: url('../../images/semester/home.png');
+  background-image: url('../../images/menu/home.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.semester__control-btn_type_error {
+  background-image: url('../../images/menu/error-color.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+.semester__control-item-container:hover .semester__control-btn_type_error {
+  background-image: url('../../images/menu/error.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
   cursor: pointer;
 }
 .semester__control-btn_type_exit {
-  background-image: url('../../images/semester/exit-color.png');
+  background-image: url('../../images/menu/exit-color.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
 }
 .semester__control-item-container:hover .semester__control-btn_type_exit {
-  background-image: url('../../images/semester/exit.png');
+  background-image: url('../../images/menu/exit.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;

@@ -31,6 +31,11 @@ function Semester({ isDisciplineOpen, backToSemester }) {
         </li>
         <li className='semester__control-item'>
           <div className='semester__control-item-container'>
+            <button className='semester__control-btn semester__control-btn_type_error' type='button'></button>
+          </div>
+        </li>
+        <li className='semester__control-item'>
+          <div className='semester__control-item-container'>
             <button className='semester__control-btn semester__control-btn_type_exit' type='button'></button>
           </div>
         </li>

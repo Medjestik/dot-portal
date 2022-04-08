@@ -1,7 +1,7 @@
 import React from 'react';
 import './PersonDeclaration.css';
 import Accordion from '../../Accordion/Accordion.js';
-import declarationIcon from '../../../images/accordion/accordion-declaration.png';
+import declarationIcon from '../../../images/accordion/accordion-declaration.svg';
 import PersonDeclarationInfoPopup from './PersonDeclarationInfoPopup/PersonDeclarationInfoPopup.js';
 import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 

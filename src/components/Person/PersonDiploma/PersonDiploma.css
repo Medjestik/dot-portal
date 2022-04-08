@@ -203,14 +203,14 @@
   margin: 0px;
   width: 20px;
   height: 20px;
-  background-image: url('../../../images/upload-color.png');
+  background-image: url('../../../images/button/upload-color.svg');
   background-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
   transition: all .3s ease-in-out;
 }
 .person-diploma__upload-field:hover .person-diploma__upload-icon {
-  background-image: url('../../../images/upload-hover.png');
+  background-image: url('../../../images/button/upload-hover.svg');
   background-size: 20px;
   background-repeat: no-repeat;
   background-position: center;

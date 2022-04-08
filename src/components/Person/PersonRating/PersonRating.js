@@ -1,12 +1,12 @@
 import React from 'react';
 import './PersonRating.css';
 import Accordion from '../../Accordion/Accordion.js';
-import ratingIcon from '../../../images/accordion/accordion-rating.png';
+import ratingIcon from '../../../images/accordion/accordion-rating.svg';
 import PersonRatingInfoPopup from './PersonRatingInfoPopup/PersonRatingInfoPopup.js';
 import StarRating from '../../StarRating/StarRating.js';
 import PersonRatingSelect from './PersonRatingSelect/PersonRatingSelect.js';
-import disciplineIcon from '../../../images/discipline-color.png';
-import teacherIcon from '../../../images/teacher-color.png';
+import disciplineIcon from '../../../images/form/discipline-color.svg';
+import teacherIcon from '../../../images/form/teacher-color.svg';
 
 function PersonRating({ scores }) {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './PersonAchievement.css';
 import Accordion from '../../Accordion/Accordion.js';
-import achievementIcon from '../../../images/accordion/accordion-achievement.png';
+import achievementIcon from '../../../images/accordion/accordion-achievement.svg';
 import groupRating from '../../../images/group-rating.svg';
 import mainRating from '../../../images/main-rating.svg';
 import PersonAchievementInfoPopup from './PersonAchievementInfoPopup/PersonAchievementInfoPopup.js';

@@ -12,19 +12,19 @@
   cursor: pointer;
   width: 24px;
   height: 24px;
-  background-image: url('../../images/rating-star.png');
+  background-image: url('../../images/rating-star.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 .star-rating__btn_type_on {
-  background-image: url('../../images/rating-star-color.png');
+  background-image: url('../../images/rating-star-color.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 .star-rating__btn_type_off {
-  background-image: url('../../images/rating-star.png');
+  background-image: url('../../images/rating-star.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

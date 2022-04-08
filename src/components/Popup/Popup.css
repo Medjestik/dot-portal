@@ -263,25 +263,25 @@
   cursor: pointer;
 }
 .popup__input-icon-password_type_show {
-  background-image: url('../../images/password-show.png');
+  background-image: url('../../images/form/password-show.svg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 .popup__input-icon-password_type_show:hover {
-  background-image: url('../../images/password-show-color.png');
+  background-image: url('../../images/form/password-show-color.svg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 .popup__input-icon-password_type_hide {
-  background-image: url('../../images/password-hide.png');
+  background-image: url('../../images/form/password-hide.svg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
 .popup__input-icon-password_type_hide:hover {
-  background-image: url('../../images/password-hide-color.png');
+  background-image: url('../../images/form/password-hide-color.svg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

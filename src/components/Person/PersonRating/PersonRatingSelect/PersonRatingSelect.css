@@ -35,11 +35,11 @@
   height: 16px;
   object-fit: contain;
   object-position: center;
-  transform: rotate(-180deg);
+  transform: rotate(0deg);
   transition: all .3s ease-in-out;
 }
 .person-rating__select-arrow_type_show {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 .person-rating__select-input {
   margin: 0px;

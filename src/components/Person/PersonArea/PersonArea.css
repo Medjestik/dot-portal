@@ -33,14 +33,14 @@
   height: 32px;
   bottom: 18px;
   left: 44px;
-  background-image: url('../../../images/photo.png');
+  background-image: url('../../../images/photo.svg');
   background-position: center;
   background-size: 32px;
   background-repeat: no-repeat;
   z-index: 5;
 }
 .person-area__photo-empty:hover::after {
-  background-image: url('../../../images/photo-color.png');
+  background-image: url('../../../images/photo-color.svg');
   background-position: center;
   background-size: 32px;
   background-repeat: no-repeat;

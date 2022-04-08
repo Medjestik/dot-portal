@@ -1,7 +1,7 @@
 import React from 'react';
 import './PersonEducation.css';
 import Accordion from '../../Accordion/Accordion.js';
-import educationIcon from '../../../images/accordion/accordion-education.png';
+import educationIcon from '../../../images/accordion/accordion-education.svg';
 import statusIcon from '../../../images/status-white.svg';
 import PersonEducationInfoPopup from './PersonEducationInfoPopup/PersonEducationInfoPopup.js';
 

@@ -58,7 +58,7 @@
   margin: 0px 0px 0px 10px;
   width: 24px;
   height: 24px;
-  background-image: url('../../images/arrow-big-white.png');
+  background-image: url('../../images/arrow-white.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
@@ -135,7 +135,7 @@
 .discipline__header-date-arrow-prev {
   width: 24px;
   height: 24px;
-  background-image: url('../../images/arrow-big-color.png');
+  background-image: url('../../images/arrow.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
@@ -144,7 +144,7 @@
 .discipline__header-date-arrow-next {
   width: 24px;
   height: 24px;
-  background-image: url('../../images/arrow-big-color.png');
+  background-image: url('../../images/arrow.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;

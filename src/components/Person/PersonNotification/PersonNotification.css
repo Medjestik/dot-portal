@@ -35,13 +35,13 @@
   margin: 0px;
   width: 20px;
   height: 20px;
-  background-image: url('../../../images/success.png');
+  background-image: url('../../../images/button/success.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 .person-notification__item_type_unread .person-notification__icon {
-  background-image: url('../../../images/attention.png');
+  background-image: url('../../../images/button/attention.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

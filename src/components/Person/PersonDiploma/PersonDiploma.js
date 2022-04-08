@@ -1,8 +1,8 @@
 import React from 'react';
 import './PersonDiploma.css';
 import Accordion from '../../Accordion/Accordion.js';
-import diplomaIcon from '../../../images/accordion/accordion-diploma.png';
-import searchIcon from '../../../images/search.png';
+import diplomaIcon from '../../../images/accordion/accordion-diploma.svg';
+import searchIcon from '../../../images/search.svg';
 import PersonDiplomaInfoPopup from './PersonDiplomaInfoPopup/PersonDiplomaInfoPopup.js';
 
 function PersonDiploma() {

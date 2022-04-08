@@ -38,7 +38,7 @@
 .container {
   max-width: 1440px;
   width: 100%;
-  padding: 12px 40px;
+  padding: 12px 34px;
   margin: 0px auto;
   display: flex;
   box-sizing: border-box;
@@ -137,7 +137,7 @@ input[type=number] {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-image: url('../../images/download.png');
+  background-image: url('../../images/button/download.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -176,7 +176,7 @@ input[type=number] {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-image: url('../../images/upload.png');
+  background-image: url('../../images/button/upload.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -215,7 +215,7 @@ input[type=number] {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-image: url('../../images/cancel.png');
+  background-image: url('../../images/button/cancel.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -254,7 +254,7 @@ input[type=number] {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-image: url('../../images/save.png');
+  background-image: url('../../images/button/save.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;

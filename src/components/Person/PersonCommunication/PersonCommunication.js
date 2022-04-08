@@ -1,10 +1,10 @@
 import React from 'react';
 import './PersonCommunication.css';
 import Accordion from '../../Accordion/Accordion.js';
-import communicationIcon from '../../../images/accordion/accordion-communication.png';
-import vkIcon from '../../../images/social/vk.png';
-import instagramIcon from '../../../images/social/instagram.png';
-import telegramIcon from '../../../images/social/telegram.png';
+import communicationIcon from '../../../images/accordion/accordion-communication.svg';
+import vkIcon from '../../../images/social/vk.svg';
+import instagramIcon from '../../../images/social/instagram.svg';
+import telegramIcon from '../../../images/social/telegram.svg';
 import PersonCommunicationInfoPopup from './PersonCommunicationInfoPopup/PersonCommunicationInfoPopup.js';
 
 function PersonCommunication({ user, userSocialClassmates }) {

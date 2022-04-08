@@ -1,6 +1,6 @@
 import React from 'react';
 import './PersonRatingSelect.css';
-import arrow from '../../../../images/arrow-color.png';
+import arrow from '../../../../images/arrow.svg';
 import useOnClickOutside from '../../../../hooks/useOnClickOutside.js';
 
 function PersonRatingSelect({ id, options, placeholder, icon, onSelect }) {
