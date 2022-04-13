@@ -1,9 +1,9 @@
 import React from 'react';
 import './PersonDocument.css';
 import Accordion from '../../Accordion/Accordion.js';
-import documentIcon from '../../../images/accordion/accordion-document.svg';
 import PersonDocumentInfoPopup from './PersonDocumentInfoPopup/PersonDocumentInfoPopup.js';
 import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
+import documentIcon from '../../../images/accordion/accordion-document.svg';
 
 function PersonDocument({ user, userDocuments, userCheck }) { 
 

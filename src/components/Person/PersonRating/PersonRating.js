@@ -1,12 +1,12 @@
 import React from 'react';
 import './PersonRating.css';
 import Accordion from '../../Accordion/Accordion.js';
-import ratingIcon from '../../../images/accordion/accordion-rating.svg';
 import PersonRatingInfoPopup from './PersonRatingInfoPopup/PersonRatingInfoPopup.js';
 import StarRating from '../../StarRating/StarRating.js';
 import PersonRatingSelect from './PersonRatingSelect/PersonRatingSelect.js';
 import disciplineIcon from '../../../images/form/discipline-color.svg';
 import teacherIcon from '../../../images/form/teacher-color.svg';
+import ratingIcon from '../../../images/accordion/accordion-rating.svg';
 
 function PersonRating({ scores }) {
 
@@ -72,6 +72,7 @@ function PersonRating({ scores }) {
       stars: disciplineStarsRating,
       text: disciplineFeedback,
     }
+    console.log(feedback);
   }
 
   function handleChangeTeacherSelect(teacher) {
@@ -93,6 +94,7 @@ function PersonRating({ scores }) {
       stars: teacherStarsRating,
       text: teacherFeedback,
     }
+    console.log(feedback);
   }
 
   React.useEffect(() => {

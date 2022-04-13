@@ -1,5 +1,6 @@
 import React from 'react';
 import './DisciplineInfo.css';
+import Table from '../../Table/Table.js';
 
 function DisciplineInfo({ currentDiscipline, documents }) {
 
@@ -28,50 +29,46 @@ function DisciplineInfo({ currentDiscipline, documents }) {
           </div>
         </div>
         <div className='discipline-info__document'>
-          <div className='discipline-info__table'>
-            <div className='discipline-info__table-header'>
-              <div className='discipline-info__table-main-row'>
-                <div className='discipline-info__table-column discipline-info__table-count'>
-                  <p className='discipline-info__table-text discipline-info__table-text_type_header'>№</p>
+          <Table>
+            <div className='table__header'>
+              <div className='table__main-column'>
+                <div className='table__column table__column_type_header table__column_type_count'>
+                  <p className='table__text table__text_type_header'>№</p>
                 </div>
-                <div className='discipline-info__table-column discipline-info__table-date'>
-                  <p className='discipline-info__table-text discipline-info__table-text_type_header'>Дата</p>
+                <div className='table__column table__column_type_header table__column_type_date'>
+                  <p className='table__text table__text_type_header'>Дата</p>
                 </div>
-                <div className='discipline-info__table-column discipline-info__table-name'>
-                  <p className='discipline-info__table-text discipline-info__table-text_type_header'>Наименование</p>
+                <div className='table__column table__column_type_header table__column_type_name'>
+                  <p className='table__text table__text_type_header'>Наименование</p>
                 </div>
               </div>
-              <div className='discipline-info__table-sub-row'>
-                <div className='discipline-info__table-btn discipline-info__table-btn_type_header'>
-                </div>
+              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
               </div>
             </div>
-            <ul className='discipline-info__table-main scroll'>
+            <ul className='table__main table__main_type_info scroll'>
               {
                 documents.map((item, i) => (
-                  <li className='discipline-info__table-row'>
-                    <div className='discipline-info__table-main-row'>
-                      <div className='discipline-info__table-column discipline-info__table-count'>
-                        <p className='discipline-info__table-text'>{i + 1}</p>
+                  <li className='table__row' key={i}>
+                    <div className='table__main-column'>
+                      <div className='table__column table__column_type_count'>
+                        <p className='table__text'>{i + 1}</p>
                       </div>
-                      <div className='discipline-info__table-column discipline-info__table-date'>
-                        <p className='discipline-info__table-text'>{item.date}</p>
+                      <div className='table__column table__column_type_date'>
+                        <p className='table__text'>{item.date}</p>
                       </div>
-                      <div className='discipline-info__table-column discipline-info__table-name'>
-                        <p className='discipline-info__table-text'>{item.title}</p>
+                      <div className='table__column table__column_type_name'>
+                        <p className='table__text'>{item.title}</p>
                       </div>
                     </div>
-                    <div className='discipline-info__table-sub-row'>
-                      <div className='discipline-info__table-btn'>
-                        <button className='btn btn_type_download btn_type_download_status_active discipline-info__table-btn-download'></button>
-                      </div>
+                    <div className='table__column table__column_type_btn'>
+                      <button className='btn btn_type_download btn_type_download_status_active table__btn'></button>
                     </div>
                   </li>
                 ))
               }
             </ul>
-
-          </div>
+          </Table>
         </div>
 
       </div>

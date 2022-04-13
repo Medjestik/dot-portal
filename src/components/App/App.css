@@ -276,3 +276,106 @@ input[type=number] {
   opacity: .8;
   box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
 }
+.btn_type_large {
+  width: 180px;
+  padding: 11px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  transition: all .3s ease-in-out;
+  flex-shrink: 0;
+}
+.btn-cancel_type_large {
+  margin: 0px 12px 0px 0px;
+  background: inherit;
+  border: 1px solid var(--slider-color);
+  border-radius: var(--border-radius);
+  color: var(--main-black-color);
+}
+.btn-cancel_type_large:hover  {
+  font-weight: 500;
+  cursor: pointer;
+  user-select: auto;
+  pointer-events: all;
+  opacity: .8;
+  border: 1px solid var(--accent-blue-color);
+  color: var(--main-black-color);
+}
+.btn-save_type_large {
+  margin: 0px;
+  background: var(--gradient-blue-color);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--main-white-color);
+}
+.btn-save_type_large:hover  {
+  cursor: pointer;
+  user-select: auto;
+  pointer-events: all;
+  opacity: .8;
+  box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
+}
+.btn-save_type_large_status_block {
+  background: var(--slider-color);
+  border-radius: var(--border-radius);
+  user-select: none;
+  pointer-events: none;
+}
+.upload-form {
+  width: 100%;
+  margin: 12px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+}
+.upload-form__field {
+  width: 100%;
+  margin: 0px 16px 0px 0px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  background: #F1F3F5;
+  border-radius: var(--border-radius);
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+}
+.upload-form__field:hover {
+  cursor: pointer;
+}
+.upload-form__text {
+  margin: 0px 16px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
+  max-width: 368px;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.upload-form__icon {
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../../images/button/upload-color.svg');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all .3s ease-in-out;
+}
+.upload-form__field:hover .upload-form__icon {
+  background-image: url('../../images/button/upload-hover.svg');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.upload-form__input {
+  display: none;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+}

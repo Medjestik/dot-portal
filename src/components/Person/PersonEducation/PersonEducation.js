@@ -1,9 +1,9 @@
 import React from 'react';
 import './PersonEducation.css';
 import Accordion from '../../Accordion/Accordion.js';
+import PersonEducationInfoPopup from './PersonEducationInfoPopup/PersonEducationInfoPopup.js';
 import educationIcon from '../../../images/accordion/accordion-education.svg';
 import statusIcon from '../../../images/status-white.svg';
-import PersonEducationInfoPopup from './PersonEducationInfoPopup/PersonEducationInfoPopup.js';
 
 function PersonEducation({ user, userEducation }) {
 
@@ -41,7 +41,7 @@ function PersonEducation({ user, userEducation }) {
     <Accordion icon={educationIcon} name='Обучение' height={296} openInfoPopup={openInfoPopup}>
       <div className='person-education__container'>
         <div className='person-education__status'>
-          <img className='person-education__status-icon' src={statusIcon} alt='иконка статуса'></img>
+          <img className='person-education__status-icon' alt='иконка' src={statusIcon}></img>
           <span className='person-education__status-count'>{user.educationStatus}%</span>
           <p className='person-education__status-text'>Статус обучения</p>
         </div>

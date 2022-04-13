@@ -1,0 +1,45 @@
+.month {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+}
+.month__text {
+  margin: 0px 20px 0px 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--main-black-color);
+}
+.month__arrow-container {
+  margin: 0px 12px 0px 0px;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.month__arrow-container:last-of-type {
+  margin: 0px;
+}
+.month__arrow-prev {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/arrow.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  transform: rotate(90deg);
+}
+.month__arrow-next {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/arrow.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  transform: rotate(270deg);
+}

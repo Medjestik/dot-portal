@@ -66,6 +66,16 @@
   justify-content: center;
   align-items: center;
 }
+.header__nav-link-icon-container {
+  width: 24px;
+  height: 24px;
+}
+.header__nav-link-icon-container svg {
+  fill: var(--accent-grey-color);
+}
+.header__nav-link_type_active .header__nav-link-icon-container svg {
+  fill: var(--main-white-color);
+}
 .header__nav-link:hover .header__nav-link-icon {
   background: var(--main-grey-color);
 }

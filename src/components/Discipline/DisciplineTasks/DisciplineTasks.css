@@ -1,0 +1,17 @@
+.discipline-tasks {
+  margin: 0px 0px 12px 0px;
+  width: 100%;
+}
+.discipline-tasks__caption {
+  margin: 24px 0px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: var(--main-black-color);
+}
+.table__main_type_tasks {
+  max-height: calc(100vh - 358px - 90px);
+}

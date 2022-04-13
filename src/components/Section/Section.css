@@ -40,7 +40,7 @@
 }
 .section__student-container {
   width: 100%;
-  min-height: 260px;
+  min-height: calc(100vh - 40px - 20px - 20px - 44px);
   margin: -80px 0px 0px 0px;
   padding: 36px;
   background: var(--main-white-color);

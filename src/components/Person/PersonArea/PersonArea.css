@@ -13,7 +13,27 @@
   margin: 0px 20px 0px 0px;
 }
 .person-area__photo {
-
+  width: 120px;
+  height: 120px;
+  background: var(--main-grey-color);
+  border-radius: 50%;
+  position: relative;
+  transition: all .3s ease-in-out;
+}
+.person-area__photo-icon {
+  display: none;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  bottom: 18px;
+  left: 44px;
+  fill: var(--accent-grey-color);
+  z-index: 5;
+  transition: all .3s ease-in-out;
+}
+.person-area__photo-icon:hover {
+  cursor: pointer;
+  fill: var(--accent-blue-color);
 }
 .person-area__photo-empty {
   width: 120px;
@@ -23,27 +43,10 @@
   position: relative;
   transition: all .3s ease-in-out;
 }
+.person-area__photo-empty:hover .person-area__photo-icon {
+  display: block;
+}
 .person-area__photo-empty:hover {
-  cursor: pointer;
-}
-.person-area__photo-empty::after {
-  content: '';
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  bottom: 18px;
-  left: 44px;
-  background-image: url('../../../images/photo.svg');
-  background-position: center;
-  background-size: 32px;
-  background-repeat: no-repeat;
-  z-index: 5;
-}
-.person-area__photo-empty:hover::after {
-  background-image: url('../../../images/photo-color.svg');
-  background-position: center;
-  background-size: 32px;
-  background-repeat: no-repeat;
   cursor: pointer;
 }
 .person-area__data-login {
@@ -258,8 +261,8 @@
 .person-area__group-icon {
   width: 32px;
   height: 32px;
-  object-position: center;
   object-fit: contain;
+  object-position: center;
 }
 .person-area__group-title {
   margin: 16px 0px 0px 0px;

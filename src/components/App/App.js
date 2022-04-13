@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from '../Header/Header.js';
 import Person from '../Person/Person.js';
 import Education from '../Education/Education.js';
+import Webinar from '../Webinar/Webinar.js';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <div className='container'>
             <Header />
             <div className='main-container'>
+
               <Routes>
                 <Route 
                 exact 
@@ -21,6 +23,7 @@ function App() {
                 <Person />}
                 />
               </Routes>
+
               <Routes>
                 <Route 
                 path='/education/*' 
@@ -28,6 +31,15 @@ function App() {
                 <Education />}
                 />
               </Routes>
+
+              <Routes>
+                <Route 
+                path='/webinars' 
+                element={
+                <Webinar />}
+                />
+              </Routes>
+
             </div>
         </div>
       </div>

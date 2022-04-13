@@ -61,7 +61,7 @@
   box-sizing: border-box;
 }
 .person-education__item:last-of-type {
-  margin: 0px;
+  margin: 0px 20px 0px 0px;
 }
 .person-education__indicators {
   display: flex;

@@ -1,0 +1,14 @@
+.webinar {
+  margin: 0px;
+  width: 100%;
+}
+.webinar__header {
+  margin: 0px 0px 24px 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.table__main_type_webinar {
+  max-height: calc(100vh - 306px);
+}

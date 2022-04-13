@@ -1,9 +1,9 @@
 import React from 'react';
 import './PersonNotification.css';
 import Accordion from '../../Accordion/Accordion.js';
-import notificationIcon from '../../../images/accordion/accordion-notification.svg';
 import PersonNotificationInfoPopup from './PersonNotificationInfoPopup/PersonNotificationInfoPopup.js';
 import CommentOfTeacherPopup from '../../Popup/CommentOfTeacherPopup/CommentOfTeacherPopup.js';
+import notificationIcon from '../../../images/accordion/accordion-notification.svg';
 
 function PersonNotification({ user, userNotifications }) {
 

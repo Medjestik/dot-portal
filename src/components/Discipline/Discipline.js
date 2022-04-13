@@ -3,26 +3,44 @@ import './Discipline.css';
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import DisciplineInfo from './DisciplineInfo/DisciplineInfo.js';
 import DisciplineMaterials from './DisciplineMaterials/DisciplineMaterials.js';
+import DisciplineTasks from './DisciplineTasks/DisciplineTasks.js';
+import Month from '../Month/Month.js';
 
 function Discipline({ currentDiscipline }) {
 
   const navigate = useNavigate();
   const { disciplineId } = useParams();
 
+  const [isShowMonth, setIsShowMonth] = React.useState(true);
+
   const chapters = [
     { title: 'Информация о дисциплине', id: 1, link: '/info' },
     { title: 'Учебные материалы', id: 2, link: '/materials' },
-    { title: 'Загрузка заданий', id: 3, link: '/task' },
+    { title: 'Загрузка заданий', id: 3, link: '/tasks' },
   ];
 
   const documents = [
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 1, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 7.53 – 2001. Издания. Международная стандартная нумерация книг [Текст]. – Взамен ГОСТ 7.53 – 86; введ. 2002 – 07 – 01. – Минск: Межгос. Совет по стандартизации, метрологии и сертификации; Москва: Изд-во стандартов, 2002. – 3 с.', id: 2, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 3, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 4, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 7.53 – 2001. Издания. Международная стандартная нумерация книг [Текст]. – Взамен ГОСТ 7.53 – 86; введ. 2002 – 07 – 01. – Минск: Межгос. Совет по стандартизации, метрологии и сертификации; Москва: Изд-во стандартов, 2002. – 3 с.', id: 5, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 6, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 1, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 1, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 2, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 7.53 – 2001. Издания. Международная стандартная нумерация книг [Текст]. – Взамен ГОСТ 7.53 – 86; введ. 2002 – 07 – 01. – Минск: Межгос. Совет по стандартизации, метрологии и сертификации; Москва: Изд-во стандартов, 2002. – 3 с.', id: 3, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 4, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 5, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 6, date: '09.03.22 12:20' },
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 1, date: '09.03.22 12:20' },
     { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 1, date: '09.03.22 12:20' },
     { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 2, date: '09.03.22 12:20' },
     { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 3, date: '09.03.22 12:20' },
     { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 4, date: '09.03.22 12:20' },
     { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 5, date: '09.03.22 12:20' },
     { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 6, date: '09.03.22 12:20' },
-    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 1, date: '09.03.22 12:20' }
+    { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 1, date: '09.03.22 12:20' },
   ];
 
   const folders = [
@@ -44,6 +62,11 @@ function Discipline({ currentDiscipline }) {
   }
 
   function chooseOption(option) {
+    if (option.link === '/info') {
+      setIsShowMonth(true);
+    } else {
+      setIsShowMonth(false);
+    }
     setCurrentChapter(option);
     setIsOpenSelectOptions(false);
     navigate('/education/semester/discipline/' + disciplineId + option.link);
@@ -71,15 +94,13 @@ function Discipline({ currentDiscipline }) {
               </ul>
             </div>
           </div>
-          <div className='discipline__header-date'>
-            <p className='discipline__header-month'>Февраль 2022</p>
-            <div className='discipline__header-date-arrow-container'>
-              <div className='discipline__header-date-arrow-prev'></div>
-            </div>
-            <div className='discipline__header-date-arrow-container'>
-              <div className='discipline__header-date-arrow-next'></div>
-            </div>
-          </div>
+
+          {
+            isShowMonth &&
+            <Month />
+          }
+          
+
         </div>
       </div>
 
@@ -95,6 +116,14 @@ function Discipline({ currentDiscipline }) {
         <Route exact path={`materials`} 
         element={
           <DisciplineMaterials folders={folders} />
+        }
+        />
+      </Routes>
+
+      <Routes>
+        <Route exact path={`tasks`} 
+        element={
+          <DisciplineTasks currentDiscipline={currentDiscipline} documents={documents} />
         }
         />
       </Routes>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './PersonArea.css';
 import groupIcon from '../../../images/group.svg';
+import { photoIcon } from './PersonIcons/PersonIcons.js';
 import PersonAreaPhotoPopup from './PersonAreaPhotoPopup/PersonAreaPhotoPopup.js';
 import PersonAreaChangePasswordPopup from './PersonAreaChangePasswordPopup/PersonAreaChangePasswordPopup.js';
 import PersonAreaDatePopup from './PersonAreaDatePopup/PersonAreaDatePopup.js';
@@ -67,7 +68,9 @@ function PersonArea({ user }) {
             ?
               <img className='person-area__photo' src={user.photo} alt="фотография пользователя" onClick={openPhotoPopup}></img>
             :
-              <div className='person-area__photo-empty' onClick={openPhotoPopup}></div>
+              <div className='person-area__photo-empty' onClick={openPhotoPopup}>
+                { photoIcon }
+              </div>
           }
           <p className='person-area__data-login'>Логин</p>
           <div className='person-area__data-password'>
@@ -126,7 +129,7 @@ function PersonArea({ user }) {
           <p className='person-area__contact-mail'>{user.curatorMail}</p>
           <div className='person-area__education'>
             <div className='person-area__group'>
-              <img className='person-area__group-icon' src={groupIcon} alt='иконка группы'></img>
+              <img className='person-area__group-icon' src={groupIcon} alt='иконка'></img>
               <h6 className='person-area__group-title'>{user.group}</h6>
             </div>
             <div className='person-area__education-card person-area__education-card_type_course'>

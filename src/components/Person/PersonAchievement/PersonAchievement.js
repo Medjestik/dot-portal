@@ -2,9 +2,10 @@ import React from 'react';
 import './PersonAchievement.css';
 import Accordion from '../../Accordion/Accordion.js';
 import achievementIcon from '../../../images/accordion/accordion-achievement.svg';
-import groupRating from '../../../images/group-rating.svg';
-import mainRating from '../../../images/main-rating.svg';
+import groupRatingIcon from '../../../images/group-rating.svg';
+import mainRatingIcon from '../../../images/main-rating.svg';
 import PersonAchievementInfoPopup from './PersonAchievementInfoPopup/PersonAchievementInfoPopup.js';
+
 
 function PersonAchievement({ user }) {
 
@@ -30,12 +31,12 @@ function PersonAchievement({ user }) {
           <p className='person-achievement__subtitle'>Ваша оценка достижений среди обучающихся</p>
           <div className='person-achievement__container'>
             <div className='person-achievement__group-rating'>
-              <img className='person-achievement__group-rating-img' src={groupRating} alt="иконка место в группе"></img>
+              <img className='person-achievement__group-rating-img' src={groupRatingIcon} alt='иконка'></img>
               <span className='person-achievement__group-rating-count'>{user.groupRating}</span>
               <p className='person-achievement__group-rating-text'>Место в&nbsp;группе</p>
             </div>
             <div className='person-achievement__main-rating'>
-              <img className='person-achievement__main-rating-img' src={mainRating} alt="иконка место на бакалавре"></img>
+              <img className='person-achievement__main-rating-img' src={mainRatingIcon} alt='иконка'></img>
               <span className='person-achievement__main-rating-count'>{user.mainRating}</span>
               <p className='person-achievement__main-rating-text'>Место на&nbsp;бакалавре</p>
             </div>

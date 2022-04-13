@@ -1,0 +1,101 @@
+.semester-header {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.semester-header__select {
+  margin: 0px;
+  min-width: 164px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 20px;
+  background: var(--main-white-color);
+  border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
+}
+.semester-header__select:hover {
+  cursor: pointer;
+}
+.semester-header__select-title {
+  margin: 0px 20px 0px 0px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--main-black-color);
+}
+.semester-header__select-arrow {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/arrow.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+}
+.semester-header__btn-back {
+  margin: 0px;
+  min-width: 164px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 20px;
+  background: var(--main-white-color);
+  border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
+}
+.semester-header__btn-back:hover {
+  cursor: pointer;
+}
+.semester-header__btn-back-text {
+  margin: 0px 20px 0px 0px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--main-black-color);
+}
+.semester-header__btn-back-arrow {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/arrow.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  transform: rotate(270deg);
+}
+.semester-header__control-list {
+  margin: 0px 0px 0px auto;
+  padding: 0px;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+.semester-header__control-item {
+  margin: 0px 22px 0px 0px;
+}
+.semester-header__control-item:last-of-type {
+  margin: 0px;
+}
+.semester-header__control-item-container {
+  width: 40px;
+  height: 40px;
+  background: var(--main-white-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+}
+.semester-header__control-item-container:hover {
+  background: var(--gradient-blue-color);
+  cursor: pointer;
+}
+.semester-header__control-btn {
+  width: 24px;
+  height: 24px;
+  fill: var(--accent-grey-color);
+}
+.semester-header__control-item-container:hover .semester-header__control-btn {
+  fill: var(--main-white-color);
+}

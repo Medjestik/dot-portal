@@ -1,6 +1,6 @@
 import React from 'react';
 import './Education.css';
-import Semester from '../Semester/Semester.js';
+import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import Section from '../Section/Section.js';
 import SemesterTable from '../SemesterTable/SemesterTable.js';
 import Discipline from '../Discipline/Discipline.js';
@@ -119,7 +119,7 @@ function Education() {
 
   return (
     <div className='education'>
-      <Semester isDisciplineOpen={isDisciplineOpen} backToSemester={backToSemester} />
+      <SemesterHeader isDisciplineOpen={isDisciplineOpen} backToSemester={backToSemester} />
 
       <Routes>
         <Route exact path={`semester`}
@@ -141,7 +141,6 @@ function Education() {
         />
       </Routes>
       
-
     </div>
   );
 }

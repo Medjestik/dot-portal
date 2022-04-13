@@ -28,12 +28,12 @@
   background: var(--gradient-blue-color);
   border-radius: var(--border-radius);
 }
-.person-achievement__group-rating-img {
+.person-achievement__group-rating-img { 
   margin: 0px;
   width: 32px;
   height: 32px;  
-  object-position: center;
   object-fit: contain;
+  object-position: center;
 }
 .person-achievement__group-rating-count {
   margin: 8px 0px 0px 0px;
@@ -70,8 +70,8 @@
   margin: 0px;
   width: 32px;
   height: 32px;  
-  object-position: center;
   object-fit: contain;
+  object-position: center;
 }
 .person-achievement__main-rating-count {
   margin: 8px 0px 0px 0px;

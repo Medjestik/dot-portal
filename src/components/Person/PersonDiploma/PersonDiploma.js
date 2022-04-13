@@ -1,8 +1,8 @@
 import React from 'react';
 import './PersonDiploma.css';
 import Accordion from '../../Accordion/Accordion.js';
-import diplomaIcon from '../../../images/accordion/accordion-diploma.svg';
 import searchIcon from '../../../images/search.svg';
+import diplomaIcon from '../../../images/accordion/accordion-diploma.svg';
 import PersonDiplomaInfoPopup from './PersonDiplomaInfoPopup/PersonDiplomaInfoPopup.js';
 
 function PersonDiploma() {
@@ -31,7 +31,6 @@ function PersonDiploma() {
     setIsShowWrongType(false);
     setFileName({ isShow: false, name: '' });
     if (e.target.files.length > 0) {
-      console.log(e.target.files)
       if (e.target.files[0].name.match(/.(docx|doc|pdf)$/i)) {
         setContentFile({ file: e.target.files[0] });
         setFileName({ isShow: true, name: e.target.files[0].name });
@@ -56,7 +55,7 @@ function PersonDiploma() {
               <p className='scroll-inside person-diploma__theme-text'>Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы</p>
             </div>
             <div className='person-diploma__plagiarism'>
-              <img className='person-diploma__plagiarism-img' src={searchIcon} alt='иконка поиска'></img>
+              <img className='person-diploma__plagiarism-img' src={searchIcon} alt='иконка'></img>
               <span className='person-diploma__plagiarism-count'>100%</span>
             </div>
           </div>
@@ -78,12 +77,12 @@ function PersonDiploma() {
         </div>
         <div className='person-diploma__upload'>
           <h5 className='person-diploma__upload-title'>Подгрузить ВКР на антиплагиат</h5>
-          <form className='person-diploma__upload-form' ref={formRef}>
-            <label htmlFor='person-diploma-upload' className='person-diploma__upload-field'>
-              <p className='person-diploma__upload-text'>{fileName.isShow ? fileName.name : ''}</p>
-              <div className='person-diploma__upload-icon'></div>
+          <form className='upload-form' ref={formRef} name='person-diploma-upload-file' id='person-diploma-upload-file'>
+            <label htmlFor='person-diploma-upload' className='upload-form__field'>
+              <p className='upload-form__text'>{fileName.isShow ? fileName.name : ''}</p>
+              <div className='upload-form__icon'></div>
             </label>
-            <input onChange={handleChangeDiploma} id='person-diploma-upload' className='person-diploma__upload-input' type="file" />
+            <input onChange={handleChangeDiploma} id='person-diploma-upload' className='upload-form__input' type="file" />
             <button className={`btn btn_type_save person-diploma__upload-btn ${contentFile.file !== null ? 'btn_type_save_status_active' : ''}`}></button>
           </form>
           <ul className='person-diploma__upload-date-list'>
