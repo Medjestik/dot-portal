@@ -1,0 +1,9 @@
+.library {
+
+}
+.library__container {
+  margin: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}

@@ -34,8 +34,8 @@ function Webinar() {
     <div className='webinar'>
       <SemesterHeader isDisciplineOpen={false} backToSemester={backToSemester} />
 
-      <Section title='Вебинары' type='small'> 
-        <div className='webinar__header'>
+      <Section title='Вебинары' heightType='page' headerType='small'>
+        <div className='section__header'>
           <Search type='small' id='webinar' data={webinars} onSearch={handleSearch} />
           <Month />
         </div>

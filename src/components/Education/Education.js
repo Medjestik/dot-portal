@@ -1,10 +1,12 @@
 import React from 'react';
 import './Education.css';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import Section from '../Section/Section.js';
 import SemesterTable from '../SemesterTable/SemesterTable.js';
 import Discipline from '../Discipline/Discipline.js';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import CalendarWebinar from '../CalendarWebinar/CalendarWebinar.js';
+
 
 function Education() {
 
@@ -124,9 +126,14 @@ function Education() {
       <Routes>
         <Route exact path={`semester`}
         element={
-          <Section title='1 семестр' type='small' >
+          <>
+          <Section title='Вебинары' heightType='content' headerType='small' >
+            <CalendarWebinar />
+          </Section>
+          <Section title='1 семестр' heightType='content' headerType='small' >
             <SemesterTable disciplines={disciplines} openDiscipline={openDiscipline} />
           </Section>
+          </>
         }
         />
       </Routes>
@@ -134,7 +141,7 @@ function Education() {
       <Routes>
         <Route exact path={`semester/discipline/:disciplineId/*`}
         element={
-          <Section title={currentDiscipline.disciplineName} type='large' > 
+          <Section title={currentDiscipline.disciplineName} heightType='content' headerType='large' > 
             <Discipline currentDiscipline={currentDiscipline} />
           </Section>
         }

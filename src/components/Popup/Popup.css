@@ -39,7 +39,7 @@
 }
 @-moz-document url-prefix() {
   .popup__container {
-    overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
 .popup__form {

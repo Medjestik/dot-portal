@@ -34,15 +34,19 @@ function Header() {
             </div>
             <p className='header__nav-link-text'>Вебинары</p>
           </NavLink>
-          <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
-            <div className='header__nav-link-icon'>
-              <div className='header__nav-link-icon-container'>
-                { ratingIcon }
+
+          {/*
+            <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
+              <div className='header__nav-link-icon'>
+                <div className='header__nav-link-icon-container'>
+                  { ratingIcon }
+                </div>
               </div>
-            </div>
-            <p className='header__nav-link-text'>Рейтинг</p>
-          </NavLink>
-          <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/documents'>
+              <p className='header__nav-link-text'>Рейтинг</p>
+            </NavLink>*/
+          }
+
+          <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/document'>
             <div className='header__nav-link-icon'>
               <div className='header__nav-link-icon-container'>
                 { documentIcon }

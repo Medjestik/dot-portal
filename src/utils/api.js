@@ -20,38 +20,15 @@ export const login = ({ login, password }) => {
   .then(res => handleResponse(res));
 };
 
-export const getMe = ({ token }) => {
-  return fetch(`${API_URL}/user`, {
+export const getUser = ({ token }) => {
+  return fetch(`${API_URL}/auth/action/user`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Basic ${token}`,
     }
   })
   .then(res => handleResponse(res))
 };
 
-export const getTests = ({ token }) => {
-  return fetch(`${API_URL}/my_tests`, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-  .then(res => handleResponse(res))
-};
-
-export const getControl = ({ token }) => {
-  return fetch(`${API_URL}/control`, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-  .then(res => handleResponse(res))
-};

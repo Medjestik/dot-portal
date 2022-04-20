@@ -59,7 +59,7 @@ function DisciplineTasks({ currentDiscipline, documents }) {
         <ul className='table__main table__main_type_tasks scroll'>
           {
             documents.map((item, i) => (
-              <li className='table__row'>
+              <li className='table__row' key={i}>
                 <div className='table__main-column'>
                   <div className='table__column table__column_type_count'>
                     <p className='table__text'>{i + 1}</p>

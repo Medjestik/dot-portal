@@ -1,0 +1,195 @@
+/*.react-calendar__navigation__label {
+  border: none;
+  background: var(--main-white-color);
+  user-select: none;
+  pointer-events: none;
+}
+.react-calendar__navigation__label span {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--main-black-color);
+}
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #f8f8fa;
+}
+.react-calendar__navigation button[disabled] {
+  background-color: #f0f0f0;
+}
+.react-calendar__month-view__weekdays__weekday {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+}
+abbr[title] {
+  margin: 0px;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
+}
+.react-calendar__month-view {
+  margin: 24px 0px 0px 0px;
+}
+
+.react-calendar__tile {
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+  background: var(--main-black-color);
+}
+.react-calendar__tile abbr {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--main-black-color);
+
+}
+
+.react-calendar__tile--now {
+  background: var(--gradient-orange-color);
+}
+.react-calendar__tile--now abbr {
+  color: var(--main-white-color);
+}*/
+
+.calendar {
+  margin: 0px;
+  width: 100%;
+  max-width: 276px;
+}
+.calendar__header {
+  margin: 0px 0px 24px 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.calendar__header-month {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px; 
+  text-align: center;  
+  color: var(--main-black-color);
+  text-transform: capitalize;
+}
+.calendar__nav-btn {
+  position: relative;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  background: var(--main-grey-color);
+  color: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.calendar__nav-btn:hover {
+  opacity: .7;
+}
+.calendar__nav-btn_type_prev {
+  margin: 0px 0px 0px auto;
+}
+.calendar__nav-btn_type_prev:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../images/arrow.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(90deg);
+}
+.calendar__nav-btn_type_next {
+  margin: 0px 0px 0px 8px;
+}
+.calendar__nav-btn_type_next:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../images/arrow.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(270deg);
+}
+.calendar__section_type_month {
+  margin: 0px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 4px;
+  row-gap: 4px;
+}
+.calendar__section_type_days {
+  margin: 0px;
+}
+.calendar__row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 4px;
+  row-gap: 4px;
+}
+
+.calendar__day {
+  margin: 0px;
+  height: 36px;
+  width: 36px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--main-black-color);
+  border: none;
+}
+
+.calendar__day_type_week {
+  color: var(--accent-grey-color);
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+  border: none;
+}
+
+.calendar__day_type_inactive {
+  color: var(--accent-grey-color);
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+  border: none;
+}
+.calendar__day_type_selected {
+  border: 2px solid var(--accent-blue-color);
+}
+.calendar__day_type_current {
+  background: var(--gradient-orange-color);
+  color: var(--main-white-color);
+  border: none;
+}
