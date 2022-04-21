@@ -6,6 +6,7 @@ import Section from '../Section/Section.js';
 import SemesterTable from '../SemesterTable/SemesterTable.js';
 import Discipline from '../Discipline/Discipline.js';
 import CalendarWebinar from '../CalendarWebinar/CalendarWebinar.js';
+import Notifications from '../Notifications/Notifications.js';
 
 
 function Education() {
@@ -121,15 +122,20 @@ function Education() {
 
   return (
     <div className='education'>
-      <SemesterHeader isDisciplineOpen={isDisciplineOpen} backToSemester={backToSemester} />
+      <SemesterHeader isDisciplineOpen={isDisciplineOpen} backToSemester={backToSemester} /> 
 
       <Routes>
-        <Route exact path={`semester`}
+        <Route exact path={`semester`} 
         element={
           <>
-          <Section title='Вебинары' heightType='content' headerType='small' >
-            <CalendarWebinar />
-          </Section>
+          <div className='education__container'>
+            <Notifications />
+
+            <Section title='Вебинары' heightType='content' headerType='small' >
+              <CalendarWebinar />
+            </Section>
+          </div>
+          
           <Section title='1 семестр' heightType='content' headerType='small' >
             <SemesterTable disciplines={disciplines} openDiscipline={openDiscipline} />
           </Section>

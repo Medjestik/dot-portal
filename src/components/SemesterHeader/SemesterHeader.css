@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 8px 8px 20px;
+  box-sizing: border-box;
   background: var(--main-white-color);
   border-radius: var(--border-radius);
   transition: all .3s ease-in-out;

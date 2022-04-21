@@ -32,3 +32,15 @@ export const getUser = ({ token }) => {
   .then(res => handleResponse(res))
 };
 
+export const getStudentData = ({ token, userId }) => {
+  return fetch(`${API_URL}/students/id/${userId}/action/group`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+

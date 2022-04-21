@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import * as api from '../../utils/api.js';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import Header from '../Header/Header.js';
 import Person from '../Person/Person.js';
 import Education from '../Education/Education.js';
@@ -14,7 +15,9 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [loginError, setLoginError] = React.useState(false);
-  const [isLoadingPage, setIsLoadingPage] = React.useState(false);
+  const [isLoadingPage, setIsLoadingPage] = React.useState(true);
+
+  const [studentData, setStudentData] = React.useState({});
 
   const { pathname } = useLocation();
 
@@ -34,7 +37,7 @@ function App() {
   }
 
   function tokenCheck () {
-    const token = 'bmF2eWRyYWdvbjpFcGlkZW1pYTEy';
+    const token = 'ZG90MjAwOTk6NDcwNjcx';
     if (token) {
       setIsLoadingPage(true);
       api.getUser({ token: token })
@@ -42,7 +45,8 @@ function App() {
           if (res) {
             console.log(res);
             setLoggedIn(true);
-            setCurrentUser(res.data);
+            setCurrentUser(res);
+            getStudentData(res.id);
             if (pathname === '/') {
               //history.push("/main");
             } else {
@@ -58,7 +62,7 @@ function App() {
             console.error(err);
         })
         .finally(() => {
-          setIsLoadingPage(false);
+          //setIsLoadingPage(false);
         });
     }
   }
@@ -70,55 +74,76 @@ function App() {
     //history.push('/');
   }
 
+  function getStudentData(id) {
+    const token = 'ZG90MjAwOTk6NDcwNjcx';
+    api.getStudentData({ token: token, userId: id })
+      .then((res) => {
+        console.log(res);
+        setStudentData(res);
+      })
+      .catch((err) => {
+          console.error(err);
+      })
+      .finally(() => {
+        setIsLoadingPage(false);
+      });
+  }
+
   React.useEffect(() => {
     tokenCheck();
     // eslint-disable-next-line
   }, []);
 
   return (
-    <div className='page'>
-      <div className='wrapper'>
-        <div className='container'>
-            <Header />
-            <div className='main-container'>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className='page'>
+        <div className='wrapper'>
+        {
+          isLoadingPage 
+          ?
+          <div></div>
+          :
+          <div className='container'>
+              <Header />
+              <div className='main-container'>
+                <Routes>
+                  <Route 
+                  exact 
+                  path='person' 
+                  element={
+                  <Person studentData={studentData} />}
+                  />
+                  <Route 
+                  path='education/*' 
+                  element={
+                  <Education />}
+                  />
 
-              <Routes>
-                <Route 
-                exact 
-                path='person' 
-                element={
-                <Person />}
-                />
-                <Route 
-                path='education/*' 
-                element={
-                <Education />}
-                />
+                  <Route 
+                  path='webinars' 
+                  element={
+                  <Webinar />}
+                  />
 
-                <Route 
-                path='webinars' 
-                element={
-                <Webinar />}
-                />
+                  <Route 
+                  path='document/*' 
+                  element={
+                  <Document />}
+                  />
 
-                <Route 
-                path='document/*' 
-                element={
-                <Document />}
-                />
+                  <Route 
+                  path='library' 
+                  element={
+                  <Library />}
+                  />
 
-                <Route 
-                path='library' 
-                element={
-                <Library />}
-                />
-
-              </Routes>
-
+                </Routes>
+              </div>    
             </div>
+          }  
         </div>
       </div>
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 

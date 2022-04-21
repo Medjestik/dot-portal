@@ -12,42 +12,52 @@
   align-items: center;
   margin: 0px 20px 0px 0px;
 }
-.person-area__photo {
+.person-area__photo-container {
   width: 120px;
   height: 120px;
   background: var(--main-grey-color);
   border-radius: 50%;
   position: relative;
   transition: all .3s ease-in-out;
+  cursor: pointer;
+}
+.person-area__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  object-fit: cover;
+  object-position: center;
+  transition: all .3s ease-in-out;
+}
+.person-area__icon-container {
+  opacity: 0;
+  margin: 0px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 120px;
+  height: 60px;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: var(--gradient-blue-color);
+  transition: .3s ease-in-out;
 }
 .person-area__photo-icon {
-  display: none;
+  opacity: 0;
   position: absolute;
   width: 32px;
   height: 32px;
   bottom: 18px;
   left: 44px;
-  fill: var(--accent-grey-color);
+  fill: var(--main-white-color);
   z-index: 5;
   transition: all .3s ease-in-out;
 }
-.person-area__photo-icon:hover {
-  cursor: pointer;
-  fill: var(--accent-blue-color);
+.person-area__photo-container:hover .person-area__icon-container {
+  opacity: 1;
 }
-.person-area__photo-empty {
-  width: 120px;
-  height: 120px;
-  background: var(--main-grey-color);
-  border-radius: 50%;
-  position: relative;
-  transition: all .3s ease-in-out;
-}
-.person-area__photo-empty:hover .person-area__photo-icon {
-  display: block;
-}
-.person-area__photo-empty:hover {
-  cursor: pointer;
+.person-area__photo-container:hover .person-area__photo-icon {
+  opacity: 1;
 }
 .person-area__data-login {
   margin: 32px 0px 0px 0px;
@@ -58,6 +68,7 @@
   line-height: 18px;
   text-align: center;
   color: var(--accent-blue-color);
+  word-wrap: break-word;
   cursor: default;
 }
 .person-area__data-password {
@@ -122,6 +133,7 @@
   font-size: 14px;
   line-height: 18px;
   cursor: default;
+  text-transform: capitalize;
 }
 .person-area__achievement {
   width: 32px;
@@ -182,6 +194,15 @@
 }
 .person-area__contact-info {
   display: flex;
+}
+.person-area__contact-photo {
+  margin: 0px 20px 0px 0px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  object-fit: cover;
+  object-position: center;
 }
 .person-area__contact-photo-empty {
   margin: 0px 20px 0px 0px;

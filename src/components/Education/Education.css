@@ -1,0 +1,9 @@
+.education {
+  margin: 0px;
+}
+.education__container {
+  margin: 0px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  grid-column-gap: 20px;
+}

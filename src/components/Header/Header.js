@@ -1,14 +1,25 @@
 import React from 'react';
 import './Header.css';
 import { NavLink } from "react-router-dom";
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon } from './HeaderIcons/HeaderIcons.js';
 
 function Header() {
+
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <header className='header'>
       <div className='header__container'>
-        <div className='header__img'></div>
-        <h3 className='header__name'>Костюлин Иван Алексеевич</h3>
+        {
+          currentUser.avatar 
+          ?
+          <img className='header__img' src={currentUser.avatar} alt='аватар'></img>
+          :
+          <div className='header__img'></div>
+        }
+        
+        <h3 className='header__name'>{currentUser.fullname || ''}</h3>
         <nav className='header__nav'>
           <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/person'>
             <div className='header__nav-link-icon'>

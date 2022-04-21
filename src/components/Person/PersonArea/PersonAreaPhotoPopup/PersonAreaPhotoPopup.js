@@ -1,9 +1,9 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 
-function PersonAreaPhotoPopup({ isOpen, onClose }) {
+function PersonAreaPhotoPopup({ isOpen, onClose, currentUser }) {
 
-  const [fileName, setFileName] = React.useState({ isShow: false, name: '', });
+  const [fileName, setFileName] = React.useState(currentUser.avatar ? { isShow: true, name: currentUser.avatar, } : { isShow: false, name: '', });
   const [isShowWrongType, setIsShowWrongType] = React.useState(false);
   const [contentFile, setContentFile] = React.useState({ file: null, });
 

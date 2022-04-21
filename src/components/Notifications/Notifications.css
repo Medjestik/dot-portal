@@ -1,0 +1,101 @@
+.notification__container {
+  margin: 0px;
+}
+.notification__list {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  min-height: 340px;
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.notification__item {
+  margin: 0px 0px 20px 0px;
+  display: flex;
+}
+.notification__item:last-of-type {
+  margin: 0px;
+}
+.notification__img {
+  margin: 0px 12px 0px 0px;
+  width: 40px;
+  height: 40px;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.notification__item_type_unread .notification__img {
+  background: var(--gradient-blue-color);
+}
+.notification__icon {
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../../images/button/success.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.notification__item_type_unread .notification__icon {
+  background-image: url('../../images/button/attention.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.notification__info {
+  margin: 0px 20px 0px 0px;
+  display: flex;
+  align-items: center;
+  padding: 11px 20px;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  width: 100%;
+  position: relative;
+}
+.notification__info:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+.notification__item_type_unread .notification__info {
+  background: var(--gradient-blue-color);
+}
+.notification__date {
+  margin: 0px 20px 0px 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
+  flex-shrink: 0;
+}
+.notification__item_type_unread .notification__date  {
+  font-weight: 500;
+  color: var(--main-white-color);
+}
+.notification__item_type_unread .notification__info:hover .notification__date {
+  color: var(--main-white-color);
+}
+.notification__text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.notification__item_type_unread .notification__text  {
+  font-weight: 500;
+  color: var(--accent-blue-color);
+}
+.notification__item_type_unread .notification__text {
+  color: var(--main-white-color);
+}

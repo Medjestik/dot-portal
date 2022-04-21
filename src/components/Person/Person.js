@@ -10,7 +10,7 @@ import PersonRating from './PersonRating/PersonRating.js';
 import PersonCommunication from './PersonCommunication/PersonCommunication.js';
 import PersonDiploma from './PersonDiploma/PersonDiploma.js';
 
-function Person() {
+function Person({ studentData }) {
 
   const user = {
     photo: '',
@@ -112,7 +112,7 @@ function Person() {
 
   return (
     <div className='person'>
-      <PersonArea user={user} />
+      <PersonArea user={user} studentData={studentData} />
       <PersonEducation user={user} userEducation={userEducation} />
       <PersonAchievement user={user} />
       <PersonDocument user={user} userDocuments={userDocuments} userCheck={userCheck} />

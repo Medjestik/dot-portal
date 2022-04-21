@@ -18,7 +18,6 @@ function PersonNotification({ user, userNotifications }) {
   function openTeacherCommentPopup(notification) {
     setIsOpenTeacherCommentPopup(true);
     setCurrentNotification(notification);
-    console.log(notification)
   }
 
   function closePopups() {
@@ -42,13 +41,13 @@ function PersonNotification({ user, userNotifications }) {
         <ul className='scroll person-notification__list'>
           {
             userNotifications.map((item, i) => (
-              <li onClick={() => openTeacherCommentPopup(item)} key={i} className={`person-notification__item ${item.unreadNotification ? 'person-notification__item_type_unread' : ''}`}>
-                <div className='person-notification__img'>
-                  <div className='person-notification__icon'></div>
+              <li onClick={() => openTeacherCommentPopup(item)} key={i} className={`notification__item ${item.unreadNotification ? 'notification__item_type_unread' : ''}`}>
+                <div className='notification__img'>
+                  <div className='notification__icon'></div>
                 </div>
-                <div className='person-notification__info'>
-                  <span className='person-notification__date'>{item.date}</span>
-                  <p className='person-notification__text'>{item.text}</p>
+                <div className='notification__info'>
+                  <span className='notification__date'>{item.date}</span>
+                  <p className='notification__text'>{item.text}</p>
                 </div>
               </li>
             ))
