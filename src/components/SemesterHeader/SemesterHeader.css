@@ -95,7 +95,7 @@
 .semester-header__control-btn {
   width: 24px;
   height: 24px;
-  fill: var(--accent-grey-color);
+  fill: var(--main-black-color);
 }
 .semester-header__control-item-container:hover .semester-header__control-btn {
   fill: var(--main-white-color);

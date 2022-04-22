@@ -1,9 +1,9 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 
-function PersonAreaDatePopup({ isOpen, onClose }) {
+function PersonAreaDatePopup({ isOpen, onClose, currentUser }) {
 
-  const [date, setDate] = React.useState('');
+  const [date, setDate] = React.useState(currentUser.birthDate || '');
   const [dateError, setDateError] = React.useState({ isShow: false, text: '' });
 
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
@@ -12,8 +12,8 @@ function PersonAreaDatePopup({ isOpen, onClose }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(date);
   }
-
 
   function handleChangeDate(e) {
     setDate(e.target.value);
@@ -23,7 +23,6 @@ function PersonAreaDatePopup({ isOpen, onClose }) {
       setDateError({ text: 'Укажите корректную дату', isShow: true });
     }
   }
-
 
   React.useEffect(() => {
     if (date.length < 10 || dateError.isShow) {
@@ -35,10 +34,10 @@ function PersonAreaDatePopup({ isOpen, onClose }) {
   }, [date]);
 
   React.useEffect(() => {
-    setDate('');
+    setDate(currentUser.birthDate || '');
     setDateError({ text: '', isShow: false });
     setIsBlockSubmitButton(true);
-  }, [isOpen]);
+  }, [isOpen, currentUser]);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} >

@@ -36,7 +36,7 @@ function Webinar() {
 
       <Section title='Вебинары' heightType='page' headerType='small'>
         <div className='section__header'>
-          <Search type='small' id='webinar' data={webinars} onSearch={handleSearch} />
+          <Search type='medium' id='webinar' data={webinars} onSearch={handleSearch} />
           <Month />
         </div>
         <Table>

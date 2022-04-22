@@ -2,9 +2,9 @@ import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 import InputMask from 'react-input-mask';
 
-function PersonAreaIdentifierPopup({ isOpen, onClose }) {
+function PersonAreaIdentifierPopup({ isOpen, onClose, currentUser }) {
 
-  const [identifier, setIdentifier] = React.useState('');
+  const [identifier, setIdentifier] = React.useState(currentUser.inn || '');
   const [identifierError, setIdentifierError] = React.useState({ isShow: false, text: '' });
 
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
@@ -13,6 +13,7 @@ function PersonAreaIdentifierPopup({ isOpen, onClose }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(identifier);
   }
 
   function handleChangePhone(e) {
@@ -31,10 +32,10 @@ function PersonAreaIdentifierPopup({ isOpen, onClose }) {
   }, [identifier]);
 
   React.useEffect(() => {
-    setIdentifier('');
+    setIdentifier(currentUser.inn || '');
     setIdentifierError({ text: '', isShow: false });
     setIsBlockSubmitButton(true);
-  }, [isOpen]);
+  }, [isOpen, currentUser]);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} >

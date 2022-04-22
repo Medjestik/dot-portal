@@ -9,9 +9,8 @@ import PersonAreaDatePopup from './PersonAreaDatePopup/PersonAreaDatePopup.js';
 import PersonAreaIdentifierPopup from './PersonAreaIdentifierPopup/PersonAreaIdentifierPopup.js';
 import PersonAreaPhonePopup from './PersonAreaPhonePopup/PersonAreaPhonePopup.js';
 import PersonAreaMailPopup from './PersonAreaMailPopup/PersonAreaMailPopup.js';
-import adminPhoto from '../../../images/photo/dekan.png';
 
-function PersonArea({ user, studentData }) { 
+function PersonArea({ studentData }) { 
 
   const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
   const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = React.useState(false); 
@@ -128,7 +127,7 @@ function PersonArea({ user, studentData }) {
               ?
                 <img className='person-area__contact-photo' src={studentData.curator.pict_url} alt='фотография куратора'></img>
               :
-                <div className='person-area__contact-photo-empty'>{user.curatorPhoto}</div>
+                <div className='person-area__contact-photo-empty'></div>
             }
             <div className='person-area__contact-info-container'>
               <h3 className='person-area__contact-name'>{studentData.curator.fullname || ''}</h3>
@@ -158,7 +157,7 @@ function PersonArea({ user, studentData }) {
               ?
                 <img className='person-area__contact-photo' src={studentData.decan.pict_url} alt='фотография декана'></img>
               :
-                <div className='person-area__contact-photo-empty'>{user.curatorPhoto}</div>
+                <div className='person-area__contact-photo-empty'></div>
             }
             <div className='person-area__contact-info-container'>
               <h3 className='person-area__contact-name'>{studentData.decan.fullname || ''}</h3>
@@ -196,6 +195,7 @@ function PersonArea({ user, studentData }) {
       <PersonAreaDatePopup
         isOpen={isDatePopupOpen}
         onClose={closePersonAreaPopup}
+        currentUser={currentUser}
       />
     }
     {
@@ -203,20 +203,23 @@ function PersonArea({ user, studentData }) {
       <PersonAreaIdentifierPopup
         isOpen={isIdentifierPopupOpen}
         onClose={closePersonAreaPopup}
+        currentUser={currentUser}
       />
     }
     {
       isPhonePopupOpen &&
       <PersonAreaPhonePopup
-      isOpen={isPhonePopupOpen}
-      onClose={closePersonAreaPopup} 
+        isOpen={isPhonePopupOpen}
+        onClose={closePersonAreaPopup}
+        currentUser={currentUser}
       />
     }
     {
       isMailPopupOpen &&
       <PersonAreaMailPopup
-      isOpen={isMailPopupOpen}
-      onClose={closePersonAreaPopup}
+        isOpen={isMailPopupOpen}
+        onClose={closePersonAreaPopup}
+        currentUser={currentUser}
       />
     }
     </>

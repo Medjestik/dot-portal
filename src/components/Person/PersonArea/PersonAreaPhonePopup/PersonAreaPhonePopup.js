@@ -2,9 +2,9 @@ import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 import InputMask from 'react-input-mask';
 
-function PersonAreaPhonePopup({ isOpen, onClose }) {
+function PersonAreaPhonePopup({ isOpen, onClose, currentUser }) {
 
-  const [phone, setPhone] = React.useState('');
+  const [phone, setPhone] = React.useState(currentUser.phone || '');
   const [phoneError, setPhoneError] = React.useState({ isShow: false, text: '' });
 
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
@@ -13,16 +13,15 @@ function PersonAreaPhonePopup({ isOpen, onClose }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(phone);
   }
-
 
   function handleChangePhone(e) {
     setPhone(e.target.value);
   }
 
-
   React.useEffect(() => {
-    if (phone.replace(/-|_/g, "").length > 15) {
+    if (phone.replace(/-|_/g, "").length > 14) {
       setIsBlockSubmitButton(false);
       setPhoneError({ text: '', isShow: false });
     } else {
@@ -33,10 +32,10 @@ function PersonAreaPhonePopup({ isOpen, onClose }) {
   }, [phone]);
 
   React.useEffect(() => {
-    setPhone('');
+    setPhone(currentUser.phone || '');
     setPhoneError({ text: '', isShow: false });
     setIsBlockSubmitButton(true);
-  }, [isOpen]);
+  }, [isOpen, currentUser]);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} >
@@ -46,7 +45,7 @@ function PersonAreaPhonePopup({ isOpen, onClose }) {
         <label className='popup__field'>
           <h4 className='popup__input-caption'>Укажите ваш актуальный номер мобильного телефона для связи:</h4>
           <div className='popup__input-field'>
-          <InputMask mask='+7 (999) 999-99-99' 
+          <InputMask mask='9 (999) 999-99-99' 
             className='popup__input'
             placeholder='Укажите ваш номер телефона...'
             type='tel'

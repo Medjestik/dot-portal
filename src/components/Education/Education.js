@@ -5,9 +5,8 @@ import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import Section from '../Section/Section.js';
 import SemesterTable from '../SemesterTable/SemesterTable.js';
 import Discipline from '../Discipline/Discipline.js';
-import CalendarWebinar from '../CalendarWebinar/CalendarWebinar.js';
+import Calendar from '../Calendar/Calendar.js';
 import Notifications from '../Notifications/Notifications.js';
-
 
 function Education() {
 
@@ -132,7 +131,7 @@ function Education() {
             <Notifications />
 
             <Section title='Вебинары' heightType='content' headerType='small' >
-              <CalendarWebinar />
+              <Calendar />
             </Section>
           </div>
           

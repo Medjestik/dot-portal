@@ -1,9 +1,9 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 
-function PersonAreaMailPopup({ isOpen, onClose }) {
+function PersonAreaMailPopup({ isOpen, onClose, currentUser }) {
 
-  const [mail, setMail] = React.useState('');
+  const [mail, setMail] = React.useState(currentUser.email || '');
   const [mailError, setMailError] = React.useState({ isShow: false, text: '' });
 
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
@@ -12,6 +12,7 @@ function PersonAreaMailPopup({ isOpen, onClose }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(mail);
   }
 
 
@@ -35,10 +36,10 @@ function PersonAreaMailPopup({ isOpen, onClose }) {
   }, [mail]);
 
   React.useEffect(() => {
-    setMail('');
+    setMail(currentUser.email || '');
     setMailError({ text: '', isShow: false });
     setIsBlockSubmitButton(true);
-  }, [isOpen]);
+  }, [isOpen, currentUser]);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} >

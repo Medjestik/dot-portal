@@ -21,9 +21,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all .3s ease-in-out;
 }
 .month__arrow-container:last-of-type {
   margin: 0px;
+}
+.month__arrow-container:hover {
+  cursor: pointer;
+  background: var(--gradient-blue-color);
 }
 .month__arrow-prev {
   width: 24px;
@@ -34,10 +39,28 @@
   background-repeat: no-repeat;
   transform: rotate(90deg);
 }
+.month__arrow-container:hover .month__arrow-prev  {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/arrow-white.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  transform: rotate(90deg);
+}
 .month__arrow-next {
   width: 24px;
   height: 24px;
   background-image: url('../../images/arrow.svg');
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  transform: rotate(270deg);
+}
+.month__arrow-container:hover .month__arrow-next  {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/arrow-white.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;

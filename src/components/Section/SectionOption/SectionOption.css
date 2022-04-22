@@ -28,6 +28,8 @@
   width: min-content;
   min-width: 164px;
   padding: 10px 20px;
+  user-select: none;
+  pointer-events: none;
 }
 .section__options-attention {
   width: 20px;

@@ -6,6 +6,7 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser }) {
   const [fileName, setFileName] = React.useState(currentUser.avatar ? { isShow: true, name: currentUser.avatar, } : { isShow: false, name: '', });
   const [isShowWrongType, setIsShowWrongType] = React.useState(false);
   const [contentFile, setContentFile] = React.useState({ file: null, });
+  const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
 
   const formRef = React.createRef();
 
@@ -13,12 +14,13 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(contentFile);
   }
 
   function removeUploadFile() {
-    //Удаление существующей картинки
     setContentFile({ file: null, });
     setFileName({ isShow: false, name: '', });
+    setIsBlockSubmitButton(false);
   }
 
   function handleChangePhoto(e) {
@@ -26,16 +28,19 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser }) {
     setFileName({ isShow: false, name: '' });
     if (e.target.files.length > 0) {
       if (e.target.files[0].name.match(/.(jpg|bmp|png)$/i)) {
-        setContentFile({ file: e.target.files[0] });
         setFileName({ isShow: true, name: e.target.files[0].name });
+        setContentFile({ file: e.target.files[0] });
+        setIsBlockSubmitButton(false);
       } else {
         setFileName({ isShow: false, name: e.target.files[0].name });
         setIsShowWrongType(true);
         setContentFile({ file: null, });
+        setIsBlockSubmitButton(true);
       }
       formRef.current.reset();
     } else {
       setContentFile({ file: null, });
+      setIsBlockSubmitButton(true);
     }
   }
 
@@ -53,12 +58,12 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser }) {
           >
           </label>
           <input onChange={handleChangePhoto} id='person-area-photo-upload' className='popup__upload-input' type="file" />
-          <button className={`btn btn_type_cancel popup__btn-upload-cancel ${contentFile.file !== null ? 'btn_type_cancel_status_active' : ''}`} type='button' onClick={removeUploadFile}></button>
+          <button className={`btn btn_type_cancel popup__btn-upload-cancel ${currentUser.avatar ? 'btn_type_cancel_status_active' : ''}`} type='button' onClick={removeUploadFile}></button>
         </div>
         <span className={`popup__input-error ${isShowWrongType && 'popup__input-error_status_show'}`}>Неверный формат файла</span>
         <div className='popup__btn-container'>
           <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>
-          <button className={`popup__btn-save ${contentFile.file === null ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
+          <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
         </div>
         <span className={`popup__input-error ${isShowRequestError && 'popup__input-error_status_show'}`}>Неверный формат файла</span>
       </form>
