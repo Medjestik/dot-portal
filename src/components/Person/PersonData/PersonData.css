@@ -1,0 +1,26 @@
+.person-data__container {
+  display: flex;
+  justify-content: space-between;
+}
+.person-data__column {
+  margin: 0px 20px 0px 0px;
+}
+.person-data__column:last-of-type {
+  margin: 0px;
+}
+.person-data__text {
+  margin: 0px 0px 16px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.person-data__text_weight_bold {
+  font-weight: 500;
+}
+.person-data__text_type_active {
+  margin: 0px;
+  color: var(--accent-blue-color);
+  cursor: pointer;
+}

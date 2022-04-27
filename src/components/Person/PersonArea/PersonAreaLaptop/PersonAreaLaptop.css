@@ -1,0 +1,16 @@
+.person-area-laptop__info {
+  margin: 0px;
+}
+.person-area-laptop__info-person {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+}
+.person-area-laptop__photo-container {
+  margin: 0px 16px 0px 0px;
+}
+.person-area-laptop__info-data {
+  margin: 32px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+}

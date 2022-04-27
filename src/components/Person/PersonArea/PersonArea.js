@@ -1,67 +1,11 @@
 import React from 'react';
 import './PersonArea.css';
-import { CurrentUserContext } from '../../../contexts/CurrentUserContext.js';
 import groupIcon from '../../../images/group.svg';
 import { photoIcon } from './PersonIcons/PersonIcons.js';
-import PersonAreaPhotoPopup from './PersonAreaPhotoPopup/PersonAreaPhotoPopup.js';
-import PersonAreaChangePasswordPopup from './PersonAreaChangePasswordPopup/PersonAreaChangePasswordPopup.js';
-import PersonAreaDatePopup from './PersonAreaDatePopup/PersonAreaDatePopup.js';
-import PersonAreaIdentifierPopup from './PersonAreaIdentifierPopup/PersonAreaIdentifierPopup.js';
-import PersonAreaPhonePopup from './PersonAreaPhonePopup/PersonAreaPhonePopup.js';
-import PersonAreaMailPopup from './PersonAreaMailPopup/PersonAreaMailPopup.js';
 
-function PersonArea({ studentData }) { 
-
-  const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
-  const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = React.useState(false); 
-  const [isDatePopupOpen, setIsDatePopupOpen] = React.useState(false);
-  const [isIdentifierPopupOpen, setIsIdentifierPopupOpen] = React.useState(false);
-  const [isPhonePopupOpen, setIsPhonePopupOpen] = React.useState(false);
-  const [isMailPopupOpen, setIsMailPopupOpen] = React.useState(false);
-
-  const currentUser = React.useContext(CurrentUserContext);
-
-  function openPhotoPopup() {
-    setIsPhotoPopupOpen(true);
-  }
-
-  function openChangePasswordPopup() {
-    setIsChangePasswordPopupOpen(true);
-  }
-
-  function openDatePopup() {
-    setIsDatePopupOpen(true);
-  }
-
-  function openIdentifierPopup() {
-    setIsIdentifierPopupOpen(true);
-  }
-
-  function openPhonePopup() {
-    setIsPhonePopupOpen(true);
-  }
-
-  function openMailPopup() {
-    setIsMailPopupOpen(true);
-  }
-
-  function closePersonAreaPopup() { 
-    setIsPhotoPopupOpen(false);
-    setIsChangePasswordPopupOpen(false);
-    setIsDatePopupOpen(false);
-    setIsIdentifierPopupOpen(false);
-    setIsPhonePopupOpen(false);
-    setIsMailPopupOpen(false);
-  }
-  
-  React.useEffect(() => {
-    setIsPhotoPopupOpen(false);
-    setIsChangePasswordPopupOpen(false);
-    setIsDatePopupOpen(false);
-  },[]);
+function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswordPopup, openDatePopup, openIdentifierPopup, openPhonePopup, openMailPopup }) { 
 
   return (
-    <>
     <section className='section person-area'>
       <div className='person-area__container'>
         <div className='person-area__data'>
@@ -170,59 +114,9 @@ function PersonArea({ studentData }) {
             <h5 className='person-area__program-direction'>{studentData.direction || ''}</h5>
             <p className='person-area__program-profile'>{studentData.profil || ''}</p>
           </div>
-          
         </div>
-
       </div>
     </section>
-    {
-      isPhotoPopupOpen &&
-      <PersonAreaPhotoPopup
-        isOpen={isPhotoPopupOpen}
-        onClose={closePersonAreaPopup}
-        currentUser={currentUser}
-      />
-    }
-    {
-      isChangePasswordPopupOpen &&
-      <PersonAreaChangePasswordPopup
-        isOpen={isChangePasswordPopupOpen}
-        onClose={closePersonAreaPopup}
-      />
-    }
-    {
-      isDatePopupOpen &&
-      <PersonAreaDatePopup
-        isOpen={isDatePopupOpen}
-        onClose={closePersonAreaPopup}
-        currentUser={currentUser}
-      />
-    }
-    {
-      isIdentifierPopupOpen &&
-      <PersonAreaIdentifierPopup
-        isOpen={isIdentifierPopupOpen}
-        onClose={closePersonAreaPopup}
-        currentUser={currentUser}
-      />
-    }
-    {
-      isPhonePopupOpen &&
-      <PersonAreaPhonePopup
-        isOpen={isPhonePopupOpen}
-        onClose={closePersonAreaPopup}
-        currentUser={currentUser}
-      />
-    }
-    {
-      isMailPopupOpen &&
-      <PersonAreaMailPopup
-        isOpen={isMailPopupOpen}
-        onClose={closePersonAreaPopup}
-        currentUser={currentUser}
-      />
-    }
-    </>
   );
 }
 

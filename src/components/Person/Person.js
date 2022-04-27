@@ -1,6 +1,9 @@
 import React from 'react';
 import './Person.css';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import PersonArea from './PersonArea/PersonArea.js';
+import PersonAreaLaptop from './PersonArea/PersonAreaLaptop/PersonAreaLaptop.js';
+import PersonData from './PersonData/PersonData.js';
 import PersonEducation from './PersonEducation/PersonEducation.js';
 import PersonAchievement from './PersonAchievement/PersonAchievement.js';
 import PersonDocument from './PersonDocument/PersonDocument.js';
@@ -9,8 +12,14 @@ import PersonNotification from './PersonNotification/PersonNotification.js';
 import PersonRating from './PersonRating/PersonRating.js';
 import PersonCommunication from './PersonCommunication/PersonCommunication.js';
 import PersonDiploma from './PersonDiploma/PersonDiploma.js';
+import PersonPhotoPopup from './PersonPopup/PersonPhotoPopup/PersonAreaPhotoPopup.js';
+import PersonChangePasswordPopup from './PersonPopup/PersonChangePasswordPopup/PersonAreaChangePasswordPopup.js';
+import PersonDatePopup from './PersonPopup/PersonDatePopup/PersonAreaDatePopup.js';
+import PersonIdentifierPopup from './PersonPopup/PersonIdentifierPopup/PersonAreaIdentifierPopup.js';
+import PersonPhonePopup from './PersonPopup/PersonPhonePopup/PersonAreaPhonePopup.js';
+import PersonMailPopup from './PersonPopup/PersonMailPopup/PersonAreaMailPopup.js';
 
-function Person({ studentData }) {
+function Person({ studentData, windowWidth }) {
 
   const user = {
     photo: '',
@@ -110,17 +119,143 @@ function Person({ studentData }) {
     { text: 'Иванова Елена Ивановна Иванова Елена Ивановна', count: '1', },
   ]
 
+  const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
+  const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = React.useState(false); 
+  const [isDatePopupOpen, setIsDatePopupOpen] = React.useState(false);
+  const [isIdentifierPopupOpen, setIsIdentifierPopupOpen] = React.useState(false);
+  const [isPhonePopupOpen, setIsPhonePopupOpen] = React.useState(false);
+  const [isMailPopupOpen, setIsMailPopupOpen] = React.useState(false);
+
+  const currentUser = React.useContext(CurrentUserContext);
+
+  function openPhotoPopup() {
+    setIsPhotoPopupOpen(true);
+  }
+
+  function openChangePasswordPopup() {
+    setIsChangePasswordPopupOpen(true);
+  }
+
+  function openDatePopup() {
+    setIsDatePopupOpen(true);
+  }
+
+  function openIdentifierPopup() {
+    setIsIdentifierPopupOpen(true);
+  }
+
+  function openPhonePopup() {
+    setIsPhonePopupOpen(true);
+  }
+
+  function openMailPopup() {
+    setIsMailPopupOpen(true);
+  }
+
+  function closePersonAreaPopup() { 
+    setIsPhotoPopupOpen(false);
+    setIsChangePasswordPopupOpen(false);
+    setIsDatePopupOpen(false);
+    setIsIdentifierPopupOpen(false);
+    setIsPhonePopupOpen(false);
+    setIsMailPopupOpen(false);
+  }
+  
+  React.useEffect(() => {
+    setIsPhotoPopupOpen(false);
+    setIsChangePasswordPopupOpen(false);
+    setIsDatePopupOpen(false);
+  },[]);
+
   return (
     <div className='person'>
-      <PersonArea user={user} studentData={studentData} />
-      <PersonEducation user={user} userEducation={userEducation} />
-      <PersonAchievement user={user} />
-      <PersonDocument user={user} userDocuments={userDocuments} userCheck={userCheck} />
-      <PersonDeclaration user={user} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} /> 
-      <PersonNotification user={user} userNotifications={userNotifications} />
-      <PersonRating scores={scores} />
-      <PersonCommunication user={user} userSocialClassmates={userSocialClassmates} /> 
-      <PersonDiploma />
+
+      {
+        windowWidth > 1439 
+        ?
+        <PersonArea 
+        currentUser={currentUser}
+        studentData={studentData}
+        openPhotoPopup={openPhotoPopup}
+        openChangePasswordPopup={openChangePasswordPopup}
+        openDatePopup={openDatePopup}
+        openIdentifierPopup={openIdentifierPopup}
+        openPhonePopup={openPhonePopup}
+        openMailPopup={openMailPopup}
+        />
+        :
+        <>
+        <PersonAreaLaptop
+        currentUser={currentUser}
+        studentData={studentData}
+        openPhotoPopup={openPhotoPopup}
+        />
+        <PersonData 
+        currentUser={currentUser}
+        openChangePasswordPopup={openChangePasswordPopup} 
+        />
+        </>
+      }
+      
+      <PersonEducation user={user} userEducation={userEducation} windowWidth={windowWidth} />
+      <PersonAchievement user={user} windowWidth={windowWidth} />
+      <PersonDocument user={user} userDocuments={userDocuments} userCheck={userCheck} windowWidth={windowWidth} />
+      <PersonDeclaration user={user} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} windowWidth={windowWidth} />
+      <PersonNotification user={user} userNotifications={userNotifications} windowWidth={windowWidth} />
+      <PersonRating scores={scores} windowWidth={windowWidth} />
+      <PersonCommunication userSocialClassmates={userSocialClassmates} windowWidth={windowWidth} />
+      {
+        //<PersonDiploma windowWidth={windowWidth} />
+      }
+      
+
+      {
+        isPhotoPopupOpen &&
+        <PersonPhotoPopup
+          isOpen={isPhotoPopupOpen}
+          onClose={closePersonAreaPopup}
+          currentUser={currentUser}
+        />
+      }
+      {
+        isChangePasswordPopupOpen &&
+        <PersonChangePasswordPopup
+          isOpen={isChangePasswordPopupOpen}
+          onClose={closePersonAreaPopup}
+        />
+      }
+      {
+        isDatePopupOpen &&
+        <PersonDatePopup
+          isOpen={isDatePopupOpen}
+          onClose={closePersonAreaPopup}
+          currentUser={currentUser}
+        />
+      }
+      {
+        isIdentifierPopupOpen &&
+        <PersonIdentifierPopup
+          isOpen={isIdentifierPopupOpen}
+          onClose={closePersonAreaPopup}
+          currentUser={currentUser}
+        />
+      }
+      {
+        isPhonePopupOpen &&
+        <PersonPhonePopup
+          isOpen={isPhonePopupOpen}
+          onClose={closePersonAreaPopup}
+          currentUser={currentUser}
+        />
+      }
+      {
+        isMailPopupOpen &&
+        <PersonMailPopup
+          isOpen={isMailPopupOpen}
+          onClose={closePersonAreaPopup}
+          currentUser={currentUser}
+        />
+      }
     </div>
   );
 }

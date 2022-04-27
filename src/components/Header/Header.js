@@ -20,7 +20,7 @@ function Header() {
         }
         
         <h3 className='header__name'>{currentUser.fullname || ''}</h3>
-        <nav className='header__nav'>
+        <nav className='scroll header__nav'>
           <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/person'>
             <div className='header__nav-link-icon'>
               <div className='header__nav-link-icon-container'>

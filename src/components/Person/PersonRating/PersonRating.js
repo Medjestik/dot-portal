@@ -8,9 +8,10 @@ import disciplineIcon from '../../../images/form/discipline-color.svg';
 import teacherIcon from '../../../images/form/teacher-color.svg';
 import ratingIcon from '../../../images/accordion/accordion-rating.svg';
 
-function PersonRating({ scores }) {
+function PersonRating({ scores, windowWidth }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
+  const [sectionHeight, setSectionHeight] = React.useState(0);
 
   const [disciplineSelect, setDisciplineSelect] = React.useState({ isChoose: false, discipline: {}, });
   const [disciplineFeedback, setDisciplineFeedback] = React.useState('');
@@ -118,80 +119,94 @@ function PersonRating({ scores }) {
     setIsOpenInfoPopup(false); 
   },[]);
 
+  React.useEffect(() => {
+    if (windowWidth > 1439) {
+      setSectionHeight(354);
+    } else if (windowWidth > 1279) {
+      setSectionHeight(612);
+    } else {
+      setSectionHeight(612);
+    }
+  }, [windowWidth]);
+
   return (
     <>
-    <Accordion icon={ratingIcon} name='Оценка дисциплин и преподавателей' height={354} openInfoPopup={openInfoPopup}>
+    <Accordion icon={ratingIcon} name='Оценка дисциплин и преподавателей' height={sectionHeight} openInfoPopup={openInfoPopup}>
       <div className='person-rating__container'>
-        <div className='person-rating__section-discipline'>
-          <PersonRatingSelect 
-            id='discipline' 
-            options={discipline} 
-            placeholder={'Выберите дисциплину'} 
-            icon={disciplineIcon} 
-            onSelect={handleChangeDisciplineSelect} 
-          />
-          <div className='person-rating__star-container'>
-            <StarRating onChange={handleChangeDisciplineStarsRating} />
-          </div>
-          <form 
-          className='person-rating__form' 
-          name='person-rating__form-discipline' 
-          id='person-rating__form-discipline' 
-          onSubmit={sendDisciplineFeedback}
-          >
-            <textarea 
-            className='person-rating__textarea scroll'
-            name='person-rating__textarea-discipline'
-            id='person-rating__textarea-discipline'
-            placeholder='Напишите отзыв...'
-            value={disciplineFeedback}
-            onChange={handleChangeDisciplineFeedback}
-            minLength='1'
-            required
+        <div className='person-rating__stars-container'>
+          <div className='person-rating__section-discipline'>
+            <PersonRatingSelect 
+              id='discipline' 
+              options={discipline} 
+              placeholder={'Выберите дисциплину'} 
+              icon={disciplineIcon} 
+              onSelect={handleChangeDisciplineSelect} 
+            />
+            <div className='person-rating__star-container'>
+              <StarRating onChange={handleChangeDisciplineStarsRating} />
+            </div>
+            <form 
+            className='person-rating__form' 
+            name='person-rating__form-discipline' 
+            id='person-rating__form-discipline' 
+            onSubmit={sendDisciplineFeedback}
             >
-            </textarea>
-            <div className='person-rating__form-separator'></div>
-            <button 
-            className={`btn_type_upload person-rating__button ${isBlockDisciplineFeedbackForm ? '' : 'btn_type_upload_status_active'}`} 
-            type='submit'>
-            </button>
-          </form>
-        </div>
-        <div className='person-rating__section-teacher'>
-          <PersonRatingSelect 
-          id='teacher' 
-          options={teachers} 
-          placeholder={'Выберите преподавателя'} 
-          icon={teacherIcon}
-          onSelect={handleChangeTeacherSelect} 
-          />
-          <div className='person-rating__star-container'>
-            <StarRating onChange={handleChangeTeacherStarsRating} />
+              <textarea 
+              className='person-rating__textarea scroll'
+              name='person-rating__textarea-discipline'
+              id='person-rating__textarea-discipline'
+              placeholder='Напишите отзыв...'
+              value={disciplineFeedback}
+              onChange={handleChangeDisciplineFeedback}
+              minLength='1'
+              required
+              >
+              </textarea>
+              <div className='person-rating__form-separator'></div>
+              <button 
+              className={`btn_type_upload person-rating__button ${isBlockDisciplineFeedbackForm ? '' : 'btn_type_upload_status_active'}`} 
+              type='submit'>
+              </button>
+            </form>
           </div>
-          <form 
-          className='person-rating__form' 
-          name='person-rating__form-teacher' 
-          id='person-rating__form-teacher'
-          onSubmit={sendTeacherFeedback}
-          >
-            <textarea 
-            className='person-rating__textarea scroll'
-            name='person-rating__textarea-teacher'
-            id='person-rating__textarea-teacher'
-            placeholder='Напишите отзыв...'
-            value={teacherFeedback}
-            onChange={handleChangeTeacherFeedback}
-            minLength='1'
-            required
+          <div className='person-rating__section-teacher'>
+            <PersonRatingSelect 
+            id='teacher' 
+            options={teachers} 
+            placeholder={'Выберите преподавателя'} 
+            icon={teacherIcon}
+            onSelect={handleChangeTeacherSelect} 
+            />
+            <div className='person-rating__star-container'>
+              <StarRating onChange={handleChangeTeacherStarsRating} />
+            </div>
+            <form 
+            className='person-rating__form' 
+            name='person-rating__form-teacher' 
+            id='person-rating__form-teacher'
+            onSubmit={sendTeacherFeedback}
             >
-            </textarea>
-            <div className='person-rating__form-separator'></div>
-            <button 
-            className={`btn_type_upload person-rating__button ${isBlockTeacherFeedbackForm ? '' : 'btn_type_upload_status_active'}`} 
-            type='submit'>
-            </button>
-          </form>
+              <textarea 
+              className='person-rating__textarea scroll'
+              name='person-rating__textarea-teacher'
+              id='person-rating__textarea-teacher'
+              placeholder='Напишите отзыв...'
+              value={teacherFeedback}
+              onChange={handleChangeTeacherFeedback}
+              minLength='1'
+              required
+              >
+              </textarea>
+              <div className='person-rating__form-separator'></div>
+              <button 
+              className={`btn_type_upload person-rating__button ${isBlockTeacherFeedbackForm ? '' : 'btn_type_upload_status_active'}`} 
+              type='submit'>
+              </button>
+            </form>
+          </div>
+
         </div>
+
         <div className='person-rating__section-score'>
           <h6 className='person-rating__score-title'>Оценки</h6>
           <div className='person-rating__score-container scroll-inside'>

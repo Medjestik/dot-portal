@@ -22,14 +22,14 @@
   transition-delay: 0s;
 }
 .popup__container {
-  margin: 15vh auto 0px;
+  margin: 10vh auto 0px;
   width: max-content;
 
   position: relative;
   display: flex;
   flex-direction: column;
   min-height: 114px;
-  max-height: 70vh;
+  max-height: 80vh;
   overflow-y: auto;
 
   background: var(--main-white-color);

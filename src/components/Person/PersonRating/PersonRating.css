@@ -4,6 +4,11 @@
   display: flex;
   align-items: center;
 }
+.person-rating__stars-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
 .person-rating__star-container {
   padding: 0px 12px;
 }
@@ -119,4 +124,14 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+@media all and (max-width: 1439px) {
+  .person-rating__container {
+    flex-direction: column;
+  }
+  .person-rating__section-score {
+    margin: 20px 0px 0px 0px;
+    width: 100%;
+  }
 }

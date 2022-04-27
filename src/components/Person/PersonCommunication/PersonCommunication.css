@@ -224,3 +224,19 @@
   width: 20px;
   height: 20px;
 }
+
+@media all and (max-width: 1439px) {
+  .person-communication__container {
+    flex-direction: column;
+  }
+  .person-communication__social {
+    margin: 0px;
+    max-width: none;
+  }
+  .person-communication__classmates {
+    margin: 20px 0px 0px 0px;
+  }
+  .person-communication__classmates-social-item {
+    max-width: none;
+  }
+}

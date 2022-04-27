@@ -20,6 +20,7 @@ function App() {
   const [studentData, setStudentData] = React.useState({});
 
   const { pathname } = useLocation();
+  const [windowWidth, setWindowWidth] = React.useState(0);
 
   function handleLogin ({ email, password }) {
 
@@ -94,6 +95,22 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+  React.useEffect(() => {
+      function resizeWindow (evt) {
+        setWindowWidth(evt.target.innerWidth);
+      }
+
+      window.addEventListener('resize', resizeWindow);
+
+      return () => {
+        window.removeEventListener('resize', resizeWindow);
+      }
+    }, []);
+
+  React.useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, [windowWidth])
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
@@ -111,7 +128,7 @@ function App() {
                   exact 
                   path='person' 
                   element={
-                  <Person studentData={studentData} />}
+                  <Person studentData={studentData} windowWidth={windowWidth} />}
                   />
                   <Route 
                   path='education/*' 

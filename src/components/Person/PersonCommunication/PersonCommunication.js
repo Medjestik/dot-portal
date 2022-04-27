@@ -7,9 +7,10 @@ import telegramIcon from '../../../images/social/telegram.svg';
 import communicationIcon from '../../../images/accordion/accordion-communication.svg';
 import PersonCommunicationInfoPopup from './PersonCommunicationInfoPopup/PersonCommunicationInfoPopup.js';
 
-function PersonCommunication({ user, userSocialClassmates }) {
+function PersonCommunication({ userSocialClassmates, windowWidth }) {
 
-  const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false); 
+  const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
+  const [sectionHeight, setSectionHeight] = React.useState(0);
 
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
@@ -23,9 +24,19 @@ function PersonCommunication({ user, userSocialClassmates }) {
     setIsOpenInfoPopup(false);
   },[]);
 
+  React.useEffect(() => {
+    if (windowWidth > 1439) {
+      setSectionHeight(346);
+    } else if (windowWidth > 1279) {
+      setSectionHeight(592);
+    } else {
+      setSectionHeight(592);
+    }
+  }, [windowWidth]);
+
   return (
     <>
-    <Accordion icon={communicationIcon} name='Общение' height={346} openInfoPopup={openInfoPopup}>
+    <Accordion icon={communicationIcon} name='Общение' height={sectionHeight} openInfoPopup={openInfoPopup}>
       <div className='person-communication__container'>
         <div className='person-communication__social'>
           <p className='person-communication__social-title'>Ваши социальные сети</p>

@@ -383,3 +383,13 @@ input[type=number] {
   width: 100%;
   height: 100%;
 }
+
+@media all and (max-width: 1439px) {
+  .container {
+    max-width: 1240px;
+    padding: 12px 20px;
+  }
+  .main-container {
+    margin: 0px 0px 0px 252px;
+  }
+}

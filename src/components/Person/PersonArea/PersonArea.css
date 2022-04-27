@@ -184,8 +184,9 @@
 }
 .person-area__separate {
   margin: auto 30px;
+  width: 1px;
   height: 160px;
-  border: 1px solid var(--main-grey-color);
+  background: var(--main-grey-color);
 }
 .person-area__contact {
   margin: 0px 20px 0px 0px;
@@ -208,6 +209,7 @@
   object-position: center;
   user-select: none;
   pointer-events: none;
+  flex-shrink: 0;
 }
 .person-area__contact-photo-empty {
   margin: 0px 20px 0px 0px;
@@ -346,4 +348,66 @@
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
+}
+
+@media all and (max-width: 1439px) {
+  .person-area__container {
+    padding: 32px;
+  }
+  .person-area__separate {
+    height: 276px;
+  }
+  .person-area__achievements-item {
+    margin: 0px 16px 0px 0px;
+  }
+  .person-area__group {
+    margin: 0px 18px 0px 0px;
+    grid-area: none;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+  }
+  .person-area__education-card {
+    justify-content: center;
+  }
+  .person-area__education-card_type_course {
+    grid-area: none;
+    margin: 0px 18px 0px 0px;
+  }
+  .person-area__education-card_type_semester {
+    grid-area: none;
+    margin: 0px;
+  }
+  .person-area__group-title {
+    margin: 0px;
+  }
+  .person-area__education-count {
+    margin: 0px 4px 0px 0px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .person-area__program {
+    margin: 16px 0px 0px 0px;
+  }
+  .person-area__program-profile {
+    margin: 12px 0px 0px 0px;
+  }
+  .person-area__contact {
+    max-width: none;
+    width: 100%;
+  }
+  .person-area__contact-info {
+    margin: 0px 0px 32px 0px;
+  }
+  .person-area__contact-info:last-of-type {
+    margin: 0px;
+  }
+  .person-area__contact-name {
+    max-width: none;
+  }
+  .person-area__contact-phone {
+    margin: 16px 0px 0px 0px;
+  }
 }

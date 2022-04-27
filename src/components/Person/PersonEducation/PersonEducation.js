@@ -5,9 +5,10 @@ import PersonEducationInfoPopup from './PersonEducationInfoPopup/PersonEducation
 import educationIcon from '../../../images/accordion/accordion-education.svg';
 import statusIcon from '../../../images/status-white.svg';
 
-function PersonEducation({ user, userEducation }) {
+function PersonEducation({ user, userEducation, windowWidth }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
+  const [sectionHeight, setSectionHeight] = React.useState(0);
 
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
@@ -36,9 +37,19 @@ function PersonEducation({ user, userEducation }) {
     )
   }
 
+  React.useEffect(() => {
+    if (windowWidth > 1439) {
+      setSectionHeight(296);
+    } else if (windowWidth > 1279) {
+      setSectionHeight(382);
+    } else {
+      setSectionHeight(382);
+    }
+  }, [windowWidth]);
+
   return (
     <>
-    <Accordion icon={educationIcon} name='Обучение' height={296} openInfoPopup={openInfoPopup}>
+    <Accordion icon={educationIcon} name='Обучение' height={sectionHeight} openInfoPopup={openInfoPopup}>
       <div className='person-education__container'>
         <div className='person-education__status'>
           <img className='person-education__status-icon' alt='иконка' src={statusIcon}></img>
