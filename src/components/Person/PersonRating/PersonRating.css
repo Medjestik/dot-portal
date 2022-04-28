@@ -134,4 +134,7 @@
     margin: 20px 0px 0px 0px;
     width: 100%;
   }
+  .person-rating__section-teacher {
+    margin: 0px;
+  }
 }

@@ -1,9 +1,12 @@
 .header {
   width: 256px;
   position: fixed;
+  top: 12px;
+  left: 0px;
   background: var(--main-white-color);
   border-radius: var(--border-radius);
   box-sizing: border-box;
+  z-index: 100;
 }
 .header__container {
   min-height: calc(100vh - 24px);
@@ -222,5 +225,21 @@
   }
   .header__container {
     padding: 32px;
+  }
+}
+
+@media all and (max-width: 1279px) {
+  .header {
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0 , 0, .3);
+  }
+  .header__container {
+    background: var(--main-white-color);
+    width: 266px;
+    min-height: 100vh;
+    max-height: 100vh;
+    z-index: 200;
   }
 }

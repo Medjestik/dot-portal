@@ -121,7 +121,9 @@ function App() {
           <div></div>
           :
           <div className='container'>
-              <Header />
+
+              <Header windowWidth={windowWidth} />
+              
               <div className='main-container'>
                 <Routes>
                   <Route 
