@@ -112,7 +112,7 @@ function App() {
   }, [windowWidth])
 
   function appHeight() {
-    const doc = document.documentElement
+    const doc = document.documentElement;
     doc.style.setProperty('--vh', (window.innerHeight*.01) + 'px');
   }
   

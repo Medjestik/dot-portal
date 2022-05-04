@@ -15,13 +15,15 @@ function Header({ windowWidth, pathname }) {
 
   function showMobileMenu() {
     setIsShowMobileMenu(true);
+    document.body.style.overflow = 'hidden';
   }
 
-  function onClickLink() {
+  function hideMobileMenu() {
     setIsShowMobileMenu(false);
+    document.body.style.overflow = '';
   }
 
-  useOnClickOutside(refMobileHeader, () => setIsShowMobileMenu(false));
+  useOnClickOutside(refMobileHeader, hideMobileMenu);
  
   return (
 
@@ -43,7 +45,7 @@ function Header({ windowWidth, pathname }) {
           
           <h3 className='header__name'>{currentUser.fullname || ''}</h3>
           <nav className='scroll header__nav'>
-            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/person'>
+            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/person'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { personIcon }
@@ -51,7 +53,7 @@ function Header({ windowWidth, pathname }) {
               </div>
               <p className='header__nav-link-text'>Личный кабинет</p>
             </NavLink>
-            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/education/semester'>
+            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/education/semester'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { educationIcon }
@@ -59,7 +61,7 @@ function Header({ windowWidth, pathname }) {
               </div>
               <p className='header__nav-link-text'>Обучение</p>
             </NavLink>
-            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
+            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { webinarIcon }
@@ -69,7 +71,7 @@ function Header({ windowWidth, pathname }) {
             </NavLink>
 
             {/*
-              <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
+              <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
                 <div className='header__nav-link-icon'>
                   <div className='header__nav-link-icon-container'>
                     { ratingIcon }
@@ -79,7 +81,7 @@ function Header({ windowWidth, pathname }) {
               </NavLink>*/
             }
 
-            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/document'>
+            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/document'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { documentIcon }
@@ -87,7 +89,7 @@ function Header({ windowWidth, pathname }) {
               </div>
               <p className='header__nav-link-text'>Документы</p>
             </NavLink>
-            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/library'>
+            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/library'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { libraryIcon }
