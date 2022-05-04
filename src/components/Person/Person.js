@@ -3,6 +3,7 @@ import './Person.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import PersonArea from './PersonArea/PersonArea.js';
 import PersonAreaLaptop from './PersonArea/PersonAreaLaptop/PersonAreaLaptop.js';
+import PersonAreaMobile from './PersonArea/PersonAreaMobile/PersonAreaMobile.js';
 import PersonData from './PersonData/PersonData.js';
 import PersonEducation from './PersonEducation/PersonEducation.js';
 import PersonAchievement from './PersonAchievement/PersonAchievement.js';
@@ -171,8 +172,7 @@ function Person({ studentData, windowWidth }) {
     <div className='person'>
 
       {
-        windowWidth > 1439 
-        ?
+        windowWidth > 1439 &&
         <PersonArea 
         currentUser={currentUser}
         studentData={studentData}
@@ -183,9 +183,25 @@ function Person({ studentData, windowWidth }) {
         openPhonePopup={openPhonePopup}
         openMailPopup={openMailPopup}
         />
-        :
+      }
+      {
+        (windowWidth <= 1439) && (windowWidth > 833) &&
         <>
         <PersonAreaLaptop
+        currentUser={currentUser}
+        studentData={studentData}
+        openPhotoPopup={openPhotoPopup}
+        />
+        <PersonData 
+        currentUser={currentUser}
+        openChangePasswordPopup={openChangePasswordPopup} 
+        />
+        </>
+      }
+      {
+        windowWidth <= 833 &&
+        <>
+        <PersonAreaMobile
         currentUser={currentUser}
         studentData={studentData}
         openPhotoPopup={openPhotoPopup}

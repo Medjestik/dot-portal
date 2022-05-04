@@ -1,9 +1,10 @@
 import React from 'react';
 import '../PersonArea.css';
-import './PersonAreaLaptop.css';
+import '../PersonAreaLaptop/PersonAreaLaptop.css';
+import './PersonAreaMobile.css';
 import { photoIcon } from '../PersonIcons/PersonIcons.js';
 
-function PersonAreaLaptop({ currentUser, studentData, openPhotoPopup }) { 
+function PersonAreaMobile({ currentUser, studentData, openPhotoPopup }) { 
 
   return (
     <section className='section person-area'>
@@ -51,44 +52,10 @@ function PersonAreaLaptop({ currentUser, studentData, openPhotoPopup }) {
             <h5 className='person-area__program-direction'>{studentData.direction || ''}</h5>
             <p className='person-area__program-profile'>{studentData.profil || ''}</p>
           </div>
-
-        </div>
-        <div className='person-area__separate'></div>
-        <div className='person-area__contact'>
-          <div className='person-area__contact-info'>
-            {
-              studentData.curator.pict_url
-              ?
-                <img className='person-area__contact-photo' src={studentData.curator.pict_url} alt='фотография куратора'></img>
-              :
-                <div className='person-area__contact-photo-empty'></div>
-            }
-            <div className='person-area__contact-info-container'>
-              <h3 className='person-area__contact-name'>{studentData.curator.fullname || ''}</h3>
-              <p className='person-area__contact-caption'>Куратор</p>
-              <p className='person-area__contact-phone'>{studentData.curator.phone || '+7 (000) 000-00-00'}</p>
-              <p className='person-area__contact-mail'>{studentData.curator.email || '0000000000000@000000.ru'}</p>
-            </div>
-          </div>
-          <div className='person-area__contact-info'>
-            {
-              studentData.decan.pict_url
-              ?
-                <img className='person-area__contact-photo' src={studentData.decan.pict_url} alt='фотография декана'></img>
-              :
-                <div className='person-area__contact-photo-empty'></div>
-            }
-            <div className='person-area__contact-info-container'>
-              <h3 className='person-area__contact-name'>{studentData.decan.fullname || ''}</h3>
-              <p className='person-area__contact-caption'>Декан</p>
-              <p className='person-area__contact-phone'>{studentData.decan.phone || '+7 (000) 000-00-00'}</p>
-              <p className='person-area__contact-mail'>{studentData.decan.email || '0000000000000@000000.ru'}</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
   );
 }
 
-export default PersonAreaLaptop;
+export default PersonAreaMobile;

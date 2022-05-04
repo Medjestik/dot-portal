@@ -39,7 +39,6 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
               <li className='person-area__achievements-item'><p className='person-area__education-level'>{studentData.qualification || ''}</p></li>
               <li className='person-area__achievements-item'><div className='person-area__achievement person-area__achievement_type_epic'></div></li>
               <li className='person-area__achievements-item'><div className='person-area__achievement person-area__achievement_type_epic'></div></li>
-              <li className='person-area__achievements-item'><div className='person-area__achievement person-area__achievement_type_epic'></div></li>
               <li className='person-area__achievements-item'><div className='person-area__achievement person-area__achievement_type_legendary'></div></li>
             </ul>
           </div>

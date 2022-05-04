@@ -411,3 +411,41 @@
     margin: 16px 0px 0px 0px;
   }
 }
+
+@media all and (max-width: 833px) {
+  .person-area__container {
+    padding: 20px;
+  }
+  .person-area__group {
+    margin: 0px 10px 0px 0px;
+    padding: 7px 10px;
+    max-width: 98px;
+  }
+  .person-area__education-card_type_course {
+    margin: 0px 10px 0px 0px;
+  }
+  .person-area__education-card {
+    padding: 7px 10px;
+    max-width: 98px;
+  }
+  .person-area__photo-container {
+    width: 100px;
+    height: 100px;
+  }
+  .person-area__photo {
+    width: 100px;
+    height: 100px;
+  }
+  .person-area__icon-container {
+    width: 100px;
+    height: 50px;
+  }
+  .person-area__photo-icon {
+    opacity: 0;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    bottom: 12px;
+    left: 34px;
+  }
+}
