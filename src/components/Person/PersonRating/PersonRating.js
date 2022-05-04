@@ -131,7 +131,7 @@ function PersonRating({ scores, windowWidth }) {
 
   return (
     <>
-    <Accordion icon={ratingIcon} name='Оценка дисциплин и преподавателей' height={sectionHeight} openInfoPopup={openInfoPopup}>
+    <Accordion icon={ratingIcon} name={windowWidth > 833 ? 'Оценка дисциплин и преподавателей' : 'Оценка'} height={sectionHeight} openInfoPopup={openInfoPopup}>
       <div className='person-rating__container'>
         <div className='person-rating__stars-container'>
           <div className='person-rating__section-discipline'>

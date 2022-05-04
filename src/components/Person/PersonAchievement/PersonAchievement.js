@@ -36,7 +36,7 @@ function PersonAchievement({ user, windowWidth }) {
 
   return (
     <>
-    <Accordion icon={achievementIcon} name='Рейтинг и достижения' height={sectionHeight} openInfoPopup={openInfoPopup}>
+    <Accordion icon={achievementIcon} name={windowWidth > 833 ? 'Рейтинг и достижения' : 'Рейтинг'} height={sectionHeight} openInfoPopup={openInfoPopup}>
       <div className='person-achievement'>
         <div className='person-achievement__rating'>
           {
