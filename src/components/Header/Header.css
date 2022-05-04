@@ -230,13 +230,9 @@
 @media all and (max-width: 1279px) {
   .header {
     width: 100%;
+    top: 0px;
+    left: 0px;
     border-radius: 0px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: -70px;
-    padding-bottom: 70px;
-    transform: translateY(70px);
   }
   .header-mobile_status_show {
     display: block;

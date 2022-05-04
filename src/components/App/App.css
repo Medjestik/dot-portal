@@ -13,7 +13,7 @@
 
   color: var(--black-color);
   background-color: var(--main-grey-color);
-  min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
 
   font-family: 'Roboto', Arial, sans-serif; 
