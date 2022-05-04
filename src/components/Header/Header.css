@@ -1,8 +1,6 @@
 .header {
   width: 256px;
   position: fixed;
-  top: 12px;
-  left: 0px;
   background: var(--main-white-color);
   border-radius: var(--border-radius);
   box-sizing: border-box;
@@ -37,7 +35,7 @@
   text-align: center;
 }
 .header__nav {
-  margin: 40px 0px 0px 0px;
+  margin: 40px 0px 12px 0px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -63,6 +61,7 @@
   outline: none;
   background: initial;
   border: none;
+  padding: 0px;
 }
 .header__nav-link:hover {
   cursor: pointer;
@@ -233,7 +232,14 @@
     width: 100%;
     top: 0px;
     left: 0px;
+    border-radius: 0px;
+  }
+  .header-mobile_status_show {
+    display: block;
     background-color: rgba(0, 0 , 0, .3);
+  }
+  .header-mobile_status_hide {
+    display: none;
   }
   .header__container {
     background: var(--main-white-color);

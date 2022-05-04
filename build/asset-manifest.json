@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1265cd84.css",
-    "main.js": "/static/js/main.a94ecb20.js",
+    "main.css": "/static/css/main.23cc8e29.css",
+    "main.js": "/static/js/main.ce5d2a6f.js",
     "static/js/787.1955ab40.chunk.js": "/static/js/787.1955ab40.chunk.js",
     "static/media/Robotomediumitalic.ttf": "/static/media/Robotomediumitalic.35abcf5eb54b0c398e52.ttf",
     "static/media/Robotoitalic.ttf": "/static/media/Robotoitalic.727137e411cf490757ce.ttf",
@@ -45,7 +45,7 @@
     "static/media/vk.svg": "/static/media/vk.42733c889f7d3dc6c940d8ef94c42042.svg",
     "static/media/vk-color.svg": "/static/media/vk-color.3e4bcb46da017673b019.svg",
     "static/media/library-white.svg": "/static/media/library-white.35b8392f22f7b7d9e09c.svg",
-    "static/media/library.svg": "/static/media/library.0ac35a62dc0647e8d3da.svg",
+    "static/media/library.svg": "/static/media/library.0ac35a62dc0647e8d3da89b880dfd350.svg",
     "static/media/accordion-diploma.svg": "/static/media/accordion-diploma.551471bf2ccaa3f292c4b65931fa18ab.svg",
     "static/media/discipline-color.svg": "/static/media/discipline-color.1ddfa7a39fbdfb4f78fa78614dbeb070.svg",
     "static/media/main-rating.svg": "/static/media/main-rating.eee3972d055bbc95b29e280300336a76.svg",
@@ -53,14 +53,13 @@
     "static/media/instagram-color.svg": "/static/media/instagram-color.156b06f75a08aac6d8cb.svg",
     "static/media/accordion-communication.svg": "/static/media/accordion-communication.03c35404cb6011e121c754fb972c1f0c.svg",
     "static/media/accordion-document.svg": "/static/media/accordion-document.253c392820b9ad966f782d396d4b6783.svg",
-    "static/media/mobile-home.svg": "/static/media/mobile-home.0b311211ef1b6d40f459.svg",
-    "static/media/education.svg": "/static/media/education.9eef265272ff4dc7cc01.svg",
+    "static/media/education.svg": "/static/media/education.9eef265272ff4dc7cc0193275da029d0.svg",
     "static/media/accordion-data.svg": "/static/media/accordion-data.650c9ee55eb4dc9514ced448f896a065.svg",
     "static/media/password-hide-color.svg": "/static/media/password-hide-color.fc56a60e78838c6b83c5.svg",
     "static/media/password-hide.svg": "/static/media/password-hide.21a4b041235074a467ae.svg",
     "static/media/education-white.svg": "/static/media/education-white.0987f91daad057d55553.svg",
     "static/media/accordion-achievement.svg": "/static/media/accordion-achievement.9febebee0f8742b7e3dcd3c3d1f90972.svg",
-    "static/media/document.svg": "/static/media/document.90e475f0759f2e89cd78.svg",
+    "static/media/document.svg": "/static/media/document.90e475f0759f2e89cd785cc01ddc2749.svg",
     "static/media/document-white.svg": "/static/media/document-white.2b04790c5516193ac79f.svg",
     "static/media/rating.svg": "/static/media/rating.882cfc0acf251c56f549.svg",
     "static/media/rating-white.svg": "/static/media/rating-white.1e4a7ec30eda44685b8b.svg",
@@ -83,13 +82,13 @@
     "static/media/download.svg": "/static/media/download.5e399bdb1da6b5f7112e.svg",
     "static/media/telegram-color.svg": "/static/media/telegram-color.835818563472af7ac3e1.svg",
     "static/media/telegram.svg": "/static/media/telegram.487bd15484bb9cf9f6fa87213d7ecbea.svg",
-    "static/media/person.svg": "/static/media/person.9cbf5dd1e24e4a381cba.svg",
+    "static/media/person.svg": "/static/media/person.9cbf5dd1e24e4a381cba3289fcb4735a.svg",
     "static/media/person-white.svg": "/static/media/person-white.3cef34f5e7081f56ac03.svg",
     "static/media/status-white.svg": "/static/media/status-white.5e2aa43d43fea8c6d9faa661361933d7.svg",
     "static/media/accordion-declaration.svg": "/static/media/accordion-declaration.268b607c8aebe3c291847a260b07c2e4.svg",
     "static/media/rating-star.svg": "/static/media/rating-star.af7ceb55bb4afeefcf85.svg",
     "static/media/search-color.svg": "/static/media/search-color.b946f3c9dc3cfce2dd55.svg",
-    "static/media/webinar.svg": "/static/media/webinar.bba64f54a794fdcca94b.svg",
+    "static/media/webinar.svg": "/static/media/webinar.bba64f54a794fdcca94b07980c18a76a.svg",
     "static/media/webinar-white.svg": "/static/media/webinar-white.305ff416988dbf0999f2.svg",
     "static/media/mobile-menu.svg": "/static/media/mobile-menu.56d1b2c25653374c02e1.svg",
     "static/media/cancel.svg": "/static/media/cancel.396f0395624fff4ff0d8.svg",
@@ -97,12 +96,12 @@
     "static/media/attention.svg": "/static/media/attention.f565963cf829280eb474.svg",
     "static/media/arrow.svg": "/static/media/arrow.55a4ec4915bbcdabc744354a9e148a36.svg",
     "static/media/arrow-white.svg": "/static/media/arrow-white.9817492cc56038ef8ec6.svg",
-    "main.1265cd84.css.map": "/static/css/main.1265cd84.css.map",
-    "main.a94ecb20.js.map": "/static/js/main.a94ecb20.js.map",
+    "main.23cc8e29.css.map": "/static/css/main.23cc8e29.css.map",
+    "main.ce5d2a6f.js.map": "/static/js/main.ce5d2a6f.js.map",
     "787.1955ab40.chunk.js.map": "/static/js/787.1955ab40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1265cd84.css",
-    "static/js/main.a94ecb20.js"
+    "static/css/main.23cc8e29.css",
+    "static/js/main.ce5d2a6f.js"
   ]
 }

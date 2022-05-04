@@ -4,21 +4,35 @@ import HeaderMobile from './HeaderMobile/HeaderMobile.js';
 import { NavLink } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon } from './HeaderIcons/HeaderIcons.js';
+import useOnClickOutside from '../../hooks/useOnClickOutside.js';
 
-function Header({ windowWidth }) {
+function Header({ windowWidth, pathname }) {
 
   const currentUser = React.useContext(CurrentUserContext);
+  const refMobileHeader = React.useRef();
 
+  const [isShowMobileMenu, setIsShowMobileMenu] = React.useState(false);
+
+  function showMobileMenu() {
+    setIsShowMobileMenu(true);
+  }
+
+  function onClickLink() {
+    setIsShowMobileMenu(false);
+  }
+
+  useOnClickOutside(refMobileHeader, () => setIsShowMobileMenu(false));
+ 
   return (
 
     <>
       {
         windowWidth < 1279 &&
-        <HeaderMobile />
+        <HeaderMobile showMobileMenu={showMobileMenu} pathname={pathname} />
       }
       
-      <header className='header'>
-        <div className='header__container'>
+      <header className={`header ${isShowMobileMenu ? 'header-mobile_status_show' : 'header-mobile_status_hide'}`}>
+        <div className='header__container' ref={refMobileHeader}>
           {
             currentUser.avatar 
             ?
@@ -29,7 +43,7 @@ function Header({ windowWidth }) {
           
           <h3 className='header__name'>{currentUser.fullname || ''}</h3>
           <nav className='scroll header__nav'>
-            <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/person'>
+            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/person'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { personIcon }
@@ -37,7 +51,7 @@ function Header({ windowWidth }) {
               </div>
               <p className='header__nav-link-text'>Личный кабинет</p>
             </NavLink>
-            <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/education/semester'>
+            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/education/semester'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { educationIcon }
@@ -45,7 +59,7 @@ function Header({ windowWidth }) {
               </div>
               <p className='header__nav-link-text'>Обучение</p>
             </NavLink>
-            <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
+            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { webinarIcon }
@@ -55,7 +69,7 @@ function Header({ windowWidth }) {
             </NavLink>
 
             {/*
-              <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
+              <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
                 <div className='header__nav-link-icon'>
                   <div className='header__nav-link-icon-container'>
                     { ratingIcon }
@@ -65,7 +79,7 @@ function Header({ windowWidth }) {
               </NavLink>*/
             }
 
-            <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/document'>
+            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/document'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { documentIcon }
@@ -73,7 +87,7 @@ function Header({ windowWidth }) {
               </div>
               <p className='header__nav-link-text'>Документы</p>
             </NavLink>
-            <NavLink className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/library'>
+            <NavLink onClick={onClickLink} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/library'>
               <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { libraryIcon }

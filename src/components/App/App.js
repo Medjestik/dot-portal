@@ -122,7 +122,7 @@ function App() {
           :
           <div className='container'>
 
-              <Header windowWidth={windowWidth} />
+              <Header windowWidth={windowWidth} pathname={pathname} />
               
               <div className='main-container'>
                 <Routes>

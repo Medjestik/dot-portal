@@ -29,19 +29,13 @@
   border: none;
   transition: all .3s ease-in-out;
 }
-.header-mobile__btn:hover {
-  cursor: pointer;
-  opacity: .7;
-}
 .header-mobile__btn_type_menu {
   background-image: url('../../../images/mobile-menu.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
-.header-mobile__btn_type_home {
-  background-image: url('../../../images/mobile-home.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+.header-mobile__btn_type_menu:hover  {
+  cursor: pointer;
+  opacity: .7;
 }
