@@ -111,6 +111,14 @@ function App() {
     setWindowWidth(window.innerWidth);
   }, [windowWidth])
 
+  function appHeight() {
+    const doc = document.documentElement
+    doc.style.setProperty('--vh', (window.innerHeight*.01) + 'px');
+  }
+  
+  window.addEventListener('resize', appHeight);
+  appHeight();
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
