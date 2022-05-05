@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.29dd6c80.css",
-    "main.js": "/static/js/main.1d374be0.js",
+    "main.css": "/static/css/main.2fb498a9.css",
+    "main.js": "/static/js/main.26dde955.js",
     "static/js/787.1955ab40.chunk.js": "/static/js/787.1955ab40.chunk.js",
     "static/media/Robotomediumitalic.ttf": "/static/media/Robotomediumitalic.35abcf5eb54b0c398e52.ttf",
     "static/media/Robotoitalic.ttf": "/static/media/Robotoitalic.727137e411cf490757ce.ttf",
@@ -45,6 +45,7 @@
     "static/media/vk.svg": "/static/media/vk.42733c889f7d3dc6c940d8ef94c42042.svg",
     "static/media/vk-color.svg": "/static/media/vk-color.3e4bcb46da017673b019.svg",
     "static/media/library-white.svg": "/static/media/library-white.35b8392f22f7b7d9e09c.svg",
+    "static/media/accordion-administration.svg": "/static/media/accordion-administration.ac635129940c16d02d6108a7742ebc59.svg",
     "static/media/library.svg": "/static/media/library.0ac35a62dc0647e8d3da89b880dfd350.svg",
     "static/media/accordion-diploma.svg": "/static/media/accordion-diploma.551471bf2ccaa3f292c4b65931fa18ab.svg",
     "static/media/discipline-color.svg": "/static/media/discipline-color.1ddfa7a39fbdfb4f78fa78614dbeb070.svg",
@@ -96,12 +97,12 @@
     "static/media/attention.svg": "/static/media/attention.f565963cf829280eb474.svg",
     "static/media/arrow.svg": "/static/media/arrow.55a4ec4915bbcdabc744354a9e148a36.svg",
     "static/media/arrow-white.svg": "/static/media/arrow-white.9817492cc56038ef8ec6.svg",
-    "main.29dd6c80.css.map": "/static/css/main.29dd6c80.css.map",
-    "main.1d374be0.js.map": "/static/js/main.1d374be0.js.map",
+    "main.2fb498a9.css.map": "/static/css/main.2fb498a9.css.map",
+    "main.26dde955.js.map": "/static/js/main.26dde955.js.map",
     "787.1955ab40.chunk.js.map": "/static/js/787.1955ab40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.29dd6c80.css",
-    "static/js/main.1d374be0.js"
+    "static/css/main.2fb498a9.css",
+    "static/js/main.26dde955.js"
   ]
 }

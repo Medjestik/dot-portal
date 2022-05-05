@@ -10,7 +10,9 @@ import PersonCommunicationInfoPopup from './PersonCommunicationInfoPopup/PersonC
 function PersonCommunication({ userSocialClassmates, windowWidth }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
+
   const [sectionHeight, setSectionHeight] = React.useState(0);
+  const heightRef = React.createRef();
 
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
@@ -25,19 +27,13 @@ function PersonCommunication({ userSocialClassmates, windowWidth }) {
   },[]);
 
   React.useEffect(() => {
-    if (windowWidth > 1439) {
-      setSectionHeight(346);
-    } else if (windowWidth > 1279) {
-      setSectionHeight(592);
-    } else {
-      setSectionHeight(592);
-    }
-  }, [windowWidth]);
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
 
   return (
     <>
     <Accordion icon={communicationIcon} name='Общение' height={sectionHeight} openInfoPopup={openInfoPopup}>
-      <div className='person-communication__container'>
+      <div ref={heightRef} className='person-communication__container'>
         <div className='person-communication__social'>
           <p className='person-communication__social-title'>Ваши социальные сети</p>
           <ul className='person-communication__social-list'>

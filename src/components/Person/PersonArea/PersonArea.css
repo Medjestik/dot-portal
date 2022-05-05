@@ -416,17 +416,21 @@
   .person-area__container {
     padding: 20px;
   }
+  .person-area-laptop__info-data {
+    justify-content: space-between;
+  }
   .person-area__group {
     margin: 0px 10px 0px 0px;
-    padding: 7px 10px;
-    max-width: 98px;
+    padding: 10px;
+    max-width: 100%;
+    width: 100%;
   }
   .person-area__education-card_type_course {
     margin: 0px 10px 0px 0px;
   }
   .person-area__education-card {
-    padding: 7px 10px;
-    max-width: 98px;
+    padding: 10px;
+    max-width: 100%;
   }
   .person-area__photo-container {
     width: 100px;

@@ -11,7 +11,7 @@ function Accordion({ icon, name, height, openInfoPopup, children }) {
   }
 
   const childrenHeight = {
-    height: height,
+    height: height + 80 + 24, // + mainHeight + marginTop
   };
 
   return (

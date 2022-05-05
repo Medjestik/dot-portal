@@ -5,11 +5,14 @@ import PersonNotificationInfoPopup from './PersonNotificationInfoPopup/PersonNot
 import CommentOfTeacherPopup from '../../Popup/CommentOfTeacherPopup/CommentOfTeacherPopup.js';
 import notificationIcon from '../../../images/accordion/accordion-notification.svg';
 
-function PersonNotification({ user, userNotifications }) {
+function PersonNotification({ user, windowWidth, userNotifications }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [isOpenTeacherCommentPopup, setIsOpenTeacherCommentPopup] = React.useState(false);
   const [currentNotification, setCurrentNotification] = React.useState({});
+
+  const [sectionHeight, setSectionHeight] = React.useState(0);
+  const heightRef = React.createRef();
 
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
@@ -24,6 +27,10 @@ function PersonNotification({ user, userNotifications }) {
     setIsOpenInfoPopup(false);
     setIsOpenTeacherCommentPopup(false);
   }
+
+  React.useEffect(() => {
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
   
   React.useEffect(() => {
     setIsOpenInfoPopup(false);
@@ -36,8 +43,8 @@ function PersonNotification({ user, userNotifications }) {
 
   return (
     <>
-    <Accordion icon={notificationIcon} name='Уведомления' height={336} openInfoPopup={openInfoPopup}>
-      <div className='person-notification__container'>
+    <Accordion icon={notificationIcon} name='Уведомления' height={sectionHeight} openInfoPopup={openInfoPopup}>
+      <div ref={heightRef} className='person-notification__container'>
         <ul className='scroll person-notification__list'>
           {
             userNotifications.map((item, i) => (

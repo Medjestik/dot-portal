@@ -5,11 +5,14 @@ import PersonDeclarationInfoPopup from './PersonDeclarationInfoPopup/PersonDecla
 import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 import declarationIcon from '../../../images/accordion/accordion-declaration.svg';
 
-function PersonDeclaration({ user, userDeclaration, declarationTemplate }) { 
+function PersonDeclaration({ user, windowWidth, userDeclaration, declarationTemplate }) { 
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [isConfirmRemovePopupOpen, setIsConfirmRemovePopupOpen] = React.useState(false);
   const [currentFile, setCurrentFile] = React.useState({});
+
+  const [sectionHeight, setSectionHeight] = React.useState(0);
+  const heightRef = React.createRef();
 
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
@@ -26,6 +29,10 @@ function PersonDeclaration({ user, userDeclaration, declarationTemplate }) {
   }
 
   React.useEffect(() => {
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
+
+  React.useEffect(() => {
     setIsOpenInfoPopup(false);
     setIsConfirmRemovePopupOpen(false);
 
@@ -36,8 +43,8 @@ function PersonDeclaration({ user, userDeclaration, declarationTemplate }) {
 
   return (
     <>
-    <Accordion icon={declarationIcon} name='Заявления' height={346} openInfoPopup={openInfoPopup}>
-      <div className='person-document'>
+    <Accordion icon={declarationIcon} name='Заявления' height={sectionHeight} openInfoPopup={openInfoPopup}>
+      <div ref={heightRef} className='person-document'>
         <div className='person-document__download'>
           <p className='person-document__download-title'>Ваши заявления</p>
           <div className='person-document__download-container'>

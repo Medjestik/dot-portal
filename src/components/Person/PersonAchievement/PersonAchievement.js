@@ -12,6 +12,8 @@ function PersonAchievement({ user, windowWidth }) {
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [sectionHeight, setSectionHeight] = React.useState(0);
 
+  const heightRef = React.createRef();
+
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
   }
@@ -21,14 +23,8 @@ function PersonAchievement({ user, windowWidth }) {
   }
 
   React.useEffect(() => {
-    if (windowWidth > 1439) {
-      setSectionHeight(322);
-    } else if (windowWidth > 1279) {
-      setSectionHeight(342);
-    } else {
-      setSectionHeight(342);
-    }
-  }, [windowWidth]);
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
   
   React.useEffect(() => {
     setIsOpenInfoPopup(false);
@@ -37,7 +33,7 @@ function PersonAchievement({ user, windowWidth }) {
   return (
     <>
     <Accordion icon={achievementIcon} name={windowWidth > 833 ? 'Рейтинг и достижения' : 'Рейтинг'} height={sectionHeight} openInfoPopup={openInfoPopup}>
-      <div className='person-achievement'>
+      <div ref={heightRef} className='person-achievement'>
         <div className='person-achievement__rating'>
           {
             windowWidth > 1400 && 

@@ -5,11 +5,14 @@ import searchIcon from '../../../images/search.svg';
 import diplomaIcon from '../../../images/accordion/accordion-diploma.svg';
 import PersonDiplomaInfoPopup from './PersonDiplomaInfoPopup/PersonDiplomaInfoPopup.js';
 
-function PersonDiploma() {
+function PersonDiploma({ windowWidth }) {
 
   const [fileName, setFileName] = React.useState({ isShow: false, name: '', });
   const [isShowWrongType, setIsShowWrongType] = React.useState(false);
-  const [contentFile, setContentFile] = React.useState({ file: null, }); 
+  const [contentFile, setContentFile] = React.useState({ file: null, });
+
+  const [sectionHeight, setSectionHeight] = React.useState(0);
+  const heightRef = React.createRef();
 
   const formRef = React.createRef();
 
@@ -45,10 +48,14 @@ function PersonDiploma() {
     }
   }
 
+  React.useEffect(() => {
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
+
   return (
     <>
-    <Accordion icon={diplomaIcon} name='Выпускная квалификационная работа' height={375} openInfoPopup={openInfoPopup}>
-      <div className='person-diploma__container'>
+    <Accordion icon={diplomaIcon} name='Выпускная квалификационная работа' height={sectionHeight} openInfoPopup={openInfoPopup}>
+      <div ref={heightRef} className='person-diploma__container'>
         <div className='person-diploma__info'>
           <div className='person-diploma__theme'>
             <div className='person-diploma__theme-container'>

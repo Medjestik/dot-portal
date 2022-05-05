@@ -5,6 +5,7 @@ import PersonArea from './PersonArea/PersonArea.js';
 import PersonAreaLaptop from './PersonArea/PersonAreaLaptop/PersonAreaLaptop.js';
 import PersonAreaMobile from './PersonArea/PersonAreaMobile/PersonAreaMobile.js';
 import PersonData from './PersonData/PersonData.js';
+import PersonAdministration from './PersonAdministration/PersonAdministration.js';
 import PersonEducation from './PersonEducation/PersonEducation.js';
 import PersonAchievement from './PersonAchievement/PersonAchievement.js';
 import PersonDocument from './PersonDocument/PersonDocument.js';
@@ -206,17 +207,22 @@ function Person({ studentData, windowWidth }) {
         studentData={studentData}
         openPhotoPopup={openPhotoPopup}
         />
-        <PersonData 
+        <PersonData
+        windowWidth={windowWidth}
         currentUser={currentUser}
-        openChangePasswordPopup={openChangePasswordPopup} 
+        openChangePasswordPopup={openChangePasswordPopup}
+        />
+        <PersonAdministration
+        windowWidth={windowWidth}
+        studentData={studentData}
         />
         </>
       }
       
       <PersonEducation user={user} userEducation={userEducation} windowWidth={windowWidth} />
       <PersonAchievement user={user} windowWidth={windowWidth} />
-      <PersonDocument user={user} userDocuments={userDocuments} userCheck={userCheck} windowWidth={windowWidth} />
-      <PersonDeclaration user={user} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} windowWidth={windowWidth} />
+      <PersonDocument user={user} windowWidth={windowWidth} userDocuments={userDocuments} userCheck={userCheck} />
+      <PersonDeclaration user={user} windowWidth={windowWidth} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} />
       <PersonNotification user={user} userNotifications={userNotifications} windowWidth={windowWidth} />
       <PersonRating scores={scores} windowWidth={windowWidth} />
       <PersonCommunication userSocialClassmates={userSocialClassmates} windowWidth={windowWidth} />

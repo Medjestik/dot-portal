@@ -11,7 +11,9 @@ import ratingIcon from '../../../images/accordion/accordion-rating.svg';
 function PersonRating({ scores, windowWidth }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
+
   const [sectionHeight, setSectionHeight] = React.useState(0);
+  const heightRef = React.createRef();
 
   const [disciplineSelect, setDisciplineSelect] = React.useState({ isChoose: false, discipline: {}, });
   const [disciplineFeedback, setDisciplineFeedback] = React.useState('');
@@ -120,19 +122,13 @@ function PersonRating({ scores, windowWidth }) {
   },[]);
 
   React.useEffect(() => {
-    if (windowWidth > 1439) {
-      setSectionHeight(354);
-    } else if (windowWidth > 1279) {
-      setSectionHeight(612);
-    } else {
-      setSectionHeight(612);
-    }
-  }, [windowWidth]);
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
 
   return (
     <>
     <Accordion icon={ratingIcon} name={windowWidth > 833 ? 'Оценка дисциплин и преподавателей' : 'Оценка'} height={sectionHeight} openInfoPopup={openInfoPopup}>
-      <div className='person-rating__container'>
+      <div ref={heightRef} className='person-rating__container'>
         <div className='person-rating__stars-container'>
           <div className='person-rating__section-discipline'>
             <PersonRatingSelect 

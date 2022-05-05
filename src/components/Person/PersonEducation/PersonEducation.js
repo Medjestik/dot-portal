@@ -10,6 +10,8 @@ function PersonEducation({ user, userEducation, windowWidth }) {
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [sectionHeight, setSectionHeight] = React.useState(0);
 
+  const heightRef = React.createRef();
+
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
   }
@@ -38,19 +40,13 @@ function PersonEducation({ user, userEducation, windowWidth }) {
   }
 
   React.useEffect(() => {
-    if (windowWidth > 1439) {
-      setSectionHeight(296);
-    } else if (windowWidth > 1279) {
-      setSectionHeight(382);
-    } else {
-      setSectionHeight(382);
-    }
-  }, [windowWidth]);
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
 
   return (
     <>
     <Accordion icon={educationIcon} name='Обучение' height={sectionHeight} openInfoPopup={openInfoPopup}>
-      <div className='person-education__container'>
+      <div ref={heightRef} className='person-education__container'>
         <div className='person-education__status'>
           <img className='person-education__status-icon' alt='иконка' src={statusIcon}></img>
           <span className='person-education__status-count'>{user.educationStatus}%</span>

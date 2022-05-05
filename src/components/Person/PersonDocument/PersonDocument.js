@@ -5,11 +5,14 @@ import PersonDocumentInfoPopup from './PersonDocumentInfoPopup/PersonDocumentInf
 import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 import documentIcon from '../../../images/accordion/accordion-document.svg';
 
-function PersonDocument({ user, userDocuments, userCheck }) { 
+function PersonDocument({ user, windowWidth, userDocuments, userCheck }) { 
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
+  const [sectionHeight, setSectionHeight] = React.useState(0);
   const [isConfirmRemovePopupOpen, setIsConfirmRemovePopupOpen] = React.useState(false);
   const [currentFile, setCurrentFile] = React.useState({});
+
+  const heightRef = React.createRef();
 
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
@@ -26,6 +29,11 @@ function PersonDocument({ user, userDocuments, userCheck }) {
   }
 
   React.useEffect(() => {
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
+
+
+  React.useEffect(() => {
     setIsOpenInfoPopup(false);
     setIsConfirmRemovePopupOpen(false);
 
@@ -36,8 +44,8 @@ function PersonDocument({ user, userDocuments, userCheck }) {
 
   return (
     <>
-    <Accordion icon={documentIcon} name='Документы' height={346} openInfoPopup={openInfoPopup}>
-      <div className='person-document'>
+    <Accordion icon={documentIcon} name='Документы' height={sectionHeight} openInfoPopup={openInfoPopup}>
+      <div ref={heightRef} className='person-document'>
         <div className='person-document__download'>
           <p className='person-document__download-title'>Документы об обучении</p>
           <div className='person-document__download-container'>

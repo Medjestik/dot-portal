@@ -99,3 +99,24 @@
 .notification__item_type_unread .notification__text {
   color: var(--main-white-color);
 }
+
+@media all and (max-width: 833px) {
+  .notification__item {
+    margin: 0px 0px 16px 0px;
+  }
+  .notification__img {
+    display: none;
+  }
+  .notification__date {
+    margin: 0px 10px 0px 0px;
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .notification__info {
+    padding: 8px 14px;
+  }
+  .notification__text {
+    font-size: 13px;
+    line-height: 16px;
+  }
+}
