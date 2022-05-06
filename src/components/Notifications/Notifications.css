@@ -109,14 +109,8 @@
   }
   .notification__date {
     margin: 0px 10px 0px 0px;
-    font-size: 13px;
-    line-height: 16px;
   }
   .notification__info {
     padding: 8px 14px;
-  }
-  .notification__text {
-    font-size: 13px;
-    line-height: 16px;
   }
 }

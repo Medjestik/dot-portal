@@ -240,3 +240,54 @@
     max-width: none;
   }
 }
+
+@media all and (max-width: 833px) {
+  .person-communication__social-list {
+    padding: 16px;
+  }
+  .person-communication__social-img {
+    width: 32px;
+    height: 32px;
+  }
+  .person-communication__social-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .person-communication__social-input {
+    padding: 7px 10px 7px 16px;
+  }
+  .person-communication__social-btn {
+    width: 16px;
+    height: 16px;
+  }
+  .person-communication__classmates-container {
+    padding: 16px;
+  }
+  .person-communication__classmates-list {
+    max-height: 340px;
+  }
+  .person-communication__classmates-item {
+    margin: 0px 0px 16px 0px;
+  }
+  .person-communication__classmates-social-list {
+    flex-direction: column;
+  }
+  .person-communication__classmates-social-item {
+    margin: 0px 0px 16px 0px;
+  }
+  .person-communication__classmates-social-empty {
+    padding: 7px 12px;
+  }
+  .person-communication__classmates-social-link {
+    padding: 7px 12px;
+  }
+  .person-communication__classmates-social-vk {
+    top: 6px
+  }
+  .person-communication__classmates-social-inst {
+    top: 6px;
+  }
+  .person-communication__classmates-social-telegram {
+    top: 6px;
+  }
+}

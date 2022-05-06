@@ -218,3 +218,71 @@
     height: 40px;
   }
 }
+
+@media all and (max-width: 833px) {
+  .person-achievement {
+    flex-direction: column;
+  }
+  .person-achievement__rating {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+  }
+  .person-achievement__container {
+    flex-direction: row;
+    width: 100%;
+  }
+  .person-achievement__group-rating {
+    margin: 0px 20px 0px 0px;
+    width: 100%;
+    height: 140px;
+  }
+  .person-achievement__main-rating {
+    width: 100%;
+    height: 140px;
+  }
+  .person-achievement__group-rating-img {
+    display: block;
+    width: 28px;
+    height: 28px;
+  }
+  .person-achievement__main-rating-img {
+    display: block;
+    width: 28px;
+    height: 28px;
+  }
+  .person-achievement__group-rating-count {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .person-achievement__achievement-list {
+    margin: 20px 0px 0px 0px;
+  }
+  .person-achievement__achievement-list-container {
+    height: 160px;
+    padding: 16px;
+  }
+  .person-achievement__achievement-item {
+    margin: 0px 0px 16px 0px;
+  }
+  .person-achievement__achievement-img {
+    width: 32px;
+    height: 32px;
+  }
+  .person-achievement__classmates {
+    margin: 20px 0px 0px 0px;
+  }
+  .person-achievement__classmates-list {
+    height: 160px;
+    padding: 16px;
+  }
+  .person-achievement__classmates-item {
+    margin: 0px 0px 16px 0px;
+  }
+  .person-achievement__classmates-img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+

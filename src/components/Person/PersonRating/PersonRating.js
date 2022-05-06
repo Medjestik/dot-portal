@@ -202,9 +202,17 @@ function PersonRating({ scores, windowWidth }) {
           </div>
 
         </div>
+        
+        {
+          windowWidth <= 833 &&
+          <h6 className='person-rating__score-title'>Оценки</h6>
+        }
 
         <div className='person-rating__section-score'>
-          <h6 className='person-rating__score-title'>Оценки</h6>
+          {
+            windowWidth > 833 &&
+            <h6 className='person-rating__score-title'>Оценки</h6>
+          }
           <div className='person-rating__score-container scroll-inside'>
             <ul className='person-rating__score-list'>
               {

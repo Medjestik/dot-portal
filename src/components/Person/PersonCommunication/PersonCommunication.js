@@ -67,7 +67,7 @@ function PersonCommunication({ userSocialClassmates, windowWidth }) {
           </ul>
         </div>
         <div className='person-communication__classmates'>
-          <p className='person-communication__classmates-title'>Ваши социальные сети</p>
+          <p className='person-communication__classmates-title'>Социальные сети одногруппников</p>
           <div className='person-communication__classmates-container'>
             <ul className='scroll-inside person-communication__classmates-list'>
               {

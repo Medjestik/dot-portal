@@ -165,4 +165,37 @@
     font-size: 14px;
     line-height: 19px;
   }
+  .person-education__slider-background {
+    display: none;
+  }
+  .person-education__list {
+    max-height: 152px;
+  }
+  .person-education__item {
+    margin: 0px 0px 16px 0px;
+    padding: 16px;
+  }
+  .person-education__item:last-of-type {
+    margin: 0px;
+  }
+  .person-education__indicators {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
+  .person-education__indicator {
+    margin: 0px;
+    flex-direction: column;
+  }
+  .person-education__indicator:last-of-type {
+    margin: 0px;
+  }
+  .person-education__indicator-count {
+    margin: 0px 0px 8px 0px;
+    font-size: 20px;
+    line-height: 24px;
+  }
 }

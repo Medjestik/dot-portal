@@ -16,7 +16,6 @@ const { ru } = require('date-fns/locale');
 
 function Calendar() {
 
-
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [activeDate, setActiveDate] = React.useState(new Date());
 
