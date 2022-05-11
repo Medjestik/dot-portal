@@ -2,6 +2,11 @@
   margin: 0px;
   display: flex;
 }
+.person-document__slider {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .person-document__download {
   margin: 0px 20px 0px 0px;
   flex-shrink: 0;
@@ -138,4 +143,30 @@
 }
 .person-document__check-field_type_empty {
   color: var(--accent-grey-color);
+}
+
+@media all and (max-width: 833px) {
+  .person-document {
+    flex-direction: column;
+    padding: 0px 0px 40px 0px;
+  }
+  .person-document__download {
+    margin: 0px 0px 20px 0px;
+  }
+  .person-document__download-container {
+    padding: 16px;
+  }
+  .person-document__download-list {
+    max-height: 140px;
+  }
+  .person-document__check-container {
+    padding: 16px 6px;
+    min-height: 180px;
+  }
+  .person-document__check-item {
+    width: 100%;
+  }
+  .person-document__check-field {
+    padding: 8px 16px;
+  }
 }

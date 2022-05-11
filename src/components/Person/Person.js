@@ -96,8 +96,6 @@ function Person({ studentData, windowWidth }) {
     { name: 'Шаблон 2', upload: true, },
     { name: 'Шаблон 3', upload: true, },
     { name: 'Шаблон 4', upload: true, },
-    { name: 'Шаблон 5', upload: true, },
-    { name: 'Шаблон 6', upload: true, },
   ]
 
   const userSocialClassmates = [

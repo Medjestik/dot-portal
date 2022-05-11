@@ -1,3 +1,7 @@
+.person-declaration{
+  margin: 0px;
+  display: flex;
+}
 .person-declaration__template {
   margin: 0px;
   width: 100%;
@@ -67,4 +71,19 @@
 }
 .person-declaration__template-field_type_empty {
   color: var(--accent-grey-color);
+}
+
+@media all and (max-width: 833px) {
+  .person-declaration {
+    flex-direction: column;
+  }
+  .person-declaration__template-container {
+    padding: 16px;
+  }
+  .person-declaration__template-list {
+    max-height: none;
+  }
+  .person-declaration__template-field {
+    padding: 8px 16px;
+  }
 }

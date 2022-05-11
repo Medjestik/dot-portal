@@ -169,14 +169,17 @@
     display: none;
   }
   .person-education__list {
-    max-height: 152px;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
   .person-education__item {
-    margin: 0px 0px 16px 0px;
+    min-width: 184px;
+    margin: 0px 16px 16px 0px;
     padding: 16px;
   }
   .person-education__item:last-of-type {
-    margin: 0px;
+    margin: 0px 0px 16px 0px;
   }
   .person-education__indicators {
     width: 100%;

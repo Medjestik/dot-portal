@@ -21,13 +21,14 @@
 }
 .calendar__nav-btn {
   position: relative;
-  margin: 0px;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
   width: 40px;
   height: 40px;
-  background: var(--main-grey-color);
-  color: var(--main-grey-color);
-  border-radius: var(--border-radius);
-  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
   border: none;
   transition: all .3s ease-in-out;
 }
@@ -41,43 +42,43 @@
 .calendar__nav-btn_type_prev:after {
   content: '';
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 30px;
-  height: 30px;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
   background-image: url('../../images/arrow.svg');
   background-position: center;
+  background-size: 24px;
   background-repeat: no-repeat;
-  background-size: contain;
   transform: rotate(90deg);
 }
 .calendar__nav-btn_type_prev:hover:after {
   background-image: url('../../images/arrow-white.svg');
   background-position: center;
+  background-size: 24px;
   background-repeat: no-repeat;
-  background-size: contain;
 }
 .calendar__nav-btn_type_next {
-  margin: 0px 0px 0px 8px;
+  margin: 0px 0px 0px 12px;
 }
 .calendar__nav-btn_type_next:after {
   content: '';
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 30px;
-  height: 30px;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
   background-image: url('../../images/arrow.svg');
   background-position: center;
+  background-size: 24px;
   background-repeat: no-repeat;
-  background-size: contain;
   transform: rotate(270deg);
 }
 .calendar__nav-btn_type_next:hover:after {
   background-image: url('../../images/arrow-white.svg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  transform: rotate(270deg);
 }
 .calendar__section_type_month {
   margin: 0px;

@@ -1,6 +1,7 @@
 import React from 'react';
 import './PersonDocument.css';
 import Accordion from '../../Accordion/Accordion.js';
+import Carousel from 'react-elastic-carousel';
 import PersonDocumentInfoPopup from './PersonDocumentInfoPopup/PersonDocumentInfoPopup.js';
 import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 import documentIcon from '../../../images/accordion/accordion-document.svg';
@@ -11,6 +12,8 @@ function PersonDocument({ user, windowWidth, userDocuments, userCheck }) {
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const [isConfirmRemovePopupOpen, setIsConfirmRemovePopupOpen] = React.useState(false);
   const [currentFile, setCurrentFile] = React.useState({});
+
+  const [sliderCheck, setSliderCheck] = React.useState([]);
 
   const heightRef = React.createRef();
 
@@ -42,6 +45,22 @@ function PersonDocument({ user, windowWidth, userDocuments, userCheck }) {
     })
   },[]);
 
+  function spliceIntoChunks(arr, chunkSize) {
+    const res = [];
+    while (arr.length > 0) {
+        const chunk = arr.splice(0, chunkSize);
+        res.push(chunk);
+    }
+    return res;
+  }
+
+  React.useEffect(() => {
+    if (windowWidth <= 833) {
+      const sliderCheck = spliceIntoChunks(userCheck, 2);
+      setSliderCheck(sliderCheck);
+    }
+  }, [windowWidth, userCheck]);
+
   return (
     <>
     <Accordion icon={documentIcon} name='Документы' height={sectionHeight} openInfoPopup={openInfoPopup}>
@@ -67,34 +86,91 @@ function PersonDocument({ user, windowWidth, userDocuments, userCheck }) {
         <div className='person-document__check'>
           <p className='person-document__check-title'>Чеки об оплате обучения</p>
           <div className='person-document__check-container'>
-            <ul className='scroll-inside person-document__check-list'>
-              {
-                userCheck.map((item, i) => (
-                  <li key={i} className='person-document__check-item'>
-                    <div className='person-document__check-info'>
-                      <p className='person-document__check-name'>{item.name}</p>
-                      <span className='person-document__check-count'>{item.count}</span>
+            {
+              windowWidth <= 833 
+              ?
+              <Carousel showArrows={false} itemsToShow={1} >
+                {
+                sliderCheck.map((item, i) => (
+                  <div className='person-document__slider' key={i}>
+                    <div className='person-document__check-item'>
+                      <div className='person-document__check-info'>
+                        <p className='person-document__check-name'>{item[0].name}</p>
+                        <span className='person-document__check-count'>{item[0].count}</span>
+                      </div>
+                      <div className='person-document__check-control'>
+                        {
+                          item[0].upload 
+                          ?
+                          <div className='person-document__check-field person-document__check-field_type_date'>{item[0].date}</div>
+                          :
+                          <div className='person-document__check-field person-document__check-field_type_empty'>Подгрузите чек</div>
+                        }
+                        <button className='btn_type_upload btn_type_upload_status_active' type='button'></button>
+                        <button className={`btn_type_download ${item[0].upload ? 'btn_type_download_status_active' : ''}`} type='button'></button>
+                        <button 
+                        className={`btn_type_cancel ${item[0].upload ? 'btn_type_cancel_status_active' : ''}`} 
+                        type='button' 
+                        onClick={() => openConfirmRemovePopup(item[0])}>
+                        </button>
+                      </div>
                     </div>
-                    <div className='person-document__check-control'>
-                      {
-                        item.upload 
-                        ?
-                        <div className='person-document__check-field person-document__check-field_type_date'>{item.date}</div>
-                        :
-                        <div className='person-document__check-field person-document__check-field_type_empty'>Подгрузите чек</div>
-                      }
-                      <button className='btn_type_upload btn_type_upload_status_active' type='button'></button>
-                      <button className={`btn_type_download ${item.upload ? 'btn_type_download_status_active' : ''}`} type='button'></button>
-                      <button 
-                      className={`btn_type_cancel ${item.upload ? 'btn_type_cancel_status_active' : ''}`} 
-                      type='button' 
-                      onClick={() => openConfirmRemovePopup(item)}>
-                      </button>
+                    <div className='person-document__check-item'>
+                      <div className='person-document__check-info'>
+                        <p className='person-document__check-name'>{item[1].name}</p>
+                        <span className='person-document__check-count'>{item[1].count}</span>
+                      </div>
+                      <div className='person-document__check-control'>
+                        {
+                          item[1].upload 
+                          ?
+                          <div className='person-document__check-field person-document__check-field_type_date'>{item[1].date}</div>
+                          :
+                          <div className='person-document__check-field person-document__check-field_type_empty'>Подгрузите чек</div>
+                        }
+                        <button className='btn_type_upload btn_type_upload_status_active' type='button'></button>
+                        <button className={`btn_type_download ${item[1].upload ? 'btn_type_download_status_active' : ''}`} type='button'></button>
+                        <button 
+                        className={`btn_type_cancel ${item[1].upload ? 'btn_type_cancel_status_active' : ''}`} 
+                        type='button' 
+                        onClick={() => openConfirmRemovePopup(item[1])}>
+                        </button>
+                      </div>
                     </div>
-                  </li>
+                  </div>
                 ))
-              }
-            </ul>
+                }
+              </Carousel>
+              :
+              <ul className='scroll-inside person-document__check-list'>
+                {
+                  userCheck.map((item, i) => (
+                    <li key={i} className='person-document__check-item'>
+                      <div className='person-document__check-info'>
+                        <p className='person-document__check-name'>{item.name}</p>
+                        <span className='person-document__check-count'>{item.count}</span>
+                      </div>
+                      <div className='person-document__check-control'>
+                        {
+                          item.upload 
+                          ?
+                          <div className='person-document__check-field person-document__check-field_type_date'>{item.date}</div>
+                          :
+                          <div className='person-document__check-field person-document__check-field_type_empty'>Подгрузите чек</div>
+                        }
+                        <button className='btn_type_upload btn_type_upload_status_active' type='button'></button>
+                        <button className={`btn_type_download ${item.upload ? 'btn_type_download_status_active' : ''}`} type='button'></button>
+                        <button 
+                        className={`btn_type_cancel ${item.upload ? 'btn_type_cancel_status_active' : ''}`} 
+                        type='button' 
+                        onClick={() => openConfirmRemovePopup(item)}>
+                        </button>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ul>
+            }
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ function PersonDeclaration({ user, windowWidth, userDeclaration, declarationTemp
   return (
     <>
     <Accordion icon={declarationIcon} name='Заявления' height={sectionHeight} openInfoPopup={openInfoPopup}>
-      <div ref={heightRef} className='person-document'>
+      <div ref={heightRef} className='person-declaration'>
         <div className='person-document__download'>
           <p className='person-document__download-title'>Ваши заявления</p>
           <div className='person-document__download-container'>

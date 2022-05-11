@@ -27,7 +27,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
           }
           <p className='person-area__data-login'>{currentUser.login || ''}</p>
           <div className='person-area__data-password'>
-            <p className='person-area__data-password-text'>Пароль</p>
+            <p className='person-area__data-password-text' onClick={openChangePasswordPopup}>Пароль</p>
             <div className='gear person-area__data-edit' onClick={openChangePasswordPopup}></div>
           </div>
 
@@ -44,19 +44,19 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
           </div>
           <ul className='person-area__info-list'>
             <li className='person-area__info-item'>
-              <p className='person-area__info-text'>{currentUser.birthDate || '00.00.0000'}</p>
+              <p className='person-area__info-text' onClick={openDatePopup}>{currentUser.birthDate || '00.00.0000'}</p>
               <div className='gear person-area__info-edit' onClick={openDatePopup}></div>
             </li>
             <li className='person-area__info-item'>
-              <p className='person-area__info-text'>{currentUser.inn || '000-000-000 00'}</p>
+              <p className='person-area__info-text' onClick={openDatePopup}>{currentUser.inn || '000-000-000 00'}</p>
               <div className='gear person-area__info-edit' onClick={openIdentifierPopup}></div>
             </li>
             <li className='person-area__info-item'>
-              <p className='person-area__info-text'>{currentUser.phone || '+7 (000) 000-00-00'}</p>
+              <p className='person-area__info-text' onClick={openDatePopup}>{currentUser.phone || '+7 (000) 000-00-00'}</p>
               <div className='gear person-area__info-edit' onClick={openPhonePopup}></div>
             </li>
             <li className='person-area__info-item'>
-              <p className='person-area__info-text'>{currentUser.email || '0000000000000@000000.ru'}</p>
+              <p className='person-area__info-text' onClick={openDatePopup}>{currentUser.email || '0000000000000@000000.ru'}</p>
               <div className='gear person-area__info-edit' onClick={openMailPopup}></div>
             </li>
           </ul>
