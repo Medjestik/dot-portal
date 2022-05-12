@@ -4,7 +4,11 @@ import Accordion from '../../Accordion/Accordion.js';
 import PersonDataInfoPopup from './PersonDataInfoPopup/PersonDataInfoPopup.js';
 import dataIcon from '../../../images/accordion/accordion-data.svg';
 
-function PersonData({ windowWidth, currentUser, openChangePasswordPopup }) {
+function PersonData({ windowWidth, currentUser, openChangePasswordPopup, openDataPopup }) {
+
+  function convertDate(date) {
+    return new Date(date).toLocaleString('ru', { month: 'numeric', day: 'numeric', }) + '.' + new Date(date).toLocaleString('sv', { year: 'numeric', });
+  }
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   
@@ -42,23 +46,23 @@ function PersonData({ windowWidth, currentUser, openChangePasswordPopup }) {
           windowWidth <= 833 
           ?
           <div className='person-data__column'>
-            <p className='person-data__text'>{currentUser.birthDate || '00.00.0000'}</p>
-            <p className='person-data__text'>{currentUser.inn || '000-000-000 00'}</p>
+            <p className='person-data__text'>{currentUser.birthDate ? convertDate(currentUser.birthDate) : '00.00.0000' }</p>
+            <p className='person-data__text'>{currentUser.snils || '000-000-000 00'}</p>
             <p className='person-data__text'>{currentUser.phone || '+7 (000) 000-00-00'}</p>
             <p className='person-data__text'>{currentUser.email || '0000000000000@000000.ru'}</p>
-            <p className='person-data__text person-data__text_weight_bold person-data__text_type_active'>Изменить данные</p>
+            <p className='person-data__text person-data__text_weight_bold person-data__text_type_active' onClick={openDataPopup}>Изменить данные</p>
           </div>
           :
           <>
           <div className='person-data__column'>
-            <p className='person-data__text'>{currentUser.birthDate || '00.00.0000'}</p>
-            <p className='person-data__text'>{currentUser.inn || '000-000-000 00'}</p>
-            <p className='person-data__text person-data__text_weight_bold person-data__text_type_active'>Изменить данные</p>
+            <p className='person-data__text'>{currentUser.birthDate ? convertDate(currentUser.birthDate) : '00.00.0000' }</p>
+            <p className='person-data__text'>{currentUser.snils || '000-000-000 00'}</p>
+            <p className='person-data__text person-data__text_weight_bold person-data__text_type_active' onClick={openDataPopup}>Изменить данные</p>
           </div>
           <div className='person-data__column'>
             <p className='person-data__text'>{currentUser.phone || '+7 (000) 000-00-00'}</p>
             <p className='person-data__text'>{currentUser.email || '0000000000000@000000.ru'}</p>
-            <p className='person-data__text person-data__text_weight_bold person-data__text_type_active'>Изменить данные</p>
+            <p className='person-data__text person-data__text_weight_bold person-data__text_type_active' onClick={openDataPopup}>Изменить данные</p>
           </div>
           </>
 

@@ -3,7 +3,11 @@ import './PersonArea.css';
 import groupIcon from '../../../images/group.svg';
 import { photoIcon } from './PersonIcons/PersonIcons.js';
 
-function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswordPopup, openDatePopup, openIdentifierPopup, openPhonePopup, openMailPopup }) { 
+function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswordPopup, openDataPopup }) {
+
+  function convertDate(date) {
+    return new Date(date).toLocaleString('ru', { month: 'numeric', day: 'numeric', }) + '.' + new Date(date).toLocaleString('sv', { year: 'numeric', });
+  }
 
   return (
     <section className='section person-area'>
@@ -13,7 +17,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
             currentUser.avatar 
             ?
               <div className='person-area__photo-container' onClick={openPhotoPopup}>
-                <img className='person-area__photo' src={currentUser.avatar } alt='' onClick={openPhotoPopup}></img>
+                <img className='person-area__photo' src={currentUser.avatar.link} alt='' onClick={openPhotoPopup}></img>
                 <div className='person-area__icon-container'>
                   { photoIcon }
                 </div>
@@ -44,20 +48,20 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
           </div>
           <ul className='person-area__info-list'>
             <li className='person-area__info-item'>
-              <p className='person-area__info-text' onClick={openDatePopup}>{currentUser.birthDate || '00.00.0000'}</p>
-              <div className='gear person-area__info-edit' onClick={openDatePopup}></div>
+              <p className='person-area__info-text' onClick={openDataPopup}>{currentUser.birthDate ? convertDate(currentUser.birthDate) : '00.00.0000' }</p>
+              <div className='gear person-area__info-edit' onClick={openDataPopup}></div>
             </li>
             <li className='person-area__info-item'>
-              <p className='person-area__info-text' onClick={openDatePopup}>{currentUser.inn || '000-000-000 00'}</p>
-              <div className='gear person-area__info-edit' onClick={openIdentifierPopup}></div>
+              <p className='person-area__info-text' onClick={openDataPopup}>{currentUser.snils || '000-000-000 00'}</p>
+              <div className='gear person-area__info-edit' onClick={openDataPopup}></div>
             </li>
             <li className='person-area__info-item'>
-              <p className='person-area__info-text' onClick={openDatePopup}>{currentUser.phone || '+7 (000) 000-00-00'}</p>
-              <div className='gear person-area__info-edit' onClick={openPhonePopup}></div>
+              <p className='person-area__info-text' onClick={openDataPopup}>{currentUser.phone || '+7 (000) 000-00-00'}</p>
+              <div className='gear person-area__info-edit' onClick={openDataPopup}></div>
             </li>
             <li className='person-area__info-item'>
-              <p className='person-area__info-text' onClick={openDatePopup}>{currentUser.email || '0000000000000@000000.ru'}</p>
-              <div className='gear person-area__info-edit' onClick={openMailPopup}></div>
+              <p className='person-area__info-text' onClick={openDataPopup}>{currentUser.email || '0000000000000@000000.ru'}</p>
+              <div className='gear person-area__info-edit' onClick={openDataPopup}></div>
             </li>
           </ul>
 

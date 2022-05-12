@@ -1,6 +1,7 @@
 import React from 'react';
 import './Person.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
+import * as api from '../../utils/api.js';
 import PersonArea from './PersonArea/PersonArea.js';
 import PersonAreaLaptop from './PersonArea/PersonAreaLaptop/PersonAreaLaptop.js';
 import PersonAreaMobile from './PersonArea/PersonAreaMobile/PersonAreaMobile.js';
@@ -16,12 +17,10 @@ import PersonCommunication from './PersonCommunication/PersonCommunication.js';
 import PersonDiploma from './PersonDiploma/PersonDiploma.js';
 import PersonPhotoPopup from './PersonPopup/PersonPhotoPopup/PersonAreaPhotoPopup.js';
 import PersonChangePasswordPopup from './PersonPopup/PersonChangePasswordPopup/PersonAreaChangePasswordPopup.js';
-import PersonDatePopup from './PersonPopup/PersonDatePopup/PersonAreaDatePopup.js';
-import PersonIdentifierPopup from './PersonPopup/PersonIdentifierPopup/PersonAreaIdentifierPopup.js';
-import PersonPhonePopup from './PersonPopup/PersonPhonePopup/PersonAreaPhonePopup.js';
-import PersonMailPopup from './PersonPopup/PersonMailPopup/PersonAreaMailPopup.js';
+import PersonAreaDataPopup from './PersonPopup/PersonDataPopup/PersonAreaDataPopup.js';
 
-function Person({ studentData, windowWidth }) {
+
+function Person({ studentData, windowWidth, onChangeUserPhoto,onChangeUserData }) {
 
   const user = {
     photo: '',
@@ -121,10 +120,9 @@ function Person({ studentData, windowWidth }) {
 
   const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
   const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = React.useState(false); 
-  const [isDatePopupOpen, setIsDatePopupOpen] = React.useState(false);
-  const [isIdentifierPopupOpen, setIsIdentifierPopupOpen] = React.useState(false);
-  const [isPhonePopupOpen, setIsPhonePopupOpen] = React.useState(false);
-  const [isMailPopupOpen, setIsMailPopupOpen] = React.useState(false);
+  const [isDataPopupOpen, setIsDataPopupOpen] = React.useState(false);
+  const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
+  const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '' });
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -136,35 +134,81 @@ function Person({ studentData, windowWidth }) {
     setIsChangePasswordPopupOpen(true);
   }
 
-  function openDatePopup() {
-    setIsDatePopupOpen(true);
+  function openDataPopup() {
+    setIsDataPopupOpen(true);
   }
 
-  function openIdentifierPopup() {
-    setIsIdentifierPopupOpen(true);
+  function handleChangePassword(oldPassword, newPassword) {
+    setIsShowRequestError({ isShow: false, text: '' });
+    setIsLoadingRequest(true);
+    const userId = currentUser.id;
+    const token = localStorage.getItem('token');
+
+    api.changePassword({ token, userId, oldPassword, newPassword })
+      .then((res) => {
+        localStorage.setItem('token', res.token);
+        closePersonAreaPopup();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsShowRequestError({ isShow: true, text: 'Неправильно введен текущий пароль. Повторите попытку!' })
+      })
+      .finally(() => {
+        setIsLoadingRequest(false);
+      });
   }
 
-  function openPhonePopup() {
-    setIsPhonePopupOpen(true);
+  function handleChangePhoto(name, file) {
+    setIsShowRequestError({ isShow: false, text: '' });
+    setIsLoadingRequest(true);
+    const userId = currentUser.id;
+    const token = localStorage.getItem('token');
+
+    api.changePhoto({ token, userId, name, file })
+      .then((res) => {
+        onChangeUserPhoto(res.avatar);
+        closePersonAreaPopup();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsShowRequestError({ isShow: true, text: 'К сожалению, произошла ошибка!' })
+      })
+      .finally(() => {
+        setIsLoadingRequest(false);
+      });
   }
 
-  function openMailPopup() {
-    setIsMailPopupOpen(true);
+  function handleChangeData(data) {
+    setIsShowRequestError({ isShow: false, text: '' });
+    setIsLoadingRequest(true);
+    const userId = currentUser.id;
+    const token = localStorage.getItem('token');
+
+    api.changeData({ token, userId, data })
+      .then((res) => {
+        onChangeUserData(res);
+        closePersonAreaPopup();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsShowRequestError({ isShow: true, text: 'К сожалению, произошла ошибка!' })
+      })
+      .finally(() => {
+        setIsLoadingRequest(false);
+      });
   }
 
-  function closePersonAreaPopup() { 
+  function closePersonAreaPopup() {
+    setIsShowRequestError({ isShow: false, text: '' });
     setIsPhotoPopupOpen(false);
     setIsChangePasswordPopupOpen(false);
-    setIsDatePopupOpen(false);
-    setIsIdentifierPopupOpen(false);
-    setIsPhonePopupOpen(false);
-    setIsMailPopupOpen(false);
+    setIsDataPopupOpen(false);
   }
   
   React.useEffect(() => {
     setIsPhotoPopupOpen(false);
     setIsChangePasswordPopupOpen(false);
-    setIsDatePopupOpen(false);
+    setIsDataPopupOpen(false);
   },[]);
 
   return (
@@ -177,10 +221,7 @@ function Person({ studentData, windowWidth }) {
         studentData={studentData}
         openPhotoPopup={openPhotoPopup}
         openChangePasswordPopup={openChangePasswordPopup}
-        openDatePopup={openDatePopup}
-        openIdentifierPopup={openIdentifierPopup}
-        openPhonePopup={openPhonePopup}
-        openMailPopup={openMailPopup}
+        openDataPopup={openDataPopup}
         />
       }
       {
@@ -191,9 +232,11 @@ function Person({ studentData, windowWidth }) {
         studentData={studentData}
         openPhotoPopup={openPhotoPopup}
         />
-        <PersonData 
+        <PersonData
+        windowWidth={windowWidth}
         currentUser={currentUser}
         openChangePasswordPopup={openChangePasswordPopup} 
+        openDataPopup={openDataPopup}
         />
         </>
       }
@@ -209,6 +252,7 @@ function Person({ studentData, windowWidth }) {
         windowWidth={windowWidth}
         currentUser={currentUser}
         openChangePasswordPopup={openChangePasswordPopup}
+        openDataPopup={openDataPopup}
         />
         <PersonAdministration
         windowWidth={windowWidth}
@@ -227,7 +271,6 @@ function Person({ studentData, windowWidth }) {
       {
         //<PersonDiploma windowWidth={windowWidth} />
       }
-      
 
       {
         isPhotoPopupOpen &&
@@ -235,6 +278,9 @@ function Person({ studentData, windowWidth }) {
           isOpen={isPhotoPopupOpen}
           onClose={closePersonAreaPopup}
           currentUser={currentUser}
+          onChangePhoto={handleChangePhoto}
+          isLoadingRequest={isLoadingRequest}
+          isShowRequestError={isShowRequestError}
         />
       }
       {
@@ -242,38 +288,20 @@ function Person({ studentData, windowWidth }) {
         <PersonChangePasswordPopup
           isOpen={isChangePasswordPopupOpen}
           onClose={closePersonAreaPopup}
+          onChangePassword={handleChangePassword}
+          isLoadingRequest={isLoadingRequest}
+          isShowRequestError={isShowRequestError}
         />
       }
       {
-        isDatePopupOpen &&
-        <PersonDatePopup
-          isOpen={isDatePopupOpen}
+        isDataPopupOpen &&
+        <PersonAreaDataPopup
+          isOpen={isDataPopupOpen}
           onClose={closePersonAreaPopup}
           currentUser={currentUser}
-        />
-      }
-      {
-        isIdentifierPopupOpen &&
-        <PersonIdentifierPopup
-          isOpen={isIdentifierPopupOpen}
-          onClose={closePersonAreaPopup}
-          currentUser={currentUser}
-        />
-      }
-      {
-        isPhonePopupOpen &&
-        <PersonPhonePopup
-          isOpen={isPhonePopupOpen}
-          onClose={closePersonAreaPopup}
-          currentUser={currentUser}
-        />
-      }
-      {
-        isMailPopupOpen &&
-        <PersonMailPopup
-          isOpen={isMailPopupOpen}
-          onClose={closePersonAreaPopup}
-          currentUser={currentUser}
+          onChangeData={handleChangeData}
+          isLoadingRequest={isLoadingRequest}
+          isShowRequestError={isShowRequestError}
         />
       }
     </div>

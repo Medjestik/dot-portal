@@ -159,14 +159,18 @@
 }
 .popup__btn-save:hover  {
   cursor: pointer;
-  user-select: auto;
-  pointer-events: all;
   opacity: .8;
-  box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
+  /*box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);*/
 }
 .popup__btn-save_type_block {
   background: var(--slider-color);
-  border-radius: var(--border-radius);
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+}
+.popup__btn-save_type_loading {
+  background: var(--gradient-orange-color);
+  cursor: default;
   user-select: none;
   pointer-events: none;
 }

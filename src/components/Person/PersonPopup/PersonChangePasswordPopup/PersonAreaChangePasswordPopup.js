@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 
-function PersonAreaChangePasswordPopup({ isOpen, onClose }) {
+function PersonAreaChangePasswordPopup({ isOpen, onClose, onChangePassword, isLoadingRequest, isShowRequestError }) {
 
   const [currentPassword, setCurrentPassword] = React.useState('');
   const [isShowCurrentPassword, setIsShowCurrentPassword] = React.useState(false);
@@ -17,10 +17,9 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose }) {
 
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
 
-  const isShowRequestError = false;
-
   function handleSubmit(e) {
     e.preventDefault();
+    onChangePassword(currentPassword, newPassword);
   }
 
   function changeCurrentPassword(e) {
@@ -86,8 +85,8 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose }) {
             id='currentPassword'
             value={currentPassword}
             onChange={changeCurrentPassword}
-            name='currentPassword' 
-            placeholder='Введите пароль...' 
+            name='currentPassword'
+            placeholder='Введите ваш логин'
             minLength='6'
             autoComplete='off'
             required 
@@ -105,7 +104,7 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose }) {
         </label>
 
         <label className='popup__field'>
-          <h4 className='popup__input-caption'>Новый пароль:</h4>
+          <h4 className='popup__input-caption'>Пароль:</h4>
           <div className='popup__input-field'>
             <input 
             className='popup__input popup__input_with_icon'
@@ -113,8 +112,8 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose }) {
             id='newPassword'
             value={newPassword}
             onChange={changeNewPassword}
-            name='newPassword' 
-            placeholder='Введите пароль...' 
+            name='newPassword'
+            placeholder='Введите ваш пароль'
             minLength='6'
             autoComplete='off'
             required 
@@ -160,9 +159,14 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose }) {
 
         <div className='popup__btn-container'>
           <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>
-          <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
+          {
+            isLoadingRequest ? 
+            <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Сохранение..</button>
+            :
+            <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
+          }
         </div>
-        <span className={`popup__input-error ${isShowRequestError && 'popup__input-error_status_show'}`}>Неправильно введен текущий пароль. Повторите попытку</span>
+        <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
       </form>
     </Popup>
   )

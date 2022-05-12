@@ -1,20 +1,36 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 
-function PersonAreaPhotoPopup({ isOpen, onClose, currentUser }) {
+function PersonAreaPhotoPopup({ isOpen, onClose, currentUser, onChangePhoto, isLoadingRequest, isShowRequestError }) {
 
-  const [fileName, setFileName] = React.useState(currentUser.avatar ? { isShow: true, name: currentUser.avatar, } : { isShow: false, name: '', });
+  const [fileName, setFileName] = React.useState(currentUser.avatar ? { isShow: true, name: currentUser.avatar.name, } : { isShow: false, name: '', });
   const [isShowWrongType, setIsShowWrongType] = React.useState(false);
   const [contentFile, setContentFile] = React.useState({ file: null, });
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
 
   const formRef = React.createRef();
 
-  const isShowRequestError = false;
+  const getBase64 = file => {
+    return new Promise(resolve => {
+      let baseURL = '';
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        baseURL = reader.result;
+        resolve(baseURL);
+      };
+    });
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(contentFile);
+    onChangePhoto(fileName.name, contentFile.file);
   }
 
   function removeUploadFile() {
@@ -27,10 +43,18 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser }) {
     setIsShowWrongType(false);
     setFileName({ isShow: false, name: '' });
     if (e.target.files.length > 0) {
-      if (e.target.files[0].name.match(/.(jpg|bmp|png)$/i)) {
-        setFileName({ isShow: true, name: e.target.files[0].name });
-        setContentFile({ file: e.target.files[0] });
-        setIsBlockSubmitButton(false);
+      if (e.target.files[0].name.match(/.(jpg|jpeg|bmp|png)$/i)) {
+        let file = e.target.files[0];
+        getBase64(file)
+        .then(result => {
+          file['base64'] = result;
+          setFileName({ isShow: true, name: file.name });
+          setContentFile({ file: file.base64 });
+          setIsBlockSubmitButton(false);
+        })
+        .catch(err => {
+          console.log(err);
+        });
       } else {
         setFileName({ isShow: false, name: e.target.files[0].name });
         setIsShowWrongType(true);
@@ -57,15 +81,20 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser }) {
           className='btn btn_type_upload btn_type_upload_status_active'
           >
           </label>
-          <input onChange={handleChangePhoto} id='person-area-photo-upload' className='popup__upload-input' type="file" />
+          <input onChange={handleChangePhoto} id='person-area-photo-upload' name='person-area-photo-upload' className='popup__upload-input' type="file" />
           <button className={`btn btn_type_cancel popup__btn-upload-cancel ${currentUser.avatar ? 'btn_type_cancel_status_active' : ''}`} type='button' onClick={removeUploadFile}></button>
         </div>
         <span className={`popup__input-error ${isShowWrongType && 'popup__input-error_status_show'}`}>Неверный формат файла</span>
         <div className='popup__btn-container'>
           <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>
-          <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
+          {
+            isLoadingRequest ? 
+            <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Сохранение..</button>
+            :
+            <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
+          }
         </div>
-        <span className={`popup__input-error ${isShowRequestError && 'popup__input-error_status_show'}`}>Неверный формат файла</span>
+        <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
       </form>
     </Popup>
   )

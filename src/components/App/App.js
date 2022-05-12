@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import * as api from '../../utils/api.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
+import HomePage from '../HomePage/HomePage.js';
 import Header from '../Header/Header.js';
 import Person from '../Person/Person.js';
 import Education from '../Education/Education.js';
@@ -19,12 +20,13 @@ function App() {
 
   const [studentData, setStudentData] = React.useState({});
 
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const [windowWidth, setWindowWidth] = React.useState(0);
 
-  function handleLogin ({ email, password }) {
+  function handleLogin(login, password) {
 
-    api.login({ email, password })
+    api.login({ login, password })
       .then((res) => {
         localStorage.setItem('token', res.token);
         tokenCheck();
@@ -38,23 +40,24 @@ function App() {
   }
 
   function tokenCheck () {
-    const token = 'ZG90MjAwOTk6NDcwNjcx';
+    const token = localStorage.getItem('token');
     if (token) {
       setIsLoadingPage(true);
       api.getUser({ token: token })
         .then((res) => {
           if (res) {
-            console.log(res);
+            console.log('UserInfo', res);
             setLoggedIn(true);
             setCurrentUser(res);
             getStudentData(res.id);
             if (pathname === '/') {
-              //history.push("/main");
+              navigate('/person');
             } else {
-              //history.push(pathname);
+              navigate(pathname);
             }
           } else {
-            localStorage.removeItem("token");
+            localStorage.removeItem('token');
+            navigate('/');
             setLoggedIn(false);
             setCurrentUser({});
           }
@@ -65,21 +68,26 @@ function App() {
         .finally(() => {
           //setIsLoadingPage(false);
         });
+    } else {
+      setIsLoadingPage(false);
+      navigate('/');
+      setLoggedIn(false);
+      setCurrentUser({});
     }
   }
 
-  function handleLogout () {
+  function handleLogout() {
     localStorage.removeItem('token');
     setLoggedIn(false);
     setCurrentUser({});
-    //history.push('/');
+    navigate('/');
   }
 
   function getStudentData(id) {
-    const token = 'ZG90MjAwOTk6NDcwNjcx';
+    const token = localStorage.getItem('token');
     api.getStudentData({ token: token, userId: id })
       .then((res) => {
-        console.log(res);
+        console.log('StudentData', res);
         setStudentData(res);
       })
       .catch((err) => {
@@ -88,6 +96,14 @@ function App() {
       .finally(() => {
         setIsLoadingPage(false);
       });
+  }
+
+  function handleChangeUserPhoto(link) {
+    setCurrentUser({ ...currentUser, avatar: link });
+  }
+
+  function handleChangeUserData(data) {
+    setCurrentUser({ ...currentUser, birthDate: data.birthDate, snils:  data.snils, phone:  data.phone, email:  data.email, });
   }
 
   React.useEffect(() => {
@@ -99,9 +115,7 @@ function App() {
       function resizeWindow (evt) {
         setWindowWidth(evt.target.innerWidth);
       }
-
       window.addEventListener('resize', resizeWindow);
-
       return () => {
         window.removeEventListener('resize', resizeWindow);
       }
@@ -122,53 +136,64 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        <div className='wrapper'>
         {
-          isLoadingPage 
-          ?
+          isLoadingPage ?
           <div></div>
           :
-          <div className='container'>
+          <Routes>
+            <Route exact path='/' element={
+              <HomePage 
+                onLogin={handleLogin}
+                //loginError={loginError}
+                //onHideLoginError={handleHideLoginError}
+                //isLoadingLogin={isLoadingLogin}
+              />
+            }/>
 
-              <Header windowWidth={windowWidth} pathname={pathname} />
-              
-              <div className='main-container'>
-                <Routes>
-                  <Route 
-                  exact 
-                  path='person' 
-                  element={
-                  <Person studentData={studentData} windowWidth={windowWidth} />}
-                  />
-                  <Route 
-                  path='education/*' 
-                  element={
-                  <Education />}
-                  />
+            <Route path='/*' element={
+              loggedIn === true ? 
+              <div className='wrapper'>
+                <div className='container'>
 
-                  <Route 
-                  path='webinars' 
-                  element={
-                  <Webinar />}
-                  />
+                    <Header windowWidth={windowWidth} pathname={pathname} onLogout={handleLogout} />
+                    
+                    <div className='main-container'>
+                      <Routes>
 
-                  <Route 
-                  path='document/*' 
-                  element={
-                  <Document />}
-                  />
+                        <Route exact path='person' element={
+                          <Person 
+                          studentData={studentData} 
+                          windowWidth={windowWidth} 
+                          onChangeUserPhoto={handleChangeUserPhoto}
+                          onChangeUserData={handleChangeUserData}
+                          />
+                        }/>
 
-                  <Route 
-                  path='library' 
-                  element={
-                  <Library />}
-                  />
+                        <Route path='education/*' element={
+                          <Education />
+                        }/>
 
-                </Routes>
-              </div>    
-            </div>
-          }  
-        </div>
+                        <Route path='webinars' element={
+                          <Webinar />
+                        }/>
+
+                        <Route path='document/*' element={
+                        <Document />
+                        }/>
+
+                        <Route path='library' element={
+                        <Library />
+                        }/>
+
+                      </Routes>
+                    </div>    
+                  </div>
+                </div>
+              : 
+              <Navigate to='/homepage' />
+            }/>
+          </Routes> 
+        }
       </div>
     </CurrentUserContext.Provider>
   );

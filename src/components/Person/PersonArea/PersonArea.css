@@ -17,14 +17,17 @@
   height: 120px;
   background: var(--main-grey-color);
   border-radius: 50%;
+  border: none;
   position: relative;
   transition: all .3s ease-in-out;
   cursor: pointer;
+  flex-shrink: 0;
 }
 .person-area__photo {
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  border: none;
   position: relative;
   object-fit: cover;
   object-position: center;
@@ -353,6 +356,9 @@
 @media all and (max-width: 1439px) {
   .person-area__container {
     padding: 32px;
+  }
+  .person-area__photo-container {
+    margin: 0px 20px 0px 0px;
   }
   .person-area__separate {
     height: 276px;

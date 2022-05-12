@@ -15,7 +15,7 @@ function PersonAreaMobile({ currentUser, studentData, openPhotoPopup }) {
               currentUser.avatar 
               ?
                 <div className='person-area__photo-container person-area-laptop__photo-container' onClick={openPhotoPopup}>
-                  <img className='person-area__photo' src={currentUser.avatar } alt='' onClick={openPhotoPopup}></img>
+                  <img className='person-area__photo' src={currentUser.avatar.link} alt='' onClick={openPhotoPopup}></img>
                   <div className='person-area__icon-container'>
                     { photoIcon }
                   </div>

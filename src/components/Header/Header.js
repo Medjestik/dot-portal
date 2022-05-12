@@ -6,7 +6,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon } from './HeaderIcons/HeaderIcons.js';
 import useOnClickOutside from '../../hooks/useOnClickOutside.js';
 
-function Header({ windowWidth, pathname }) {
+function Header({ windowWidth, pathname, onLogout }) {
 
   const currentUser = React.useContext(CurrentUserContext);
   const refMobileHeader = React.useRef();
@@ -38,7 +38,7 @@ function Header({ windowWidth, pathname }) {
           {
             currentUser.avatar 
             ?
-            <img className='header__img' src={currentUser.avatar} alt='аватар'></img>
+            <img className='header__img' src={currentUser.avatar.link} alt='аватар'></img>
             :
             <div className='header__img'></div>
           }
@@ -99,7 +99,7 @@ function Header({ windowWidth, pathname }) {
             </NavLink>
           </nav>
           
-          <button className='header__nav-link header__nav-link_type_logout'>
+          <button className='header__nav-link header__nav-link_type_logout' onClick={onLogout}>
             <div className='header__nav-link-icon'>
                 <div className='header__nav-link-icon-container'>
                   { logoutIcon }
