@@ -108,8 +108,8 @@ function Login({ onLogin }) {
           </span>
         </label>
 
-        <div className='popup__btn-container'>
-          <button className='popup__btn-cancel' type='button'>Забыли пароль?</button>
+        <div className='login__btn-container'>
+          <button className='login__btn-forgot' type='button'>Забыли пароль?</button>
           {
             isLoadingRequest ? 
             <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Вход..</button>

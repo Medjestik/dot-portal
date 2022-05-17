@@ -21,11 +21,39 @@
   line-height: 26px;
   color: var(--main-black-color);
 }
+.login__btn-container {
+  display: flex;
+  align-items: center;
+  margin: 24px 0px 0px 0px;
+}
+.login__btn-forgot {
+  margin: 0px 12px 0px 0px;
+  width: 100%;
+  padding: 11px;
+  background: inherit;
+  border: 1px solid var(--slider-color);
+  border-radius: var(--border-radius);
+  color: var(--main-black-color);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  transition: all .3s ease-in-out;
+}
+.login__btn-forgot:hover {
+  font-weight: 500;
+  cursor: pointer;
+  user-select: auto;
+  pointer-events: all;
+  opacity: .8;
+  border: 1px solid var(--accent-blue-color);
+  color: var(--main-black-color);
+}
 
 @media all and (max-width: 833px) {
   .login {
-    margin: 10vh 20px 0px;
-    width: calc(100% - 40px);
+    margin: 10vh 40px 0px;
+    width: calc(100% - 80px);
   }
   .login__form {
     padding: 20px;
@@ -34,5 +62,13 @@
     margin: 0px 0px 12px 0px;
     font-size: 18px;
     line-height: 22px;
+  }
+  .login__btn-container {
+    margin: 12px 0px 0px 0px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .login__btn-forgot {
+    margin: 12px 0px 0px 0px;
   }
 }
