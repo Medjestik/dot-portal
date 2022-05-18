@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.5d9f6182.css",
-    "main.js": "/static/js/main.b6a33dc4.js",
+    "main.css": "/static/css/main.0c4440e8.css",
+    "main.js": "/static/js/main.b487efaf.js",
     "static/js/787.1955ab40.chunk.js": "/static/js/787.1955ab40.chunk.js",
-    "static/media/home-page-background.jpg": "/static/media/home-page-background.6ebabe323b86ec3dbd90.jpg",
+    "static/media/homepage-background.jpg": "/static/media/homepage-background.6ebabe323b86ec3dbd90.jpg",
     "static/media/Robotomediumitalic.ttf": "/static/media/Robotomediumitalic.35abcf5eb54b0c398e52.ttf",
     "static/media/Robotoitalic.ttf": "/static/media/Robotoitalic.727137e411cf490757ce.ttf",
     "static/media/Robotolightitalic.ttf": "/static/media/Robotolightitalic.0af29016d4a1e7a3cc4e.ttf",
@@ -82,13 +82,16 @@
     "static/media/search.svg": "/static/media/search.12b79a9505e61eb9092878c46128b8f7.svg",
     "static/media/rating-star-color.svg": "/static/media/rating-star-color.c3fb6e1694956df0210f.svg",
     "static/media/download.svg": "/static/media/download.5e399bdb1da6b5f7112e.svg",
+    "static/media/homepage-phone.svg": "/static/media/homepage-phone.1061394f1440bdbea550.svg",
     "static/media/telegram-color.svg": "/static/media/telegram-color.835818563472af7ac3e1.svg",
     "static/media/telegram.svg": "/static/media/telegram.487bd15484bb9cf9f6fa87213d7ecbea.svg",
     "static/media/person.svg": "/static/media/person.9cbf5dd1e24e4a381cba3289fcb4735a.svg",
     "static/media/person-white.svg": "/static/media/person-white.3cef34f5e7081f56ac03.svg",
+    "static/media/homepage-mail.svg": "/static/media/homepage-mail.620b5a28c766476b73dd.svg",
     "static/media/status-white.svg": "/static/media/status-white.5e2aa43d43fea8c6d9faa661361933d7.svg",
     "static/media/accordion-declaration.svg": "/static/media/accordion-declaration.268b607c8aebe3c291847a260b07c2e4.svg",
     "static/media/rating-star.svg": "/static/media/rating-star.af7ceb55bb4afeefcf85.svg",
+    "static/media/homepage-copyright.svg": "/static/media/homepage-copyright.3c21c8cfda5bbdc6e12d.svg",
     "static/media/search-color.svg": "/static/media/search-color.b946f3c9dc3cfce2dd55.svg",
     "static/media/webinar.svg": "/static/media/webinar.bba64f54a794fdcca94b07980c18a76a.svg",
     "static/media/webinar-white.svg": "/static/media/webinar-white.305ff416988dbf0999f2.svg",
@@ -98,12 +101,13 @@
     "static/media/attention.svg": "/static/media/attention.f565963cf829280eb474.svg",
     "static/media/arrow.svg": "/static/media/arrow.55a4ec4915bbcdabc744354a9e148a36.svg",
     "static/media/arrow-white.svg": "/static/media/arrow-white.9817492cc56038ef8ec6.svg",
-    "main.5d9f6182.css.map": "/static/css/main.5d9f6182.css.map",
-    "main.b6a33dc4.js.map": "/static/js/main.b6a33dc4.js.map",
+    "static/media/arrow-blue.svg": "/static/media/arrow-blue.f26d55b949820f718a86.svg",
+    "main.0c4440e8.css.map": "/static/css/main.0c4440e8.css.map",
+    "main.b487efaf.js.map": "/static/js/main.b487efaf.js.map",
     "787.1955ab40.chunk.js.map": "/static/js/787.1955ab40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5d9f6182.css",
-    "static/js/main.b6a33dc4.js"
+    "static/css/main.0c4440e8.css",
+    "static/js/main.b487efaf.js"
   ]
 }

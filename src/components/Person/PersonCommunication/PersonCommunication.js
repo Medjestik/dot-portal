@@ -14,6 +14,8 @@ function PersonCommunication({ userSocialClassmates, windowWidth }) {
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const heightRef = React.createRef();
 
+  const [numberClassmates, setNumberClassmates] = React.useState(2);
+
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
   }
@@ -21,10 +23,62 @@ function PersonCommunication({ userSocialClassmates, windowWidth }) {
   function closeInfoPopup() {
     setIsOpenInfoPopup(false);
   }
+
+  function showMoreClassmates() {
+    setNumberClassmates(userSocialClassmates.length);
+  }
   
   React.useEffect(() => {
     setIsOpenInfoPopup(false);
+    setNumberClassmates(2);
   },[]);
+
+
+  function renderClassmatesItem(item, i) {
+    return (
+      <li className='person-communication__classmates-item' key={i}>
+        <h5 className='person-communication__classmates-name'>{item.name}</h5>
+        <ul className='person-communication__classmates-social-list'>
+          <li className='person-communication__classmates-social-item'>
+            {
+              item.vk.length < 1
+              ?
+              <>
+              <p className='person-communication__classmates-social-empty'>Отсутствует</p>
+              <div className='person-communication__classmates-social-vk'></div>
+              </>
+              :
+              <a className='person-communication__classmates-social-link' href={item.vk} target='_blank' rel='noreferrer'>{item.vk}</a>
+            }
+          </li>
+          <li className='person-communication__classmates-social-item'>
+            {
+              item.inst.length < 1
+              ?
+              <>
+              <p className='person-communication__classmates-social-empty'>Отсутствует</p>
+              <div className='person-communication__classmates-social-inst'></div>
+              </>
+              :
+              <a className='person-communication__classmates-social-link' href={item.inst} target='_blank' rel='noreferrer'>{item.inst}</a>
+            }
+          </li>
+          <li className='person-communication__classmates-social-item'>
+            {
+              item.telegram.length < 1
+              ?
+              <>
+              <p className='person-communication__classmates-social-empty'>Отсутствует</p>
+              <div className='person-communication__classmates-social-telegram'></div>
+              </>
+              :
+              <a className='person-communication__classmates-social-link' href={item.telegram} target='_blank' rel='noreferrer'>{item.telegram}</a>
+            }
+          </li>
+        </ul>
+      </li>
+    )
+  }
 
   React.useEffect(() => {
     setSectionHeight(heightRef.current.clientHeight);
@@ -69,53 +123,31 @@ function PersonCommunication({ userSocialClassmates, windowWidth }) {
         <div className='person-communication__classmates'>
           <p className='person-communication__classmates-title'>Социальные сети одногруппников</p>
           <div className='person-communication__classmates-container'>
-            <ul className='scroll-inside person-communication__classmates-list'>
+            {
+              windowWidth <= 833 
+              ?
+              <>
+              <ul className='person-communication__classmates-list'>
+                {
+                  userSocialClassmates.slice(0, numberClassmates).map((item, i) => (
+                    renderClassmatesItem(item, i)
+                  ))
+                }
+              </ul>
               {
-                userSocialClassmates.map((item, i) => (
-                  <li className='person-communication__classmates-item' key={i}>
-                    <h5 className='person-communication__classmates-name'>{item.name}</h5>
-                    <ul className='person-communication__classmates-social-list'>
-                      <li className='person-communication__classmates-social-item'>
-                        {
-                          item.vk.length < 1
-                          ?
-                          <>
-                          <p className='person-communication__classmates-social-empty'>Отсутствует</p>
-                          <div className='person-communication__classmates-social-vk'></div>
-                          </>
-                          :
-                          <a className='person-communication__classmates-social-link' href={item.vk} target='_blank' rel='noreferrer'>{item.vk}</a>
-                        }
-                      </li>
-                      <li className='person-communication__classmates-social-item'>
-                        {
-                          item.inst.length < 1
-                          ?
-                          <>
-                          <p className='person-communication__classmates-social-empty'>Отсутствует</p>
-                          <div className='person-communication__classmates-social-inst'></div>
-                          </>
-                          :
-                          <a className='person-communication__classmates-social-link' href={item.inst} target='_blank' rel='noreferrer'>{item.inst}</a>
-                        }
-                      </li>
-                      <li className='person-communication__classmates-social-item'>
-                        {
-                          item.telegram.length < 1
-                          ?
-                          <>
-                          <p className='person-communication__classmates-social-empty'>Отсутствует</p>
-                          <div className='person-communication__classmates-social-telegram'></div>
-                          </>
-                          :
-                          <a className='person-communication__classmates-social-link' href={item.telegram} target='_blank' rel='noreferrer'>{item.telegram}</a>
-                        }
-                      </li>
-                    </ul>
-                  </li>
-                ))
+                (userSocialClassmates.length > numberClassmates) &&
+                <button className='btn-more btn-more_type_show' onClick={showMoreClassmates}>Показать больше</button>
               }
-            </ul>
+              </>
+              :
+              <ul className='scroll-inside person-communication__classmates-list'>
+                {
+                  userSocialClassmates.map((item, i) => (
+                    renderClassmatesItem(item, i)
+                  ))
+                }
+              </ul>
+            }
           </div>
         </div>
       </div>  

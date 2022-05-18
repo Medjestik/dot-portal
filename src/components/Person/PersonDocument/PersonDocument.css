@@ -27,6 +27,7 @@
   background: var(--main-grey-color);
 }
 .person-document__download-list {
+  width: 100%;
   max-width: 320px;
   max-height: 160px;
   margin: 0px;
@@ -37,6 +38,7 @@
   overflow-y: auto;
 }
 .person-document__download-item {
+  width: 100%;
   margin: 0px 0px 20px 0px;
   display: flex;
   align-items: center;
@@ -157,7 +159,11 @@
     padding: 16px;
   }
   .person-document__download-list {
+    max-width: none;
     max-height: 140px;
+  }
+  .person-document__download-text {
+    max-width: none;
   }
   .person-document__check-container {
     padding: 16px 6px;

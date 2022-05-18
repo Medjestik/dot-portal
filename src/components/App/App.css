@@ -327,6 +327,43 @@ input[type=number] {
   user-select: none;
   pointer-events: none;
 }
+.btn-more {
+  position: relative;
+  background: none;
+  border: none;
+  margin: 0px auto;
+  padding: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--accent-blue-color);
+}
+.btn-more_type_show::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  width: 16px;
+  height: 16px;
+  background-image: url('../../images/arrow-blue.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.btn-more_type_hide::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  width: 16px;
+  height: 16px;
+  background-image: url('../../images/arrow-blue.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(180deg);
+}
 .upload-form {
   width: 100%;
   margin: 12px 0px 0px 0px;

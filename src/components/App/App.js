@@ -14,28 +14,31 @@ import Library from '../Library/Library.js';
 function App() { 
 
   const [currentUser, setCurrentUser] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [loginError, setLoginError] = React.useState(false);
-  const [isLoadingPage, setIsLoadingPage] = React.useState(true);
-
   const [studentData, setStudentData] = React.useState({});
+
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [requestError, setRequestError] = React.useState(false);
+  const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
+
+  const [isLoadingPage, setIsLoadingPage] = React.useState(true);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [windowWidth, setWindowWidth] = React.useState(0);
 
   function handleLogin(login, password) {
-
+    setIsLoadingRequest(true);
     api.login({ login, password })
       .then((res) => {
         localStorage.setItem('token', res.token);
         tokenCheck();
       })
       .catch((err) => {
-        setLoginError(true);
+        console.log(err);
+        setRequestError(true);
       })
       .finally(() => {
-
+        setIsLoadingRequest(false);
       });
   }
 
@@ -74,6 +77,10 @@ function App() {
       setLoggedIn(false);
       setCurrentUser({});
     }
+  }
+
+  function handleHideRequestError() {
+    setRequestError(false);
   }
 
   function handleLogout() {
@@ -144,9 +151,9 @@ function App() {
             <Route exact path='/' element={
               <HomePage 
                 onLogin={handleLogin}
-                //loginError={loginError}
-                //onHideLoginError={handleHideLoginError}
-                //isLoadingLogin={isLoadingLogin}
+                requestError={requestError}
+                onHideRequestError={handleHideRequestError}
+                isLoadingRequest={isLoadingRequest}
               />
             }/>
 

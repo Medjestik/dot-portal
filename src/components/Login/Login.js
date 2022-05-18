@@ -1,7 +1,7 @@
 import React from 'react';
 import './Login.css';
 
-function Login({ onLogin }) {
+function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) {
 
   const [login, setLogin] = React.useState('');
   const [loginError, setLoginError] = React.useState({ isShow: false, text: '' });
@@ -11,11 +11,9 @@ function Login({ onLogin }) {
 
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
 
-  const isLoadingRequest = false;
-  const isShowRequestError = { isShow: false, text: '' }
-
   function handleChangeLogin(e) {
     setLogin(e.target.value);
+    onHideRequestError();
     if (e.target.checkValidity()) {
       setLoginError({ text: '', isShow: false });
     } else {
@@ -25,6 +23,7 @@ function Login({ onLogin }) {
 
   function handleChangePassword(e) {
     setPassword(e.target.value);
+    onHideRequestError();
     if (e.target.checkValidity()) {
       setPasswordError({ text: '', isShow: false });
     } else {
@@ -34,7 +33,7 @@ function Login({ onLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(login, password)
+    onHideRequestError();
     onLogin(login, password);
   }
 
@@ -117,7 +116,7 @@ function Login({ onLogin }) {
             <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Войти</button>
           }
         </div>
-        <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
+        <span className={`popup__input-error ${requestError && 'popup__input-error_status_show'}`}>К сожалению, произошла ошибка!</span>
 
       </form>
     </div>

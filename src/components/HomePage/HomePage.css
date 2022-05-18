@@ -27,7 +27,7 @@
   margin: 0px;
   width: 100%;
   height: 100vh;
-  background-image: url('../../images/home-page-background.jpg');
+  background-image: url('../../images/homepage/homepage-background.jpg');
   background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
@@ -68,31 +68,88 @@
   color: #FFFFFF;
 }
 .home-page__info-email {
+  position: relative;
   margin: 16px 0px 0px 0px;
+  padding: 0px 0px 0px 30px;
   font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 18px;
   color: #FFFFFF;
+}
+.home-page__info-email::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: -1px;
+  left: 0px;
+  background-image: url('../../images/homepage/homepage-mail.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .home-page__info-phone {
+  position: relative;
   margin: 16px 0px 0px 0px;
+  padding: 0px 0px 0px 30px;
   font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 18px;
   color: #FFFFFF;
 }
+.home-page__info-phone::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: -1px;
+  left: 0px;
+  background-image: url('../../images/homepage/homepage-phone.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 .home-page__info-copy {
+  position: relative;
   margin: auto 0px 0px 0px;
+  padding: 0px 0px 0px 30px;
   font-style: normal;
   font-weight: 300;
   font-size: 14px;
   line-height: 18px;
   color: #FFFFFF;
+}
+.home-page__info-copy::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: -1px;
+  left: 0px;
+  background-image: url('../../images/homepage/homepage-copyright.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 @media all and (max-width: 833px) {
+  .home-page {
+    min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    min-height: calc(var(--vh, 1vh) * 100);
+    max-height: 100vh;
+  }
+  .home-page__overlay {
+    min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    min-height: calc(var(--vh, 1vh) * 100);
+    max-height: 100vh;
+  }
+  .home-page__background {
+    min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    min-height: calc(var(--vh, 1vh) * 100);
+    max-height: 100vh;
+  }
   .home-page__info {
     margin: auto 40px 40px 40px;
     flex-direction: column;
