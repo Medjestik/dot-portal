@@ -7,19 +7,30 @@
 .semester-header__select {
   margin: 0px;
   min-width: 164px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px;
+  box-sizing: border-box;
+  background: var(--main-white-color);
+  border-radius: var(--border-radius);
+}
+.semester-header__select_status_open {
+  border-radius: 8px 8px 0px 0px;
+}
+.semester-header__select:hover {
+  cursor: pointer;
+}
+.semester-header__select-main {
+  margin: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px 8px 8px 20px;
   box-sizing: border-box;
-  background: var(--main-white-color);
-  border-radius: var(--border-radius);
-  transition: all .3s ease-in-out;
 }
-.semester-header__select:hover {
-  cursor: pointer;
-}
-.semester-header__select-title {
+.semester-header__select-text {
   margin: 0px 20px 0px 0px;
   font-style: normal;
   font-weight: 900;
@@ -28,12 +39,60 @@
   color: var(--main-black-color);
 }
 .semester-header__select-arrow {
+  margin: 0px 0px 0px 10px;
   width: 24px;
   height: 24px;
   background-image: url('../../images/arrow.svg');
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
+  transform: rotate(0deg);
+  transition: all .3s ease-in-out;
+}
+.semester-header__select-arrow_status_open {
+  transform: rotate(180deg);
+}
+.semester-header__select-options-container {
+  width: 100%;
+  margin: 0px;
+  background: var(--main-white-color);
+  border-radius: 0px 0px 8px 8px;
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0px;
+  transition: all .3s ease-in-out;
+  z-index: 100;
+  box-sizing: border-box;
+  border: 1px solid var(--slider-color);
+}
+.semester-header__select-options-container_status_open {
+  display: block;
+}
+.semester-header__select-options-list {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+.semester-header__select-options-item {
+  margin: 0px 20px;
+  padding: 11px 0px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--slider-color);
+}
+.semester-header__select-options-item:last-of-type {
+  border-bottom: none;
+}
+.semester-header__select-options-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.semester-header__select-options-item:hover .semester-header__select-options-text {
+  color: var(--accent-blue-color);
 }
 .semester-header__btn-back {
   margin: 0px;
@@ -44,6 +103,7 @@
   padding: 8px 8px 8px 20px;
   background: var(--main-white-color);
   border-radius: var(--border-radius);
+  border: none;
   transition: all .3s ease-in-out;
 }
 .semester-header__btn-back:hover {

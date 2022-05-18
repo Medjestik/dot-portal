@@ -14,7 +14,7 @@ function PersonCommunication({ userSocialClassmates, windowWidth }) {
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const heightRef = React.createRef();
 
-  const [numberClassmates, setNumberClassmates] = React.useState(2);
+  const [numberStep, setNumberStep] = React.useState(2);
 
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
@@ -25,12 +25,12 @@ function PersonCommunication({ userSocialClassmates, windowWidth }) {
   }
 
   function showMoreClassmates() {
-    setNumberClassmates(userSocialClassmates.length);
+    setNumberStep(userSocialClassmates.length);
   }
   
   React.useEffect(() => {
     setIsOpenInfoPopup(false);
-    setNumberClassmates(2);
+    setNumberStep(2);
   },[]);
 
 
@@ -129,13 +129,13 @@ function PersonCommunication({ userSocialClassmates, windowWidth }) {
               <>
               <ul className='person-communication__classmates-list'>
                 {
-                  userSocialClassmates.slice(0, numberClassmates).map((item, i) => (
+                  userSocialClassmates.slice(0, numberStep).map((item, i) => (
                     renderClassmatesItem(item, i)
                   ))
                 }
               </ul>
               {
-                (userSocialClassmates.length > numberClassmates) &&
+                (userSocialClassmates.length > numberStep) &&
                 <button className='btn-more btn-more_type_show' onClick={showMoreClassmates}>Показать больше</button>
               }
               </>

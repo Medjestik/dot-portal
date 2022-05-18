@@ -14,8 +14,7 @@ import Library from '../Library/Library.js';
 function App() { 
 
   const [currentUser, setCurrentUser] = React.useState({});
-  const [studentData, setStudentData] = React.useState({});
-
+  
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [requestError, setRequestError] = React.useState(false);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
@@ -52,7 +51,6 @@ function App() {
             console.log('UserInfo', res);
             setLoggedIn(true);
             setCurrentUser(res);
-            getStudentData(res.id);
             if (pathname === '/') {
               navigate('/person');
             } else {
@@ -69,7 +67,7 @@ function App() {
             console.error(err);
         })
         .finally(() => {
-          //setIsLoadingPage(false);
+          setIsLoadingPage(false);
         });
     } else {
       setIsLoadingPage(false);
@@ -88,21 +86,6 @@ function App() {
     setLoggedIn(false);
     setCurrentUser({});
     navigate('/');
-  }
-
-  function getStudentData(id) {
-    const token = localStorage.getItem('token');
-    api.getStudentData({ token: token, userId: id })
-      .then((res) => {
-        console.log('StudentData', res);
-        setStudentData(res);
-      })
-      .catch((err) => {
-          console.error(err);
-      })
-      .finally(() => {
-        setIsLoadingPage(false);
-      });
   }
 
   function handleChangeUserPhoto(link) {
@@ -169,7 +152,6 @@ function App() {
 
                         <Route exact path='person' element={
                           <Person 
-                          studentData={studentData} 
                           windowWidth={windowWidth} 
                           onChangeUserPhoto={handleChangeUserPhoto}
                           onChangeUserData={handleChangeUserData}

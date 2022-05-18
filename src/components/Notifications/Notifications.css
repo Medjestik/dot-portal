@@ -112,5 +112,6 @@
   }
   .notification__info {
     padding: 8px 14px;
+    margin: 0px;
   }
 }

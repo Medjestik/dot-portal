@@ -170,7 +170,7 @@
   }
   .person-education__list {
     flex-direction: row;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
   }
   .person-education__item {

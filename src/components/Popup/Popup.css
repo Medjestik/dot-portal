@@ -319,4 +319,7 @@
   .popup__form_type_medium {
     width: 95vw;
   }
+  .popup__input-field {
+    padding: 11px 12px 11px 12px;
+  }
 }

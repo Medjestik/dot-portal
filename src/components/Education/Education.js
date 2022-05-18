@@ -127,14 +127,16 @@ function Education() {
         <Route exact path={`semester`} 
         element={
           <>
-          <div className='education__container'>
-            <Notifications />
+          {/*
+            <div className='education__container'>
+              <Notifications />
 
-            <Section title='Вебинары' heightType='content' headerType='small' >
-              <Calendar />
-            </Section>
-          </div>
-          
+              <Section title='Вебинары' heightType='content' headerType='small' >
+                <Calendar />
+              </Section>
+            </div>*/
+          }
+
           <Section title='1 семестр' heightType='content' headerType='small' >
             <SemesterTable disciplines={disciplines} openDiscipline={openDiscipline} />
           </Section>

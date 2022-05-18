@@ -1,7 +1,7 @@
 import React from 'react';
 import './Person.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
-import * as api from '../../utils/api.js';
+import * as personApi from '../../utils/personApi';
 import PersonArea from './PersonArea/PersonArea.js';
 import PersonAreaLaptop from './PersonArea/PersonAreaLaptop/PersonAreaLaptop.js';
 import PersonAreaMobile from './PersonArea/PersonAreaMobile/PersonAreaMobile.js';
@@ -20,7 +20,7 @@ import PersonChangePasswordPopup from './PersonPopup/PersonChangePasswordPopup/P
 import PersonAreaDataPopup from './PersonPopup/PersonDataPopup/PersonAreaDataPopup.js';
 
 
-function Person({ studentData, windowWidth, onChangeUserPhoto,onChangeUserData }) {
+function Person({ windowWidth, onChangeUserPhoto,onChangeUserData }) {
 
   const user = {
     photo: '',
@@ -49,12 +49,6 @@ function Person({ studentData, windowWidth, onChangeUserPhoto,onChangeUserData }
     achievements: ['Сессия без троек', 'Нет хвостов', 'Номер один в группе'],
     achievementsClassmates: ['Иванов Иван', 'Петров Иван', 'Костюлин Иван',],
   }
-
-  const userEducation = [
-    { course: 2, semester: 1, over: 2, credit: 7, status: 'current' },
-    { course: 1, semester: 2, over: 6, credit: 2, status: 'over' },
-    { course: 1, semester: 1, over: 8, credit: 0, status: 'over' },
-  ];
 
   const userNotifications = [
     { unreadNotification: true, date: '00.00.00 00:00', text: 'Новая оценка по текущему контролю «__» по дисциплине «__»' },
@@ -118,6 +112,10 @@ function Person({ studentData, windowWidth, onChangeUserPhoto,onChangeUserData }
     { text: 'Иванова Елена Ивановна Иванова Елена Ивановна', count: '1', },
   ]
 
+  const [studentData, setStudentData] = React.useState({});
+  const [studentEducationInfo, setStudentEducationInfo] = React.useState({});
+  const [isLoadingPage, setIsLoadingPage] = React.useState(true);
+  
   const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
   const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = React.useState(false); 
   const [isDataPopupOpen, setIsDataPopupOpen] = React.useState(false);
@@ -144,7 +142,7 @@ function Person({ studentData, windowWidth, onChangeUserPhoto,onChangeUserData }
     const userId = currentUser.id;
     const token = localStorage.getItem('token');
 
-    api.changePassword({ token, userId, oldPassword, newPassword })
+    personApi.changePassword({ token, userId, oldPassword, newPassword })
       .then((res) => {
         localStorage.setItem('token', res.token);
         closePersonAreaPopup();
@@ -164,7 +162,7 @@ function Person({ studentData, windowWidth, onChangeUserPhoto,onChangeUserData }
     const userId = currentUser.id;
     const token = localStorage.getItem('token');
 
-    api.changePhoto({ token, userId, name, file })
+    personApi.changePhoto({ token, userId, name, file })
       .then((res) => {
         onChangeUserPhoto(res.avatar);
         closePersonAreaPopup();
@@ -184,7 +182,7 @@ function Person({ studentData, windowWidth, onChangeUserPhoto,onChangeUserData }
     const userId = currentUser.id;
     const token = localStorage.getItem('token');
 
-    api.changeData({ token, userId, data })
+    personApi.changeData({ token, userId, data })
       .then((res) => {
         onChangeUserData(res);
         closePersonAreaPopup();
@@ -204,107 +202,143 @@ function Person({ studentData, windowWidth, onChangeUserPhoto,onChangeUserData }
     setIsChangePasswordPopupOpen(false);
     setIsDataPopupOpen(false);
   }
+
+  function getData(id) {
+    const token = localStorage.getItem('token');
+    Promise.all([
+      personApi.getStudentData({ token: token, userId: id }),
+      personApi.getStudentEducationInfo({ token: token, userId: id })
+    ])
+    
+      .then(([studentData, studentEducationInfo]) => {
+        console.log('StudentData', studentData);
+        console.log('StudentEducationInfo', studentEducationInfo);
+        setStudentData(studentData);
+        setStudentEducationInfo(studentEducationInfo);
+      })
+      .catch((err) => {
+          console.error(err);
+      })
+      .finally(() => {
+        setIsLoadingPage(false);
+      });
+  }
   
   React.useEffect(() => {
     setIsPhotoPopupOpen(false);
     setIsChangePasswordPopupOpen(false);
     setIsDataPopupOpen(false);
-  },[]);
+
+    if (currentUser.access_role === 'user') {
+      getData(currentUser.id);
+    }
+    return () => {
+      setStudentData({});
+    }
+  }, [currentUser]);
 
   return (
-    <div className='person'>
+    <>
+      {
+        isLoadingPage 
+        ?
+        <div></div>
+        :
+        <div className='person'>
 
-      {
-        windowWidth > 1439 &&
-        <PersonArea 
-        currentUser={currentUser}
-        studentData={studentData}
-        openPhotoPopup={openPhotoPopup}
-        openChangePasswordPopup={openChangePasswordPopup}
-        openDataPopup={openDataPopup}
-        />
-      }
-      {
-        (windowWidth <= 1439) && (windowWidth > 833) &&
-        <>
-        <PersonAreaLaptop
-        currentUser={currentUser}
-        studentData={studentData}
-        openPhotoPopup={openPhotoPopup}
-        />
-        <PersonData
-        windowWidth={windowWidth}
-        currentUser={currentUser}
-        openChangePasswordPopup={openChangePasswordPopup} 
-        openDataPopup={openDataPopup}
-        />
-        </>
-      }
-      {
-        windowWidth <= 833 &&
-        <>
-        <PersonAreaMobile
-        currentUser={currentUser}
-        studentData={studentData}
-        openPhotoPopup={openPhotoPopup}
-        />
-        <PersonData
-        windowWidth={windowWidth}
-        currentUser={currentUser}
-        openChangePasswordPopup={openChangePasswordPopup}
-        openDataPopup={openDataPopup}
-        />
-        <PersonAdministration
-        windowWidth={windowWidth}
-        studentData={studentData}
-        />
-        </>
-      }
-      
-      <PersonEducation user={user} userEducation={userEducation} windowWidth={windowWidth} />
-      <PersonAchievement user={user} windowWidth={windowWidth} />
-      <PersonDocument user={user} windowWidth={windowWidth} userDocuments={userDocuments} userCheck={userCheck} />
-      <PersonDeclaration user={user} windowWidth={windowWidth} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} />
-      <PersonNotification user={user} userNotifications={userNotifications} windowWidth={windowWidth} />
-      <PersonRating scores={scores} windowWidth={windowWidth} />
-      <PersonCommunication userSocialClassmates={userSocialClassmates} windowWidth={windowWidth} />
-      {
-        //<PersonDiploma windowWidth={windowWidth} />
-      }
+          {
+            windowWidth > 1439 &&
+            <PersonArea 
+            currentUser={currentUser}
+            studentData={studentData}
+            openPhotoPopup={openPhotoPopup}
+            openChangePasswordPopup={openChangePasswordPopup}
+            openDataPopup={openDataPopup}
+            />
+          }
+          {
+            (windowWidth <= 1439) && (windowWidth > 833) &&
+            <>
+            <PersonAreaLaptop
+            currentUser={currentUser}
+            studentData={studentData}
+            openPhotoPopup={openPhotoPopup}
+            />
+            <PersonData
+            windowWidth={windowWidth}
+            currentUser={currentUser}
+            openChangePasswordPopup={openChangePasswordPopup} 
+            openDataPopup={openDataPopup}
+            />
+            </>
+          }
+          {
+            windowWidth <= 833 &&
+            <>
+            <PersonAreaMobile
+            currentUser={currentUser}
+            studentData={studentData}
+            openPhotoPopup={openPhotoPopup}
+            />
+            <PersonData
+            windowWidth={windowWidth}
+            currentUser={currentUser}
+            openChangePasswordPopup={openChangePasswordPopup}
+            openDataPopup={openDataPopup}
+            />
+            <PersonAdministration
+            windowWidth={windowWidth}
+            studentData={studentData}
+            />
+            </>
+          }
+          
+          <PersonEducation user={user} studentEducationInfo={studentEducationInfo} windowWidth={windowWidth} />
+          <PersonAchievement user={user} windowWidth={windowWidth} />
+          <PersonDocument user={user} windowWidth={windowWidth} userDocuments={userDocuments} userCheck={userCheck} />
+          <PersonDeclaration user={user} windowWidth={windowWidth} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} />
+          <PersonNotification user={user} userNotifications={userNotifications} windowWidth={windowWidth} />
+          <PersonRating scores={scores} windowWidth={windowWidth} />
+          <PersonCommunication userSocialClassmates={userSocialClassmates} windowWidth={windowWidth} />
+          {
+            //<PersonDiploma windowWidth={windowWidth} />
+          }
 
-      {
-        isPhotoPopupOpen &&
-        <PersonPhotoPopup
-          isOpen={isPhotoPopupOpen}
-          onClose={closePersonAreaPopup}
-          currentUser={currentUser}
-          onChangePhoto={handleChangePhoto}
-          isLoadingRequest={isLoadingRequest}
-          isShowRequestError={isShowRequestError}
-        />
+          {
+            isPhotoPopupOpen &&
+            <PersonPhotoPopup
+              isOpen={isPhotoPopupOpen}
+              onClose={closePersonAreaPopup}
+              currentUser={currentUser}
+              onChangePhoto={handleChangePhoto}
+              isLoadingRequest={isLoadingRequest}
+              isShowRequestError={isShowRequestError}
+            />
+          }
+          {
+            isChangePasswordPopupOpen &&
+            <PersonChangePasswordPopup
+              isOpen={isChangePasswordPopupOpen}
+              onClose={closePersonAreaPopup}
+              onChangePassword={handleChangePassword}
+              isLoadingRequest={isLoadingRequest}
+              isShowRequestError={isShowRequestError}
+            />
+          }
+          {
+            isDataPopupOpen &&
+            <PersonAreaDataPopup
+              isOpen={isDataPopupOpen}
+              onClose={closePersonAreaPopup}
+              currentUser={currentUser}
+              onChangeData={handleChangeData}
+              isLoadingRequest={isLoadingRequest}
+              isShowRequestError={isShowRequestError}
+            />
+          }
+        </div>
       }
-      {
-        isChangePasswordPopupOpen &&
-        <PersonChangePasswordPopup
-          isOpen={isChangePasswordPopupOpen}
-          onClose={closePersonAreaPopup}
-          onChangePassword={handleChangePassword}
-          isLoadingRequest={isLoadingRequest}
-          isShowRequestError={isShowRequestError}
-        />
-      }
-      {
-        isDataPopupOpen &&
-        <PersonAreaDataPopup
-          isOpen={isDataPopupOpen}
-          onClose={closePersonAreaPopup}
-          currentUser={currentUser}
-          onChangeData={handleChangeData}
-          isLoadingRequest={isLoadingRequest}
-          isShowRequestError={isShowRequestError}
-        />
-      }
-    </div>
+    </>
   );
 }
 

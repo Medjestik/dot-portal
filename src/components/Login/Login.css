@@ -52,7 +52,7 @@
 
 @media all and (max-width: 833px) {
   .login {
-    margin: 10vh 40px 0px;
+    margin: 80px 40px 0px;
     width: calc(100% - 80px);
   }
   .login__form {

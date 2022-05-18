@@ -1,5 +1,7 @@
 .person-notification__container {
   margin: 0px;
+  display: flex;
+  flex-direction: column;
 }
 .person-notification__list { 
   list-style-type: none;
@@ -9,4 +11,11 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+}
+
+@media all and (max-width: 833px) {
+  .person-notification__list { 
+    max-height: none;
+    margin: 0px 0px 16px 0px;
+  }
 }

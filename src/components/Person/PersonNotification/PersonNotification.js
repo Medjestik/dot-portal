@@ -14,6 +14,8 @@ function PersonNotification({ user, windowWidth, userNotifications }) {
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const heightRef = React.createRef();
 
+  const [numberStep, setNumberStep] = React.useState(5);
+
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
   }
@@ -28,6 +30,24 @@ function PersonNotification({ user, windowWidth, userNotifications }) {
     setIsOpenTeacherCommentPopup(false);
   }
 
+  function showNotifications() {
+    setNumberStep(numberStep + 5);
+  }
+
+  function renderNotifications(item, i) {
+    return (
+      <li onClick={() => openTeacherCommentPopup(item)} key={i} className={`notification__item ${item.unreadNotification ? 'notification__item_type_unread' : ''}`}>
+        <div className='notification__img'>
+          <div className='notification__icon'></div>
+        </div>
+        <div className='notification__info'>
+          <span className='notification__date'>{item.date}</span>
+          <p className='notification__text'>{item.text}</p>
+        </div>
+      </li>
+    )
+  }
+
   React.useEffect(() => {
     setSectionHeight(heightRef.current.clientHeight);
   }, [heightRef, windowWidth]);
@@ -35,6 +55,7 @@ function PersonNotification({ user, windowWidth, userNotifications }) {
   React.useEffect(() => {
     setIsOpenInfoPopup(false);
     setIsOpenTeacherCommentPopup(false);
+    setNumberStep(5);
 
     return(() => {
       setCurrentNotification({});
@@ -45,21 +66,32 @@ function PersonNotification({ user, windowWidth, userNotifications }) {
     <>
     <Accordion icon={notificationIcon} name='Уведомления' height={sectionHeight} openInfoPopup={openInfoPopup}>
       <div ref={heightRef} className='person-notification__container'>
-        <ul className='scroll person-notification__list'>
+      {
+        windowWidth <= 833 
+        ?
+        <>
+        <ul className='person-notification__list'>
           {
-            userNotifications.map((item, i) => (
-              <li onClick={() => openTeacherCommentPopup(item)} key={i} className={`notification__item ${item.unreadNotification ? 'notification__item_type_unread' : ''}`}>
-                <div className='notification__img'>
-                  <div className='notification__icon'></div>
-                </div>
-                <div className='notification__info'>
-                  <span className='notification__date'>{item.date}</span>
-                  <p className='notification__text'>{item.text}</p>
-                </div>
-              </li>
+            userNotifications.slice(0, numberStep).map((item, i) => (
+              renderNotifications(item, i)
             ))
           }
         </ul>
+        {
+          (userNotifications.length > numberStep) &&
+          <button className='btn-more btn-more_type_show' onClick={showNotifications}>Показать больше</button>
+        }
+        </>
+        :
+        <ul className='scroll person-notification__list'>
+          {
+            userNotifications.map((item, i) => (
+              renderNotifications(item, i)
+            ))
+          }
+        </ul>
+      }
+
       </div>   
     </Accordion>
     {

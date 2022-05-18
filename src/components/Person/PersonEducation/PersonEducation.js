@@ -5,7 +5,7 @@ import PersonEducationInfoPopup from './PersonEducationInfoPopup/PersonEducation
 import educationIcon from '../../../images/accordion/accordion-education.svg';
 import statusIcon from '../../../images/status-white.svg';
 
-function PersonEducation({ user, userEducation, windowWidth }) {
+function PersonEducation({ user, studentEducationInfo, windowWidth }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [sectionHeight, setSectionHeight] = React.useState(0);
@@ -24,17 +24,17 @@ function PersonEducation({ user, userEducation, windowWidth }) {
     setIsOpenInfoPopup(false);
   },[]);
 
-  function progressSlider(edu) {
+  function progressSlider(edu, i) {
 
-    const eduPercent = edu.over / (edu.over + edu.credit) * 100;
+    const eduPercent = edu.countOver / (edu.countOver + edu.countCredit) * 100;
 
     const sliderWidth = {
       width: eduPercent + '%'
     }
 
     return (
-      <div className={`person-education__slider-background person-education__slider-background_type_${edu.status}`}>
-        <div style={Object.assign({}, sliderWidth)} className={`person-education__slider person-education__slider_type_${edu.status}`}></div>
+      <div className={`person-education__slider-background person-education__slider-background_type_${i === 0 ? 'current' : 'over'}`}>
+        <div style={Object.assign({}, sliderWidth)} className={`person-education__slider person-education__slider_type_${i === 0 ? 'current' : 'over'}`}></div>
       </div>
     )
   }
@@ -49,32 +49,56 @@ function PersonEducation({ user, userEducation, windowWidth }) {
       <div ref={heightRef} className='person-education__container'>
         <div className='person-education__status'>
           <img className='person-education__status-icon' alt='иконка' src={statusIcon}></img>
-          <span className='person-education__status-count'>{user.educationStatus}%</span>
+          <span className='person-education__status-count'>{studentEducationInfo.status}%</span>
           <p className='person-education__status-text'>Статус обучения</p>
         </div>
         <ul className='scroll person-education__list'>
           {
-            userEducation.map((edu, i) => (
+            studentEducationInfo.semesters.map((sem, i) => (
               <li className='person-education__item' key={i}>
                 <ul className='person-education__indicators'>
                   <li className='person-education__indicator'>
-                    <span className={`person-education__indicator-count person-education__indicator-count_type_${edu.status}`}>{edu.course}</span>
-                    <p className={`person-education__indicator-text person-education__indicator-text_type_${edu.status}`}>Курс</p>
+                    <span 
+                    className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
+                      {sem.courseNumber}
+                    </span>
+                    <p 
+                    className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
+                      Курс
+                    </p>
                   </li>
                   <li className='person-education__indicator'>
-                    <span className={`person-education__indicator-count person-education__indicator-count_type_${edu.status}`}>{edu.semester}</span>
-                    <p className={`person-education__indicator-text person-education__indicator-text_type_${edu.status}`}>Семестр</p>
+                    <span 
+                    className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
+                      {sem.semesterNumber}
+                    </span>
+                    <p 
+                    className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
+                      Семестр
+                    </p>
                   </li>
                   <li className='person-education__indicator'>
-                    <span className={`person-education__indicator-count person-education__indicator-count_type_${edu.status}`}>{edu.over}</span>
-                    <p className={`person-education__indicator-text person-education__indicator-text_type_${edu.status}`}>Сдано</p>
+                    <span 
+                    className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
+                      {sem.countOver}
+                    </span>
+                    <p 
+                    className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
+                      Сдано
+                    </p>
                   </li>
                   <li className='person-education__indicator'>
-                    <span className={`person-education__indicator-count person-education__indicator-count_type_${edu.status}`}>{edu.credit}</span>
-                    <p className={`person-education__indicator-text person-education__indicator-text_type_${edu.status}`}>Долг</p>
+                    <span 
+                    className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
+                      {sem.countCredit}
+                    </span>
+                    <p 
+                    className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
+                      Долг
+                    </p>
                   </li>
                 </ul>
-                {progressSlider(edu)}
+                {progressSlider(sem, i)}
               </li>
             ))
           }
