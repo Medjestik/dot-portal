@@ -36,7 +36,7 @@ function Header({ windowWidth, pathname, onLogout }) {
       <header className={`header ${isShowMobileMenu ? 'header-mobile_status_show' : 'header-mobile_status_hide'}`}>
         <div className='header__container' ref={refMobileHeader}>
           {
-            currentUser.avatar 
+            currentUser.avatar.link
             ?
             <img className='header__img' src={currentUser.avatar.link} alt='аватар'></img>
             :

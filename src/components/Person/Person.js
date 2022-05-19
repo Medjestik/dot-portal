@@ -20,7 +20,7 @@ import PersonChangePasswordPopup from './PersonPopup/PersonChangePasswordPopup/P
 import PersonAreaDataPopup from './PersonPopup/PersonDataPopup/PersonAreaDataPopup.js';
 
 
-function Person({ windowWidth, onChangeUserPhoto,onChangeUserData }) {
+function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
 
   const user = {
     photo: '',
@@ -103,10 +103,6 @@ function Person({ windowWidth, onChangeUserPhoto,onChangeUserData }) {
   const scores = [
     { text: 'Иванова Елена Ивановна', count: '5', },
     { text: 'Иванова Елена Ивановна', count: '4', },
-    { text: 'Иванова Елена Ивановна', count: '2', },
-    { text: 'Иванова Елена Ивановна', count: '5', },
-    { text: 'Иванова Елена Ивановна', count: '3', },
-    { text: 'Иванова Елена Ивановна', count: '1', },
     { text: 'Иванова Елена Ивановна', count: '4', },
     { text: 'Иванова Елена Ивановна', count: '5', },
     { text: 'Иванова Елена Ивановна Иванова Елена Ивановна', count: '1', },
@@ -164,7 +160,11 @@ function Person({ windowWidth, onChangeUserPhoto,onChangeUserData }) {
 
     personApi.changePhoto({ token, userId, name, file })
       .then((res) => {
-        onChangeUserPhoto(res.avatar);
+        if (res) {
+          onChangeUserPhoto(res.avatar);
+        } else {
+          onChangeUserPhoto({ name: '', link: '' });
+        }
         closePersonAreaPopup();
       })
       .catch((err) => {
@@ -204,6 +204,7 @@ function Person({ windowWidth, onChangeUserPhoto,onChangeUserData }) {
   }
 
   function getData(id) {
+    setIsLoadingPage(true);
     const token = localStorage.getItem('token');
     Promise.all([
       personApi.getStudentData({ token: token, userId: id }),
@@ -235,7 +236,8 @@ function Person({ windowWidth, onChangeUserPhoto,onChangeUserData }) {
     return () => {
       setStudentData({});
     }
-  }, [currentUser]);
+  // eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -293,10 +295,10 @@ function Person({ windowWidth, onChangeUserPhoto,onChangeUserData }) {
             </>
           }
           
-          <PersonEducation user={user} studentEducationInfo={studentEducationInfo} windowWidth={windowWidth} />
+          <PersonEducation studentEducationInfo={studentEducationInfo} windowWidth={windowWidth} />
           <PersonAchievement user={user} windowWidth={windowWidth} />
-          <PersonDocument user={user} windowWidth={windowWidth} userDocuments={userDocuments} userCheck={userCheck} />
-          <PersonDeclaration user={user} windowWidth={windowWidth} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} />
+          <PersonDocument windowWidth={windowWidth} userDocuments={userDocuments} userCheck={userCheck} />
+          <PersonDeclaration windowWidth={windowWidth} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} />
           <PersonNotification user={user} userNotifications={userNotifications} windowWidth={windowWidth} />
           <PersonRating scores={scores} windowWidth={windowWidth} />
           <PersonCommunication userSocialClassmates={userSocialClassmates} windowWidth={windowWidth} />

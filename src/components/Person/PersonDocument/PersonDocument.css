@@ -20,6 +20,8 @@
   color: var(--main-black-color);
 }
 .person-document__download-container {
+  display: flex;
+  flex-direction: column;
   margin: 12px 0px 0px 0px;
   padding: 20px 22px;
   border-radius: var(--border-radius);
@@ -160,7 +162,7 @@
   }
   .person-document__download-list {
     max-width: none;
-    max-height: 140px;
+    max-height: none;
   }
   .person-document__download-text {
     max-width: none;

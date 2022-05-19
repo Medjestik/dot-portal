@@ -5,7 +5,7 @@ import PersonDeclarationInfoPopup from './PersonDeclarationInfoPopup/PersonDecla
 import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 import declarationIcon from '../../../images/accordion/accordion-declaration.svg';
 
-function PersonDeclaration({ user, windowWidth, userDeclaration, declarationTemplate }) { 
+function PersonDeclaration({ windowWidth, userDeclaration, declarationTemplate }) { 
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [isConfirmRemovePopupOpen, setIsConfirmRemovePopupOpen] = React.useState(false);
@@ -13,6 +13,8 @@ function PersonDeclaration({ user, windowWidth, userDeclaration, declarationTemp
 
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const heightRef = React.createRef();
+
+  const [numberStep, setNumberStep] = React.useState(3);
 
   function openInfoPopup() {
     setIsOpenInfoPopup(true);
@@ -28,6 +30,21 @@ function PersonDeclaration({ user, windowWidth, userDeclaration, declarationTemp
     setIsConfirmRemovePopupOpen(false); 
   }
 
+  function showMoreDeclaration() {
+    setNumberStep(userDeclaration.length);
+  }
+
+  function renderDeclarationItem(item, i) {
+    return (
+      <li 
+      key={i} 
+      className={`person-document__download-item ${item.status === 'active' ? 'person-document__download-item_status_active' : ''}`}>
+        <button className={`btn_type_download ${item.status === 'active' ? 'btn_type_download_status_active' : ''}`} type='button'></button>
+        <p className='person-document__download-text'>{item.name}</p>
+      </li>
+    )
+  }
+
   React.useEffect(() => {
     setSectionHeight(heightRef.current.clientHeight);
   }, [heightRef, windowWidth]);
@@ -35,7 +52,7 @@ function PersonDeclaration({ user, windowWidth, userDeclaration, declarationTemp
   React.useEffect(() => {
     setIsOpenInfoPopup(false);
     setIsConfirmRemovePopupOpen(false);
-
+    setNumberStep(3);
     return(() => {
       setCurrentFile({});
     })
@@ -48,20 +65,32 @@ function PersonDeclaration({ user, windowWidth, userDeclaration, declarationTemp
         <div className='person-document__download'>
           <p className='person-document__download-title'>Ваши заявления</p>
           <div className='person-document__download-container'>
-            <ul className='scroll-inside person-document__download-list'>
+            {
+              windowWidth <= 833 
+              ?
+              <>
+              <ul className='person-document__download-list'>
               {
-                userDeclaration.map((item, i) => (
-                  <li 
-                  key={i} 
-                  className={`person-document__download-item ${item.status === 'active' ? 'person-document__download-item_status_active' : ''}`}>
-                    <button className={`btn_type_download ${item.status === 'active' ? 'btn_type_download_status_active' : ''}`} type='button'></button>
-                    <p className='person-document__download-text'>{item.name}</p>
-                  </li>
+                userDeclaration.slice(0, numberStep).map((item, i) => (
+                  renderDeclarationItem(item, i)
                 ))
               }
-            </ul>
-          </div>
-          
+              </ul>
+              {
+                (userDeclaration.length > numberStep) &&
+                <button className='btn-more btn-more_type_show btn-more_margin_top' onClick={showMoreDeclaration}>Показать больше</button>
+              }
+              </>
+              :
+              <ul className='scroll-inside person-document__download-list'>
+              {
+                userDeclaration.map((item, i) => (
+                  renderDeclarationItem(item, i)
+                ))
+              }
+              </ul>
+            }
+          </div>    
         </div>
         <div className='person-declaration__template'>
           <p className='person-declaration__template-title'>Шаблоны заявлений</p>

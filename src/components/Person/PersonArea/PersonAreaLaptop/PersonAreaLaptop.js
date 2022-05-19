@@ -11,7 +11,7 @@ function PersonAreaLaptop({ currentUser, studentData, openPhotoPopup }) {
         <div className='person-area-laptop__info'>
           <div className='person-area-laptop__info-person'>
             {
-              currentUser.avatar 
+              currentUser.avatar.link 
               ?
                 <div className='person-area__photo-container person-area-laptop__photo-container' onClick={openPhotoPopup}>
                   <img className='person-area__photo' src={currentUser.avatar.link} alt='' onClick={openPhotoPopup}></img>

@@ -5,7 +5,7 @@ import PersonEducationInfoPopup from './PersonEducationInfoPopup/PersonEducation
 import educationIcon from '../../../images/accordion/accordion-education.svg';
 import statusIcon from '../../../images/status-white.svg';
 
-function PersonEducation({ user, studentEducationInfo, windowWidth }) {
+function PersonEducation({ studentEducationInfo, windowWidth }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [sectionHeight, setSectionHeight] = React.useState(0);

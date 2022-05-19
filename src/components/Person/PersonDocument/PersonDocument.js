@@ -6,7 +6,7 @@ import PersonDocumentInfoPopup from './PersonDocumentInfoPopup/PersonDocumentInf
 import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 import documentIcon from '../../../images/accordion/accordion-document.svg';
 
-function PersonDocument({ user, windowWidth, userDocuments, userCheck }) { 
+function PersonDocument({ windowWidth, userDocuments, userCheck }) { 
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [sectionHeight, setSectionHeight] = React.useState(0);
@@ -14,6 +14,8 @@ function PersonDocument({ user, windowWidth, userDocuments, userCheck }) {
   const [currentFile, setCurrentFile] = React.useState({});
 
   const [sliderCheck, setSliderCheck] = React.useState([]);
+
+  const [numberStep, setNumberStep] = React.useState(3);
 
   const heightRef = React.createRef();
 
@@ -31,19 +33,9 @@ function PersonDocument({ user, windowWidth, userDocuments, userCheck }) {
     setIsConfirmRemovePopupOpen(false);
   }
 
-  React.useEffect(() => {
-    setSectionHeight(heightRef.current.clientHeight);
-  }, [heightRef, windowWidth]);
-
-
-  React.useEffect(() => {
-    setIsOpenInfoPopup(false);
-    setIsConfirmRemovePopupOpen(false);
-
-    return(() => {
-      setCurrentFile({});
-    })
-  },[]);
+  function showMoreDocuments() {
+    setNumberStep(userDocuments.length);
+  }
 
   function spliceIntoChunks(arr, chunkSize) {
     const res = [];
@@ -53,6 +45,30 @@ function PersonDocument({ user, windowWidth, userDocuments, userCheck }) {
     }
     return res;
   }
+
+  function renderDocumentsItem(item, i) {
+    return (
+      <li 
+        key={i} 
+        className={`person-document__download-item ${item.status === 'active' ? 'person-document__download-item_status_active' : ''}`}>
+          <button className={`btn_type_download ${item.status === 'active' ? 'btn_type_download_status_active' : ''}`} type='button'></button>
+          <p className='person-document__download-text'>{item.name}</p>
+      </li>
+    )
+  }
+
+  React.useEffect(() => {
+    setSectionHeight(heightRef.current.clientHeight);
+  }, [heightRef, windowWidth]);
+
+  React.useEffect(() => {
+    setIsOpenInfoPopup(false);
+    setIsConfirmRemovePopupOpen(false);
+    setNumberStep(3);
+    return(() => {
+      setCurrentFile({});
+    })
+  },[]);
 
   React.useEffect(() => {
     if (windowWidth <= 833) {
@@ -68,18 +84,31 @@ function PersonDocument({ user, windowWidth, userDocuments, userCheck }) {
         <div className='person-document__download'>
           <p className='person-document__download-title'>Документы об обучении</p>
           <div className='person-document__download-container'>
-            <ul className='scroll-inside person-document__download-list'>
+            {
+              windowWidth <= 833 
+              ?
+              <>
+              <ul className='person-document__download-list'>
+                {
+                  userDocuments.slice(0, numberStep).map((item, i) => (
+                    renderDocumentsItem(item, i)
+                  ))
+                }
+              </ul>
+              {
+                (userDocuments.length > numberStep) &&
+                <button className='btn-more btn-more_type_show btn-more_margin_top' onClick={showMoreDocuments}>Показать больше</button>
+              }
+              </>
+              :
+              <ul className='scroll-inside person-document__download-list'>
               {
                 userDocuments.map((item, i) => (
-                  <li 
-                  key={i} 
-                  className={`person-document__download-item ${item.status === 'active' ? 'person-document__download-item_status_active' : ''}`}>
-                    <button className={`btn_type_download ${item.status === 'active' ? 'btn_type_download_status_active' : ''}`} type='button'></button>
-                    <p className='person-document__download-text'>{item.name}</p>
-                  </li>
+                  renderDocumentsItem(item, i)
                 ))
               }
             </ul>
+            }
           </div>
           
         </div>

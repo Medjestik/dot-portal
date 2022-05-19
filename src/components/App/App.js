@@ -88,8 +88,10 @@ function App() {
     navigate('/');
   }
 
-  function handleChangeUserPhoto(link) {
-    setCurrentUser({ ...currentUser, avatar: link });
+  function handleChangeUserPhoto(avatar) {
+    console.log(avatar);
+    console.log({ ...currentUser, avatar: avatar })
+    setCurrentUser({ ...currentUser, avatar: avatar });
   }
 
   function handleChangeUserData(data) {

@@ -8,7 +8,7 @@ import disciplineIcon from '../../../images/form/discipline-color.svg';
 import teacherIcon from '../../../images/form/teacher-color.svg';
 import ratingIcon from '../../../images/accordion/accordion-rating.svg';
 
-function PersonRating({ scores, windowWidth }) {
+function PersonRating({ windowWidth, scores }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
 
@@ -23,6 +23,8 @@ function PersonRating({ scores, windowWidth }) {
   const [teacherFeedback, setTeacherFeedback] = React.useState('');
   const [teacherStarsRating, setTeacherStarsRating] = React.useState(0);
   const [isBlockTeacherFeedbackForm, setIsBlockTeacherFeedbackForm] = React.useState(true);
+
+  const [numberStep, setNumberStep] = React.useState(3);
 
   const discipline = [
     { value: '1', label: 'Русский язык', id: '1', },
@@ -54,6 +56,19 @@ function PersonRating({ scores, windowWidth }) {
 
   function closeInfoPopup() {
     setIsOpenInfoPopup(false);
+  }
+
+  function showMoreScores() {
+    setNumberStep(scores.length);
+  }
+
+  function renderScoresItem(item, i) {
+    return (
+      <li className='person-rating__score-item' key={i}>
+        <span className='person-rating__score-count'>{item.count}</span>
+        <p className='person-rating__score-text'>{item.text}</p>
+      </li>
+    )
   }
 
   function handleChangeDisciplineSelect(discipline) {
@@ -214,16 +229,31 @@ function PersonRating({ scores, windowWidth }) {
             <h6 className='person-rating__score-title'>Оценки</h6>
           }
           <div className='person-rating__score-container scroll-inside'>
+          {
+            windowWidth <= 833 
+            ?
+            <>
             <ul className='person-rating__score-list'>
               {
-                scores.map((item, i) => (
-                  <li className='person-rating__score-item' key={i}>
-                    <span className='person-rating__score-count'>{item.count}</span>
-                    <p className='person-rating__score-text'>{item.text}</p>
-                  </li>
+                scores.slice(0, numberStep).map((item, i) => (
+                  renderScoresItem(item, i)
                 ))
               }
             </ul>
+            {
+              (scores.length > numberStep) &&
+              <button className='btn-more btn-more_type_show btn-more_margin_top' onClick={showMoreScores}>Показать больше</button>
+            }
+            </>
+            :
+            <ul className='person-rating__score-list'>
+              {
+                scores.map((item, i) => (
+                  renderScoresItem(item, i)
+                ))
+              }
+            </ul>
+          }
           </div>
         </div>
       </div>    

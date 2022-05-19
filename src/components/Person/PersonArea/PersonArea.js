@@ -14,7 +14,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
       <div className='person-area__container'>
         <div className='person-area__data'>
           {
-            currentUser.avatar 
+            currentUser.avatar.link
             ?
               <div className='person-area__photo-container' onClick={openPhotoPopup}>
                 <img className='person-area__photo' src={currentUser.avatar.link} alt='' onClick={openPhotoPopup}></img>
