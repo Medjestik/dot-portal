@@ -1,11 +1,11 @@
 import { API_URL } from './config.js';
 
 function handleResponse (res) {
-    if (res.ok) {
-      return res.json()
-    } else {
-      return Promise.reject(res)
-    }
+  if (res.ok) {
+    return res.json()
+  } else {
+    return Promise.reject(res)
+  }
 }
 
 export const login = ({ login, password }) => {
@@ -22,6 +22,18 @@ export const login = ({ login, password }) => {
 
 export const getUser = ({ token }) => {
   return fetch(`${API_URL}/auth/action/user`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getSemesterInfo = ({ token, userId }) => {
+  return fetch(`${API_URL}/education/action/semesters/student_id/${userId }`, { 
     method: 'GET',
     headers: {
       'Accept': 'application/json',

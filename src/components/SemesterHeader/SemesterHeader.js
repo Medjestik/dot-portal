@@ -2,15 +2,8 @@ import React from 'react';
 import './SemesterHeader.css';
 import { notificationIcon, homeIcon, errorIcon, exitIcon } from './SemesterHeaderIcons/SemesterHeaderIcons.js'
 
-function SemesterHeader({ isDisciplineOpen, backToSemester }) {
+function SemesterHeader({ semesterInfo, currentSemester, chooseSemester, isDisciplineOpen, backToSemester }) {
 
-  const chapters = [
-    { title: 'Семестр 1', id: 1, link: '/info' },
-    { title: 'Семестр 2', id: 2, link: '/materials' },
-    { title: 'Семестр 3', id: 3, link: '/tasks' },
-  ]
-
-  const [currentSemester, setCurrentSemester] = React.useState(chapters[0]);
   const [isOpenSelectOptions, setIsOpenSelectOptions] = React.useState(false);
 
   function openSelectOptions() {
@@ -23,13 +16,15 @@ function SemesterHeader({ isDisciplineOpen, backToSemester }) {
   }
 
   function chooseOption(option) {
-    setCurrentSemester(option);
+    chooseSemester(option);
     setIsOpenSelectOptions(false);
     //navigate('/education/semester/discipline/' + disciplineId + option.link);
   }
 
   React.useEffect(() => {
+    chooseSemester(semesterInfo[semesterInfo.length - 1]);
     setIsOpenSelectOptions(false);
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -44,15 +39,15 @@ function SemesterHeader({ isDisciplineOpen, backToSemester }) {
         :
         <div className={`semester-header__select ${isOpenSelectOptions ? 'semester-header__select_status_open' : ''}`}>
           <div className='semester-header__select-main' onClick={openSelectOptions}>
-            <p className='semester-header__select-text'>{currentSemester.title}</p>
+            <p className='semester-header__select-text'>Семестер {currentSemester.position}</p>
             <div className={`semester-header__select-arrow ${isOpenSelectOptions ? 'semester-header__select-arrow_status_open' : ''}`}></div>
           </div>
           <div className={`semester-header__select-options-container ${isOpenSelectOptions ? 'semester-header__select-options-container_status_open' : ''}`}>
             <ul className='semester-header__select-options-list'>
               {
-                chapters.filter(item => item.id !== currentSemester.id).map((item, i) => (
+                semesterInfo.filter(item => item.semesterId !== currentSemester.semesterId).map((item, i) => (
                   <li className='semester-header__select-options-item' key={i} onClick={() => chooseOption(item)}>
-                    <p className='semester-header__select-options-text'>{item.title}</p>
+                    <p className='semester-header__select-options-text'>Семестер {item.position}</p>
                   </li>
                 ))
               }

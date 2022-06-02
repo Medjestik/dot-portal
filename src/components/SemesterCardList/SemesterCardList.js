@@ -18,7 +18,7 @@ function SemesterCardList({ disciplines, openDiscipline }) {
           }
         </ul>
         :
-        <div className='semester-card__text'>Дисциплины отсутствуют</div>
+        <div className='semester-card__text semester-card__text_color_grey'>Дисциплины отсутствуют</div>
       }
       
     </div>

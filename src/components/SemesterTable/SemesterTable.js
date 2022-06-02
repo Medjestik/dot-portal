@@ -60,29 +60,29 @@ function SemesterTable({ disciplines, openDiscipline }) {
                   <p className='semester-table__text'>{i + 1}</p>
                 </div>
                 <div className='semester-table__column semester-table__column-time'>
-                  <p className='semester-table__text'>{item.disciplineStart} - {item.disciplineEnd}</p>
+                  <p className='semester-table__text'>{item.startDate} - {item.endDate}</p>
                 </div>
                 <div className='semester-table__column semester-table__column-discipline'>
                   <p 
                   className='semester-table__text semester-table__text_weight_bold semester-table__text_type_active' 
                   onClick={() => openDiscipline(item)}>
-                    {item.disciplineName}
+                    {item.name}
                   </p>
                 </div>
                 <div className='semester-table__column semester-table__column-teacher'>
-                  <p className='semester-table__text'>{item.disciplineTeacher}</p>
+                  <p className='semester-table__text'>{item.tutor}</p>
                 </div>
                 <div className='semester-table__column semester-table__column-type'>
-                  <p className='semester-table__text'>{item.disciplineType}</p>
+                  <p className='semester-table__text'>{item.control}</p>
                 </div>
                 <div className='semester-table__column semester-table__column-score'>
-                  <p className='semester-table__text'>{item.score || 'н/а'}</p>
-                  <p className='semester-table__text semester-table__text_color_grey'>{item.scoreDate}</p>
+                  <p className='semester-table__text'>{item.mark || 'н/а'}</p>
+                  <p className='semester-table__text semester-table__text_color_grey'>{item.markDate || 'н/а'}</p>
                 </div>
                 <div className='semester-table__column semester-table__column-comment'>
                   <p className='semester-table__text semester-table__text_type_cut semester-table__text_type_active' 
-                  onClick={() => openCommentPopup(item.comment)}>
-                    {item.comment}
+                  onClick={() => openCommentPopup(item.lastComment || '')}>
+                    {item.lastComment || ''}
                   </p>
                 </div>
               </li>

@@ -14,6 +14,7 @@ import Library from '../Library/Library.js';
 function App() { 
 
   const [currentUser, setCurrentUser] = React.useState({});
+  const [semesterInfo, setSemesterInfo] = React.useState({});
   
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [requestError, setRequestError] = React.useState(false);
@@ -51,10 +52,8 @@ function App() {
             console.log('UserInfo', res);
             setLoggedIn(true);
             setCurrentUser(res);
-            if (pathname === '/') {
-              navigate('/person');
-            } else {
-              navigate(pathname);
+            if (res.access_role) {
+              semesterInfoRequest(res.id)
             }
           } else {
             localStorage.removeItem('token');
@@ -66,15 +65,32 @@ function App() {
         .catch((err) => {
             console.error(err);
         })
-        .finally(() => {
-          setIsLoadingPage(false);
-        });
     } else {
       setIsLoadingPage(false);
       navigate('/');
       setLoggedIn(false);
       setCurrentUser({});
     }
+  }
+
+  function semesterInfoRequest(userId) {
+    const token = localStorage.getItem('token');
+    api.getSemesterInfo({ token: token, userId: userId })
+    .then((res) => {
+      console.log('SemesterInfo', res);
+      setSemesterInfo(res);
+      if (pathname === '/') {
+        navigate('/person');
+      } else {
+        navigate(pathname);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      setIsLoadingPage(false);
+    });
   }
 
   function handleHideRequestError() {
@@ -89,8 +105,6 @@ function App() {
   }
 
   function handleChangeUserPhoto(avatar) {
-    console.log(avatar);
-    console.log({ ...currentUser, avatar: avatar })
     setCurrentUser({ ...currentUser, avatar: avatar });
   }
 
@@ -100,6 +114,11 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
+
+    return(() => {
+      setCurrentUser({});
+      setSemesterInfo({});
+    })
     // eslint-disable-next-line
   }, []);
 
@@ -158,23 +177,24 @@ function App() {
                           windowWidth={windowWidth} 
                           onChangeUserPhoto={handleChangeUserPhoto}
                           onChangeUserData={handleChangeUserData}
+                          semesterInfo={semesterInfo}
                           />
                         }/>
 
                         <Route path='education/*' element={
-                          <Education windowWidth={windowWidth}  />
+                          <Education windowWidth={windowWidth} semesterInfo={semesterInfo} />
                         }/>
 
                         <Route path='webinars' element={
-                          <Webinar />
+                          <Webinar semesterInfo={semesterInfo} />
                         }/>
 
                         <Route path='document/*' element={
-                        <Document />
+                        <Document semesterInfo={semesterInfo} />
                         }/>
 
                         <Route path='library/*' element={
-                        <Library />
+                        <Library semesterInfo={semesterInfo} />
                         }/>
 
                       </Routes>

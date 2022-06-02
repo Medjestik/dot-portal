@@ -21,7 +21,10 @@ function Library() {
 
   return (
     <div className='library'>
-      <SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
+      {
+        //<SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
+      }
+      
       
       <div className='library__container'>
         <SectionTabs type='small' tabs={tabs} > 

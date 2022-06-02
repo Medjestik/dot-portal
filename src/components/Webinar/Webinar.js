@@ -29,7 +29,9 @@ function Webinar() {
   return (
 
     <div className='webinar'>
-      <SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
+      {
+        //<SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
+      }
 
       <Section title='Вебинары' heightType='page' headerType='small'>
         <div className='section__header'>

@@ -21,9 +21,11 @@ function Document() {
 
   return (
 
-    <div className='document'> 
-      <SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
-
+    <div className='document'>
+      {
+        //<SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
+      }
+      
       <div className='document__container'>
         <SectionTabs type='small' tabs={tabs} > 
 
