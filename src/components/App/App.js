@@ -143,7 +143,8 @@ function App() {
             }/>
 
             <Route path='/*' element={
-              loggedIn === true ? 
+              loggedIn === true 
+              ? 
               <div className='wrapper'>
                 <div className='container'>
 
@@ -161,7 +162,7 @@ function App() {
                         }/>
 
                         <Route path='education/*' element={
-                          <Education />
+                          <Education windowWidth={windowWidth}  />
                         }/>
 
                         <Route path='webinars' element={
@@ -172,7 +173,7 @@ function App() {
                         <Document />
                         }/>
 
-                        <Route path='library' element={
+                        <Route path='library/*' element={
                         <Library />
                         }/>
 
@@ -180,7 +181,7 @@ function App() {
                     </div>    
                   </div>
                 </div>
-              : 
+              :
               <Navigate to='/homepage' />
             }/>
           </Routes> 

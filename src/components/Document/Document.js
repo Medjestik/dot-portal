@@ -4,11 +4,9 @@ import SectionTabs from '../Section/SectionTabs/SectionTabs.js';
 import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import DocumentList from './DocumentList/DocumentList.js';
 import MaterialList from './MaterialList/MaterialList.js';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 function Document() {
-
-  const navigate = useNavigate();
 
   const tabs = [
     {
@@ -21,14 +19,10 @@ function Document() {
     },
   ]
 
-
-  function backToSemester() {
-  }
-
   return (
 
     <div className='document'> 
-      <SemesterHeader isDisciplineOpen={false} backToSemester={backToSemester} />
+      <SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
 
       <div className='document__container'>
         <SectionTabs type='small' tabs={tabs} > 

@@ -17,18 +17,27 @@ function SemesterHeader({ isDisciplineOpen, backToSemester }) {
     setIsOpenSelectOptions(!isOpenSelectOptions);
   }
 
+  function handleBackBtn() {
+    setIsOpenSelectOptions(false);
+    backToSemester();
+  }
+
   function chooseOption(option) {
     setCurrentSemester(option);
     setIsOpenSelectOptions(false);
     //navigate('/education/semester/discipline/' + disciplineId + option.link);
   }
 
+  React.useEffect(() => {
+    setIsOpenSelectOptions(false);
+  }, []);
+
   return (
     <div className='semester-header'>
       {
         isDisciplineOpen 
         ?
-        <button className='semester-header__btn-back' type='button' onClick={backToSemester}> 
+        <button className='semester-header__btn-back' type='button' onClick={handleBackBtn}> 
           <p className='semester-header__btn-back-text'>Назад</p>
           <div className='semester-header__btn-back-arrow'></div>
         </button>

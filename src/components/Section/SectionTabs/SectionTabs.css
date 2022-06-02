@@ -11,7 +11,7 @@
 }
 .section__tabs-item {
   margin: 0px 20px 0px 0px;
-  width: min-content;
+  width: max-content;
   min-width: 164px;
   height: 120px;
   padding: 10px 20px;
@@ -27,11 +27,11 @@
   background: var(--main-white-color);
 }
 .section__tabs-item_type_small {
-  width: min-content;
+  width: max-content;
   min-width: 164px;
 }
 .section__tabs-item_type_medium {
-  width: min-content;
+  width: max-content;
   min-width: 256px;
 }
 .section__tabs-item_type_large {
@@ -45,10 +45,6 @@
   font-size: 16px;
   line-height: 20px;
   color: var(--main-white-color);
-  -webkit-line-clamp: 1;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 .section__tabs-item_type_active .section__tabs-title {
   color: var(--main-black-color);

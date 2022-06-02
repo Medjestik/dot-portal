@@ -1,9 +1,28 @@
 import React from 'react';
 import './SemesterTable.css';
+import SemesterCommentPopup from '../Popup/SemesterCommentPopup/SemesterCommentPopup.js';
 
 function SemesterTable({ disciplines, openDiscipline }) {
 
+  const [isOpenCommentPopup, setIsOpenCommentPopup] = React.useState(false);
+  const [currentComment, setCurrentComment] = React.useState('');
+
+  function openCommentPopup(comment) {
+    setCurrentComment(comment);
+    setIsOpenCommentPopup(true);
+  }
+
+  function closeCommentPopup() {
+    setIsOpenCommentPopup(false);
+  }
+
+  React.useEffect(() => {
+    setCurrentComment('');
+    setIsOpenCommentPopup(false);
+  }, []);
+
   return (
+    <>
     <div className='semester-table'>
 
       <div className='semester-table__line semester-table__header'>
@@ -17,7 +36,7 @@ function SemesterTable({ disciplines, openDiscipline }) {
           <p className='semester-table__text semester-table__text_weight_bold'>Дисциплина</p>
         </div>
         <div className='semester-table__column semester-table__column-teacher'>
-          <p className='semester-table__text semester-table__text_weight_bold'>ФИО преподавателя</p>
+          <p className='semester-table__text semester-table__text_weight_bold'>Преподаватель</p>
         </div>
         <div className='semester-table__column semester-table__column-type'>
           <p className='semester-table__text semester-table__text_weight_bold'>Контроль</p>
@@ -61,7 +80,10 @@ function SemesterTable({ disciplines, openDiscipline }) {
                   <p className='semester-table__text semester-table__text_color_grey'>{item.scoreDate}</p>
                 </div>
                 <div className='semester-table__column semester-table__column-comment'>
-                  <p className='semester-table__text'>{item.comment}</p>
+                  <p className='semester-table__text semester-table__text_type_cut semester-table__text_type_active' 
+                  onClick={() => openCommentPopup(item.comment)}>
+                    {item.comment}
+                  </p>
                 </div>
               </li>
             ))
@@ -70,8 +92,16 @@ function SemesterTable({ disciplines, openDiscipline }) {
         :
         <div className='semester-table__text semester-table__text_color_grey'>Дисциплины отсутствуют</div>
       }
-      
     </div>
+    {
+      isOpenCommentPopup &&
+      <SemesterCommentPopup
+      isOpen={isOpenCommentPopup}
+      onClose={closeCommentPopup}
+      comment={currentComment}
+      />
+    }
+    </>
   );
 }
 

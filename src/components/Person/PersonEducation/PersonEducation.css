@@ -134,7 +134,7 @@
     flex-direction: row;
   }
   .person-education__status-icon {
-    margin: 0px 8px 0px 0px;
+    display: none;
   }
   .person-education__status-count {
     margin: 0px 8px 0px 0px;
@@ -152,9 +152,6 @@
 @media all and (max-width: 833px) {
   .person-education__status {
     height: 48px;
-  }
-  .person-education__status-icon {
-    display: none;
   }
   .person-education__status-count {
     font-size: 20px;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from '../Popup.js';
 
-function CommentOfTeacherPopup({ isOpen, onClose, comment }) {
+function SemesterCommentPopup({ isOpen, onClose, comment }) {
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -11,9 +11,9 @@ function CommentOfTeacherPopup({ isOpen, onClose, comment }) {
   return (
     <Popup isOpen={isOpen} onClose={onClose} >
       <form className='popup__form popup__form_type_medium' name='person-area-teacher-comment-popup' action='#' noValidate onSubmit={handleSubmit}>
-        <h2 className='popup__title'>Новый комментарий от преподавателя по дисциплине</h2>
+        <h2 className='popup__title'>Комментарий преподавателя по&nbsp;дисциплине</h2>
         <div className='popup__text-container scroll'>
-          <p className='popup__text'>{comment.text} 
+          <p className='popup__text'>{comment}
           </p>
         </div>
         <button className='popup__btn-back' type='submit'>Назад</button>
@@ -22,4 +22,4 @@ function CommentOfTeacherPopup({ isOpen, onClose, comment }) {
   )
 }
 
-export default CommentOfTeacherPopup;
+export default SemesterCommentPopup;

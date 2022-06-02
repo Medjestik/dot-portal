@@ -1,5 +1,6 @@
 .person-data__container {
   display: flex;
+  justify-content: space-between;
 }
 .person-data__column {
   margin: 0px 30px 0px 0px;

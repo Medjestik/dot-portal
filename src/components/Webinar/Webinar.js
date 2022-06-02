@@ -22,9 +22,6 @@ function Webinar() {
 
   const [filteredWebinars, setFilteredWebinars] = React.useState(webinars);
 
-  function backToSemester() {
-  }
-
   function handleSearch(data) {
     setFilteredWebinars(data);
   }
@@ -32,7 +29,7 @@ function Webinar() {
   return (
 
     <div className='webinar'>
-      <SemesterHeader isDisciplineOpen={false} backToSemester={backToSemester} />
+      <SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
 
       <Section title='Вебинары' heightType='page' headerType='small'>
         <div className='section__header'>

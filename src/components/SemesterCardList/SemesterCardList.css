@@ -1,0 +1,9 @@
+.semester-card {
+  margin: 0px;
+  width: 100%;
+}
+.semester-card__list {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}

@@ -1,0 +1,72 @@
+.semester-card__item {
+  padding: 0px 0px 28px 0px;
+  margin: 0px 0px 28px 0px;
+  border-bottom: 1px solid var(--slider-color);
+  box-sizing: border-box;
+}
+.semester-card__item:last-of-type {
+  padding: 0px;
+  border-bottom: none;
+}
+.semester-card__text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--main-black-color);
+  min-width: 80px;
+}
+.semester-card__text_weight_bold {
+  font-weight: 500;
+}
+.semester-card__text_color_grey {
+  color: var(--accent-grey-color);
+}
+.semester-table__text_type_active:hover {
+  cursor: pointer;
+  color: var(--accent-blue-color);
+}
+.semester-card__text_type_discipline {
+  margin: 28px 0px 0px 0px;
+}
+.semester-card__text_type_teacher {
+  margin: 12px 0px 0px 0px;
+}
+.semester-card__text_type_comment {
+  margin: 28px 0px 0px 0px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--accent-blue-color);
+  width: fit-content;
+  position: relative;
+}
+.semester-card__text_type_comment::after {
+  content: '';
+  position: absolute;
+  right: -16px;
+  top: 2px;
+  background-image: url('../../images/arrow-blue.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 12px;
+  height: 12px;
+  transition: all .3s ease-in-out;
+}
+.semester-card__text_type_comment_type_show::after {
+  transform: rotate(180deg);
+}
+.semester-card__info {
+  margin: 28px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.semester-card__comment {
+  display: none;
+  margin: 8px 0px 0px 0px;
+}
+.semester-card__comment_type_show {
+  display: block;
+}

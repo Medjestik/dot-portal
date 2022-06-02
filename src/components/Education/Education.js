@@ -4,11 +4,12 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import Section from '../Section/Section.js';
 import SemesterTable from '../SemesterTable/SemesterTable.js';
+import SemesterCardList from '../SemesterCardList/SemesterCardList.js';
 import Discipline from '../Discipline/Discipline.js';
 import Calendar from '../Calendar/Calendar.js';
 import Notifications from '../Notifications/Notifications.js';
 
-function Education() {
+function Education({ windowWidth }) {
 
   const disciplines = [
     {
@@ -52,7 +53,7 @@ function Education() {
       disciplineType: 'Экз',
       score: '',
       scoreDate: '',
-      comment: 'Текст комментария',
+      comment: '',
       id: 4,
     },
     {
@@ -138,7 +139,13 @@ function Education() {
           }
 
           <Section title='1 семестр' heightType='content' headerType='small' >
+          {
+          windowWidth <= 833 
+          ?
+            <SemesterCardList disciplines={disciplines} openDiscipline={openDiscipline} />
+          :
             <SemesterTable disciplines={disciplines} openDiscipline={openDiscipline} />
+          }
           </Section>
           </>
         }

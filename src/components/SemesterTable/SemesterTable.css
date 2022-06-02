@@ -61,10 +61,6 @@
   font-size: 14px;
   line-height: 18px; 
   color: var(--main-black-color);
-  -webkit-line-clamp: 2;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   transition: all .3s ease-in-out;
 }
 .semester-table__text_weight_bold {
@@ -76,4 +72,23 @@
 .semester-table__text_type_active:hover {
   color: var(--accent-blue-color);
   cursor: pointer;
+}
+.semester-table__text_type_cut {
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media all and (max-width: 1279px) {
+  .semester-table__column {
+    margin: 0px 10px 0px 0px;
+  }
+  .semester-table__column-comment {
+    width: 124px;
+  }
+}
+
+@media all and (max-width: 833px) {
+
 }

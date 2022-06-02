@@ -5,7 +5,7 @@ function Month() {
 
   return (
     <div className='month'>
-      <p className='month__text'>Февраль 2022</p>
+      <p className='month__text'></p>
       <div className='month__arrow-container'>
         <div className='month__arrow-prev'></div>
       </div>
