@@ -40,7 +40,7 @@ function DisciplineTasks({ windowWidth, currentDiscipline, documents }) {
 
       <p className='discipline-tasks__caption'>Загрузите выполненную работу:</p>
 
-      <div className='discipline-tasks'>
+      <div className='discipline-tasks__form'>
         <form className='upload-form' ref={formRef} name='person-diploma-upload-file' id='person-diploma-upload-file'>
           <label htmlFor='person-diploma-upload' className='upload-form__field'>
             <p className='upload-form__text'>{fileName.isShow ? fileName.name : ''}</p>

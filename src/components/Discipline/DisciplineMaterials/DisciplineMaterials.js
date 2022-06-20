@@ -58,7 +58,7 @@ function DisciplineMaterials({ disciplineId }) {
     var mapForm = document.createElement("form");
     mapForm.target = "Map";
     mapForm.method = "POST"; // or "post" if appropriate
-    mapForm.action = 'https://edu.emiit.ru/view_doc.html?mode=part_start?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + elem.code;
+    mapForm.action = 'https://edu.emiit.ru/view_doc.html?mode=part_start&course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + elem.code;
 
     var mapInput = document.createElement("input");
     mapInput.type = "text";

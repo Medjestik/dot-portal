@@ -1,6 +1,9 @@
 .discipline-tasks {
   margin: 0px 0px 12px 0px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
 }
 .discipline-tasks__caption {
   margin: 24px 0px 0px 0px;
@@ -12,6 +15,7 @@
   align-items: center;
   color: var(--main-black-color);
 }
-.table__main_type_tasks {
-  max-height: calc(100vh - 358px - 90px);
+.discipline-tasks__form {
+  margin: 0px 0px 20px 0px;
+  width: 100%;
 }
