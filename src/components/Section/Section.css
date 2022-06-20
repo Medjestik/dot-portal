@@ -1,6 +1,9 @@
 .section__student {
   margin: 20px 0px 0px 0px;
   width: 100%;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
 }
 .section__student-list {
   margin: 0px;
@@ -55,7 +58,7 @@
   min-height: max-content;
 }
 .section__student-container_type_page {
-  min-height: calc(100vh - 40px - 20px - 20px - 44px);
+  flex-grow: 2;
 }
 .section__header {
   margin: 0px 0px 24px 0px;

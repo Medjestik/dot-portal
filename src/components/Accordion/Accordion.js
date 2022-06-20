@@ -16,7 +16,7 @@ function Accordion({ icon, name, height, openInfoPopup, children }) {
 
   return (
     <section
-      style={Object.assign({}, isOpenAccordion && childrenHeight)} 
+      style={Object.assign({}, isOpenAccordion && childrenHeight)}
       className={`accordion ${isOpenAccordion ? 'accordion_state_open' : ''}`}
     >
       <div className='accordion__main'>

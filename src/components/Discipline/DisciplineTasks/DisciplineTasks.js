@@ -2,13 +2,26 @@ import React from 'react';
 import './DisciplineTasks.css';
 import Table from '../../Table/Table.js';
 
-function DisciplineTasks({ currentDiscipline, documents }) {
+function DisciplineTasks({ windowWidth, currentDiscipline, documents }) {
 
   const [fileName, setFileName] = React.useState({ isShow: false, name: '', });
   const [isShowWrongType, setIsShowWrongType] = React.useState(false);
   const [contentFile, setContentFile] = React.useState({ file: null, }); 
 
   const formRef = React.createRef();
+
+  const containerHeightRef = React.createRef();
+  const headerHeightRef = React.createRef();
+
+  const [tableHeight, setTableHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    setTableHeight(containerHeightRef.current.clientHeight - headerHeightRef.current.clientHeight);
+  }, [windowWidth, containerHeightRef, headerHeightRef]);
+
+  const tableStyle = {
+    height: tableHeight, // + mainHeight + marginTop
+  };
 
   function handleChangeDiploma(e) {
     setIsShowWrongType(false);
@@ -40,7 +53,8 @@ function DisciplineTasks({ currentDiscipline, documents }) {
       </div>
 
      <Table>
-        <div className='table__header'>
+      <div ref={containerHeightRef} className='table__container'>
+        <div ref={headerHeightRef} className='table__header'>
           <div className='table__main-column'>
             <div className='table__column table__column_type_header table__column_type_count'>
               <p className='table__text table__text_type_header'>№</p>
@@ -56,7 +70,7 @@ function DisciplineTasks({ currentDiscipline, documents }) {
             <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
           </div>
         </div>
-        <ul className='table__main table__main_type_tasks scroll'>
+        <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_tasks scroll'>
           {
             documents.map((item, i) => (
               <li className='table__row' key={i}>
@@ -78,6 +92,7 @@ function DisciplineTasks({ currentDiscipline, documents }) {
             ))
           }
         </ul>
+      </div>
       </Table>
     </div>
   );

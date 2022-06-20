@@ -1,17 +1,26 @@
 import React from 'react';
 import './Discipline.css';
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
+import { Route, Routes, useNavigate, useParams, useLocation } from 'react-router-dom';
 import DisciplineInfo from './DisciplineInfo/DisciplineInfo.js';
 import DisciplineMaterials from './DisciplineMaterials/DisciplineMaterials.js';
 import DisciplineTasks from './DisciplineTasks/DisciplineTasks.js';
 import Month from '../Month/Month.js';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
+import * as educationApi from '../../utils/educationApi.js';
+import Preloader from '../Preloader/Preloader.js';
 
-function Discipline({ currentSemester, currentDiscipline }) {
+function Discipline({ windowWidth, currentSemester, currentDiscipline, getDisciplineName }) {
 
   const navigate = useNavigate();
   const { disciplineId } = useParams();
+  const location = useLocation();
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   const [isShowMonth, setIsShowMonth] = React.useState(true);
+  const [isLoadingDiscipline, setIsLoadingDiscipline] = React.useState(true);
+
+  const [disciplineInfo, setDisciplineInfo] = React.useState({});
 
   const chapters = [
     { title: 'Информация о дисциплине', id: 1, link: '/info' },
@@ -43,18 +52,7 @@ function Discipline({ currentSemester, currentDiscipline }) {
     { title: 'ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы ГОСТ 1759. 5 – 87. Гайки. Механические свойства и методы', id: 1, date: '09.03.22 12:20' },
   ];
 
-  const folders = [
-    { name: 'Теоретический материал', type: 'theory', materials: [{ name: 'Глава 1. Теоретический материал', type: 'theory', status: 'empty' }] },
-    { name: 'Практические задания', type: 'practice', 
-    materials: [
-    { name: 'Практическое задание № 1', type: 'practice', status: 'empty' },
-    { name: 'Практическое задание № 2 с очень-очень-очень-очень-очень-очень-очень-очень-очень длинным названием', type: 'practice', status: 'progress' }, 
-    { name: 'Практическое задание № 3 с очень-очень-очень-очень-очень-очень-очень-очень-очень длинным названием длинным названием длинным названием', type: 'practice', status: 'success' }, 
-    ] 
-    },
-  ]
-
-  const [currentChapter, setCurrentChapter] = React.useState(chapters[0]);
+  const [currentChapter, setCurrentChapter] = React.useState({});
   const [isOpenSelectOptions, setIsOpenSelectOptions] = React.useState(false);
 
   function openSelectOptions() {
@@ -62,18 +60,51 @@ function Discipline({ currentSemester, currentDiscipline }) {
   }
 
   function chooseOption(option) {
-    if (option.link === '/info') {
+    /*if (option.link === '/info') {
       setIsShowMonth(true);
     } else {
       setIsShowMonth(false);
-    }
+    }*/
     setCurrentChapter(option);
     setIsOpenSelectOptions(false);
     navigate('/education/semester/' + currentSemester.semesterId + '/discipline/' + disciplineId + option.link);
   }
 
+  function disciplineRequest(disciplineId) {
+    setIsLoadingDiscipline(true);
+    const token = localStorage.getItem('token');
+    educationApi.getDisciplineMaterial({ token: token, disciplineId: disciplineId, currentUserId: currentUser.id })
+    .then((res) => {
+      console.log('DisciplineInfo', res);
+      setDisciplineInfo(res);
+      getDisciplineName(res.object_id);
+      chapters.forEach((chap) => {
+        if (location.pathname.includes(chap.link)) {
+          setCurrentChapter(chap);
+        }
+      })
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {  
+      setIsLoadingDiscipline(false);
+    });
+  }
+
+  React.useEffect(() => {
+    disciplineRequest(disciplineId);
+    // eslint-disable-next-line
+  }, [disciplineId]);
+
   return (
     <div className='discipline'>
+      {
+      isLoadingDiscipline 
+      ?
+      <Preloader />
+      :
+      <>
       <div className='discipline__header'>
         <p className='discipline__header-caption'>Выберите раздел дисциплины:</p>
         <div className='discipline__header-container'>
@@ -95,19 +126,19 @@ function Discipline({ currentSemester, currentDiscipline }) {
             </div>
           </div>
 
-          {
+          { /*
             isShowMonth &&
             <Month />
+            */
           }
           
-
         </div>
       </div>
 
       <Routes>
         <Route exact path={`info`}
         element={
-          <DisciplineInfo currentDiscipline={currentDiscipline} documents={documents} /> 
+          <DisciplineInfo windowWidth={windowWidth} currentDiscipline={currentDiscipline} documents={documents} /> 
         }
         />
       </Routes>
@@ -123,12 +154,12 @@ function Discipline({ currentSemester, currentDiscipline }) {
       <Routes>
         <Route exact path={`tasks`}
         element={
-          <DisciplineTasks currentDiscipline={currentDiscipline} documents={documents} />
+          <DisciplineTasks windowWidth={windowWidth} currentDiscipline={currentDiscipline} documents={documents} />
         }
         />
       </Routes>
-
-
+    </>
+    }
     </div>
   );
 }

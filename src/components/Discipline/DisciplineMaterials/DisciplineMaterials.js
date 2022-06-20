@@ -10,10 +10,6 @@ function DisciplineMaterials({ disciplineId }) {
   const [isLoadingMaterials, setIsLoadingMaterials] = React.useState(true);
   const [materials, setMaterials] = React.useState([]);
 
-  let materialWindow;
-
-  console.log('123')
-
   function disciplineMaterialRequest(disciplineId) {
     setIsLoadingMaterials(true);
     const token = localStorage.getItem('token');
@@ -31,11 +27,8 @@ function DisciplineMaterials({ disciplineId }) {
   }
 
   function handleOpenMaterial(item) {
-    const materialLink = 'https://api.emiit.ru/course_launch2.html?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
+    const materialLink = 'https://edu.emiit.ru/course_launch2.html?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
     viewFile(materialLink)
-    //, 'win' + materials.object_id + '','toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1280,height=1024'
-    //if (materialWindow != null )
-    //materialWindow.moveTo( 0, 0 );
   }
 
   const viewFile = async (url) => {
@@ -50,7 +43,7 @@ function DisciplineMaterials({ disciplineId }) {
     // FETCH BLOB FROM IT        
     .then((response) => response.blob())      
     .then((blob) => { // RETRIEVE THE BLOB AND CREATE LOCAL URL   
-      console.log(blob);       
+      console.log(blob);
       var _url = window.URL.createObjectURL(blob);
       console.log(_url);
       const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1280,height=1024'     
@@ -60,6 +53,41 @@ function DisciplineMaterials({ disciplineId }) {
       console.log(err);      
     });
   };
+
+  function handleClick(elem) {
+    var mapForm = document.createElement("form");
+    mapForm.target = "Map";
+    mapForm.method = "POST"; // or "post" if appropriate
+    mapForm.action = 'https://edu.emiit.ru/view_doc.html?mode=part_start?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + elem.code;
+
+    var mapInput = document.createElement("input");
+    mapInput.type = "text";
+    mapInput.name = "user_login";
+    mapInput.value = 'dot22001';
+    mapForm.appendChild(mapInput);
+
+    var mapInput2 = document.createElement("input");
+    mapInput2.type = "text";
+    mapInput2.name = "user_password";
+    mapInput2.value = '211211';
+    mapForm.appendChild(mapInput2);
+
+    var mapInput3 = document.createElement("input");
+    mapInput3.type = "text";
+    mapInput3.name = "set_auth";
+    mapInput3.value = '1';
+    mapForm.appendChild(mapInput3);
+
+    document.body.appendChild(mapForm);
+
+    let map = window.open("", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
+
+    if (map) {
+        mapForm.submit();
+    } else {
+        alert('You must allow popups for this map to work.');
+    }
+  }
 
   React.useEffect(() => {
     disciplineMaterialRequest(disciplineId);
@@ -77,8 +105,9 @@ function DisciplineMaterials({ disciplineId }) {
         <ul>
           {
             materials.parts.part.map((elem, i) => (
-              <li onClick={(() => handleOpenMaterial(elem))} key={i}>
-                <p>{elem.name} {elem.state_id}</p>
+              <li key={i}>
+                  <p onClick={(() => handleOpenMaterial(elem))}>{elem.name} {elem.state_id}</p>
+                  <button type="button" onClick={() => handleClick(elem)}>CLICK</button>
               </li>
             ))
           }

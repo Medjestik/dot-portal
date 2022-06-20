@@ -1,6 +1,12 @@
 .table {
   margin: 0px;
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.table__container {
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -44,6 +50,7 @@
   margin: 0px;
   padding: 0px 8px 0px 0px;
   list-style-type: none;
+  flex-grow: 0;
   overflow-y: scroll;
 }
 .table__column_type_btn-header {

@@ -19,8 +19,8 @@ function Education({ windowWidth, semesterInfo }) {
 
   const currentUser = React.useContext(CurrentUserContext);
   
-  const [disciplines, setDisciplines] = React.useState({});
-  const [currentDiscipline, setCurrentDiscipline] = React.useState({ title: '', });
+  const [disciplines, setDisciplines] = React.useState([]);
+  const [currentDiscipline, setCurrentDiscipline] = React.useState({ name: '', });
   const [isDisciplineOpen, setIsDisciplineOpen] = React.useState(location.pathname.includes('discipline') ? true : false);
 
   const [currentSemester, setCurrentSemester] = React.useState({});
@@ -34,7 +34,7 @@ function Education({ windowWidth, semesterInfo }) {
   }
 
   function openDiscipline(discipline) {
-    setCurrentDiscipline(discipline);
+    setCurrentDiscipline({ name: '', });
     navigate(location.pathname + '/discipline/' + discipline.discipline_id + '/info');
     setIsDisciplineOpen(true);
   }
@@ -50,6 +50,7 @@ function Education({ windowWidth, semesterInfo }) {
     educationApi.getDisciplines({ token: token, semesterId: semesterId, currentUserId: currentUser.id })
     .then((res) => {
       console.log('Disciplines', res);
+      setCurrentSemester(semesterInfo.find((sem) => sem.semesterId === params.semesterId));
       setDisciplines(res.disciplines);
     })
     .catch((err) => {
@@ -60,11 +61,17 @@ function Education({ windowWidth, semesterInfo }) {
     });
   }
 
+  function getDisciplineName(name) {
+    console.log(currentSemester);
+    setCurrentDiscipline({ ...currentDiscipline, name: name })
+  }
+
   React.useEffect(() => {
-    setCurrentSemester(semesterInfo.find((sem) => sem.semesterId === params.semesterId));
+    
     disciplineRequest(params.semesterId);
+    
     return(() => {
-      setCurrentDiscipline({ title: '', }); 
+      setCurrentDiscipline({ name: '', });
       setCurrentSemester({});
     })
     // eslint-disable-next-line
@@ -78,17 +85,19 @@ function Education({ windowWidth, semesterInfo }) {
       chooseSemester={chooseSemester}
       isDisciplineOpen={isDisciplineOpen} 
       backToSemester={backToSemester} 
-      /> 
+      />
+      
+      {
+        isLoadingDiscipline 
+        ?
+        <div></div>
+        :
 
+        <>
       <Routes>
         <Route exact path='/'
         element={
           <>
-          {
-            isLoadingDiscipline ?
-            <div></div>
-            :
-            <>
             {
               /*
               <div className='education__container'>
@@ -110,9 +119,7 @@ function Education({ windowWidth, semesterInfo }) {
                 <SemesterTable disciplines={disciplines} openDiscipline={openDiscipline} />
               }
             </Section>
-            </>
-          }        
-          </>
+          </> 
         }
         />
       </Routes>
@@ -120,12 +127,14 @@ function Education({ windowWidth, semesterInfo }) {
       <Routes>
         <Route exact path={`/discipline/:disciplineId/*`}
         element={
-          <Section title={currentDiscipline.name} heightType='content' headerType='large' > 
-            <Discipline currentSemester={currentSemester} currentDiscipline={currentDiscipline} />
+          <Section title={currentDiscipline.name} heightType='page' headerType='large' >
+            <Discipline windowWidth={windowWidth} currentSemester={currentSemester} currentDiscipline={currentDiscipline} getDisciplineName={getDisciplineName} />
           </Section>
         }
         />
       </Routes>
+      </>
+      }
       
     </div>
   );

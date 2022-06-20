@@ -1,10 +1,14 @@
 .discipline-info {
   margin: 24px 0px 0px 0px;
   width: 100%;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
 }
 .discipline-info__container {
   margin: 0px;
   width: 100%;
+  height: 100%;
   display: flex;
 }
 .discipline-info__teacher {
@@ -12,6 +16,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   max-width: 480px;
 }
 .discipline-info__teacher-container {
@@ -63,7 +68,7 @@
 .discipline-info__teacher-comment {
   margin: 24px 0px 0px 0px;
   width: 100%;
-  flex-grow: 1;
+  flex-grow: 2;
   padding: 16px 24px;
   box-sizing: border-box;
   background: var(--main-grey-color);
@@ -80,9 +85,6 @@
 .discipline-info__document {
   margin: 0px;
   width: 100%;
-}
-.table__main_type_info {
-  max-height: calc(100vh - 352px);
 }
 .table__btn {
   margin: 0px;
