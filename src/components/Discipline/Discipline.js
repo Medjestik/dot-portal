@@ -6,7 +6,7 @@ import DisciplineMaterials from './DisciplineMaterials/DisciplineMaterials.js';
 import DisciplineTasks from './DisciplineTasks/DisciplineTasks.js';
 import Month from '../Month/Month.js';
 
-function Discipline({ currentDiscipline }) {
+function Discipline({ currentSemester, currentDiscipline }) {
 
   const navigate = useNavigate();
   const { disciplineId } = useParams();
@@ -69,7 +69,7 @@ function Discipline({ currentDiscipline }) {
     }
     setCurrentChapter(option);
     setIsOpenSelectOptions(false);
-    navigate('/education/semester/discipline/' + disciplineId + option.link);
+    navigate('/education/semester/' + currentSemester.semesterId + '/discipline/' + disciplineId + option.link);
   }
 
   return (
@@ -105,7 +105,7 @@ function Discipline({ currentDiscipline }) {
       </div>
 
       <Routes>
-        <Route exact path={`info`} 
+        <Route exact path={`info`}
         element={
           <DisciplineInfo currentDiscipline={currentDiscipline} documents={documents} /> 
         }
@@ -113,15 +113,15 @@ function Discipline({ currentDiscipline }) {
       </Routes>
 
       <Routes>
-        <Route exact path={`materials`} 
+        <Route exact path={`materials`}
         element={
-          <DisciplineMaterials folders={folders} />
+          <DisciplineMaterials disciplineId={disciplineId} />
         }
         />
       </Routes>
 
       <Routes>
-        <Route exact path={`tasks`} 
+        <Route exact path={`tasks`}
         element={
           <DisciplineTasks currentDiscipline={currentDiscipline} documents={documents} />
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Education.css';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import Section from '../Section/Section.js';
 import SemesterTable from '../SemesterTable/SemesterTable.js';
@@ -15,6 +15,7 @@ function Education({ windowWidth, semesterInfo }) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const params = useParams();
 
   const currentUser = React.useContext(CurrentUserContext);
   
@@ -22,23 +23,24 @@ function Education({ windowWidth, semesterInfo }) {
   const [currentDiscipline, setCurrentDiscipline] = React.useState({ title: '', });
   const [isDisciplineOpen, setIsDisciplineOpen] = React.useState(location.pathname.includes('discipline') ? true : false);
 
-  const [currentSemester, setCurrentSemester] = React.useState(semesterInfo[semesterInfo.length - 1]);
+  const [currentSemester, setCurrentSemester] = React.useState({});
 
   const [isLoadingDiscipline, setIsLoadingDisciplines] = React.useState(true);
 
   function chooseSemester(semester) {
     setCurrentSemester(semester);
     disciplineRequest(semester.semesterId);
+    navigate('/education/semester/' + semester.semesterId);
   }
 
   function openDiscipline(discipline) {
     setCurrentDiscipline(discipline);
-    navigate('/education/semester/discipline/' + discipline.id + '/info');
+    navigate(location.pathname + '/discipline/' + discipline.discipline_id + '/info');
     setIsDisciplineOpen(true);
   }
 
   function backToSemester() {
-    navigate('/education/semester');
+    navigate('/education/semester/' + currentSemester.semesterId);
     setIsDisciplineOpen(false);
   }
 
@@ -53,13 +55,14 @@ function Education({ windowWidth, semesterInfo }) {
     .catch((err) => {
       console.error(err);
     })
-    .finally(() => {
+    .finally(() => {  
       setIsLoadingDisciplines(false);
     });
   }
 
   React.useEffect(() => {
-    disciplineRequest(semesterInfo[semesterInfo.length - 1].semesterId);
+    setCurrentSemester(semesterInfo.find((sem) => sem.semesterId === params.semesterId));
+    disciplineRequest(params.semesterId);
     return(() => {
       setCurrentDiscipline({ title: '', }); 
       setCurrentSemester({});
@@ -78,7 +81,7 @@ function Education({ windowWidth, semesterInfo }) {
       /> 
 
       <Routes>
-        <Route exact path={`semester`} 
+        <Route exact path='/'
         element={
           <>
           {
@@ -115,10 +118,10 @@ function Education({ windowWidth, semesterInfo }) {
       </Routes>
 
       <Routes>
-        <Route exact path={`semester/discipline/:disciplineId/*`}
+        <Route exact path={`/discipline/:disciplineId/*`}
         element={
-          <Section title={currentDiscipline.disciplineName} heightType='content' headerType='large' > 
-            <Discipline currentDiscipline={currentDiscipline} />
+          <Section title={currentDiscipline.name} heightType='content' headerType='large' > 
+            <Discipline currentSemester={currentSemester} currentDiscipline={currentDiscipline} />
           </Section>
         }
         />

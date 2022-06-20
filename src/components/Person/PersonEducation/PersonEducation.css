@@ -52,15 +52,22 @@
 }
 .person-education__item {
   margin: 0px 20px 20px 0px;
+}
+.person-education__item:last-of-type {
+  margin: 0px 20px 0px 0px;
+}
+.person-education__item-link {
+  margin: 0px;
   display: flex;
   align-items: center;
   background: var(--main-grey-color);
   border-radius: var(--border-radius);
   padding: 25px 32px;
   box-sizing: border-box;
+  text-decoration: none;
 }
-.person-education__item:last-of-type {
-  margin: 0px 20px 0px 0px;
+.person-education__item-link:hover {
+  cursor: pointer;
 }
 .person-education__indicators {
   display: flex;
@@ -171,12 +178,14 @@
     overflow-y: hidden;
   }
   .person-education__item {
-    min-width: 184px;
     margin: 0px 16px 16px 0px;
-    padding: 16px;
   }
   .person-education__item:last-of-type {
     margin: 0px 0px 16px 0px;
+  }
+  .person-education__item-link {
+    min-width: 184px;
+    padding: 16px;
   }
   .person-education__indicators {
     width: 100%;

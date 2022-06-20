@@ -22,7 +22,6 @@ function SemesterHeader({ semesterInfo, currentSemester, chooseSemester, isDisci
   }
 
   React.useEffect(() => {
-    chooseSemester(semesterInfo[semesterInfo.length - 1]);
     setIsOpenSelectOptions(false);
     // eslint-disable-next-line
   }, []);

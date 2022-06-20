@@ -48,22 +48,19 @@ function App() {
       setIsLoadingPage(true);
       api.getUser({ token: token })
         .then((res) => {
-          if (res) {
-            console.log('UserInfo', res);
-            setLoggedIn(true);
-            setCurrentUser(res);
-            if (res.access_role) {
-              semesterInfoRequest(res.id)
-            }
-          } else {
-            localStorage.removeItem('token');
-            navigate('/');
-            setLoggedIn(false);
-            setCurrentUser({});
+          console.log('UserInfo', res);
+          setLoggedIn(true);
+          setCurrentUser(res);
+          if (res.access_role) {
+            semesterInfoRequest(res.id)
           }
         })
-        .catch((err) => {
-            console.error(err);
+        .catch(() => {
+          localStorage.removeItem('token');
+          setIsLoadingPage(false);
+          navigate('/');
+          setLoggedIn(false);
+          setCurrentUser({});
         })
     } else {
       setIsLoadingPage(false);
@@ -167,7 +164,7 @@ function App() {
               <div className='wrapper'>
                 <div className='container'>
 
-                    <Header windowWidth={windowWidth} pathname={pathname} onLogout={handleLogout} />
+                    <Header windowWidth={windowWidth} pathname={pathname} onLogout={handleLogout} semesterInfo={semesterInfo} />
                     
                     <div className='main-container'>
                       <Routes>
@@ -181,7 +178,7 @@ function App() {
                           />
                         }/>
 
-                        <Route path='education/*' element={
+                        <Route path='education/semester/:semesterId/*' element={
                           <Education windowWidth={windowWidth} semesterInfo={semesterInfo} />
                         }/>
 

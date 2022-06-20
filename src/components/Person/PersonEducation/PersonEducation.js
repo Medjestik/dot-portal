@@ -4,6 +4,7 @@ import Accordion from '../../Accordion/Accordion.js';
 import PersonEducationInfoPopup from './PersonEducationInfoPopup/PersonEducationInfoPopup.js';
 import educationIcon from '../../../images/accordion/accordion-education.svg';
 import statusIcon from '../../../images/status-white.svg';
+import { NavLink } from "react-router-dom";
 
 function PersonEducation({ studentEducationInfo, windowWidth }) {
 
@@ -56,49 +57,51 @@ function PersonEducation({ studentEducationInfo, windowWidth }) {
           {
             studentEducationInfo.semesters.map((sem, i) => (
               <li className='person-education__item' key={i}>
-                <ul className='person-education__indicators'>
-                  <li className='person-education__indicator'>
-                    <span 
-                    className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
-                      {sem.courseNumber}
-                    </span>
-                    <p 
-                    className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
-                      Курс
-                    </p>
-                  </li>
-                  <li className='person-education__indicator'>
-                    <span 
-                    className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
-                      {sem.semesterNumber}
-                    </span>
-                    <p 
-                    className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
-                      Семестр
-                    </p>
-                  </li>
-                  <li className='person-education__indicator'>
-                    <span 
-                    className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
-                      {sem.countOver}
-                    </span>
-                    <p 
-                    className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
-                      Сдано
-                    </p>
-                  </li>
-                  <li className='person-education__indicator'>
-                    <span 
-                    className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
-                      {sem.countCredit}
-                    </span>
-                    <p 
-                    className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
-                      Долг
-                    </p>
-                  </li>
-                </ul>
-                {progressSlider(sem, i)}
+                <NavLink className='person-education__item-link' to={`/education/semester/` + sem.semesterId}>
+                  <ul className='person-education__indicators'>
+                    <li className='person-education__indicator'>
+                      <span 
+                      className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
+                        {sem.courseNumber}
+                      </span>
+                      <p 
+                      className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
+                        Курс
+                      </p>
+                    </li>
+                    <li className='person-education__indicator'>
+                      <span 
+                      className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
+                        {sem.semesterNumber}
+                      </span>
+                      <p 
+                      className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
+                        Семестр
+                      </p>
+                    </li>
+                    <li className='person-education__indicator'>
+                      <span 
+                      className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
+                        {sem.countOver}
+                      </span>
+                      <p 
+                      className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
+                        Сдано
+                      </p>
+                    </li>
+                    <li className='person-education__indicator'>
+                      <span 
+                      className={`person-education__indicator-count person-education__indicator-count_type_${i === 0 ? 'current' : 'over'}`}>
+                        {sem.countCredit}
+                      </span>
+                      <p 
+                      className={`person-education__indicator-text person-education__indicator-text_type_${i === 0 ? 'current' : 'over'}`}>
+                        Долг
+                      </p>
+                    </li>
+                  </ul>
+                  {progressSlider(sem, i)}
+                </NavLink>
               </li>
             ))
           }
