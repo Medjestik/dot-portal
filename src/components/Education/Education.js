@@ -50,7 +50,6 @@ function Education({ windowWidth, semesterInfo }) {
     educationApi.getDisciplines({ token: token, semesterId: semesterId, currentUserId: currentUser.id })
     .then((res) => {
       console.log('Disciplines', res);
-      setCurrentSemester(semesterInfo.find((sem) => sem.semesterId === params.semesterId));
       setDisciplines(res.disciplines);
     })
     .catch((err) => {
@@ -62,12 +61,11 @@ function Education({ windowWidth, semesterInfo }) {
   }
 
   function getDisciplineName(name) {
-    console.log(currentSemester);
     setCurrentDiscipline({ ...currentDiscipline, name: name })
   }
 
   React.useEffect(() => {
-    
+    setCurrentSemester(semesterInfo.find((sem) => sem.semesterId === params.semesterId));
     disciplineRequest(params.semesterId);
     
     return(() => {

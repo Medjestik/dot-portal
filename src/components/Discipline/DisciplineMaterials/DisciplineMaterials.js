@@ -2,6 +2,7 @@ import React from 'react';
 import './DisciplineMaterials.css';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext.js';
 import * as educationApi from '../../../utils/educationApi.js';
+import Preloader from '../../Preloader/Preloader.js';
 
 function DisciplineMaterials({ disciplineId }) {
 
@@ -27,8 +28,13 @@ function DisciplineMaterials({ disciplineId }) {
   }
 
   function handleOpenMaterial(item) {
-    const materialLink = 'https://edu.emiit.ru/course_launch2.html?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
-    viewFile(materialLink)
+    const token = localStorage.getItem('token');
+    const _url = 'https://' + token + '@course.emiit.ru/_wt/part_start?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
+    const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024'     
+    window.open(_url, '_blank', windowFeatures ).focus(); // window.open + focus
+    
+    const materialLink = 'https://course.emiit.ru/_wt/part_start?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
+    //viewFile(materialLink)
   }
 
   const viewFile = async (url) => {
@@ -41,12 +47,12 @@ function DisciplineMaterials({ disciplineId }) {
       }
     }) 
     // FETCH BLOB FROM IT        
-    .then((response) => response.blob())      
+    .then((response) => response.blob())
     .then((blob) => { // RETRIEVE THE BLOB AND CREATE LOCAL URL   
       console.log(blob);
       var _url = window.URL.createObjectURL(blob);
       console.log(_url);
-      const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1280,height=1024'     
+      const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024'     
       window.open(_url, '_blank', windowFeatures ).focus(); // window.open + focus
     })
     .catch((err) => {        
@@ -58,27 +64,34 @@ function DisciplineMaterials({ disciplineId }) {
     var mapForm = document.createElement("form");
     mapForm.target = "Map";
     mapForm.method = "POST"; // or "post" if appropriate
-    mapForm.action = 'https://edu.emiit.ru/view_doc.html?mode=part_start&course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + elem.code;
+    mapForm.action = 'https://course.emiit.ru/_wt/part_start?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + elem.code;
 
     var mapInput = document.createElement("input");
-    mapInput.type = "text";
+    mapInput.type = "hidden";
     mapInput.name = "user_login";
     mapInput.value = 'dot22001';
     mapForm.appendChild(mapInput);
 
     var mapInput2 = document.createElement("input");
-    mapInput2.type = "text";
+    mapInput2.type = "hidden";
     mapInput2.name = "user_password";
     mapInput2.value = '211211';
     mapForm.appendChild(mapInput2);
 
     var mapInput3 = document.createElement("input");
-    mapInput3.type = "text";
+    mapInput3.type = "hidden";
     mapInput3.name = "set_auth";
     mapInput3.value = '1';
     mapForm.appendChild(mapInput3);
 
     document.body.appendChild(mapForm);
+
+    const form = 
+    <form>
+      <input></input>
+      <input></input>
+    </form>
+    
 
     let map = window.open("", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
 
@@ -113,7 +126,7 @@ function DisciplineMaterials({ disciplineId }) {
           }
         </ul>
         :
-        <div>123</div>
+        <Preloader />
       }
 
     </div>
