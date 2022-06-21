@@ -28,79 +28,33 @@ function DisciplineMaterials({ disciplineId }) {
   }
 
   function handleOpenMaterial(item) {
-    const token = localStorage.getItem('token');
-    const _url = 'https://' + token + '@course.emiit.ru/_wt/part_start?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
-    const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024'     
-    window.open(_url, '_blank', windowFeatures ).focus(); // window.open + focus
-    
-    const materialLink = 'https://course.emiit.ru/_wt/part_start?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
-    //viewFile(materialLink)
+    const materialLink = 'https://course.emiit.ru/view_doc.html?mode=part_start&course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
+    fetchForm(materialLink);
   }
 
-  const viewFile = async (url) => {
-    console.log(url);
+  const fetchForm = async (url) => {
+
     const token = localStorage.getItem('token');
-    // Change this to use your HTTP client      
-    fetch(url, { 
-      headers: {
-      'Authorization': `Basic ${token}`,
-      }
-    }) 
-    // FETCH BLOB FROM IT        
-    .then((response) => response.blob())
-    .then((blob) => { // RETRIEVE THE BLOB AND CREATE LOCAL URL   
-      console.log(blob);
-      var _url = window.URL.createObjectURL(blob);
-      console.log(_url);
-      const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024'     
-      window.open(_url, '_blank', windowFeatures ).focus(); // window.open + focus
+    const data = atob(token);
+    const dataArray = data.split(':');
+
+    let formData = new FormData();
+    formData.append('user_login', dataArray[0]);
+    formData.append('user_password', dataArray[1]);
+    formData.append('set_auth', '1');
+
+    fetch(url, {
+      method: 'POST',
+      body: formData,
     })
-    .catch((err) => {        
-      console.log(err);      
+    .then(() => {
+      const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024'     
+      window.open(url, '_blank', windowFeatures).focus();
+    })
+    .catch((err) => {
+      console.error(err);
     });
   };
-
-  function handleClick(elem) {
-    var mapForm = document.createElement("form");
-    mapForm.target = "Map";
-    mapForm.method = "POST"; // or "post" if appropriate
-    mapForm.action = 'https://course.emiit.ru/_wt/part_start?course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + elem.code;
-
-    var mapInput = document.createElement("input");
-    mapInput.type = "hidden";
-    mapInput.name = "user_login";
-    mapInput.value = 'dot22001';
-    mapForm.appendChild(mapInput);
-
-    var mapInput2 = document.createElement("input");
-    mapInput2.type = "hidden";
-    mapInput2.name = "user_password";
-    mapInput2.value = '211211';
-    mapForm.appendChild(mapInput2);
-
-    var mapInput3 = document.createElement("input");
-    mapInput3.type = "hidden";
-    mapInput3.name = "set_auth";
-    mapInput3.value = '1';
-    mapForm.appendChild(mapInput3);
-
-    document.body.appendChild(mapForm);
-
-    const form = 
-    <form>
-      <input></input>
-      <input></input>
-    </form>
-    
-
-    let map = window.open("", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
-
-    if (map) {
-        mapForm.submit();
-    } else {
-        alert('You must allow popups for this map to work.');
-    }
-  }
 
   React.useEffect(() => {
     disciplineMaterialRequest(disciplineId);
@@ -111,20 +65,22 @@ function DisciplineMaterials({ disciplineId }) {
   }, [disciplineId]);
 
   return (
-    <div className=''>
+    <div  className=''>
       {
         !isLoadingMaterials 
         ?
+        <>
         <ul>
           {
             materials.parts.part.map((elem, i) => (
               <li key={i}>
                   <p onClick={(() => handleOpenMaterial(elem))}>{elem.name} {elem.state_id}</p>
-                  <button type="button" onClick={() => handleClick(elem)}>CLICK</button>
+
               </li>
             ))
           }
         </ul>
+        </>
         :
         <Preloader />
       }
