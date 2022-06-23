@@ -73,11 +73,11 @@ function Discipline({ windowWidth, currentSemester, currentDiscipline, getDiscip
   function disciplineRequest(disciplineId) {
     setIsLoadingDiscipline(true);
     const token = localStorage.getItem('token');
-    educationApi.getDisciplineMaterial({ token: token, disciplineId: disciplineId, currentUserId: currentUser.id })
+    educationApi.getDisciplineInfo({ token: token, disciplineId: disciplineId })
     .then((res) => {
       console.log('DisciplineInfo', res);
       setDisciplineInfo(res);
-      getDisciplineName(res.object_id);
+      getDisciplineName(res.name);
       chapters.forEach((chap) => {
         if (location.pathname.includes(chap.link)) {
           setCurrentChapter(chap);
@@ -138,7 +138,11 @@ function Discipline({ windowWidth, currentSemester, currentDiscipline, getDiscip
       <Routes>
         <Route exact path={`info`}
         element={
-          <DisciplineInfo windowWidth={windowWidth} currentDiscipline={currentDiscipline} documents={documents} /> 
+          <DisciplineInfo 
+          windowWidth={windowWidth}
+          disciplineInfo={disciplineInfo}
+          documents={documents}
+          /> 
         }
         />
       </Routes>

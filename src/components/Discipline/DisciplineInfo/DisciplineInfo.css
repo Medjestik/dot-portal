@@ -30,6 +30,11 @@
   height: 120px;
   border-radius: 50%;
   background: var(--main-grey-color);
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  pointer-events: none;
+  border: none;
   flex-shrink: 0;
 }
 .discipline-info__teacher-info {
@@ -60,6 +65,7 @@
   font-weight: 300;
   font-size: 14px;
   line-height: 18px;
+  min-height: 18px;
   color: var(--main-black-color);
 }
 .discipline-info__teacher-text_margin_top {

@@ -2,7 +2,7 @@ import React from 'react';
 import './DisciplineInfo.css';
 import Table from '../../Table/Table.js';
 
-function DisciplineInfo({ windowWidth, currentDiscipline, documents }) {
+function DisciplineInfo({ windowWidth, disciplineInfo, documents }) {
 
   const containerHeightRef = React.createRef();
   const headerHeightRef = React.createRef();
@@ -22,17 +22,23 @@ function DisciplineInfo({ windowWidth, currentDiscipline, documents }) {
       <div className='discipline-info__container'>
         <div className='discipline-info__teacher'>
           <div className='discipline-info__teacher-container'>
-            <div className='discipline-info__teacher-img'></div>
+            {
+              disciplineInfo.tutor.pict_url 
+              ?
+              <img className='discipline-info__teacher-img' src={disciplineInfo.tutor.pict_url} alt=''></img>
+              :
+              <div className='discipline-info__teacher-img'></div>
+            }
             <div className='discipline-info__teacher-info'>
-              <h3 className='discipline-info__teacher-name'>{currentDiscipline.disciplineTeacher}</h3>
+              <h3 className='discipline-info__teacher-name'>{disciplineInfo.tutor.fullname}</h3>
               <ul className='discipline-info__teacher-info-list'>
                 <li className='discipline-info__teacher-info-item'>
                   <p className='discipline-info__teacher-text'>Преподаватель</p>
                   <p className='discipline-info__teacher-text discipline-info__teacher-text_margin_top'>Доцент</p>
                 </li>
                 <li className='discipline-info__teacher-info-item'>
-                  <p className='discipline-info__teacher-text'>+7 (000) 000-00-00</p>
-                  <p className='discipline-info__teacher-text discipline-info__teacher-text_margin_top'>0000000000000@000000.ru</p>
+                  <p className='discipline-info__teacher-text'>{disciplineInfo.tutor.phone}</p>
+                  <p className='discipline-info__teacher-text discipline-info__teacher-text_margin_top'>{disciplineInfo.tutor.email}</p>
                 </li>
               </ul>
             </div>

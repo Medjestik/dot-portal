@@ -51,6 +51,7 @@ function Education({ windowWidth, semesterInfo }) {
     .then((res) => {
       console.log('Disciplines', res);
       setDisciplines(res.disciplines);
+      //setDisciplines([ ...res.disciplines, ...res.practics ]);
     })
     .catch((err) => {
       console.error(err);
