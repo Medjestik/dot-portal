@@ -121,3 +121,11 @@
 .table__text_type_header {
   font-weight: 500;
 }
+.table__caption_type_empty {
+  margin: 21px 0px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
+}

@@ -19,7 +19,6 @@ function DisciplineMaterials({ disciplineId }) {
     .then((res) => {
       console.log('DisciplineMaterial', res);
       setMaterials(res);
-      createNewArray(res.parts);
     })
     .catch((err) => {
       console.error(err);
@@ -60,10 +59,6 @@ function DisciplineMaterials({ disciplineId }) {
 
   function updateMaterial() {
     disciplineMaterialRequest(disciplineId);
-  }
-
-  function createNewArray(arr) {
-    
   }
 
   React.useEffect(() => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
+import GetBase64File from '../../../../custom/GetBase64File.js';
 
 function PersonAreaPhotoPopup({ isOpen, onClose, currentUser, onChangePhoto, isLoadingRequest, isShowRequestError }) {
 
@@ -9,24 +10,6 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser, onChangePhoto, isL
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
 
   const formRef = React.createRef();
-
-  const getBase64 = file => {
-    return new Promise(resolve => {
-      let baseURL = '';
-      // Make new FileReader
-      let reader = new FileReader();
-
-      // Convert the file to base64 text
-      reader.readAsDataURL(file);
-
-      // on reader load somthing...
-      reader.onload = () => {
-        // Make a fileInfo Object
-        baseURL = reader.result;
-        resolve(baseURL);
-      };
-    });
-  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -45,7 +28,7 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser, onChangePhoto, isL
     if (e.target.files.length > 0) {
       if (e.target.files[0].name.match(/.(jpg|jpeg|bmp|png)$/i)) {
         let file = e.target.files[0];
-        getBase64(file)
+        GetBase64File(file)
         .then(result => {
           file['base64'] = result;
           setFileName({ isShow: true, name: file.name });

@@ -291,6 +291,10 @@ input[type=number] {
   transition: all .3s ease-in-out;
   flex-shrink: 0;
 }
+.btn_type_link {
+  margin: 0px;
+  text-decoration: none;
+}
 .btn-cancel_type_large {
   margin: 0px 12px 0px 0px;
   background: inherit;
@@ -319,11 +323,17 @@ input[type=number] {
   user-select: auto;
   pointer-events: all;
   opacity: .8;
-  box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
 }
 .btn-save_type_large_status_block {
   background: var(--slider-color);
   border-radius: var(--border-radius);
+  box-shadow: none;
+  user-select: none;
+  pointer-events: none;
+}
+.btn-save_type_large_status_loading {
+  background: var(--gradient-orange-color);
+  cursor: default;
   user-select: none;
   pointer-events: none;
 }
@@ -368,6 +378,10 @@ input[type=number] {
   margin: 16px auto 0px;
 }
 .upload-form {
+  width: 100%;
+  margin: 12px 0px 0px 0px;
+}
+.upload-form__container {
   width: 100%;
   margin: 12px 0px 0px 0px;
   display: flex;

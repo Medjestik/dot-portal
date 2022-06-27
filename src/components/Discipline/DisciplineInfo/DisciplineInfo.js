@@ -2,7 +2,7 @@ import React from 'react';
 import './DisciplineInfo.css';
 import Table from '../../Table/Table.js';
 
-function DisciplineInfo({ windowWidth, disciplineInfo, documents }) {
+function DisciplineInfo({ windowWidth, disciplineInfo }) {
 
   const containerHeightRef = React.createRef();
   const headerHeightRef = React.createRef();
@@ -34,11 +34,11 @@ function DisciplineInfo({ windowWidth, disciplineInfo, documents }) {
               <ul className='discipline-info__teacher-info-list'>
                 <li className='discipline-info__teacher-info-item'>
                   <p className='discipline-info__teacher-text'>Преподаватель</p>
-                  <p className='discipline-info__teacher-text discipline-info__teacher-text_margin_top'>Доцент</p>
+                  <p className='discipline-info__teacher-text discipline-info__teacher-text_type_job discipline-info__teacher-text_margin_top'>{disciplineInfo.tutor.job}</p>
                 </li>
                 <li className='discipline-info__teacher-info-item'>
                   <p className='discipline-info__teacher-text'>{disciplineInfo.tutor.phone}</p>
-                  <p className='discipline-info__teacher-text discipline-info__teacher-text_margin_top'>{disciplineInfo.tutor.email}</p>
+                  <p className='discipline-info__teacher-text discipline-info__teacher-text_type_mail discipline-info__teacher-text_margin_top'>{disciplineInfo.tutor.email}</p>
                 </li>
               </ul>
             </div>
@@ -66,9 +66,13 @@ function DisciplineInfo({ windowWidth, disciplineInfo, documents }) {
                   <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
                 </div>
               </div>
-              <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_info scroll'>
+              {
+                disciplineInfo.additional_files.length < 1 ?
+                <span className='table__caption_type_empty'>Дополнительные документы не загружены!</span>
+                :
+                <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_info scroll'>
                 {
-                  documents.map((item, i) => (
+                  disciplineInfo.additional_files.map((item, i) => (
                     <li className='table__row' key={i}>
                       <div className='table__main-column'>
                         <div className='table__column table__column_type_count'>
@@ -78,16 +82,19 @@ function DisciplineInfo({ windowWidth, disciplineInfo, documents }) {
                           <p className='table__text'>{item.date}</p>
                         </div>
                         <div className='table__column table__column_type_name'>
-                          <p className='table__text'>{item.title}</p>
+                          <p className='table__text'>{item.name}</p>
                         </div>
                       </div>
                       <div className='table__column table__column_type_btn'>
-                        <button className='btn btn_type_download btn_type_download_status_active table__btn'></button>
+                        <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
+                          <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
+                        </a>
                       </div>
                     </li>
                   ))
                 }
               </ul>
+              }
             </div>
           </Table>
         </div>
