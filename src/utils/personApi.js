@@ -71,3 +71,28 @@ export const getStudentEducationInfo = ({ token, userId }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const getStudentSocial = ({ token, userId }) => {
+  return fetch(`${API_URL}/students/id/${userId}/action/social_info`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const changeStudentSocial = ({ token, userId, social }) => {
+  return fetch(`${API_URL}/students/id/${userId}/action/update_social`, {
+    method: 'PATCH', 
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ social })
+  })
+  .then(res => handleResponse(res));
+};

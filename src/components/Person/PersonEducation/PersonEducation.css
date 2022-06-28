@@ -86,6 +86,10 @@
 }
 .person-education__indicator-count {
   margin: 0px 12px 0px 0px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
   font-style: normal;
   font-weight: 900;
   font-size: 26px;

@@ -2,6 +2,7 @@ import React from 'react';
 import './Person.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import * as personApi from '../../utils/personApi';
+import Preloader from '../Preloader/Preloader.js';
 import PersonArea from './PersonArea/PersonArea.js';
 import PersonAreaLaptop from './PersonArea/PersonAreaLaptop/PersonAreaLaptop.js';
 import PersonAreaMobile from './PersonArea/PersonAreaMobile/PersonAreaMobile.js';
@@ -91,15 +92,6 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
     { name: 'Шаблон 4', upload: true, },
   ]
 
-  const userSocialClassmates = [
-    { name: 'Леонова Анна', vk: '', inst: '_leo_ann_', telegram: '', },
-    { name: 'Иванов Иван', vk: 'vk.com/id111111', inst: '', telegram: '', },
-    { name: 'Леонова Анна', vk: '', inst: '_leo_ann_', telegram: '', },
-    { name: 'Иванов Иван', vk: 'vk.com/id111111', inst: '', telegram: '', },
-    { name: 'Леонова Анна', vk: '', inst: '_leo_ann_', telegram: '', },
-    { name: 'Иванов Иван', vk: 'vk.com/id111111', inst: '', telegram: '', },
-  ]
-
   const scores = [
     { text: 'Иванова Елена Ивановна', count: '5', },
     { text: 'Иванова Елена Ивановна', count: '4', },
@@ -110,13 +102,17 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
 
   const [studentData, setStudentData] = React.useState({});
   const [studentEducationInfo, setStudentEducationInfo] = React.useState({});
+  const [studentSocial, setStudentSocial] = React.useState({});
+
   const [isLoadingPage, setIsLoadingPage] = React.useState(true);
   
   const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
   const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = React.useState(false); 
   const [isDataPopupOpen, setIsDataPopupOpen] = React.useState(false);
+
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
   const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '' });
+  const [isLoadingSocialRequest, setIsLoadingSocialRequest] = React.useState({ isShow: false, type: '' });
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -208,20 +204,50 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
     const token = localStorage.getItem('token');
     Promise.all([
       personApi.getStudentData({ token: token, userId: id }),
-      personApi.getStudentEducationInfo({ token: token, userId: id })
+      personApi.getStudentEducationInfo({ token: token, userId: id }),
+      personApi.getStudentSocial({ token: token, userId: id }),
     ])
-    
-      .then(([studentData, studentEducationInfo]) => {
-        console.log('StudentData', studentData);
-        console.log('StudentEducationInfo', studentEducationInfo);
-        setStudentData(studentData);
-        setStudentEducationInfo(studentEducationInfo);
+    .then(([studentData, studentEducationInfo, studentSocial]) => {
+      console.log('StudentData', studentData);
+      console.log('StudentEducationInfo', studentEducationInfo);
+      console.log('StudentSocial', studentSocial);
+      setStudentData(studentData);
+      setStudentEducationInfo(studentEducationInfo);
+      setStudentSocial(studentSocial);
+    })
+    .catch((err) => {
+        console.error(err);
+    })
+    .finally(() => {
+      setIsLoadingPage(false);
+    });
+  }
+
+  function handleChangeSocialLink(link, type) {
+    //setIsLoadingRequest(true);
+    const userId = currentUser.id;
+    const token = localStorage.getItem('token');
+    let social = {};
+    if (type === 'vk') {
+      social = { ...studentSocial.student, vk: link };
+      setIsLoadingSocialRequest({ isShow: true, type: 'vk' });
+    } else if (type === 'instagram') {
+      social = { ...studentSocial.student, instagram: link };
+      setIsLoadingSocialRequest({ isShow: true, type: 'instagram' });
+    } else {
+      social = { ...studentSocial.student, telegram: link };
+      setIsLoadingSocialRequest({ isShow: true, type: 'telegram' });
+    }
+    personApi.changeStudentSocial({ token, userId, social })
+      .then((res) => {
+        setStudentSocial({ ...studentSocial, student: res });
       })
       .catch((err) => {
-          console.error(err);
+        console.log(err);
+        //setIsShowRequestError({ isShow: true, text: 'Неправильно введен текущий пароль. Повторите попытку!' })
       })
       .finally(() => {
-        setIsLoadingPage(false);
+        setIsLoadingSocialRequest({ isShow: false, type: '' });
       });
   }
   
@@ -235,6 +261,9 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
     }
     return () => {
       setStudentData({});
+      setStudentEducationInfo({});
+      setStudentSocial({});
+      setIsLoadingSocialRequest({ isShow: false, type: '' });
     }
   // eslint-disable-next-line
   }, []);
@@ -244,7 +273,7 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
       {
         isLoadingPage 
         ?
-        <div></div>
+        <Preloader />
         :
         <div className='person'>
 
@@ -301,7 +330,12 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
           <PersonDeclaration windowWidth={windowWidth} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} />
           <PersonNotification user={user} userNotifications={userNotifications} windowWidth={windowWidth} />
           <PersonRating scores={scores} windowWidth={windowWidth} />
-          <PersonCommunication userSocialClassmates={userSocialClassmates} windowWidth={windowWidth} />
+          <PersonCommunication 
+          windowWidth={windowWidth}
+          studentSocial={studentSocial}
+          onChange={handleChangeSocialLink}
+          isLoading={isLoadingSocialRequest}
+          />
           {
             //<PersonDiploma windowWidth={windowWidth} />
           }
