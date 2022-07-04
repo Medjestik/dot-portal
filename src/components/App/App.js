@@ -191,7 +191,7 @@ function App() {
                         }/>
 
                         <Route path='library/*' element={
-                        <Library semesterInfo={semesterInfo} />
+                        <Library windowWidth={windowWidth} />
                         }/>
 
                       </Routes>

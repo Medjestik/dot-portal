@@ -129,3 +129,6 @@
   line-height: 18px;
   color: var(--accent-grey-color);
 }
+.table__btn {
+  margin: 0px;
+}

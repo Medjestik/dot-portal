@@ -13,7 +13,7 @@ function PersonNotificationInfoPopup({ isOpen, onClose }) {
       <form className='popup__form popup__form_type_small' name='person-notification-info-popup' action='#' noValidate onSubmit={handleSubmit}>
         <h2 className='popup__title'>Уведомления</h2>
         <p className='popup__subtitle'>Просмотр, скачивание и загрузка персональных документов обучения.</p>
-        <p className='popup__text'><span className='popup__text-accent'>Документы</span> загружаются деканатом в режиме реального времени, при загрузке нового документа вам приходит <a className='popup__text-link' href='/' target='_blank' rel='noreferrer'>уведомление.</a></p>
+        <p className='popup__text'>Документы загружаются деканатом в режиме реального времени, при загрузке нового документа вам приходит <span className='popup__text-accent'>уведомление.</span></p>
         <button className='popup__btn-back' type='submit'>Назад</button>
       </form>
     </Popup>

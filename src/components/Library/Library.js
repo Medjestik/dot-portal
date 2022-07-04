@@ -1,12 +1,11 @@
 import React from 'react';
 import './Library.css';
 import SectionTabs from '../Section/SectionTabs/SectionTabs.js';
-import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import { Route, Routes } from 'react-router-dom';
 import LibraryList from './LibraryList/LibraryList.js';
 import NormativeList from './NormativeList/NormativeList.js';
-
-function Library() {
+ 
+function Library({ windowWidth }) {
 
   const tabs = [
     {
@@ -20,25 +19,20 @@ function Library() {
   ]
 
   return (
-    <div className='library'>
-      {
-        //<SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
-      }
-      
-      
+    <div className='library'>   
       <div className='library__container'>
         <SectionTabs type='small' tabs={tabs} > 
 
           <Routes>
 
             <Route exact path='/' element={ 
-                <LibraryList />
+                <LibraryList windowWidth={windowWidth} />
               }
             >
             </Route>
 
             <Route exact path='/normative' element={ 
-                <NormativeList />
+                <NormativeList windowWidth={windowWidth} />
               }
             >
             </Route>

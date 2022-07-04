@@ -24,6 +24,9 @@
 .search_type_medium {
   width: 400px;
 }
+.search_type_large {
+  width: 100%;
+}
 .search__input {
   width: 100%;
   margin: 0px;

@@ -1,21 +1,24 @@
 import React from 'react';
 import Search from '../../Search/Search.js';
-import Month from '../../Month/Month.js';
 import Table from '../../Table/Table.js';
+import { library } from '../../../utils/links.js';
 
-function LibraryList() {
+function LibraryList({ windowWidth }) {
 
-  const library = [
-    { name: 'Электронная библиотека ИЭФ', link: 'https://miit-ief.ru/student/elibrary/' },
-    { name: 'Электронно-библиотечная система Юрайт', link: 'https://www.biblio-online.ru' },
-    { name: 'Единое окно доступа к образовательным ресурсам федерального портала Российское образование', link: 'http://window.edu.ru/' },
-    { name: 'Электронная библиотека ИЭФ', link: 'https://miit-ief.ru/student/elibrary/' },
-    { name: 'Электронно-библиотечная система Юрайт', link: 'https://www.biblio-online.ru' },
-    { name: 'Единое окно доступа к образовательным ресурсам федерального портала Российское образование', link: 'http://window.edu.ru/' },
-    { name: 'Электронная библиотека ИЭФ', link: 'https://miit-ief.ru/student/elibrary/' },
-    { name: 'Электронно-библиотечная система Юрайт', link: 'https://www.biblio-online.ru' },
-    { name: 'Единое окно доступа к образовательным ресурсам федерального портала Российское образование', link: 'http://window.edu.ru/' },
-  ]
+  const containerHeightRef = React.createRef();
+  const headerHeightRef = React.createRef();
+
+  const [tableHeight, setTableHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    if (windowWidth >= 833 ) {
+      setTableHeight(containerHeightRef.current.clientHeight - headerHeightRef.current.clientHeight);
+    }
+  }, [windowWidth, containerHeightRef, headerHeightRef]);
+
+  const tableStyle = {
+    height: tableHeight, // + mainHeight + marginTop
+  };
 
   const [libraryDocuments, setLibraryDocuments] = React.useState(library);
 
@@ -23,46 +26,69 @@ function LibraryList() {
     setLibraryDocuments(data);
   }
 
+
   return (
     <>
     <div className='section__header'>
-      <Search type='medium' id='library' data={library} onSearch={handleSearchLibraryDocuments} />
-      <Month />
+      <Search type={windowWidth < 833 ? 'large' : 'medium' } id='library' data={library} onSearch={handleSearchLibraryDocuments} />
     </div>
-    <Table>
-      <div className='table__header'>
-        <div className='table__main-column table__main-column_type_empty'>
-          <div className='table__column table__column_type_header table__column_type_count'>
-            <p className='table__text table__text_type_header'>№</p>
-          </div>
-          <div className='table__column table__column_type_header table__column_type_name'>
-            <p className='table__text table__text_type_header'>Наименование</p>
-          </div>
-          <div className='table__column table__column_type_header table__column_type_link'>
-            <p className='table__text table__text_type_header'>Ссылка</p>
-          </div>
-        </div>
-      </div>
-      <ul className='table__main table__main_type_webinar scroll'>
-        {
-          libraryDocuments.map((item, i) => (
-            <li className='table__row' key={i}>
-              <div className='table__main-column'>
-                <div className='table__column table__column_type_count'>
-                  <p className='table__text'>{i + 1}</p>
+
+      {
+        windowWidth < 833 
+        ?
+        <ul className='library__list'>
+          {
+            libraryDocuments.map((item, i) => (
+              <li className='library__item' key={i}>
+                <span className='library__count'>{i + 1}.</span>
+                <div className='library__item-info'>
+                  <p className='library__item-name'>{item.name}</p>
+                  <a className='library__item-link' href={item.link} target='_blank' rel='noreferrer'>{item.link}</a>
                 </div>
-                <div className='table__column table__column_type_name'>
-                  <p className='table__text'>{item.name}</p>
+              </li>
+            ))
+          }
+        </ul>
+        :
+        <Table>
+          <div ref={containerHeightRef} className='table__container'>
+            <div ref={headerHeightRef} className='table__header'>
+              <div className='table__main-column table__main-column_type_empty'>
+                <div className='table__column table__column_type_header table__column_type_count'>
+                  <p className='table__text table__text_type_header'>№</p>
                 </div>
-                <div className='table__column table__column_type_link'>
-                  <a className='table__text table__link' href={item.link} target='_blank' rel='noreferrer'>{item.link}</a>
+                <div className='table__column table__column_type_header table__column_type_name'>
+                  <p className='table__text table__text_type_header'>Наименование</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_link'>
+                  <p className='table__text table__text_type_header'>Ссылка</p>
                 </div>
               </div>
-            </li>
-          ))
-        }
-      </ul>
-    </Table>
+            </div>
+            <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+              {
+                libraryDocuments.map((item, i) => (
+                  <li className='table__row' key={i}>
+                    <div className='table__main-column'>
+                      <div className='table__column table__column_type_count'>
+                        <p className='table__text'>{i + 1}</p>
+                      </div>
+                      <div className='table__column table__column_type_name'>
+                        <p className='table__text'>{item.name}</p>
+                      </div>
+                      <div className='table__column table__column_type_link'>
+                        <a className='table__text table__link' href={item.link} target='_blank' rel='noreferrer'>{item.link}</a>
+                      </div>
+                    </div>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </Table>
+      }
+
+
     </>
   )
 }

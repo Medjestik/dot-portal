@@ -6,7 +6,7 @@
   height: 100%;
 }
 .education__container {
-  margin: 0px;
+  margin: 0px 0px 20px 0px;
   display: grid;
   grid-template-columns: 1fr 360px;
   grid-column-gap: 20px;
