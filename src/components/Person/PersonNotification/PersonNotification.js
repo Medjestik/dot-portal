@@ -2,14 +2,12 @@ import React from 'react';
 import './PersonNotification.css';
 import Accordion from '../../Accordion/Accordion.js';
 import PersonNotificationInfoPopup from './PersonNotificationInfoPopup/PersonNotificationInfoPopup.js';
-import CommentOfTeacherPopup from '../../Popup/CommentOfTeacherPopup/CommentOfTeacherPopup.js';
 import notificationIcon from '../../../images/accordion/accordion-notification.svg';
 
-function PersonNotification({ user, windowWidth, userNotifications }) {
+function PersonNotification({ windowWidth, userNotifications, onOpen, currentNotification }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
-  const [isOpenTeacherCommentPopup, setIsOpenTeacherCommentPopup] = React.useState(false);
-  const [currentNotification, setCurrentNotification] = React.useState({});
+
 
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const heightRef = React.createRef();
@@ -20,14 +18,8 @@ function PersonNotification({ user, windowWidth, userNotifications }) {
     setIsOpenInfoPopup(true);
   }
 
-  function openTeacherCommentPopup(notification) {
-    setIsOpenTeacherCommentPopup(true);
-    setCurrentNotification(notification);
-  }
-
   function closePopups() {
     setIsOpenInfoPopup(false);
-    setIsOpenTeacherCommentPopup(false);
   }
 
   function showNotifications() {
@@ -36,13 +28,17 @@ function PersonNotification({ user, windowWidth, userNotifications }) {
 
   function renderNotifications(item, i) {
     return (
-      <li onClick={() => openTeacherCommentPopup(item)} key={i} className={`notification__item ${item.unreadNotification ? 'notification__item_type_unread' : ''}`}>
+      <li 
+      onClick={() => onOpen(item.id)} 
+      key={i} 
+      className={`notification__item ${item.viewed ? '' : 'notification__item_type_unread'}`}
+      >
         <div className='notification__img'>
           <div className='notification__icon'></div>
         </div>
-        <div className='notification__info'>
+        <div className={`notification__info ${userNotifications.length > 4 ? '' : 'notification__info_type_short'}`}>
           <span className='notification__date'>{item.date}</span>
-          <p className='notification__text'>{item.text}</p>
+          <p className='notification__text'>{item.title}</p>
         </div>
       </li>
     )
@@ -54,11 +50,8 @@ function PersonNotification({ user, windowWidth, userNotifications }) {
   
   React.useEffect(() => {
     setIsOpenInfoPopup(false);
-    setIsOpenTeacherCommentPopup(false);
     setNumberStep(5);
-
     return(() => {
-      setCurrentNotification({});
     })
   },[]);
 
@@ -99,14 +92,6 @@ function PersonNotification({ user, windowWidth, userNotifications }) {
       <PersonNotificationInfoPopup
         isOpen={isOpenInfoPopup}
         onClose={closePopups}
-      />
-    }
-    {
-      isOpenTeacherCommentPopup &&
-      <CommentOfTeacherPopup
-      isOpen={isOpenTeacherCommentPopup}
-      onClose={closePopups}
-      comment={currentNotification}
       />
     }
     </>

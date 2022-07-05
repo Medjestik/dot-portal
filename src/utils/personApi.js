@@ -72,6 +72,30 @@ export const getStudentEducationInfo = ({ token, userId }) => {
   .then(res => handleResponse(res))
 };
 
+export const getUserNotifications = ({ token }) => {
+  return fetch(`${API_URL}/notifications/action/my_notifications`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const openUserNotification = ({ token, notificationId }) => {
+  return fetch(`${API_URL}/notifications/action/show_notification/id/${notificationId}`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
 export const getStudentSocial = ({ token, userId }) => {
   return fetch(`${API_URL}/students/id/${userId}/action/social_info`, { 
     method: 'GET',

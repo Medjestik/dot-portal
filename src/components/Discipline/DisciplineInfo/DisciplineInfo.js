@@ -68,9 +68,12 @@ function DisciplineInfo({ windowWidth, disciplineInfo }) {
               </div>
               {
                 disciplineInfo.additional_files.length < 1 ?
-                <span className='table__caption_type_empty'>Дополнительные документы не загружены!</span>
+                <span className='table__caption_type_empty'>Дополнительные материалы не загружены!</span>
                 :
-                <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_info scroll'>
+                <ul 
+                style={Object.assign({}, windowWidth <= 1279 ? { height: 'auto' } : tableStyle)} 
+                className='table__main table__main_type_info scroll'
+                >
                 {
                   disciplineInfo.additional_files.map((item, i) => (
                     <li className='table__row' key={i}>

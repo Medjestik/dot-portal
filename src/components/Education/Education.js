@@ -1,17 +1,15 @@
 import React from 'react';
 import './Education.css';
 import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
-import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
+import SemesterHeaderWithOptions from '../SemesterHeader/SemesterHeaderWithOptions/SemesterHeaderWithOptions.js';
 import Section from '../Section/Section.js';
 import SemesterTable from '../SemesterTable/SemesterTable.js';
 import SemesterCardList from '../SemesterCardList/SemesterCardList.js';
 import Discipline from '../Discipline/Discipline.js';
-import Calendar from '../Calendar/Calendar.js';
-import Notifications from '../Notifications/Notifications.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import * as educationApi from '../../utils/educationApi.js';
 
-function Education({ windowWidth, semesterInfo }) {
+function Education({ windowWidth, semesterInfo, onLogout }) {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -77,13 +75,14 @@ function Education({ windowWidth, semesterInfo }) {
   }, []);
 
   return (
-    <div className='education'>
-      <SemesterHeader 
+    <div className='education'> 
+      <SemesterHeaderWithOptions
       semesterInfo={semesterInfo}
       currentSemester={currentSemester}
       chooseSemester={chooseSemester}
-      isDisciplineOpen={isDisciplineOpen} 
-      backToSemester={backToSemester} 
+      isDisciplineOpen={isDisciplineOpen}
+      backToSemester={backToSemester}
+      onLogout={onLogout}
       />
       
       {
@@ -96,29 +95,15 @@ function Education({ windowWidth, semesterInfo }) {
       <Routes>
         <Route exact path='/'
         element={
-          <>
+          <Section title={currentSemester.position + ' семестр'}  heightType='content' headerType='small' >
             {
-              /*
-              <div className='education__container'>
-                <Notifications />
-  
-                <Section title='Вебинары' heightType='content' headerType='small' >
-                  <Calendar />
-                </Section>
-              </div>
-              */
+            windowWidth <= 833 
+            ?
+              <SemesterCardList disciplines={disciplines} openDiscipline={openDiscipline} />
+            :
+              <SemesterTable disciplines={disciplines} openDiscipline={openDiscipline} />
             }
-
-            <Section title={currentSemester.position + ' семестр'}  heightType='content' headerType='small' >
-              {
-              windowWidth <= 833 
-              ?
-                <SemesterCardList disciplines={disciplines} openDiscipline={openDiscipline} />
-              :
-                <SemesterTable disciplines={disciplines} openDiscipline={openDiscipline} />
-              }
-            </Section>
-          </> 
+          </Section>
         }
         />
       </Routes>

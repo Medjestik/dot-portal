@@ -7,6 +7,7 @@
 .semester-header__select {
   margin: 0px;
   min-width: 164px;
+  min-height: 40px;
   position: relative;
   display: flex;
   align-items: center;
@@ -109,6 +110,21 @@
 .semester-header__btn-back:hover {
   cursor: pointer;
 }
+.semester-header__btn-empty {
+  margin: 0px;
+  min-width: max-content;
+  min-height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 8px 0px 8px 20px;
+  background: var(--main-white-color);
+  border-radius: var(--border-radius);
+  border: none;
+  user-select: none;
+  pointer-events: none;
+}
 .semester-header__btn-back-text {
   margin: 0px 20px 0px 0px;
   font-style: normal;
@@ -126,20 +142,20 @@
   background-repeat: no-repeat;
   transform: rotate(270deg);
 }
-.semester-header__control-list {
+.semester-header__nav-list {
   margin: 0px 0px 0px auto;
   padding: 0px;
   list-style-type: none;
   display: flex;
   align-items: center;
 }
-.semester-header__control-item {
+.semester-header__nav-item {
   margin: 0px 22px 0px 0px;
 }
-.semester-header__control-item:last-of-type {
+.semester-header__nav-item:last-of-type {
   margin: 0px;
 }
-.semester-header__control-item-container {
+.semester-header__nav-item-container {
   width: 40px;
   height: 40px;
   background: var(--main-white-color);
@@ -148,15 +164,23 @@
   justify-content: center;
   border-radius: var(--border-radius);
 }
-.semester-header__control-item-container:hover {
+.semester-header__nav-item-container:hover {
   background: var(--gradient-blue-color);
   cursor: pointer;
 }
-.semester-header__control-btn {
+.semester-header__nav-item-container_type_active {
+  background: var(--gradient-blue-color);
+  user-select: none;
+  pointer-events: none;
+}
+.semester-header__nav-btn {
   width: 24px;
   height: 24px;
   fill: var(--main-black-color);
 }
-.semester-header__control-item-container:hover .semester-header__control-btn {
+.semester-header__nav-item-container:hover .semester-header__nav-btn {
+  fill: var(--main-white-color);
+}
+.semester-header__nav-item-container_type_active .semester-header__nav-btn {
   fill: var(--main-white-color);
 }

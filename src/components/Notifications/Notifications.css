@@ -1,12 +1,20 @@
+.notification {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 24px);
+  height: 100%;
+}
 .notification__container {
   margin: 0px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .notification__list {
   list-style-type: none;
   margin: 0px;
   padding: 0px;
-  min-height: 340px;
-  max-height: 340px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -57,6 +65,9 @@
   width: 100%;
   position: relative;
 }
+.notification__info_type_short {
+  margin: 0px;
+}
 .notification__info:hover {
   cursor: pointer;
   opacity: .7;
@@ -98,6 +109,14 @@
 }
 .notification__item_type_unread .notification__text {
   color: var(--main-white-color);
+}
+.notification__caption_type_empty {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
 }
 
 @media all and (max-width: 833px) {

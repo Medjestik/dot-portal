@@ -89,7 +89,7 @@
   min-width: 32px;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   font-style: normal;
   font-weight: 900;
   font-size: 26px;

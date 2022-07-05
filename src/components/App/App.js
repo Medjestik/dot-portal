@@ -10,6 +10,7 @@ import Education from '../Education/Education.js';
 import Webinar from '../Webinar/Webinar.js';
 import Document from '../Document/Document.js';
 import Library from '../Library/Library.js';
+import Notifications from '../Notifications/Notifications.js';
 
 function App() { 
 
@@ -164,7 +165,12 @@ function App() {
               <div className='wrapper'>
                 <div className='container'>
 
-                    <Header windowWidth={windowWidth} pathname={pathname} onLogout={handleLogout} semesterInfo={semesterInfo} />
+                    <Header 
+                    windowWidth={windowWidth}
+                    pathname={pathname}
+                    onLogout={handleLogout}
+                    semesterInfo={semesterInfo}
+                    />
                     
                     <div className='main-container'>
                       <Routes>
@@ -179,7 +185,11 @@ function App() {
                         }/>
 
                         <Route path='education/semester/:semesterId/*' element={
-                          <Education windowWidth={windowWidth} semesterInfo={semesterInfo} />
+                          <Education 
+                          windowWidth={windowWidth} 
+                          semesterInfo={semesterInfo}
+                          onLogout={handleLogout} 
+                          />
                         }/>
 
                         <Route path='webinars' element={
@@ -187,11 +197,26 @@ function App() {
                         }/>
 
                         <Route path='document/*' element={
-                        <Document semesterInfo={semesterInfo} />
+                          <Document 
+                          semesterInfo={semesterInfo}
+                          onLogout={handleLogout}
+                          />
                         }/>
 
                         <Route path='library/*' element={
-                        <Library windowWidth={windowWidth} />
+                          <Library 
+                          windowWidth={windowWidth}
+                          semesterInfo={semesterInfo}
+                          onLogout={handleLogout}
+                          />
+                        }/>
+
+                        <Route path='notifications/*' element={
+                          <Notifications
+                          windowWidth={windowWidth}
+                          semesterInfo={semesterInfo}
+                          onLogout={handleLogout}
+                          />
                         }/>
 
                       </Routes>

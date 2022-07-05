@@ -17,7 +17,7 @@ function LibraryList({ windowWidth }) {
   }, [windowWidth, containerHeightRef, headerHeightRef]);
 
   const tableStyle = {
-    height: tableHeight, // + mainHeight + marginTop
+    height: tableHeight,
   };
 
   const [libraryDocuments, setLibraryDocuments] = React.useState(library);
@@ -25,7 +25,6 @@ function LibraryList({ windowWidth }) {
   function handleSearchLibraryDocuments(data) {
     setLibraryDocuments(data);
   }
-
 
   return (
     <>

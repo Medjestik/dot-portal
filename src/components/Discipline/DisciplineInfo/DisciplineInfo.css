@@ -97,3 +97,17 @@
   margin: 0px;
   width: 100%;
 }
+
+@media all and (max-width: 1279px) {
+  .discipline-info__container {
+    flex-direction: column;
+  }
+  .discipline-info__teacher {
+    margin: 0px;
+    max-width: 100%;
+    height: auto;
+  }
+  .discipline-info__document {
+    margin: 20px 0px 0px 0px;
+  }
+}

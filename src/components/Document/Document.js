@@ -6,7 +6,7 @@ import DocumentList from './DocumentList/DocumentList.js';
 import MaterialList from './MaterialList/MaterialList.js';
 import { Route, Routes } from 'react-router-dom';
 
-function Document() {
+function Document({ semesterInfo, onLogout }) {
 
   const tabs = [
     {
@@ -22,9 +22,8 @@ function Document() {
   return (
 
     <div className='document'>
-      {
-        //<SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
-      }
+      
+      <SemesterHeader semesterInfo={semesterInfo} onLogout={onLogout} />
       
       <div className='document__container'>
         <SectionTabs type='small' tabs={tabs} > 

@@ -19,6 +19,7 @@ import PersonDiploma from './PersonDiploma/PersonDiploma.js';
 import PersonPhotoPopup from './PersonPopup/PersonPhotoPopup/PersonAreaPhotoPopup.js';
 import PersonChangePasswordPopup from './PersonPopup/PersonChangePasswordPopup/PersonAreaChangePasswordPopup.js';
 import PersonAreaDataPopup from './PersonPopup/PersonDataPopup/PersonAreaDataPopup.js';
+import NotificationPopup from '../Popup/NotificationPopup/NotificationPopup.js';
 
 
 function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
@@ -50,17 +51,6 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
     achievements: ['Сессия без троек', 'Нет хвостов', 'Номер один в группе'],
     achievementsClassmates: ['Иванов Иван', 'Петров Иван', 'Костюлин Иван',],
   }
-
-  const userNotifications = [
-    { unreadNotification: true, date: '00.00.00 00:00', text: 'Новая оценка по текущему контролю «__» по дисциплине «__»' },
-    { unreadNotification: true, date: '00.00.00 00:00', text: 'Не подгружен чек об оплате обучения' },
-    { unreadNotification: false, date: '00.00.00 00:00', text: 'Поздравляем, Вами успешно завершен «__» курс «__» семестр' },
-    { unreadNotification: false, date: '00.00.00 00:00', text: 'Новый комментарий от преподавателя «__» по дисциплине «__» Новый комментарий от преподавателя «__» по дисциплине «__» Новый комментарий от преподавателя «__» по дисциплине «__»' },
-    { unreadNotification: false, date: '00.00.00 00:00', text: 'Новый комментарий от преподавателя «__» по дисциплине «__»' },
-    { unreadNotification: false, date: '00.00.00 00:00', text: 'Новый комментарий от преподавателя «__» по дисциплине «__»' },
-    { unreadNotification: false, date: '00.00.00 00:00', text: 'Новый комментарий от преподавателя «__» по дисциплине «__»' },
-    { unreadNotification: false, date: '00.00.00 00:00', text: 'Новый комментарий от преподавателя «__» по дисциплине «__»' },
-  ]
 
   const userDocuments = [
     { name: 'Договор', link: '123', status: 'active', },
@@ -103,12 +93,16 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
   const [studentData, setStudentData] = React.useState({});
   const [studentEducationInfo, setStudentEducationInfo] = React.useState({});
   const [studentSocial, setStudentSocial] = React.useState({});
+  const [userNotifications, setUserNotifications] = React.useState([]);
+  const [currentNotification, setCurrentNotification] = React.useState({});
+  const [isLoadingNotificationData, setIsLoadingNotificationData] = React.useState(false);
 
   const [isLoadingPage, setIsLoadingPage] = React.useState(true);
   
   const [isPhotoPopupOpen, setIsPhotoPopupOpen] = React.useState(false);
   const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = React.useState(false); 
   const [isDataPopupOpen, setIsDataPopupOpen] = React.useState(false);
+  const [isNotificationPopupOpen, setIsNotificationPopupOpen] = React.useState(false);
 
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
   const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '' });
@@ -126,6 +120,13 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
 
   function openDataPopup() {
     setIsDataPopupOpen(true);
+  }
+
+  function closePersonAreaPopup() {
+    setIsShowRequestError({ isShow: false, text: '' });
+    setIsPhotoPopupOpen(false);
+    setIsChangePasswordPopupOpen(false);
+    setIsDataPopupOpen(false);
   }
 
   function handleChangePassword(oldPassword, newPassword) {
@@ -192,39 +193,37 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
       });
   }
 
-  function closePersonAreaPopup() {
-    setIsShowRequestError({ isShow: false, text: '' });
-    setIsPhotoPopupOpen(false);
-    setIsChangePasswordPopupOpen(false);
-    setIsDataPopupOpen(false);
+  function handleOpenNotificationPopup(id) {
+    setIsLoadingNotificationData(true);
+    setIsNotificationPopupOpen(true);
+    const token = localStorage.getItem('token');
+    personApi.openUserNotification({ token: token, notificationId: id })
+      .then((res) => {
+        setCurrentNotification(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsNotificationPopupOpen(false);
+        setIsLoadingNotificationData(false);
+      })
+      .finally(() => {
+        setIsLoadingNotificationData(false);
+      });
   }
 
-  function getData(id) {
-    setIsLoadingPage(true);
-    const token = localStorage.getItem('token');
-    Promise.all([
-      personApi.getStudentData({ token: token, userId: id }),
-      personApi.getStudentEducationInfo({ token: token, userId: id }),
-      personApi.getStudentSocial({ token: token, userId: id }),
-    ])
-    .then(([studentData, studentEducationInfo, studentSocial]) => {
-      console.log('StudentData', studentData);
-      console.log('StudentEducationInfo', studentEducationInfo);
-      console.log('StudentSocial', studentSocial);
-      setStudentData(studentData);
-      setStudentEducationInfo(studentEducationInfo);
-      setStudentSocial(studentSocial);
-    })
-    .catch((err) => {
-        console.error(err);
-    })
-    .finally(() => {
-      setIsLoadingPage(false);
-    });
+  function handleCloseNotificationPopup() {
+    const index = userNotifications.indexOf(userNotifications.find((elem) => (elem.id === currentNotification.notification_id)));
+    if (index >= 0) {
+      setUserNotifications([
+        ...userNotifications.slice(0, index), 
+        { ...userNotifications[index], viewed: true }, 
+        ...userNotifications.slice(index + 1)
+      ]);
+    }
+    setIsNotificationPopupOpen(false);
   }
 
   function handleChangeSocialLink(link, type) {
-    //setIsLoadingRequest(true);
     const userId = currentUser.id;
     const token = localStorage.getItem('token');
     let social = {};
@@ -244,11 +243,37 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
       })
       .catch((err) => {
         console.log(err);
-        //setIsShowRequestError({ isShow: true, text: 'Неправильно введен текущий пароль. Повторите попытку!' })
       })
       .finally(() => {
         setIsLoadingSocialRequest({ isShow: false, type: '' });
       });
+  }
+
+  function getData(id) {
+    setIsLoadingPage(true);
+    const token = localStorage.getItem('token');
+    Promise.all([
+      personApi.getStudentData({ token: token, userId: id }),
+      personApi.getStudentEducationInfo({ token: token, userId: id }),
+      personApi.getStudentSocial({ token: token, userId: id }), 
+      personApi.getUserNotifications({ token: token }),
+    ])
+    .then(([studentData, studentEducationInfo, studentSocial, userNotifications]) => {
+      console.log('StudentData', studentData);
+      console.log('StudentEducationInfo', studentEducationInfo);
+      console.log('StudentSocial', studentSocial);
+      console.log('UserNotifications', userNotifications);
+      setStudentData(studentData);
+      setStudentEducationInfo(studentEducationInfo);
+      setStudentSocial(studentSocial);
+      setUserNotifications(userNotifications);
+    })
+    .catch((err) => {
+        console.error(err);
+    })
+    .finally(() => {
+      setIsLoadingPage(false);
+    });
   }
   
   React.useEffect(() => {
@@ -263,7 +288,8 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
       setStudentData({});
       setStudentEducationInfo({});
       setStudentSocial({});
-      setIsLoadingSocialRequest({ isShow: false, type: '' });
+      setUserNotifications([]);
+      setIsLoadingSocialRequest({ isShow: false, type: '' }); 
     }
   // eslint-disable-next-line
   }, []);
@@ -328,7 +354,12 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
           <PersonAchievement user={user} windowWidth={windowWidth} />
           <PersonDocument windowWidth={windowWidth} userDocuments={userDocuments} userCheck={userCheck} />
           <PersonDeclaration windowWidth={windowWidth} userDeclaration={userDeclaration} declarationTemplate={declarationTemplate} />
-          <PersonNotification user={user} userNotifications={userNotifications} windowWidth={windowWidth} />
+          <PersonNotification
+          windowWidth={windowWidth}
+          userNotifications={userNotifications}
+          onOpen={handleOpenNotificationPopup}
+          currentNotification={currentNotification}
+          />
           <PersonRating scores={scores} windowWidth={windowWidth} />
           <PersonCommunication 
           windowWidth={windowWidth}
@@ -370,6 +401,15 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
               onChangeData={handleChangeData}
               isLoadingRequest={isLoadingRequest}
               isShowRequestError={isShowRequestError}
+            />
+          }
+          {
+            isNotificationPopupOpen &&
+            <NotificationPopup
+            isOpen={isNotificationPopupOpen}
+            onClose={handleCloseNotificationPopup}
+            notification={currentNotification}
+            isLoading={isLoadingNotificationData}
             />
           }
         </div>
