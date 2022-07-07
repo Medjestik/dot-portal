@@ -522,6 +522,9 @@ input[type=number] {
 }
 
 @media all and (max-width: 833px) {
+  .container {
+    padding: 76px 0px 16px 0px;
+  }
   .btn_type_download {
     width: 32px;
     height: 32px;

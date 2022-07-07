@@ -66,6 +66,7 @@
   line-height: 18px;
   min-height: 18px;
   color: var(--main-black-color);
+  word-wrap: break-word;
 }
 .discipline-info__teacher-text_type_job {
   text-transform: capitalize;
@@ -93,9 +94,70 @@
   line-height: 18px;
   color: var(--main-black-color);
 }
+.discipline-info__teacher-comment-text_type_empty {
+  color: var(--accent-grey-color);
+}
 .discipline-info__document {
   margin: 0px;
   width: 100%;
+}
+.discipline-info__document-caption {
+  margin: 0px 0px 8px 0px;
+  text-align: left;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.discipline-info__document-list {
+  margin: 0px;
+  width: 100%;
+  padding: 0px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+.discipline-info__document-item {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 21px 0px;
+  border-bottom: 1px solid var(--slider-color);
+}
+.discipline-info__document-item:last-of-type {
+  border-bottom: none;
+}
+.discipline-info__document-count {
+  margin: 0px 21px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--slider-color);
+}
+.discipline-info__document-info {
+  margin: 0px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.discipline-info__document-name {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.discipline-info__document-date {
+  margin: 5px 0px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--slider-color);
 }
 
 @media all and (max-width: 1279px) {
@@ -109,5 +171,66 @@
   }
   .discipline-info__document {
     margin: 20px 0px 0px 0px;
+  }
+}
+
+@media all and (max-width: 833px)  {
+  .discipline__header-select {
+    width: 100%;
+  }
+  .discipline__header-select-main {
+    padding: 8px 8px 8px 16px;
+  }
+  .discipline__header-select-text {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .discipline__header-select-arrow {
+    width: 16px;
+    height: 16px;
+  }
+  .discipline__header-select-options-container {
+    top: 32px;
+  }
+  .discipline__header-select-options-item {
+    padding: 9px 16px;
+  }
+  .discipline__header-select-options-text {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .discipline-info__teacher-img {
+    width: 100px;
+    height: 100px;
+  }
+  .discipline-info__teacher-container {
+    align-items: flex-start;
+  }
+  .discipline-info__teacher-name {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .discipline-info__teacher-info-list {
+    margin: 16px 0px 0px 0px;
+  }
+  .discipline-info__teacher-info-list {
+    flex-direction: column;
+  }
+  .discipline-info__teacher-info-item {
+    margin: 0px 0px 12px 0px;
+  }
+  .discipline-info__teacher-info-item:last-of-type {
+    margin: 0px;
+  }
+  .discipline-info__teacher-text {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .discipline-info__teacher-comment {
+    padding: 16px 20px;
+  }
+  .discipline-info__teacher-comment-text {
+    font-size: 13px;
+    line-height: 16px;
   }
 }

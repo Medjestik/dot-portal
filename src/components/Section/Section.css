@@ -72,4 +72,12 @@
   .section__student-container {
     padding: 20px;
   }
+  .section__student-item {
+    padding: 7px 16px;
+    height: 112px;
+  }
+  .section__student-title {
+    font-size: 15px;
+    line-height: 18px;
+  }
 }

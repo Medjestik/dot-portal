@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.adc15207.css",
-    "main.js": "/static/js/main.e6819876.js",
+    "main.css": "/static/css/main.7ef2347e.css",
+    "main.js": "/static/js/main.f9530303.js",
     "static/js/787.1955ab40.chunk.js": "/static/js/787.1955ab40.chunk.js",
     "static/media/homepage-background.jpg": "/static/media/homepage-background.6ebabe323b86ec3dbd90.jpg",
     "static/media/Robotomediumitalic.ttf": "/static/media/Robotomediumitalic.35abcf5eb54b0c398e52.ttf",
@@ -16,7 +16,6 @@
     "static/media/Robotomedium.ttf": "/static/media/Robotomedium.704bba02385c62b5914c.ttf",
     "static/media/Roboto.ttf": "/static/media/Roboto.ecf539e1e3bc3e936f78.ttf",
     "static/media/Robotothin.ttf": "/static/media/Robotothin.a2329626eefbae679990.ttf",
-    "static/media/rut-avatar.png": "/static/media/rut-avatar.d4ca1622b5f9ab2a3ff5.png",
     "static/media/Robotomediumitalic.woff": "/static/media/Robotomediumitalic.7f386c9f1ab8ea402147.woff",
     "static/media/Robotoitalic.woff": "/static/media/Robotoitalic.bf5f5b612ecf194288f8.woff",
     "static/media/Robotoblackitalic.woff": "/static/media/Robotoblackitalic.34d76a2a6c343da6c96c.woff",
@@ -41,9 +40,16 @@
     "static/media/Robotolight.woff2": "/static/media/Robotolight.95ff440a51f48ad36a98.woff2",
     "static/media/Roboto.woff2": "/static/media/Roboto.806e04d8241d87f99a68.woff2",
     "static/media/Robotothin.woff2": "/static/media/Robotothin.30581100ea069d04b86a.woff2",
+    "static/media/rut.png": "/static/media/rut.cee19eb3af90a60d7dd3.png",
     "static/media/test.svg": "/static/media/test.ea137248903aa6b8395f.svg",
     "static/media/group-rating.svg": "/static/media/group-rating.5635b86108a6c8dc4ea000a7d3be1529.svg",
     "static/media/content.svg": "/static/media/content.1e8028333aacf8299043.svg",
+    "static/media/error-color.svg": "/static/media/error-color.fd221ec54bb85ddd6316.svg",
+    "static/media/error.svg": "/static/media/error.ef22c54144529fbb6273.svg",
+    "static/media/notification-color.svg": "/static/media/notification-color.9500648d2971ae4b58a5.svg",
+    "static/media/notification.svg": "/static/media/notification.e48d0f3e32b98ae899b4.svg",
+    "static/media/exit-color.svg": "/static/media/exit-color.d519f2608ac494d4a6b6.svg",
+    "static/media/exit.svg": "/static/media/exit.0a9a73c5bdda6e22e80d.svg",
     "static/media/teacher-color.svg": "/static/media/teacher-color.2185e8d51becdebba26787ac5955430d.svg",
     "static/media/group.svg": "/static/media/group.e5dac1189cba40fcb8510af384661055.svg",
     "static/media/vk.svg": "/static/media/vk.42733c889f7d3dc6c940d8ef94c42042.svg",
@@ -58,6 +64,8 @@
     "static/media/instagram-color.svg": "/static/media/instagram-color.156b06f75a08aac6d8cb.svg",
     "static/media/accordion-communication.svg": "/static/media/accordion-communication.03c35404cb6011e121c754fb972c1f0c.svg",
     "static/media/accordion-document.svg": "/static/media/accordion-document.253c392820b9ad966f782d396d4b6783.svg",
+    "static/media/home-color.svg": "/static/media/home-color.231e0b379fd631b1234f.svg",
+    "static/media/home.svg": "/static/media/home.a8f6698c0310de5a5189.svg",
     "static/media/education.svg": "/static/media/education.9eef265272ff4dc7cc0193275da029d0.svg",
     "static/media/accordion-data.svg": "/static/media/accordion-data.650c9ee55eb4dc9514ced448f896a065.svg",
     "static/media/password-hide-color.svg": "/static/media/password-hide-color.fc56a60e78838c6b83c5.svg",
@@ -106,12 +114,12 @@
     "static/media/arrow.svg": "/static/media/arrow.55a4ec4915bbcdabc744354a9e148a36.svg",
     "static/media/arrow-white.svg": "/static/media/arrow-white.9817492cc56038ef8ec6.svg",
     "static/media/arrow-blue.svg": "/static/media/arrow-blue.f26d55b949820f718a86.svg",
-    "main.adc15207.css.map": "/static/css/main.adc15207.css.map",
-    "main.e6819876.js.map": "/static/js/main.e6819876.js.map",
+    "main.7ef2347e.css.map": "/static/css/main.7ef2347e.css.map",
+    "main.f9530303.js.map": "/static/js/main.f9530303.js.map",
     "787.1955ab40.chunk.js.map": "/static/js/787.1955ab40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.adc15207.css",
-    "static/js/main.e6819876.js"
+    "static/css/main.7ef2347e.css",
+    "static/js/main.f9530303.js"
   ]
 }

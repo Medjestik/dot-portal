@@ -2,7 +2,8 @@ import React from 'react';
 import './NotificationPopup.css';
 import Popup from '../Popup.js';
 import PreloaderPopup from '../../Preloader/PreloaderPopup/PreloaderPopup.js';
-import logo from '../../../images/rut-avatar.png';
+import logo from '../../../images/avatar/rut.png';
+import supportAvatar from '../../../images/avatar/support.png';
 
 function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
 
@@ -14,9 +15,8 @@ function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
   }
 
   function defineCreator(elem) {
-    console.log(elem);
     if (elem.type === 'system') {
-      setCreator({ name: 'Техническая поддержка', pic: elem.tutor.pict_url });
+      setCreator({ name: 'Техническая поддержка', pic: supportAvatar });
     } else if (elem.type === 'news') {
       setCreator({ name: 'РУТ (МИИТ)', pic: logo });
     } else {
@@ -32,8 +32,6 @@ function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
       setCreator({ name: '', pic: '' });
     })
   }, [isLoading, notification])
-
-  console.log(notification);
 
   return (
     <Popup isOpen={isOpen} onClose={onClose} >
@@ -60,6 +58,17 @@ function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
         <div className='popup__text-container scroll'>
           <p className='popup__text'>{notification.text}</p>
         </div>
+        {
+          notification.files.length > 0 &&
+          <div className='notification-popup__links'>
+            <p className='notification-popup__link-caption'>Файлы для загрузки:</p>
+            {
+              notification.files.map((file, i) => (
+                <a key={i} className='link notification-popup__link' href={file.name}>{i + 1}. {file.name}</a>
+              ))
+            }
+          </div>
+        }
         <button className='popup__btn-back' type='submit'>Назад</button>
         </>
       }

@@ -10,7 +10,9 @@ function DisciplineInfo({ windowWidth, disciplineInfo }) {
   const [tableHeight, setTableHeight] = React.useState(0);
 
   React.useEffect(() => {
-    setTableHeight(containerHeightRef.current.clientHeight - headerHeightRef.current.clientHeight);
+    if (windowWidth >= 833 ) {
+      setTableHeight(containerHeightRef.current.clientHeight - headerHeightRef.current.clientHeight);
+    }
   }, [windowWidth, containerHeightRef, headerHeightRef]);
 
   const tableStyle = {
@@ -44,10 +46,44 @@ function DisciplineInfo({ windowWidth, disciplineInfo }) {
             </div>
           </div>
           <div className='discipline-info__teacher-comment'>
-            <p className='discipline-info__teacher-comment-text'>Комментарий преподавателя</p>
+            {
+              disciplineInfo.message 
+              ? 
+              <p className='discipline-info__teacher-comment-text'>{disciplineInfo.message}</p>
+              :
+              <p className='discipline-info__teacher-comment-text discipline-info__teacher-comment-text_type_empty'>Комментарий...</p>
+            }
           </div>
         </div>
         <div className='discipline-info__document'>
+        {
+        windowWidth < 833
+        ?
+          <>
+          {
+            disciplineInfo.additional_files.length > 0 &&
+            <>
+              <h5 className='discipline-info__document-caption'>Материалы для загрузки:</h5>
+              <ul className='discipline-info__document-list'>
+                {
+                  disciplineInfo.additional_files.map((item, i) => (
+                    <li className='discipline-info__document-item' key={i}>
+                      <span className='discipline-info__document-count'>{i + 1}.</span>
+                      <div className='discipline-info__document-info'>
+                        <h6 className='discipline-info__document-name'>{item.name}</h6>
+                        <p className='discipline-info__document-date'>{item.date}</p>
+                      </div>
+                      <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
+                        <div className='btn btn_type_download btn_type_download_status_active'></div>
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </>
+          }
+          </>
+        :
           <Table>
             <div ref={containerHeightRef} className='table__container'>
               <div ref={headerHeightRef} className='table__header'>
@@ -100,6 +136,8 @@ function DisciplineInfo({ windowWidth, disciplineInfo }) {
               }
             </div>
           </Table>
+        }
+
         </div>
 
       </div>

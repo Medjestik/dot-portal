@@ -6,27 +6,9 @@ import Preloader from '../Preloader/Preloader.js';
 import SectionTabs from '../Section/SectionTabs/SectionTabs.js';
 import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import NotificationPopup from '../Popup/NotificationPopup/NotificationPopup.js';
+import { types } from './NotificationsTypes/NotificationsTypes.js';
 
 function Notifications({ windowWidth, semesterInfo, onLogout }) {
-
-  const tabs = [
-    {
-      title: 'Преподаватель',
-      link: '/notifications'
-    },
-    {
-      title: 'Деканат',
-      link: '/notifications/office'
-    },
-    {
-      title: 'Система',
-      link: '/notifications/system'
-    },
-    {
-      title: 'Новости',
-      link: '/notifications/news'
-    },
-  ]
 
   const [userNotifications, setUserNotifications] = React.useState([]);
   const [currentNotification, setCurrentNotification] = React.useState({});
@@ -139,7 +121,7 @@ function Notifications({ windowWidth, semesterInfo, onLogout }) {
         isLoadingPage ?
         <Preloader />
         :
-        <SectionTabs type='small' tabs={tabs} >
+        <SectionTabs type='small' tabs={types} >
 
           <div className='notification__container' ref={containerHeightRef} >
 

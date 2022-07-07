@@ -38,6 +38,30 @@
   line-height: 18px;
   color: var(--main-black-color);
 }
+.notification-popup__links {
+  margin: 12px 0px 0px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.notification-popup__link-caption {
+  margin: 0px 0px 8px 0px;
+  text-align: left;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.notification-popup__link {
+  margin: 0px 0px 8px 0px;
+  max-width: max-content;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+.notification-popup__link:last-of-type {
+  margin: 0px;
+}
 
 
 
