@@ -383,13 +383,18 @@ input[type=number] {
 }
 .upload-form__container {
   width: 100%;
+  display: flex;
   margin: 12px 0px 0px 0px;
+}
+.upload-form__section {
+  width: 100%;
+  margin: 0px 16px 0px 0px;
   display: flex;
   align-items: center;
 }
 .upload-form__field {
   width: 100%;
-  margin: 0px 16px 0px 0px;
+  margin: 0px;
   padding: 10px 16px;
   box-sizing: border-box;
   background: #F1F3F5;
@@ -432,6 +437,10 @@ input[type=number] {
 }
 .upload-form__input {
   display: none;
+}
+.upload-form__buttons {
+  margin: 0px;
+  display: flex;
 }
 
 .svg {
@@ -558,5 +567,33 @@ input[type=number] {
     background-size: 16px;
     width: 16px;
     height: 16px;
+  }
+  .btn_type_large {
+    flex-grow: 2;
+    width: auto;
+    padding: 7px;
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .upload-form__container {
+    flex-direction: column;
+  }
+  .upload-form__section {
+    margin: 0px;
+  }
+  .upload-form__buttons {
+    margin: 12px 0px 0px 0px;
+  }
+  .upload-form__field {
+    padding: 6px 12px;
+  }
+  .upload-form__text {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .upload-form__icon {
+    width: 16px;
+    height: 16px;
+    background-size: 16px;
   }
 }

@@ -154,23 +154,27 @@ function DisciplineTasks({ windowWidth, disciplineId }) {
             </div>
             <p className='discipline-tasks__caption'>Выберите файл:</p>
             <div className='upload-form__container'>
-              <label htmlFor='discipline-tasks-upload' className='upload-form__field'>
-                <p className='upload-form__text'>{fileName.isShow ? fileName.name : ''}</p>
-                <div className='upload-form__icon'></div>
-              </label>
-              <input onChange={handleChangeTask} id='discipline-tasks-upload' className='upload-form__input' type="file" />
-              <button className='btn_type_large btn-cancel_type_large' type='button' onClick={cleanForm}>Отменить</button>
-              {
-                isLoadingRequest ? 
-                <button className='btn_type_large btn-save_type_large btn-save_type_large_status_loading' disabled type='button'>Сохранение..</button>
-                :
-                <button 
-                className={`btn_type_large btn-save_type_large ${isBlockSaveButton ? 'btn-save_type_large_status_block' : ''}`} 
-                type='submit'
-                >
-                  Сохранить
-                </button>
-              }
+              <div className='upload-form__section'>
+                <label htmlFor='discipline-tasks-upload' className='upload-form__field'>
+                  <p className='upload-form__text'>{fileName.isShow ? fileName.name : ''}</p>
+                  <div className='upload-form__icon'></div>
+                </label>
+                <input onChange={handleChangeTask} id='discipline-tasks-upload' className='upload-form__input' type="file" />
+              </div>
+              <div className='upload-form__buttons'>
+                <button className='btn_type_large btn-cancel_type_large' type='button' onClick={cleanForm}>Отменить</button>
+                  {
+                    isLoadingRequest ? 
+                    <button className='btn_type_large btn-save_type_large btn-save_type_large_status_loading' disabled type='button'>Сохранение..</button>
+                    :
+                    <button 
+                    className={`btn_type_large btn-save_type_large ${isBlockSaveButton ? 'btn-save_type_large_status_block' : ''}`} 
+                    type='submit'
+                    >
+                      Сохранить
+                    </button>
+                  }
+              </div>
             </div>
           </form>
         </div>

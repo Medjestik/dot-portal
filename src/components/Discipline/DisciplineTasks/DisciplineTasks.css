@@ -19,3 +19,11 @@
   margin: 0px 0px 20px 0px;
   width: 100%;
 }
+
+@media all and (max-width: 833px)  {
+  .discipline-tasks__caption {
+    margin: 16px 0px 0px 0px;
+    font-size: 13px;
+    line-height: 16px;
+  }
+}

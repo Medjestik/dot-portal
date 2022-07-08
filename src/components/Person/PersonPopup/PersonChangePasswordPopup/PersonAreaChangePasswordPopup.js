@@ -86,7 +86,7 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose, onChangePassword, isLo
             value={currentPassword}
             onChange={changeCurrentPassword}
             name='currentPassword'
-            placeholder='Введите ваш логин'
+            placeholder='Введите ваш текущий пароль'
             minLength='6'
             autoComplete='off'
             required 
@@ -113,7 +113,7 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose, onChangePassword, isLo
             value={newPassword}
             onChange={changeNewPassword}
             name='newPassword'
-            placeholder='Введите ваш пароль'
+            placeholder='Введите ваш новый пароль'
             minLength='6'
             autoComplete='off'
             required 
@@ -140,7 +140,7 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose, onChangePassword, isLo
             value={repeatPassword}
             onChange={changeRepeatPassword}
             name='repeatPassword' 
-            placeholder='Введите пароль...' 
+            placeholder='Повторите ваш новый пароль' 
             minLength='6'
             autoComplete='off'
             required 

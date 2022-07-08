@@ -99,10 +99,11 @@
 .popup__btn-container {
   display: flex;
   align-items: center;
-  margin: 24px 0px 0px 0px;
+  margin: auto 0px 0px 0px;
+  padding: 24px 0px 0px 0px;
 }
 .popup__btn-back {
-  margin: 32px 0px 0px 0px;
+  margin: auto 0px 0px 0px;
   width: 100%;
   padding: 11px;
   background: var(--gradient-blue-color);
@@ -321,7 +322,26 @@
   .popup__form_type_medium {
     width: 95vw;
   }
+  .popup__field {
+    margin: 12px 0px 0px 0px;
+  }
   .popup__input-field {
-    padding: 11px 12px 11px 12px;
+    margin: 8px 0px 0px 0px;
+    padding: 7px 12px 7px 12px;
+  }
+  .popup__input-caption {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .popup__input {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .popup__input::placeholder {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .popup__btn-container {
+    padding: 16px 0px 0px 0px;
   }
 }

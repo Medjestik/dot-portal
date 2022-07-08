@@ -27,6 +27,9 @@
   align-items: center;
   border-bottom: 1px solid var(--slider-color);
 }
+.discipline-materials__item:last-of-type .discipline-materials__item-info {
+  border-bottom: none;
+}
 .discipline-materials__item-text {
   margin: 0px 20px 0px 0px;
   font-family: 'Roboto';
