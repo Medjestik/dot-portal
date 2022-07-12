@@ -11,6 +11,7 @@ import Webinar from '../Webinar/Webinar.js';
 import Document from '../Document/Document.js';
 import Library from '../Library/Library.js';
 import Notifications from '../Notifications/Notifications.js';
+import Events from '../Events/Events.js';
 
 function App() { 
 
@@ -213,6 +214,14 @@ function App() {
 
                         <Route path='notifications/*' element={
                           <Notifications
+                          windowWidth={windowWidth}
+                          semesterInfo={semesterInfo}
+                          onLogout={handleLogout}
+                          />
+                        }/>
+
+                        <Route path='events/*' element={
+                          <Events
                           windowWidth={windowWidth}
                           semesterInfo={semesterInfo}
                           onLogout={handleLogout}

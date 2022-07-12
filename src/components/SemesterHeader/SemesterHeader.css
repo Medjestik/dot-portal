@@ -202,17 +202,17 @@
 .semester-header__nav-item-container_type_active .semester-header__nav-btn_type_notification {
   background-image: url('../../images/menu/notification.svg');
 }
-.semester-header__nav-btn_type_error {
-  background-image: url('../../images/menu/error-color.svg');
+.semester-header__nav-btn_type_calendar {
+  background-image: url('../../images/menu/calendar-color.svg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
-.semester-header__nav-item-container:hover .semester-header__nav-btn_type_error {
-  background-image: url('../../images/menu/error.svg');
+.semester-header__nav-item-container:hover .semester-header__nav-btn_type_calendar {
+  background-image: url('../../images/menu/calendar.svg');
 }
-.semester-header__nav-item-container_type_active .semester-header__nav-btn_type_error {
-  background-image: url('../../images/menu/error.svg');
+.semester-header__nav-item-container_type_active .semester-header__nav-btn_type_calendar {
+  background-image: url('../../images/menu/calendar.svg');
 }
 .semester-header__nav-btn_type_exit {
   background-image: url('../../images/menu/exit-color.svg');

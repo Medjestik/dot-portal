@@ -5,6 +5,8 @@ import educationIcon from '../../../images/header/education.svg';
 import webinarIcon from '../../../images/header/webinar.svg';
 import documentIcon from '../../../images/header/document.svg';
 import libraryIcon from '../../../images/header/library.svg';
+import notificationIcon from '../../../images/header/notification.svg';
+import calendarIcon from '../../../images/header/calendar.svg';
 
 function HeaderMobile({ showMobileMenu, pathname }) {
 
@@ -16,6 +18,8 @@ function HeaderMobile({ showMobileMenu, pathname }) {
     else if (path.includes('webinars')) { linkText = 'Вебинары'; linkImg = webinarIcon; }
     else if (path.includes('document')) { linkText = 'Документы'; linkImg = documentIcon; }
     else if (path.includes('library')) { linkText = 'Библиотека'; linkImg = libraryIcon; }
+    else if (path.includes('notifications')) { linkText = 'Уведомления'; linkImg = notificationIcon; }
+    else if (path.includes('calendar')) { linkText = 'Календарь'; linkImg = calendarIcon; }
     return (
       <>
       <h2 className='header-mobile__title'>{linkText}</h2>

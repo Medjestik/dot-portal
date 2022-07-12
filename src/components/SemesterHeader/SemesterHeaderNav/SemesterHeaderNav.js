@@ -16,9 +16,9 @@ return (
       </NavLink>
     </li>
     <li className='semester-header__nav-item'>
-      <div className='semester-header__nav-item-container'>
-        <div className='semester-header__nav-btn semester-header__nav-btn_type_error'></div>
-      </div>
+      <NavLink className={({ isActive }) => 'semester-header__nav-item-container ' + (isActive ? 'semester-header__nav-item-container_type_active' : '')} to='/events'>
+          <div className='semester-header__nav-btn semester-header__nav-btn_type_calendar'></div>
+      </NavLink>
     </li>
     <li className='semester-header__nav-item'>
       <div className='semester-header__nav-item-container' onClick={onLogout}>
