@@ -5,7 +5,7 @@ import * as educationApi from '../../../utils/educationApi.js';
 import Preloader from '../../Preloader/Preloader.js';
 import DisciplineMaterialsList from '../DisciplineMaterialsList/DisciplineMaterialsList.js';
 
-function DisciplineMaterials({ disciplineId }) {
+function DisciplineMaterials({ windowWidth, disciplineId }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -82,7 +82,7 @@ function DisciplineMaterials({ disciplineId }) {
       {
         !isLoadingMaterials 
         ?
-        <DisciplineMaterialsList materials={materials.parts.part} handleOpenMaterial={handleOpenMaterial} />
+        <DisciplineMaterialsList windowWidth={windowWidth} materials={materials.parts.part} handleOpenMaterial={handleOpenMaterial} />
         :
         <Preloader />
       }

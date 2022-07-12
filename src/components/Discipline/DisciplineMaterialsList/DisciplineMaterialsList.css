@@ -27,9 +27,6 @@
   align-items: center;
   border-bottom: 1px solid var(--slider-color);
 }
-.discipline-materials__item:last-of-type .discipline-materials__item-info {
-  border-bottom: none;
-}
 .discipline-materials__item-text {
   margin: 0px 20px 0px 0px;
   font-family: 'Roboto';
@@ -86,7 +83,9 @@
 .discipline-materials__item-icon {
   margin: 0px 12px 0px 0px;
   width: 40px;
+  min-width: 40px;
   height: 40px;
+  min-height: 40px;
   background-position: center;
   background-size: 24px;
   background-repeat: no-repeat;
@@ -102,4 +101,46 @@
 }
 .discipline-materials__item-icon_type_content {
   background-image: url('../../../images/materials/content.svg');
+}
+.discipline-materials__item-mobile {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media all and (max-width: 833px) {
+  .discipline-materials__list {
+    padding: 0px;
+  }
+  .discipline-materials__item-mobile {
+    margin: 0px 0px 0px 12px;
+  }
+  .discipline-materials__item-btn {
+    width: 100px;
+    margin: 2px 0px 0px 0px;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .discipline-materials__item-status {
+    margin: 0px;
+    min-width: auto;
+    text-align: center;
+    font-size: 13px;
+    line-height: 16px;
+  }
+  .discipline-materials__item-text {
+    margin: 0px;
+  }
+  .discipline-materials__item-icon {
+    margin: 0px 12px 0px 0px;
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    min-height: 24px;
+    background-position: center;
+    background-size: 16px;
+    background-repeat: no-repeat;
+  }
 }

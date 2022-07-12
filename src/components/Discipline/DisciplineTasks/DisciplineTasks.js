@@ -32,7 +32,7 @@ function DisciplineTasks({ windowWidth, disciplineId }) {
   };
 
   React.useEffect(() => {
-    if (!isLoadingTasks) {
+    if (!isLoadingTasks && windowWidth >= 833) {
       setTableHeight(containerHeightRef.current.clientHeight - headerHeightRef.current.clientHeight); 
     }
     
@@ -179,58 +179,86 @@ function DisciplineTasks({ windowWidth, disciplineId }) {
           </form>
         </div>
 
-      <Table>
-        <div ref={containerHeightRef} className='table__container'>
-          <div ref={headerHeightRef} className='table__header'>
-            <div className='table__main-column'>
-              <div className='table__column table__column_type_header table__column_type_count'>
-                <p className='table__text table__text_type_header'>№</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_date'>
-                <p className='table__text table__text_type_header'>Дата</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_name'>
-                <p className='table__text table__text_type_header'>Наименование</p>
-              </div>
-            </div>
-            <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-              <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
-            </div>
-          </div>
+        {
+        windowWidth < 833
+        ?
+          <>
           {
-            tasks.length < 1 ?
-            <span className='table__caption_type_empty'>Выполненные работы не загружены!</span>
-            :
-            <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_tasks scroll'>
-              {
-                tasks.map((item, i) => (
-                  <li className='table__row' key={i}>
-                    <div className='table__main-column'>
-                      <div className='table__column table__column_type_count'>
-                        <p className='table__text'>{i + 1}</p>
+            tasks.length > 0 &&
+            <>
+              <h5 className='discipline-list__caption'>Загруженные материалы:</h5>
+              <ul className='discipline-list'>
+                {
+                  tasks.map((item, i) => (
+                    <li className='discipline-list__item' key={i}>
+                      <span className='discipline-list__count'>{i + 1}.</span>
+                      <div className='discipline-list__info'>
+                        <h6 className='discipline-list__info-name'>{item.name}</h6>
+                        <p className='discipline-list__info-date'>{item.date}</p>
                       </div>
-                      <div className='table__column table__column_type_date'>
-                        <p className='table__text'>{item.date}</p>
-                      </div>
-                      <div className='table__column table__column_type_name'>
-                        <p className='table__text'>{item.name}</p>
-                      </div>
-                    </div>
-                    <div className='table__column table__column_type_btn'>
                       <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
-                        <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
+                        <div className='btn btn_type_download btn_type_download_status_active discipline-list__btn'></div>
                       </a>
-                    </div>
-                  </li>
-                ))
-              }
-            </ul>
+                    </li>
+                  ))
+                }
+              </ul>
+            </>
           }
-        </div>
-      </Table>
+          </>
+        :
+          <Table>
+            <div ref={containerHeightRef} className='table__container'>
+              <div ref={headerHeightRef} className='table__header'>
+                <div className='table__main-column'>
+                  <div className='table__column table__column_type_header table__column_type_count'>
+                    <p className='table__text table__text_type_header'>№</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_date'>
+                    <p className='table__text table__text_type_header'>Дата</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_name'>
+                    <p className='table__text table__text_type_header'>Наименование</p>
+                  </div>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                  <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
+                </div>
+              </div>
+              {
+                tasks.length < 1 ?
+                <span className='table__caption_type_empty'>Выполненные работы не загружены!</span>
+                :
+                <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_tasks scroll'>
+                  {
+                    tasks.map((item, i) => (
+                      <li className='table__row' key={i}>
+                        <div className='table__main-column'>
+                          <div className='table__column table__column_type_count'>
+                            <p className='table__text'>{i + 1}</p>
+                          </div>
+                          <div className='table__column table__column_type_date'>
+                            <p className='table__text'>{item.date}</p>
+                          </div>
+                          <div className='table__column table__column_type_name'>
+                            <p className='table__text'>{item.name}</p>
+                          </div>
+                        </div>
+                        <div className='table__column table__column_type_btn'>
+                          <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
+                            <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
+                          </a>
+                        </div>
+                      </li>
+                    ))
+                  }
+                </ul>
+              }
+            </div>
+          </Table>
+        }
       </>
       }
-
     </div>
   );
 }

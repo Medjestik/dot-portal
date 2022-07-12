@@ -10,7 +10,7 @@ function DisciplineInfo({ windowWidth, disciplineInfo }) {
   const [tableHeight, setTableHeight] = React.useState(0);
 
   React.useEffect(() => {
-    if (windowWidth >= 833 ) {
+    if (windowWidth >= 833) {
       setTableHeight(containerHeightRef.current.clientHeight - headerHeightRef.current.clientHeight);
     }
   }, [windowWidth, containerHeightRef, headerHeightRef]);
@@ -63,18 +63,18 @@ function DisciplineInfo({ windowWidth, disciplineInfo }) {
           {
             disciplineInfo.additional_files.length > 0 &&
             <>
-              <h5 className='discipline-info__document-caption'>Материалы для загрузки:</h5>
-              <ul className='discipline-info__document-list'>
+              <h5 className='discipline-list__caption'>Материалы для загрузки:</h5>
+              <ul className='discipline-list'>
                 {
                   disciplineInfo.additional_files.map((item, i) => (
-                    <li className='discipline-info__document-item' key={i}>
-                      <span className='discipline-info__document-count'>{i + 1}.</span>
-                      <div className='discipline-info__document-info'>
-                        <h6 className='discipline-info__document-name'>{item.name}</h6>
-                        <p className='discipline-info__document-date'>{item.date}</p>
+                    <li className='discipline-list__item' key={i}>
+                      <span className='discipline-list__count'>{i + 1}.</span>
+                      <div className='discipline-list__info'>
+                        <h6 className='discipline-list__info-name'>{item.name}</h6>
+                        <p className='discipline-list__info-date'>{item.date}</p>
                       </div>
                       <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
-                        <div className='btn btn_type_download btn_type_download_status_active'></div>
+                        <div className='btn btn_type_download btn_type_download_status_active discipline-list__btn'></div>
                       </a>
                     </li>
                   ))

@@ -113,7 +113,7 @@
 }
 .semester-header__btn-empty {
   margin: 0px;
-  min-width: max-content;
+  min-width: 164px;
   min-height: 40px;
   box-sizing: border-box;
   display: flex;

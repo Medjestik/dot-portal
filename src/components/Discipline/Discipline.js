@@ -125,7 +125,10 @@ function Discipline({ windowWidth, currentSemester, currentDiscipline, getDiscip
       <Routes>
         <Route exact path={`materials`}
         element={
-          <DisciplineMaterials disciplineId={disciplineId} />
+          <DisciplineMaterials
+          windowWidth={windowWidth}
+          disciplineId={disciplineId}
+          />
         }
         />
       </Routes>

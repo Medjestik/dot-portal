@@ -1,7 +1,7 @@
 import React from 'react';
 import './DisciplineMaterialsList.css';
 
-function DisciplineMaterialsList({ materials, handleOpenMaterial }) {
+function DisciplineMaterialsList({ windowWidth, materials, handleOpenMaterial }) {
 
   const [convertMaterials, setConvertMaterials] = React.useState([]);
 
@@ -41,14 +41,13 @@ function DisciplineMaterialsList({ materials, handleOpenMaterial }) {
               <p className='discipline-materials__item-text'>{elem.name}</p>
             </div>
             <ul className='discipline-materials__list'>
-              {
-                renderMaterials(elem.children)
-              }
+              {renderMaterials(elem.children)}
             </ul>
           </li>
         )
       } else {
-        return (
+        return (         
+          windowWidth >= 833 ?
           <li key={elem.code} className='discipline-materials__item'>
             <div className='discipline-materials__item-info'>
               {renderMaterialIcon(elem)}
@@ -56,6 +55,17 @@ function DisciplineMaterialsList({ materials, handleOpenMaterial }) {
               {renderMaterialStatus(elem)}
             </div>
             {renderMaterialBtn(elem)}
+          </li>
+          :
+          <li key={elem.code} className='discipline-materials__item'>
+            <div className='discipline-materials__item-info'>
+              {renderMaterialIcon(elem)}
+              <p className='discipline-materials__item-text'>{elem.name}</p>
+            </div>
+            <div className='discipline-materials__item-mobile'>
+              {renderMaterialStatus(elem)}
+              {renderMaterialBtn(elem)}
+            </div>
           </li>
         )
       }
@@ -122,7 +132,7 @@ function DisciplineMaterialsList({ materials, handleOpenMaterial }) {
         className='discipline-materials__item-btn discipline-materials__item-btn_type_repeat' 
         onClick={(() => handleOpenMaterial(elem))}
         >
-          Пройти заново
+          Повторить
         </button>
       )
     } else {

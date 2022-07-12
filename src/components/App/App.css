@@ -585,7 +585,7 @@ input[type=number] {
     margin: 12px 0px 0px 0px;
   }
   .upload-form__field {
-    padding: 6px 12px;
+    padding: 8px 12px;
   }
   .upload-form__text {
     font-size: 13px;
@@ -595,5 +595,11 @@ input[type=number] {
     width: 16px;
     height: 16px;
     background-size: 16px;
+  }
+  .upload-form__field:hover .upload-form__icon {
+    background-image: url('../../images/button/upload-hover.svg');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
