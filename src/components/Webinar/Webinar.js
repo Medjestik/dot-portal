@@ -1,7 +1,7 @@
 import React from 'react';
 import './Webinar.css';
 import Section from '../Section/Section.js';
-import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
+import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
 import Search from '../Search/Search.js';
 import Month from '../Month/Month.js';
 import Table from '../Table/Table.js';

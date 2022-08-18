@@ -52,33 +52,36 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser, onChangePhoto, isL
   }
 
   return (
-    <Popup isOpen={isOpen} onClose={onClose} >
-      <form className='popup__form popup__form_type_small' name='person-area-photo-popup' action='#' noValidate onSubmit={handleSubmit} ref={formRef}>
-        <h2 className='popup__title'>Фотография</h2>
-        <p className='popup__subtitle'>Загрузите вашу фотографию на портал:</p>
-        <div className='popup__upload-section'>
-          <div className='popup__upload-text-container'>
-            <p className='popup__upload-text'>{fileName.isShow ? fileName.name : ''}</p>
-          </div>
-          <label htmlFor='person-area-photo-upload' 
-          className='btn btn_type_upload btn_type_upload_status_active'
-          >
-          </label>
-          <input onChange={handleChangePhoto} id='person-area-photo-upload' name='person-area-photo-upload' className='popup__upload-input' type="file" />
-          <button className={`btn btn_type_cancel popup__btn-upload-cancel ${currentUser.avatar ? 'btn_type_cancel_status_active' : ''}`} type='button' onClick={removeUploadFile}></button>
+    <Popup 
+      isOpen={isOpen}
+      onSubmit={handleSubmit}
+      formWidth={'small'}
+      formName={'person-area-photo-popup'}
+    >
+      <h2 className='popup__title'>Фотография</h2>
+      <p className='popup__subtitle'>Загрузите вашу фотографию на портал:</p>
+      <div className='popup__upload-section'>
+        <div className='popup__upload-text-container'>
+          <p className='popup__upload-text'>{fileName.isShow ? fileName.name : ''}</p>
         </div>
-        <span className={`popup__input-error ${isShowWrongType && 'popup__input-error_status_show'}`}>Неверный формат файла</span>
-        <div className='popup__btn-container'>
-          <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>
-          {
-            isLoadingRequest ? 
-            <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Сохранение..</button>
-            :
-            <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
-          }
-        </div>
-        <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
-      </form>
+        <label htmlFor='person-area-photo-upload' 
+        className='btn btn_type_upload btn_type_upload_status_active'
+        >
+        </label>
+        <input onChange={handleChangePhoto} id='person-area-photo-upload' name='person-area-photo-upload' className='popup__upload-input' type="file" />
+        <button className={`btn btn_type_cancel popup__btn-upload-cancel ${currentUser.avatar ? 'btn_type_cancel_status_active' : ''}`} type='button' onClick={removeUploadFile}></button>
+      </div>
+      <span className={`popup__input-error ${isShowWrongType && 'popup__input-error_status_show'}`}>Неверный формат файла</span>
+      <div className='popup__btn-container'>
+        <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>
+        {
+          isLoadingRequest ? 
+          <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Сохранение..</button>
+          :
+          <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
+        }
+      </div>
+      <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
     </Popup>
   )
 }

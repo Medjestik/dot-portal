@@ -242,7 +242,6 @@ input[type=number] {
   opacity: .8;
   box-shadow: 0px 8px 12px -8px rgba(213, 102, 0, 0.9);
 }
-
 .btn_type_save {
   position: relative;
   margin: 0px 12px 0px 0px;
@@ -377,6 +376,9 @@ input[type=number] {
 .btn-more_margin_top {
   margin: 16px auto 0px;
 }
+.btn_margin_zero {
+  margin: 0px;
+}
 .upload-form {
   width: 100%;
   margin: 12px 0px 0px 0px;
@@ -442,12 +444,10 @@ input[type=number] {
   margin: 0px;
   display: flex;
 }
-
 .svg {
   width: 100%;
   height: 100%;
 }
-
 .rec.rec-carousel-wrapper {
   position: relative;
 }

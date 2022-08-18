@@ -32,8 +32,20 @@ export const getUser = ({ token }) => {
   .then(res => handleResponse(res))
 };
 
-export const getSemesterInfo = ({ token, userId }) => {
+export const getUserSemesterInfo = ({ token, userId }) => {
   return fetch(`${API_URL}/education/action/semesters/student_id/${userId }`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getTeacherSemesterInfo = ({ token }) => {
+  return fetch(`${API_URL}/tutors/action/semesters`, { 
     method: 'GET',
     headers: {
       'Accept': 'application/json',

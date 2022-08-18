@@ -4,11 +4,12 @@ import * as personApi from '../../utils/personApi';
 import { Route, Routes } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader.js';
 import SectionTabs from '../Section/SectionTabs/SectionTabs.js';
-import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
+import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
+import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import NotificationPopup from '../Popup/NotificationPopup/NotificationPopup.js';
 import { types } from './NotificationsTypes/NotificationsTypes.js';
 
-function Notifications({ windowWidth, semesterInfo, onLogout }) {
+function Notifications({ windowWidth, onLogout }) {
 
   const [userNotifications, setUserNotifications] = React.useState([]);
   const [currentNotification, setCurrentNotification] = React.useState({});
@@ -115,7 +116,9 @@ function Notifications({ windowWidth, semesterInfo, onLogout }) {
   return (
     <div className='notification'>
 
-      <SemesterHeader semesterInfo={semesterInfo} onLogout={onLogout} />
+      <SemesterHeader onLogout={onLogout}>
+        <SemesterHeaderBtnBack onBack={() => {}} isPerformFunction={false} />
+      </SemesterHeader>
 
       {
         isLoadingPage ?

@@ -6,12 +6,13 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import HomePage from '../HomePage/HomePage.js';
 import Header from '../Header/Header.js';
 import Person from '../Person/Person.js';
-import Education from '../Education/Education.js';
+import SemesterUser from '../Education/SemesterUser/SemesterUser.js';
 import Webinar from '../Webinar/Webinar.js';
 import Document from '../Document/Document.js';
 import Library from '../Library/Library.js';
 import Notifications from '../Notifications/Notifications.js';
 import Events from '../Events/Events.js';
+import SemesterTeacher from '../Education/SemesterTeacher/SemesterTeacher.js';
 
 function App() { 
 
@@ -53,8 +54,18 @@ function App() {
           console.log('UserInfo', res);
           setLoggedIn(true);
           setCurrentUser(res);
-          if (res.access_role) {
-            semesterInfoRequest(res.id)
+          if (res.access_role === 'user') {
+            semesterUserInfoRequest(res.id);
+          } else if (res.access_role === 'tutor') {
+            semesterTeacherInfoRequest();
+          } else {
+            if (pathname === '/') {
+              navigate('/person');
+              setIsLoadingPage(false);
+            } else {
+              navigate(pathname);
+              setIsLoadingPage(false);
+            }
           }
         })
         .catch(() => {
@@ -72,9 +83,32 @@ function App() {
     }
   }
 
-  function semesterInfoRequest(userId) {
+  function semesterUserInfoRequest(userId) {
     const token = localStorage.getItem('token');
-    api.getSemesterInfo({ token: token, userId: userId })
+    api.getUserSemesterInfo({ token: token, userId: userId })
+    .then((res) => {
+      console.log('SemesterInfo', res);
+      const newArr = res.map((item) => {
+        return ({ ...item, id: item.semesterId, name: 'Семестр ' + item.position})
+      })
+      setSemesterInfo(newArr);
+      if (pathname === '/') {
+        navigate('/person');
+      } else {
+        navigate(pathname);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      setIsLoadingPage(false);
+    });
+  }
+
+  function semesterTeacherInfoRequest() {
+    const token = localStorage.getItem('token');
+    api.getTeacherSemesterInfo({ token: token })
     .then((res) => {
       console.log('SemesterInfo', res);
       setSemesterInfo(res);
@@ -179,14 +213,13 @@ function App() {
                         <Route exact path='person' element={
                           <Person 
                           windowWidth={windowWidth} 
-                          onChangeUserPhoto={handleChangeUserPhoto}
-                          onChangeUserData={handleChangeUserData}
-                          semesterInfo={semesterInfo}
+                          onChangeUserPhoto={handleChangeUserPhoto} 
+                          onChangeUserData={handleChangeUserData} 
                           />
                         }/>
 
                         <Route path='education/semester/:semesterId/*' element={
-                          <Education 
+                          <SemesterUser 
                           windowWidth={windowWidth} 
                           semesterInfo={semesterInfo}
                           onLogout={handleLogout} 
@@ -199,7 +232,6 @@ function App() {
 
                         <Route path='document/*' element={
                           <Document 
-                          semesterInfo={semesterInfo}
                           onLogout={handleLogout}
                           />
                         }/>
@@ -207,7 +239,6 @@ function App() {
                         <Route path='library/*' element={
                           <Library 
                           windowWidth={windowWidth}
-                          semesterInfo={semesterInfo}
                           onLogout={handleLogout}
                           />
                         }/>
@@ -215,13 +246,19 @@ function App() {
                         <Route path='notifications/*' element={
                           <Notifications
                           windowWidth={windowWidth}
-                          semesterInfo={semesterInfo}
                           onLogout={handleLogout}
                           />
                         }/>
 
                         <Route path='events/*' element={
                           <Events
+                          windowWidth={windowWidth}
+                          onLogout={handleLogout}
+                          />
+                        }/>
+
+                        <Route path='semester/:semesterId/*' element={
+                          <SemesterTeacher
                           windowWidth={windowWidth}
                           semesterInfo={semesterInfo}
                           onLogout={handleLogout}

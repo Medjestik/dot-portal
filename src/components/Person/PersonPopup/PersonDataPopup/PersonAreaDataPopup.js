@@ -97,105 +97,108 @@ function PersonAreaDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoa
   }, [isOpen, currentUser]);
 
   return (
-    <Popup isOpen={isOpen} onClose={onClose} >
-      <form className='popup__form popup__form_type_medium' name='person-area-change-data-popup' action='#' noValidate onSubmit={handleSubmit}>
-        <h2 className='popup__title'>Персональные данные</h2>
+    <Popup
+      isOpen={isOpen}
+      onSubmit={handleSubmit}
+      formWidth={'medium'}
+      formName={'person-area-change-data-popup'}
+    >
+      <h2 className='popup__title'>Персональные данные</h2>
 
-        <label className='popup__field'>
-          <h4 className='popup__input-caption'>Укажите вашу дату рождения:</h4>
-          <div className='popup__input-field'>
-            <input 
-            className='popup__input'
-            type='date'
-            id='person-area-date'
-            value={date}
-            onChange={handleChangeDate}
-            name='person-area-date' 
-            placeholder='Укажите дату...'
-            min='1900-01-01'
-            max='2100-01-01'
-            autoComplete='off'
-            required 
-            />
-
-          </div>
-          <span className={`popup__input-error ${dateError.isShow ? 'popup__input-error_status_show' : ''}`}>
-            {dateError.text}
-          </span>
-        </label>
-
-        <label className='popup__field'>
-          <h4 className='popup__input-caption'>Укажите ваш страховой номер индивидуального лицевого счета:</h4>
-          <div className='popup__input-field'>
-          <InputMask mask='999 999 999 99' 
-            className='popup__input'
-            placeholder='Укажите ваш снилс...'
-            type='tel'
-            id='person-area-identifier'
-            name='person-area-identifier'
-            value={identifier}
-            onChange={handleChangeIdentifier}
-            required
-            autoComplete="off"
+      <label className='popup__field'>
+        <h4 className='popup__input-caption'>Укажите вашу дату рождения:</h4>
+        <div className='popup__input-field'>
+          <input 
+          className='popup__input'
+          type='date'
+          id='person-area-date'
+          value={date}
+          onChange={handleChangeDate}
+          name='person-area-date' 
+          placeholder='Укажите дату...'
+          min='1900-01-01'
+          max='2100-01-01'
+          autoComplete='off'
+          required 
           />
-          </div>
-          <span className={`popup__input-error ${identifierError.isShow ? 'popup__input-error_status_show' : ''}`}>
-            {identifierError.text}
-          </span>
-        </label>
 
-        <label className='popup__field'>
-          <h4 className='popup__input-caption'>Укажите ваш актуальный номер мобильного телефона для связи:</h4>
-          <div className='popup__input-field'>
-          <InputMask mask='9 (999) 999-99-99' 
-            className='popup__input'
-            placeholder='Укажите ваш номер телефона...'
-            type='tel'
-            id='person-area-phone'
-            name='person-area-phone'
-            value={phone}
-            onChange={handleChangePhone}
-            required
-            autoComplete="off"
-          />
-          </div>
-          <span className={`popup__input-error ${phoneError.isShow ? 'popup__input-error_status_show' : ''}`}>
-            {phoneError.text}
-          </span>
-        </label>
-
-        <label className='popup__field'>
-          <h4 className='popup__input-caption'>Укажите ваш актуальный e-mail для связи:</h4>
-          <div className='popup__input-field'>
-            <input 
-            className='popup__input'
-            type='email'
-            id='person-area-mail'
-            value={mail}
-            onChange={handleChangeMail}
-            name='person-area-mail' 
-            placeholder='Укажите вашу почту...'
-            autoComplete='off'
-            required 
-            />
-
-          </div>
-          <span className={`popup__input-error ${mailError.isShow ? 'popup__input-error_status_show' : ''}`}>
-            {mailError.text}
-          </span>
-        </label>
-
-        <div className='popup__btn-container'>
-          <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>
-          {
-            isLoadingRequest ? 
-            <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Сохранение..</button>
-            :
-            <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
-          }
         </div>
-        <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
-      </form>
+        <span className={`popup__input-error ${dateError.isShow ? 'popup__input-error_status_show' : ''}`}>
+          {dateError.text}
+        </span>
+      </label>
+
+      <label className='popup__field'>
+        <h4 className='popup__input-caption'>Укажите ваш страховой номер индивидуального лицевого счета:</h4>
+        <div className='popup__input-field'>
+        <InputMask mask='999 999 999 99' 
+          className='popup__input'
+          placeholder='Укажите ваш снилс...'
+          type='tel'
+          id='person-area-identifier'
+          name='person-area-identifier'
+          value={identifier}
+          onChange={handleChangeIdentifier}
+          required
+          autoComplete="off"
+        />
+        </div>
+        <span className={`popup__input-error ${identifierError.isShow ? 'popup__input-error_status_show' : ''}`}>
+          {identifierError.text}
+        </span>
+      </label>
+
+      <label className='popup__field'>
+        <h4 className='popup__input-caption'>Укажите ваш актуальный номер мобильного телефона для связи:</h4>
+        <div className='popup__input-field'>
+        <InputMask mask='9 (999) 999-99-99' 
+          className='popup__input'
+          placeholder='Укажите ваш номер телефона...'
+          type='tel'
+          id='person-area-phone'
+          name='person-area-phone'
+          value={phone}
+          onChange={handleChangePhone}
+          required
+          autoComplete="off"
+        />
+        </div>
+        <span className={`popup__input-error ${phoneError.isShow ? 'popup__input-error_status_show' : ''}`}>
+          {phoneError.text}
+        </span>
+      </label>
+
+      <label className='popup__field'>
+        <h4 className='popup__input-caption'>Укажите ваш актуальный e-mail для связи:</h4>
+        <div className='popup__input-field'>
+          <input 
+          className='popup__input'
+          type='email'
+          id='person-area-mail'
+          value={mail}
+          onChange={handleChangeMail}
+          name='person-area-mail' 
+          placeholder='Укажите вашу почту...'
+          autoComplete='off'
+          required 
+          />
+
+        </div>
+        <span className={`popup__input-error ${mailError.isShow ? 'popup__input-error_status_show' : ''}`}>
+          {mailError.text}
+        </span>
+      </label>
+
+      <div className='popup__btn-container'>
+        <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>
+        {
+          isLoadingRequest ? 
+          <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Сохранение..</button>
+          :
+          <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Сохранить</button>
+        }
+      </div>
+      <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
     </Popup>
   )
 }

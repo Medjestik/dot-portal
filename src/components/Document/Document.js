@@ -1,12 +1,13 @@
 import React from 'react';
 import './Document.css';
 import SectionTabs from '../Section/SectionTabs/SectionTabs.js';
-import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
+import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
+import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import DocumentList from './DocumentList/DocumentList.js';
 import MaterialList from './MaterialList/MaterialList.js';
 import { Route, Routes } from 'react-router-dom';
 
-function Document({ semesterInfo, onLogout }) {
+function Document({ onLogout }) {
 
   const tabs = [
     {
@@ -23,7 +24,9 @@ function Document({ semesterInfo, onLogout }) {
 
     <div className='document'>
       
-      <SemesterHeader semesterInfo={semesterInfo} onLogout={onLogout} />
+      <SemesterHeader onLogout={onLogout}>
+        <SemesterHeaderBtnBack onBack={() => {}} isPerformFunction={false} />
+      </SemesterHeader>
       
       <div className='document__container'>
         <SectionTabs type='small' tabs={tabs} > 

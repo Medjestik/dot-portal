@@ -3,7 +3,7 @@ import './Header.css';
 import HeaderMobile from './HeaderMobile/HeaderMobile.js';
 import { useLocation, NavLink } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
-import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon } from './HeaderIcons/HeaderIcons.js';
+import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon, disciplineIcon } from './HeaderIcons/HeaderIcons.js';
 import useOnClickOutside from '../../hooks/useOnClickOutside.js';
 
 function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
@@ -15,6 +15,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
 
   const [isShowMobileMenu, setIsShowMobileMenu] = React.useState(false);
   const [isEducationOpen, setIsEducationOpen] = React.useState(location.pathname.includes('/education') ? true : false);
+  const [isDisciplinesOpen, setIsDisciplinesOpen] = React.useState(location.pathname.includes('/semester') ? true : false);
 
   function showMobileMenu() {
     setIsShowMobileMenu(true);
@@ -26,10 +27,109 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
     document.body.style.overflow = '';
   }
 
+  function renderUserLinks() {
+    return (
+      <>
+      <NavLink 
+      onClick={hideMobileMenu}
+      className={`header__nav-link + ${isEducationOpen ? 'header__nav-link_type_active' : ''}`} 
+      to={`/education/semester/${semesterInfo[semesterInfo.length - 1].semesterId}`}
+      >
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { educationIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Обучение</p>
+      </NavLink>
+
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
+      <div className='header__nav-link-icon'>
+        <div className='header__nav-link-icon-container'>
+          { webinarIcon }
+        </div>
+      </div>
+      <p className='header__nav-link-text'>Вебинары</p>
+    </NavLink>
+
+      {/*
+        <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
+          <div className='header__nav-link-icon'>
+            <div className='header__nav-link-icon-container'>
+              { ratingIcon }
+            </div>
+          </div>
+          <p className='header__nav-link-text'>Рейтинг</p>
+        </NavLink>*/
+      }
+
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/document'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { documentIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Документы</p>
+      </NavLink>
+      </>
+    )
+  }
+
+  function renderTeacherLinks() {
+    return (
+      <>
+      <NavLink
+      onClick={hideMobileMenu}
+      className={`header__nav-link + ${isDisciplinesOpen ? 'header__nav-link_type_active' : ''}`}
+      to={`/semester/${semesterInfo[0].id}`}
+      >
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { disciplineIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Дисциплины</p> 
+      </NavLink>
+      </>
+    )
+
+  }
+
+  function renderPersonLinks() {
+    return (
+      <>
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/person'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { personIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Личный кабинет</p>
+      </NavLink>
+      </>
+    )
+  }
+
+  function renderLibraryLinks() {
+    return (
+      <>
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/library'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { libraryIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Библиотека</p> 
+      </NavLink>
+      </>
+    )
+  }
+
   useOnClickOutside(refMobileHeader, hideMobileMenu);
 
   React.useEffect(() => {
     setIsEducationOpen(location.pathname.includes('/education') ? true : false);
+    setIsDisciplinesOpen(location.pathname.includes('/semester') ? true : false);
   }, [location])
  
   return (
@@ -52,62 +152,24 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
           
           <h3 className='header__name'>{currentUser.fullname || ''}</h3>
           <nav className='scroll header__nav'>
-            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/person'>
-              <div className='header__nav-link-icon'>
-                <div className='header__nav-link-icon-container'>
-                  { personIcon }
-                </div>
-              </div>
-              <p className='header__nav-link-text'>Личный кабинет</p>
-            </NavLink>
-            <NavLink 
-            onClick={hideMobileMenu}
-            className={`header__nav-link + ${isEducationOpen ? 'header__nav-link_type_active' : ''}`} 
-            to={`/education/semester/${semesterInfo[semesterInfo.length - 1].semesterId}`}
-            >
-              <div className='header__nav-link-icon'>
-                <div className='header__nav-link-icon-container'>
-                  { educationIcon }
-                </div>
-              </div>
-              <p className='header__nav-link-text'>Обучение</p>
-            </NavLink>
-            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
-              <div className='header__nav-link-icon'>
-                <div className='header__nav-link-icon-container'>
-                  { webinarIcon }
-                </div>
-              </div>
-              <p className='header__nav-link-text'>Вебинары</p>
-            </NavLink>
 
-            {/*
-              <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
-                <div className='header__nav-link-icon'>
-                  <div className='header__nav-link-icon-container'>
-                    { ratingIcon }
-                  </div>
-                </div>
-                <p className='header__nav-link-text'>Рейтинг</p>
-              </NavLink>*/
+            {
+              renderPersonLinks()
+            }
+            
+            {
+              
+              currentUser.access_role === 'user' 
+              ?
+              renderUserLinks()
+              :
+              renderTeacherLinks()
             }
 
-            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/document'>
-              <div className='header__nav-link-icon'>
-                <div className='header__nav-link-icon-container'>
-                  { documentIcon }
-                </div>
-              </div>
-              <p className='header__nav-link-text'>Документы</p>
-            </NavLink>
-            <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/library'>
-              <div className='header__nav-link-icon'>
-                <div className='header__nav-link-icon-container'>
-                  { libraryIcon }
-                </div>
-              </div>
-              <p className='header__nav-link-text'>Библиотека</p> 
-            </NavLink>
+            {
+              renderLibraryLinks()
+            }
+            
           </nav>
           
           <button className='header__nav-link header__nav-link_type_logout' onClick={onLogout}>

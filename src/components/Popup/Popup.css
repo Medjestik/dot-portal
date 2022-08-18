@@ -47,13 +47,15 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  min-height: 420px;
   height: 100%;
 }
-.popup__form_type_small {
+.popup__form_height_min {
+  min-height: 420px;
+}
+.popup__form_width_small {
   width: 414px;
 }
-.popup__form_type_medium {
+.popup__form_width_medium {
   width: 520px;
 }
 .popup__title {
@@ -307,6 +309,88 @@
 }
 .popup__input-error_status_show {
   opacity: 1;
+}
+.popup__textarea {
+  resize: none;
+  width: calc(100% - 20px);
+  min-height: 160px;
+  padding: 10px;
+  margin: 8px 0px 0px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--title-color);
+  border: none;
+  outline: none;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
+}
+.popup__list {
+  width: 100%;
+  margin: 12px 0px 12px 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+.popup__item {
+  width: 100%;
+  margin: 0px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.popup__item-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0px 12px 0px 0px;
+  padding: 11px 0px;
+  border-bottom: 1px solid var(--slider-color);
+}
+.popup__item:last-of-type .popup__item-container  {
+  border-bottom: none;
+}
+.popup__item-count {
+  margin: 0px 12px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.popup__item-img {
+  margin: 0px 12px 0px 0px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  user-select: none;
+  pointer-events: none;
+  object-fit: cover;
+  object-position: center;
+}
+.popup__item-info {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+.popup__item-name {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.popup__item-date {
+  margin: 4px 0px 0px 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--accent-grey-color);
 }
 
 @media all and (max-width: 833px) {

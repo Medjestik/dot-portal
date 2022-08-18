@@ -4,9 +4,10 @@ import SectionTabs from '../Section/SectionTabs/SectionTabs.js';
 import { Route, Routes } from 'react-router-dom';
 import LibraryList from './LibraryList/LibraryList.js';
 import NormativeList from './NormativeList/NormativeList.js';
-import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
+import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
+import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
  
-function Library({ windowWidth, semesterInfo, onLogout }) {
+function Library({ windowWidth, onLogout }) {
 
   const tabs = [
     {
@@ -22,7 +23,9 @@ function Library({ windowWidth, semesterInfo, onLogout }) {
   return (
     <div className='library'>
 
-      <SemesterHeader semesterInfo={semesterInfo} onLogout={onLogout} />
+      <SemesterHeader onLogout={onLogout}>
+        <SemesterHeaderBtnBack onBack={() => {}} isPerformFunction={false} />
+      </SemesterHeader>
 
       <div className='library__container'>
         <SectionTabs type='small' tabs={tabs} > 

@@ -19,7 +19,7 @@ function HeaderMobile({ showMobileMenu, pathname }) {
     else if (path.includes('document')) { linkText = 'Документы'; linkImg = documentIcon; }
     else if (path.includes('library')) { linkText = 'Библиотека'; linkImg = libraryIcon; }
     else if (path.includes('notifications')) { linkText = 'Уведомления'; linkImg = notificationIcon; }
-    else if (path.includes('calendar')) { linkText = 'Календарь'; linkImg = calendarIcon; }
+    else if (path.includes('events')) { linkText = 'Календарь'; linkImg = calendarIcon; }
     return (
       <>
       <h2 className='header-mobile__title'>{linkText}</h2>

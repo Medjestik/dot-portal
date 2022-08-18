@@ -21,7 +21,7 @@ export const getDisciplines = ({ token, semesterId, currentUserId }) => {
 };
 
 export const getDisciplineInfo = ({ token, disciplineId }) => {
-  return fetch(`${API_URL}/education/action/discipline_info/discipline_id/${disciplineId}`, { 
+  return fetch(`${API_URL}/education/action/discipline_info/discipline_id/${disciplineId}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -65,6 +65,31 @@ export const getDisciplineMaterial = ({ token, disciplineId, currentUserId }) =>
       'Content-Type': 'application/json',
       'Authorization': `Basic ${token}`,
     }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getDisciplineInfoTeacher = ({ token, teacherId, disciplineId }) => {
+  return fetch(`${API_URL}/tutors/id/${teacherId}/action/discipline/discipline_id/${disciplineId}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const teacherSetMark = ({ token, discipline_id, student_id, mark_id, kr_mark_id, comment }) => {
+  return fetch(`${API_URL}/tutors/action/set_mark`, { 
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ discipline_id, student_id, mark_id, kr_mark_id, comment })
   })
   .then(res => handleResponse(res))
 };

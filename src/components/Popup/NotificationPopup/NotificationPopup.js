@@ -34,8 +34,12 @@ function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
   }, [isLoading, notification])
 
   return (
-    <Popup isOpen={isOpen} onClose={onClose} >
-      <form className='popup__form popup__form_type_medium' name='person-area-notification-popup' action='#' noValidate onSubmit={handleSubmit}>
+    <Popup
+    isOpen={isOpen}
+    onSubmit={handleSubmit}
+    formWidth={'medium'}
+    formName={'person-area-notification-popup'}
+    >
       {
         isLoading ?
         <PreloaderPopup />
@@ -72,7 +76,6 @@ function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
         <button className='popup__btn-back' type='submit'>Назад</button>
         </>
       }
-      </form>
     </Popup>
   )
 }

@@ -91,7 +91,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
             onChange={handleChangePassword}
             name='password' 
             placeholder='Введите пароль...' 
-            minLength='6'
+            minLength='2'
             autoComplete='off'
             required 
             />
