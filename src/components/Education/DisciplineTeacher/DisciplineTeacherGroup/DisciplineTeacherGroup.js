@@ -34,8 +34,6 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
 
   return (
     <div className='discipline-teacher-group'>
-      {
-        disciplineStudents.length > 0 ?
         <Table>
           <div className='table__header'>
             <div className='table__main-column'>
@@ -68,52 +66,54 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
               </div>
             </div>
           </div>
-          <ul className='table__main table__main_scroll_auto'>
-            {
-              disciplineStudents.map((item, i) => (
-                <li className='table__row' key={i}>
-                  <div className='table__main-column'>
-                    <div className='table__column table__column_type_count'>
-                      <p className='table__text'>{i + 1}</p>
-                    </div>
-                    <div className='table__column table__column_type_name' onClick={() => onOpenStudent(item)}>
-                      <p className='table__text table__text_type_header table__text_type_active'>{item.student.fullname}</p>
-                    </div>
-                    <div className='table__column table__column_type_small'>
-                      <p className='table__text'>{item.learning.content_time}</p>
-                    </div>
-                    <div className='table__column table__column_type_small' onClick={() => onViewTests(item)}>
-                      <p className='table__text table__text_type_active'>{item.learning.completed_tests_count}/{item.learning.total_tests_count}</p>
-                    </div>
-                    <div className='table__column table__column_type_small' onClick={() => onViewFiles(item)}>
-                      <p className='table__text table__text_type_active'>{item.files.length} шт.</p>
-                    </div>
-                    <div className='table__column table__column_type_medium' onClick={() => onChooseMark(item)}>
-                      {renderMark(item.mark.name)}
-                    </div>
-                    {
-                      disciplineInfo.course_work &&
-                      <div className='table__column table__column_type_medium' onClick={() => onChooseMark(item)}>
-                        {renderMark(item.course_mark.name)}
+          {
+          disciplineStudents.length > 0 ?
+            <ul className='table__main table__main_scroll_auto'>
+              {
+                disciplineStudents.map((item, i) => (
+                  <li className='table__row' key={i}>
+                    <div className='table__main-column'>
+                      <div className='table__column table__column_type_count'>
+                        <p className='table__text'>{i + 1}</p>
                       </div>
-                    }
-                    <div className='table__column table__column_type_large' onClick={() => onViewComments(item)}>
+                      <div className='table__column table__column_type_name' onClick={() => onOpenStudent(item)}>
+                        <p className='table__text table__text_type_header table__text_type_active'>{item.student.fullname}</p>
+                      </div>
+                      <div className='table__column table__column_type_small'>
+                        <p className='table__text'>{item.learning.content_time}</p>
+                      </div>
+                      <div className='table__column table__column_type_small' onClick={() => onViewTests(item)}>
+                        <p className='table__text table__text_type_active'>{item.learning.completed_tests_count}/{item.learning.total_tests_count}</p>
+                      </div>
+                      <div className='table__column table__column_type_small' onClick={() => onViewFiles(item)}>
+                        <p className='table__text table__text_type_active'>{item.files.length} шт.</p>
+                      </div>
+                      <div className='table__column table__column_type_medium' onClick={() => onChooseMark(item)}>
+                        {renderMark(item.mark.name)}
+                      </div>
                       {
-                        item.comments.length > 0 ?
-                        <p className='table__text table__text_type_cut table__text_type_active'>{item.comments[item.comments.length - 1].text}</p>
-                        :
-                        <p className='table__text table__text_type_empty table__text_type_active'>Нет комментария</p>
+                        disciplineInfo.course_work &&
+                        <div className='table__column table__column_type_medium' onClick={() => onChooseMark(item)}>
+                          {renderMark(item.course_mark.name)}
+                        </div>
                       }
+                      <div className='table__column table__column_type_large' onClick={() => onViewComments(item)}>
+                        {
+                          item.comments.length > 0 ?
+                          <p className='table__text table__text_type_cut table__text_type_active'>{item.comments[item.comments.length - 1].text}</p>
+                          :
+                          <p className='table__text table__text_type_empty table__text_type_active'>Нет комментария</p>
+                        }
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
+                  </li>
+                ))
+              }
+            </ul>
+          :
+           <p className='table__caption_type_empty'>Список студентов пуст!</p>
+          }
         </Table>
-        :
-        <p className='table__caption_type_empty'>Список студентов пуст!</p>
-      }
     </div>
   );
 }

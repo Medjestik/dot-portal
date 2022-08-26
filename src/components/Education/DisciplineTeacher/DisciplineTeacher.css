@@ -31,13 +31,13 @@
 .discipline-teacher__header-group {
   margin: 0px;
   padding: 11px;
-  background: var(--gradient-blue-color);
+  background: var(--main-grey-color);
   border-radius: var(--border-radius);
   font-style: normal;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 14px;
   line-height: 18px;
-  color: var(--main-white-color);
+  color: var(--main-black-color);
   user-select: none;
   pointer-events: none;
 }

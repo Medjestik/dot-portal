@@ -79,7 +79,7 @@ function TeacherChooseMarkPopup({ isOpen, onClose, currentStudent, disciplineInf
       </label>
 
       <div className='popup__btn-container'>
-        <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Отменить</button>
+        <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Назад</button>
         {
           isLoadingRequest ? 
           <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Сохранение..</button>

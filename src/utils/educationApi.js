@@ -93,3 +93,29 @@ export const teacherSetMark = ({ token, discipline_id, student_id, mark_id, kr_m
   })
   .then(res => handleResponse(res))
 };
+
+export const teacherAddComment = ({ token, discipline_id, student_id, comment }) => {
+  return fetch(`${API_URL}/tutors/action/add_comment`, { 
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ discipline_id, student_id, comment })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const teacherEditComment = ({ token, discipline_id, student_id, comment_id, comment }) => {
+  return fetch(`${API_URL}/tutors/action/update_comment/id/${comment_id}`, { 
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ discipline_id, student_id, comment })
+  })
+  .then(res => handleResponse(res))
+};

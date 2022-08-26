@@ -10,6 +10,8 @@ import TeacherChooseMarkPopup from '../EducationPopup/TeacherChooseMarkPopup/Tea
 import TeacherViewFilesPopup from '../EducationPopup/TeacherViewFilesPopup/TeacherViewFilesPopup.js';
 import TeacherViewTestsPopup from '../EducationPopup/TeacherViewTestsPopup/TeacherViewTestsPopup.js';
 import TeacherViewCommentsPopup from '../EducationPopup/TeacherViewCommentsPopup/TeacherViewCommentsPopup.js';
+import TeacherAddCommentPopup from '../EducationPopup/TeacherAddCommentPopup/TeacherAddCommentPopup.js';
+import TeacherEditCommentPopup from '../EducationPopup/TeacherEditCommentPopup/TeacherEditCommentPopup.js';
 
 function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) {
 
@@ -31,19 +33,23 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
   const [isOpenTeacherViewFiles, setIsOpenTeacherViewFiles] = React.useState(false);
   const [isOpenTeacherViewTests, setIsOpenTeacherViewTests] = React.useState(false);
   const [isOpenTeacherViewComments, setIsOpenTeacherViewComments] = React.useState(false);
+  const [isOpenTeacherAddComment, setIsOpenTeacherAddComment] = React.useState(false);
+  const [isOpenTeacherEditComment, setIsOpenTeacherEditComment] = React.useState(false);
 
   const sections = [
     { title: 'Список студентов', id: 1, link: '/group' },
-    { title: 'Учебные материалы', id: 2, link: '/materials' },
-    { title: 'Загрузка заданий', id: 3, link: '/tasks' },
+    { title: 'Информация о дисциплине', id: 2, link: '/info' },
+    { title: 'Учебные материалы', id: 3, link: '/materials' },
+    { title: 'Ведомости', id: 4, link: '/list' },
   ];
 
   const [currentSection, setCurrentSection] = React.useState({});
   const [currentStudent, setCurrentStudent] = React.useState({});
+  const [currentComment, setCurrentComment] = React.useState({});
 
   function chooseSection(option) {
     setCurrentSection(option);
-    navigate('/education/semester/' + currentSemester.semesterId + '/discipline/' + disciplineId + option.link);
+    navigate('/semester/' + currentSemester.id + '/discipline/' + disciplineId + option.link);
   }
 
   function disciplineRequest(disciplineId) {
@@ -82,7 +88,6 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
       comment: data.text
     })
     .then((res) => {
-      console.log('New Mark', res);
       const index = disciplineStudents.indexOf(disciplineStudents.find((elem) => (elem.student.id === res.student.id)));
       const student = {
         ...disciplineStudents[index],
@@ -90,8 +95,70 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
         course_mark: res.course_mark,
         comments: res.new_comment ? [...disciplineStudents[index].comments, res.new_comment ] :  disciplineStudents[index].comments,
       };
+      setCurrentStudent(student);
       setDisciplineStudents([ ...disciplineStudents.slice(0, index), student, ...disciplineStudents.slice(index + 1) ]);
       closeTeacherPopup();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {  
+      setIsLoadingRequest(false);
+    });
+  }
+
+  function addComment(data) {
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+    educationApi.teacherAddComment({
+      token: token,
+      discipline_id: disciplineInfo.id,
+      student_id: currentStudent.student.id,
+      comment: data.text
+    })
+    .then((res) => {
+      const index = disciplineStudents.indexOf(disciplineStudents.find((elem) => (elem.student.id === currentStudent.student.id)));
+      const student = {
+        ...disciplineStudents[index],
+        comments: [...disciplineStudents[index].comments, res],
+      };
+      setCurrentStudent(student);
+      setDisciplineStudents([ ...disciplineStudents.slice(0, index), student, ...disciplineStudents.slice(index + 1)]);
+      closeCommentPopup();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {  
+      setIsLoadingRequest(false);
+    });
+  }
+
+  function editComment(data) {
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+    educationApi.teacherEditComment({
+      token: token,
+      discipline_id: disciplineInfo.id,
+      student_id: currentStudent.student.id,
+      comment_id: data.id,
+      comment: data.text
+    })
+    .then((res) => {
+      const index = disciplineStudents.indexOf(disciplineStudents.find((elem) => (elem.student.id === currentStudent.student.id)));
+      const indexComment = disciplineStudents[index].comments.indexOf(disciplineStudents[index].comments.find((elem) => (elem.id === res.id)));
+      console.log(indexComment);
+      const comments = ([ 
+        ...disciplineStudents[index].comments.slice(0, indexComment), 
+        res, 
+        ...disciplineStudents[index].comments.slice(indexComment + 1) 
+      ]);
+      console.log(comments);
+      const student = { ...disciplineStudents[index], comments: comments, };
+      setCurrentStudent(student);
+      setDisciplineStudents([ ...disciplineStudents.slice(0, index), student, ...disciplineStudents.slice(index + 1) ]);
+      closeCommentPopup();
+
     })
     .catch((err) => {
       console.error(err);
@@ -125,6 +192,20 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
     setIsOpenTeacherViewComments(true);
   }
 
+  function openAddCommentPopup() {
+    setIsOpenTeacherAddComment(true);
+  }
+
+  function openEditCommentPopup(comment) {
+    setCurrentComment(comment);
+    setIsOpenTeacherEditComment(true);
+  }
+
+  function closeCommentPopup() {
+    setIsOpenTeacherAddComment(false);
+    setIsOpenTeacherEditComment(false);
+  }
+
   function closeTeacherPopup() {
     setIsOpenTeacherChooseMark(false);
     setIsOpenTeacherViewFiles(false);
@@ -139,12 +220,15 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
     return(() => {
       setDisciplineInfo({});
       setDisciplineStudents([]);
+      setCurrentSection({});
+      setCurrentStudent({});
+      setCurrentComment({});
     })
     // eslint-disable-next-line
   }, [disciplineId]);
 
   return (
-    <div className='discipline-teacher'>
+    <div className='discipline-teacher'> 
       {
       isLoadingDiscipline 
       ?
@@ -212,7 +296,34 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
         <TeacherViewCommentsPopup 
           isOpen={isOpenTeacherViewComments}
           onClose={closeTeacherPopup}
+          onAddComment={openAddCommentPopup}
+          onEditComment={openEditCommentPopup}
           currentStudent={currentStudent}
+        />
+      }
+
+      {
+        isOpenTeacherAddComment &&
+        <TeacherAddCommentPopup
+          isOpen={isOpenTeacherAddComment}
+          onClose={closeCommentPopup}
+          onAdd={addComment}
+          currentStudent={currentStudent}
+          isLoadingRequest={isLoadingRequest}
+          isShowRequestError={isShowRequestError}
+        />
+      }
+
+      {
+        isOpenTeacherEditComment &&
+        <TeacherEditCommentPopup 
+          isOpen={isOpenTeacherEditComment}
+          onClose={closeCommentPopup}
+          onEdit={editComment}
+          currentStudent={currentStudent}
+          currentComment={currentComment}
+          isLoadingRequest={isLoadingRequest}
+          isShowRequestError={isShowRequestError}
         />
       }
 
