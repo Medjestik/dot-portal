@@ -17,9 +17,10 @@ import SemesterTeacher from '../Education/SemesterTeacher/SemesterTeacher.js';
 function App() { 
 
   const [currentUser, setCurrentUser] = React.useState({});
-  const [semesterInfo, setSemesterInfo] = React.useState({});
-  
   const [loggedIn, setLoggedIn] = React.useState(false);
+
+  const [semesterInfo, setSemesterInfo] = React.useState({});
+
   const [requestError, setRequestError] = React.useState(false);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
 

@@ -4,7 +4,7 @@ import './Section.css';
 function Section({ title, heightType, headerType, children }) {
 
   return (
-    <section className='section__student'>
+    <section className={`section__student section__student_type_${headerType}`}>
       <ul className='section__student-list'>
         <li className={`section__student-item section__student-item_type_${headerType}`}>
           <h4 className='section__student-title'>{title}</h4>

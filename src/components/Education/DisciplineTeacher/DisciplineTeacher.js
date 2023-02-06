@@ -4,8 +4,11 @@ import { Route, Routes, useNavigate, useParams, useLocation } from 'react-router
 import * as educationApi from '../../../utils/educationApi.js';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext.js';
 import Preloader from '../../Preloader/Preloader.js';
+import Section from '../../Section/Section.js';
 import DisciplineSectionSelect from '../DisciplineSectionSelect/DisciplineSectionSelect.js';
 import DisciplineTeacherGroup from './DisciplineTeacherGroup/DisciplineTeacherGroup.js';
+import DisciplineTeacherStudent from './DisciplineTeacherStudent/DisciplineTeacherStudent.js';
+import DisciplineTeacherInfo from './DisciplineTeacherInfo/DisciplineTeacherInfo.js';
 import TeacherChooseMarkPopup from '../EducationPopup/TeacherChooseMarkPopup/TeacherChooseMarkPopup.js';
 import TeacherViewFilesPopup from '../EducationPopup/TeacherViewFilesPopup/TeacherViewFilesPopup.js';
 import TeacherViewTestsPopup from '../EducationPopup/TeacherViewTestsPopup/TeacherViewTestsPopup.js';
@@ -13,7 +16,7 @@ import TeacherViewCommentsPopup from '../EducationPopup/TeacherViewCommentsPopup
 import TeacherAddCommentPopup from '../EducationPopup/TeacherAddCommentPopup/TeacherAddCommentPopup.js';
 import TeacherEditCommentPopup from '../EducationPopup/TeacherEditCommentPopup/TeacherEditCommentPopup.js';
 
-function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) {
+function DisciplineTeacher({ windowWidth, currentSemester }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -22,12 +25,14 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
   const location = useLocation();
 
   const [isLoadingDiscipline, setIsLoadingDiscipline] = React.useState(true);
+  const [isLoadingStudent, setIsLoadingStudent] = React.useState(true);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
   const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '', });
 
   const [groupInfo, setGroupInfo] = React.useState({});
   const [disciplineInfo, setDisciplineInfo] = React.useState({});
   const [disciplineStudents, setDisciplineStudents] = React.useState([]);
+
 
   const [isOpenTeacherChooseMark, setIsOpenTeacherChooseMark] = React.useState(false);
   const [isOpenTeacherViewFiles, setIsOpenTeacherViewFiles] = React.useState(false);
@@ -48,7 +53,6 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
   const [currentComment, setCurrentComment] = React.useState({});
 
   function chooseSection(option) {
-    setCurrentSection(option);
     navigate('/semester/' + currentSemester.id + '/discipline/' + disciplineId + option.link);
   }
 
@@ -61,12 +65,6 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
       setGroupInfo(res.group);
       setDisciplineInfo(res.discipline);
       setDisciplineStudents(res.students.filter((item) => (item.student.fullname !== null)));
-      getDisciplineName(res.discipline.name);
-      sections.forEach((section) => {
-        if (location.pathname.includes(section.link)) {
-          setCurrentSection(section);
-        }
-      })
     })
     .catch((err) => {
       console.error(err);
@@ -168,8 +166,15 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
     });
   }
 
-  function openStudent(student) {
+  function openStudent(item) {
+    navigate('/semester/' + currentSemester.id + '/discipline/' + disciplineId + '/student/' + item.student.id);
+  }
+
+  function getStudent(id) {
+    const student = disciplineStudents.find((item) => (item.student.id === id));
+    console.log(student);
     setCurrentStudent(student);
+    setIsLoadingStudent(false);
   }
 
   function openChooseMarkPopup(student) {
@@ -214,6 +219,23 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
     setIsShowRequestError({ isShow: false, text: '', })
   }
 
+  function renderDisciplineSection(children) {
+    return (
+      <Section title={disciplineInfo.name} heightType='page' headerType='large'>
+        <div className='discipline-teacher'> 
+          <div className='discipline-teacher__header'>
+            <p className='discipline-teacher__header-caption'>Выберите раздел дисциплины:</p>
+            <div className='discipline-teacher__header-container'>
+              <DisciplineSectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
+              <div className='discipline-teacher__header-group'>Группа: {groupInfo.current_name}</div>
+            </div>
+          </div>
+        </div>
+        {children}
+      </Section>
+    )
+  }
+
   React.useEffect(() => {
     disciplineRequest(disciplineId);
 
@@ -227,37 +249,69 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
     // eslint-disable-next-line
   }, [disciplineId]);
 
+  React.useEffect(() => {
+    if (!location.pathname.includes('student')) {
+      sections.forEach((section) => {
+        if (location.pathname.includes(section.link)) {
+          setCurrentSection(section);
+        }
+      });
+    }
+    // eslint-disable-next-line
+  }, [location]);
+
   return (
-    <div className='discipline-teacher'> 
+    <>
       {
       isLoadingDiscipline 
       ?
       <Preloader />
       :
       <>
-      <div className='discipline-teacher__header'>
-        <p className='discipline-teacher__header-caption'>Выберите раздел дисциплины:</p>
-        <div className='discipline-teacher__header-container'>
-          <DisciplineSectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
-          <div className='discipline-teacher__header-group'>Группа: {groupInfo.current_name}</div>
-        </div>
-      </div>
 
       <Routes>
         <Route exact path={`group`}
-        element={
-          <DisciplineTeacherGroup 
-            windowWidth={windowWidth}
-            disciplineInfo={disciplineInfo}
-            disciplineStudents={disciplineStudents}
-            onOpenStudent={openStudent}
-            onChooseMark={openChooseMarkPopup}
-            onViewFiles={openViewFilesPopup}
-            onViewTests={openViewTestsPopup}
-            onViewComments={openViewCommentsPopup}
-          /> 
-        }
+          element={
+            renderDisciplineSection(
+              <DisciplineTeacherGroup
+                windowWidth={windowWidth}
+                disciplineInfo={disciplineInfo}
+                disciplineStudents={disciplineStudents}
+                onOpenStudent={openStudent}
+                onChooseMark={openChooseMarkPopup}
+                onViewFiles={openViewFilesPopup}
+                onViewTests={openViewTestsPopup}
+                onViewComments={openViewCommentsPopup}
+              /> 
+            )
+          }
         />
+
+        <Route exact path={`info`}
+          element={
+            renderDisciplineSection(
+              <DisciplineTeacherInfo
+                windowWidth={windowWidth}
+                disciplineInfo={disciplineInfo}
+              /> 
+            )
+          }
+        />
+
+        <Route exact path={`/student/:studentId/*`}
+          element={
+            <DisciplineTeacherStudent 
+              windowWidth={windowWidth}
+              disciplineInfo={disciplineInfo}
+              getStudent={getStudent}
+              currentStudent={currentStudent}
+              isLoadingStudent={isLoadingStudent}
+              onAddComment={openAddCommentPopup}
+              onEditComment={openEditCommentPopup}
+              onChooseMark={openChooseMarkPopup}
+            />
+          }
+         />   
       </Routes>
 
       {
@@ -327,9 +381,9 @@ function DisciplineTeacher({ windowWidth, currentSemester, getDisciplineName }) 
         />
       }
 
+      </>
+      }
     </>
-    }
-    </div>
   );
 }
 

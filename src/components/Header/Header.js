@@ -130,7 +130,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
   React.useEffect(() => {
     setIsEducationOpen(location.pathname.includes('/education') ? true : false);
     setIsDisciplinesOpen(location.pathname.includes('/semester') ? true : false);
-  }, [location])
+  }, [location]);
  
   return (
 

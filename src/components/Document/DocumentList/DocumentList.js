@@ -16,7 +16,6 @@ function DocumentList() {
     { name: 'ГОСТ 7.9 – 77. Реферат и аннотация. – Москва: Изд-во стандартов, 1981. – 6 с.', date: '09.02.2022 10:20', status: 'Проверка', },
   ]
 
-
   const [documents, setDocuments] = React.useState(document);
 
   function handleSearchDocuments(data) {

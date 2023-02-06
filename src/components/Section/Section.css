@@ -1,6 +1,8 @@
 .section__student {
   margin: 0px;
   width: 100%;
+}
+.section__student_type_page {
   flex-grow: 2;
   display: flex;
   flex-direction: column;

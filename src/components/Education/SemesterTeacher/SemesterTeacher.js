@@ -21,7 +21,7 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
   const [currentSemester, setCurrentSemester] = React.useState({});
 
   const [disciplines, setDisciplines] = React.useState([]);
-  const [currentDiscipline, setCurrentDiscipline] = React.useState({ name: '', });
+  
   const [isDisciplineOpen, setIsDisciplineOpen] = React.useState(location.pathname.includes('discipline') ? true : false);
 
   const [isLoadingDiscipline, setIsLoadingDisciplines] = React.useState(true);
@@ -42,10 +42,6 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
     });
   }
 
-  function getDisciplineName(name) {
-    setCurrentDiscipline({ ...currentDiscipline, name: name })
-  }
-
   function chooseSemester(semester) {
     setCurrentSemester(semester);
     disciplineRequest(semester.id);
@@ -53,14 +49,11 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
   }
 
   function openDiscipline(discipline) {
-    setCurrentDiscipline({ name: '', });
     navigate(location.pathname + '/discipline/' + discipline.discipline_id + '/group');
-    setIsDisciplineOpen(true);
   }
 
   function backToSemester() {
-    navigate('/semester/' + currentSemester.id);
-    setIsDisciplineOpen(false);
+    location.pathname.includes('student') ? navigate(-1) : navigate('/semester/' + currentSemester.id);
   }
 
   React.useEffect(() => {
@@ -69,12 +62,17 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
 
     return(() => {
       setDisciplines([]);
+      setCurrentSemester({});
     })
     // eslint-disable-next-line
   }, []);
 
+  React.useEffect(() => {
+    location.pathname.includes('discipline') ? setIsDisciplineOpen(true) : setIsDisciplineOpen(false);
+  }, [location]);
+
   return (
-    <div>
+    <div className='education'>
       <SemesterHeader onLogout={onLogout}>
         <SemesterHeaderWithOptionsTeacher
           semesterInfo={semesterInfo}
@@ -103,14 +101,10 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
         <Routes>
           <Route exact path={`/discipline/:disciplineId/*`}
           element={
-            <Section title={currentDiscipline.name} heightType='page' headerType='large' >
-              <DisciplineTeacher 
+            <DisciplineTeacher 
               windowWidth={windowWidth} 
               currentSemester={currentSemester} 
-              currentDiscipline={currentDiscipline} 
-              getDisciplineName={getDisciplineName} 
-              />
-            </Section>
+            />
           }
           />
         </Routes>

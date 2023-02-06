@@ -81,7 +81,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
         </label>
 
         <label className='popup__field'>
-          <h4 className='popup__input-caption'>Новый пароль:</h4>
+          <h4 className='popup__input-caption'>Пароль:</h4>
           <div className='popup__input-field'>
             <input 
             className='popup__input popup__input_with_icon'

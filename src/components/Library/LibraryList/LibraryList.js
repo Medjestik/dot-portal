@@ -11,6 +11,7 @@ function LibraryList({ windowWidth }) {
   const [tableHeight, setTableHeight] = React.useState(0);
 
   React.useEffect(() => {
+    console.log(containerHeightRef);
     if (windowWidth >= 833 ) {
       setTableHeight(containerHeightRef.current.clientHeight - headerHeightRef.current.clientHeight);
     }
@@ -86,8 +87,6 @@ function LibraryList({ windowWidth }) {
           </div>
         </Table>
       }
-
-
     </>
   )
 }
