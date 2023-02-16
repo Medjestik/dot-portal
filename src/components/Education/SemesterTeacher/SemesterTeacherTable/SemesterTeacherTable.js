@@ -7,7 +7,7 @@ function DisciplinesTeacherTable({ disciplines, openDiscipline }) {
   return (
     <Table>
       <div className='table__header'>
-        <div className='table__main-column table__main-column_type_empty'>
+        <div className='table__main-column'>
           <div className='table__column table__column_type_header table__column_type_count'>
             <p className='table__text table__text_type_header'>№</p>
           </div>

@@ -5,25 +5,32 @@ import Table from '../../../Table/Table.js';
 function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
 
   const containerHeightRef = React.createRef();
-  const headerHeightRef = React.createRef();
+  const tableHeaderHeightRef = React.createRef();
+  const teacherInfoHeightRef = React.createRef();
 
   const [tableHeight, setTableHeight] = React.useState(0);
+  const [commentHeight, setCommentHeight] = React.useState(0);
 
   React.useEffect(() => {
     if (windowWidth >= 833) {
-      setTableHeight(containerHeightRef.current.clientHeight - headerHeightRef.current.clientHeight);
+      setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
+      setCommentHeight(containerHeightRef.current.clientHeight - teacherInfoHeightRef.current.clientHeight - 24);
     }
-  }, [windowWidth, containerHeightRef, headerHeightRef]);
+  }, [windowWidth, containerHeightRef, tableHeaderHeightRef, teacherInfoHeightRef]);
 
   const tableStyle = {
     height: tableHeight, // + mainHeight + marginTop
   };
 
+  const commentStyle = {
+    height: commentHeight, // + mainHeight + marginTop
+  };
+
   return (
     <div className='discipline-info'>
-      <div className='discipline-info__container'>
+      <div ref={containerHeightRef} className='discipline-info__container'>
         <div className='discipline-info__teacher'>
-          <div className='discipline-info__teacher-container'>
+          <div ref={teacherInfoHeightRef} className='discipline-info__teacher-container'>
             {
               disciplineInfo.tutor.pict_url 
               ?
@@ -45,13 +52,16 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
               </ul>
             </div>
           </div>
-          <div className='discipline-info__teacher-comment'>
+          <div 
+          style={Object.assign({}, windowWidth <= 1279 ? { height: 'auto' } : commentStyle)}
+          className='discipline-info__teacher-comment scroll-inside'
+          >
             {
               disciplineInfo.message 
               ? 
               <p className='discipline-info__teacher-comment-text'>{disciplineInfo.message}</p>
               :
-              <p className='discipline-info__teacher-comment-text discipline-info__teacher-comment-text_type_empty'>Комментарий...</p>
+              <p className='discipline-info__teacher-comment-text discipline-info__teacher-comment-text_type_empty'>Комментарий отсутствует</p>
             }
           </div>
         </div>
@@ -85,8 +95,8 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
           </>
         :
           <Table>
-            <div ref={containerHeightRef} className='table__container'>
-              <div ref={headerHeightRef} className='table__header'>
+            <div className='table__container'>
+              <div ref={tableHeaderHeightRef} className='table__header'>
                 <div className='table__main-column'>
                   <div className='table__column table__column_type_header table__column_type_count'>
                     <p className='table__text table__text_type_header'>№</p>

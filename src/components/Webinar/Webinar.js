@@ -2,11 +2,11 @@ import React from 'react';
 import './Webinar.css';
 import Section from '../Section/Section.js';
 import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
+import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import Search from '../Search/Search.js';
-import Month from '../Month/Month.js';
 import Table from '../Table/Table.js';
 
-function Webinar() {
+function Webinar({ windowWidth, onLogout }) {
 
   const webinars = [
     { date: '09.02.2022', time: '10:20', name: 'Управление ИТ-сервисом и контентом', teacher: 'Леонова Анна Владимировна', status: 'Пройден', link: 'https://dot1', room: 'dot1', record: 'https://www.youtube.com/watch?v=G8pYMLeW7jI'  },
@@ -29,14 +29,14 @@ function Webinar() {
   return (
 
     <div className='webinar'>
-      {
-        //<SemesterHeader isDisciplineOpen={false} backToSemester={() => {}} />
-      }
+
+      <SemesterHeader onLogout={onLogout}>
+        <SemesterHeaderBtnBack onBack={() => {}} isPerformFunction={false} />
+      </SemesterHeader>
 
       <Section title='Вебинары' heightType='page' headerType='small'>
         <div className='section__header'>
           <Search type='medium' id='webinar' data={webinars} onSearch={handleSearch} />
-          <Month />
         </div>
         <Table>
           <div className='table__header'>

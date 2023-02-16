@@ -85,6 +85,7 @@
   box-sizing: border-box;
   background: var(--main-grey-color);
   border-radius: var(--border-radius);
+  overflow-y: auto;
 }
 .discipline-info__teacher-comment-text {
   margin: 0px;

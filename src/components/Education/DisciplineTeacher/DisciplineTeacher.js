@@ -9,6 +9,7 @@ import DisciplineSectionSelect from '../DisciplineSectionSelect/DisciplineSectio
 import DisciplineTeacherGroup from './DisciplineTeacherGroup/DisciplineTeacherGroup.js';
 import DisciplineTeacherStudent from './DisciplineTeacherStudent/DisciplineTeacherStudent.js';
 import DisciplineTeacherInfo from './DisciplineTeacherInfo/DisciplineTeacherInfo.js';
+import DisciplineTeacherMaterials from './DisciplineTeacherMaterials/DisciplineTeacherMaterials.js';
 import TeacherChooseMarkPopup from '../EducationPopup/TeacherChooseMarkPopup/TeacherChooseMarkPopup.js';
 import TeacherViewFilesPopup from '../EducationPopup/TeacherViewFilesPopup/TeacherViewFilesPopup.js';
 import TeacherViewTestsPopup from '../EducationPopup/TeacherViewTestsPopup/TeacherViewTestsPopup.js';
@@ -45,7 +46,6 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
     { title: 'Список студентов', id: 1, link: '/group' },
     { title: 'Информация о дисциплине', id: 2, link: '/info' },
     { title: 'Учебные материалы', id: 3, link: '/materials' },
-    { title: 'Ведомости', id: 4, link: '/list' },
   ];
 
   const [currentSection, setCurrentSection] = React.useState({});
@@ -293,6 +293,16 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
               <DisciplineTeacherInfo
                 windowWidth={windowWidth}
                 disciplineInfo={disciplineInfo}
+              /> 
+            )
+          }
+        />
+
+        <Route exact path={`materials`}
+          element={
+            renderDisciplineSection(
+              <DisciplineTeacherMaterials
+                windowWidth={windowWidth}
               /> 
             )
           }

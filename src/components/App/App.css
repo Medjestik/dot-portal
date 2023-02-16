@@ -115,7 +115,7 @@
 }
 .scroll-inside::-webkit-scrollbar-thumb {
   border-radius: var(--border-radius);
-  background: var(--accent-grey-color);
+  background: var(--accent-grey-color); 
 }
 
 input::-webkit-outer-spin-button,

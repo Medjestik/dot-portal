@@ -1,14 +1,14 @@
 import React from 'react';
 import './SemesterUserTable.css';
-import SemesterCommentPopup from '../../../Popup/SemesterCommentPopup/SemesterCommentPopup.js';
+import StudentViewCommentsPopup from '../../EducationPopup/StudentViewCommentsPopup/StudentViewCommentsPopup.js';
 
 function SemesterUserTable({ disciplines, openDiscipline }) {
 
   const [isOpenCommentPopup, setIsOpenCommentPopup] = React.useState(false);
-  const [currentComment, setCurrentComment] = React.useState('');
+  const [currentComments, setCurrentComments] = React.useState('');
 
   function openCommentPopup(comment) {
-    setCurrentComment(comment);
+    setCurrentComments(comment);
     setIsOpenCommentPopup(true);
   }
 
@@ -17,7 +17,7 @@ function SemesterUserTable({ disciplines, openDiscipline }) {
   }
 
   React.useEffect(() => {
-    setCurrentComment('');
+    setCurrentComments('');
     setIsOpenCommentPopup(false);
   }, []);
 
@@ -81,7 +81,7 @@ function SemesterUserTable({ disciplines, openDiscipline }) {
                 </div>
                 <div className='semester-table__column semester-table__column-comment'>
                   <p className='semester-table__text semester-table__text_type_cut semester-table__text_type_active' 
-                  onClick={() => openCommentPopup(item.lastComment || '')}>
+                  onClick={() => openCommentPopup(item.comments)}>
                     {item.lastComment || ''}
                   </p>
                 </div>
@@ -90,15 +90,14 @@ function SemesterUserTable({ disciplines, openDiscipline }) {
           }
         </ul>
         :
-        <div className='semester-table__text semester-table__text_color_grey'>Дисциплины отсутствуют</div>
+        <div className='table__caption_type_empty'>Дисциплины отсутствуют</div>
       }
     </div>
     {
-      isOpenCommentPopup &&
-      <SemesterCommentPopup
-      isOpen={isOpenCommentPopup}
-      onClose={closeCommentPopup}
-      comment={currentComment}
+      <StudentViewCommentsPopup
+        isOpen={isOpenCommentPopup}
+        onClose={closeCommentPopup}
+        comments={currentComments}
       />
     }
     </>

@@ -1,8 +1,8 @@
 import React from 'react';
-import './DisciplineTeacherInfo.css';
+import './DisciplineTeacherMaterials.css';
 import Preloader from '../../../Preloader/Preloader.js';
 
-function DisciplineTeacherInfo({ windowWidth, disciplineInfo }) {
+function DisciplineTeacherMaterials({ windowWidth }) {
 
   const [isLoadingData, setIsLoadingData] = React.useState(true);
 
@@ -17,7 +17,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineInfo }) {
         isLoadingData ?
         <Preloader />
         :
-        <div className='discipline-teacher__info'>
+        <div className='discipline-teacher__materials'>
          123
         </div>
       }
@@ -25,4 +25,4 @@ function DisciplineTeacherInfo({ windowWidth, disciplineInfo }) {
   )
 }
 
-export default DisciplineTeacherInfo;
+export default DisciplineTeacherMaterials;

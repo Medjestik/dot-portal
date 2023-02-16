@@ -30,31 +30,38 @@ function DisciplineUserMaterials({ windowWidth, disciplineId }) {
 
   const handleOpenMaterial = async (item) => {
 
-    const url = 'https://course.emiit.ru/view_doc.html?mode=part_start&course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
+
 
     const token = localStorage.getItem('token');
     const data = atob(token);
     const dataArray = data.split(':');
 
-    let formData = new FormData();
+    const url = 'https://' + dataArray[0] + ':' + dataArray[1] + '@course.emiit.ru/view_doc.html?mode=part_start&course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
+
+    /*let formData = new FormData();
     formData.append('user_login', dataArray[0]);
     formData.append('user_password', dataArray[1]);
-    formData.append('set_auth', '1');
+    formData.append('set_auth', '1');*/
 
-    const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024' ;
+    const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024';
 
-    fetch(url, {
+    window.open(url, '_blank', windowFeatures).focus();
+    
+    /*fetch(url, {
       method: 'POST',
       body: formData,
     })
-    .then(() => {
+    .then((res) => {
+      console.log(res);
       window.open(url, '_blank', windowFeatures).focus();
     })
     .catch((err) => {
       console.error(err);
     })
     .finally(() => {
-    })
+    })*/
+
+
   };
 
   function updateMaterial() {

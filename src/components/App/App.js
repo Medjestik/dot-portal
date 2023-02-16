@@ -7,6 +7,7 @@ import HomePage from '../HomePage/HomePage.js';
 import Header from '../Header/Header.js';
 import Person from '../Person/Person.js';
 import SemesterUser from '../Education/SemesterUser/SemesterUser.js';
+import Journal from '../Journal/Journal.js';
 import Webinar from '../Webinar/Webinar.js';
 import Document from '../Document/Document.js';
 import Library from '../Library/Library.js';
@@ -227,8 +228,18 @@ function App() {
                           />
                         }/>
 
+                        <Route path='journal/*' element={
+                          <Journal
+                          windowWidth={windowWidth}
+                          onLogout={handleLogout}
+                          />
+                        }/>
+
                         <Route path='webinars' element={
-                          <Webinar semesterInfo={semesterInfo} />
+                          <Webinar
+                          windowWidth={windowWidth}
+                          onLogout={handleLogout}
+                          />
                         }/>
 
                         <Route path='document/*' element={

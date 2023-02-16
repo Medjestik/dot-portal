@@ -13,7 +13,7 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
   }
 
   function renderComment(comment) {
-    if (currentUser.id === comment.author_id) {
+    if (currentUser.id === comment.author_id) { 
       return (
         <h4 className='popup__item-name popup__item-name_type_active' onClick={() => onEditComment(comment)}>{comment.text}</h4>
       )
@@ -29,7 +29,7 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
     isOpen={isOpen}
     onSubmit={handleSubmit}
     formWidth={'medium'}
-    formName={'education-teacher-view-tests-popup'}
+    formName={'education-teacher-view-comments-popup'}
     >
       <h2 className='popup__title'>Комментарии для студента</h2>
       <p className='popup__subtitle'>Студент: {currentStudent.student.fullname}</p>
