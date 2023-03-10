@@ -38,7 +38,7 @@
 }
 .table__column {
   margin: 0px 12px 0px 0px;
-  padding: 21px 0px;
+  padding: 16px 0px;
   box-sizing: border-box;
 }
 .table__column_type_header {
@@ -102,6 +102,7 @@
   flex-shrink: 0;
 }
 .table__column_type_btn {
+  display: flex;
   flex-shrink: 0;
   padding: 0px;
 }

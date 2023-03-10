@@ -8,7 +8,6 @@ function PersonNotification({ windowWidth, userNotifications, onOpen, currentNot
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
 
-
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const heightRef = React.createRef();
 

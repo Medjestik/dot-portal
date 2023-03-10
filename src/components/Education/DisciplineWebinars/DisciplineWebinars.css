@@ -1,0 +1,7 @@
+.discipline-webinar {
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}

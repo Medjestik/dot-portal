@@ -21,7 +21,7 @@ function SemesterCard({ item, openDiscipline }) {
       
       <div className='semester-card__info'>
         <p className='semester-card__text'>{item.control}</p>
-        <p className='semester-card__text'>{item.mark || 'н/а'}</p>
+        <p className='semester-card__text'>{item.mark.name || 'н/а'}</p>
         <p className='semester-card__text'>{item.markDate || 'н/а'}</p>
       </div>
 

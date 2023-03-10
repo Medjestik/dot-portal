@@ -3,7 +3,8 @@ import './DisciplineUser.css';
 import { Route, Routes, useNavigate, useParams, useLocation } from 'react-router-dom';
 import DisciplineSectionSelect from '../DisciplineSectionSelect/DisciplineSectionSelect.js';
 import DisciplineUserInfo from './DisciplineUserInfo/DisciplineUserInfo.js';
-import DisciplineUserMaterials from './DisciplineUserMaterials/DisciplineUserMaterials.js';
+import DisciplineMaterials from '../DisciplineMaterials/DisciplineMaterials.js';
+import DisciplineWebinars from '../DisciplineWebinars/DisciplineWebinars.js';
 import DisciplineUserTasks from './DisciplineUserTasks/DisciplineUserTasks.js';
 import * as educationApi from '../../../utils/educationApi.js';
 import Preloader from '../../Preloader/Preloader.js';
@@ -21,7 +22,8 @@ function Discipline({ windowWidth, currentSemester, getDisciplineName }) {
   const sections = [
     { title: 'Информация о дисциплине', id: 1, link: '/info' },
     { title: 'Учебные материалы', id: 2, link: '/materials' },
-    { title: 'Загрузка заданий', id: 3, link: '/tasks' },
+    { title: 'Вебинары', id: 3, link: '/webinars' },
+    { title: 'Загрузка заданий', id: 4, link: '/tasks' },
   ];
 
   const [currentSection, setCurrentSection] = React.useState({});
@@ -87,7 +89,18 @@ function Discipline({ windowWidth, currentSemester, getDisciplineName }) {
       <Routes>
         <Route exact path={`materials`}
         element={
-          <DisciplineUserMaterials
+          <DisciplineMaterials
+          windowWidth={windowWidth}
+          disciplineId={disciplineId}
+          />
+        }
+        />
+      </Routes>
+
+      <Routes>
+        <Route exact path={`webinars`}
+        element={
+          <DisciplineWebinars
           windowWidth={windowWidth}
           disciplineId={disciplineId}
           />

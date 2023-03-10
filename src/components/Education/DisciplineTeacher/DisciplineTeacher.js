@@ -9,7 +9,7 @@ import DisciplineSectionSelect from '../DisciplineSectionSelect/DisciplineSectio
 import DisciplineTeacherGroup from './DisciplineTeacherGroup/DisciplineTeacherGroup.js';
 import DisciplineTeacherStudent from './DisciplineTeacherStudent/DisciplineTeacherStudent.js';
 import DisciplineTeacherInfo from './DisciplineTeacherInfo/DisciplineTeacherInfo.js';
-import DisciplineTeacherMaterials from './DisciplineTeacherMaterials/DisciplineTeacherMaterials.js';
+import DisciplineMaterials from '../DisciplineMaterials/DisciplineMaterials.js';
 import TeacherChooseMarkPopup from '../EducationPopup/TeacherChooseMarkPopup/TeacherChooseMarkPopup.js';
 import TeacherViewFilesPopup from '../EducationPopup/TeacherViewFilesPopup/TeacherViewFilesPopup.js';
 import TeacherViewTestsPopup from '../EducationPopup/TeacherViewTestsPopup/TeacherViewTestsPopup.js';
@@ -33,7 +33,6 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
   const [groupInfo, setGroupInfo] = React.useState({});
   const [disciplineInfo, setDisciplineInfo] = React.useState({});
   const [disciplineStudents, setDisciplineStudents] = React.useState([]);
-
 
   const [isOpenTeacherChooseMark, setIsOpenTeacherChooseMark] = React.useState(false);
   const [isOpenTeacherViewFiles, setIsOpenTeacherViewFiles] = React.useState(false);
@@ -59,9 +58,9 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
   function disciplineRequest(disciplineId) {
     setIsLoadingDiscipline(true);
     const token = localStorage.getItem('token');
-    educationApi.getDisciplineInfoTeacher({ token: token, teacherId: currentUser.id, disciplineId: disciplineId })
+    educationApi.getDisciplineTeacher({ token: token, teacherId: currentUser.id, disciplineId: disciplineId })
     .then((res) => {
-      console.log('DisciplineInfo', res);
+      console.log('Discipline', res);
       setGroupInfo(res.group);
       setDisciplineInfo(res.discipline);
       setDisciplineStudents(res.students.filter((item) => (item.student.fullname !== null)));
@@ -292,7 +291,7 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
             renderDisciplineSection(
               <DisciplineTeacherInfo
                 windowWidth={windowWidth}
-                disciplineInfo={disciplineInfo}
+                disciplineId={disciplineId}
               /> 
             )
           }
@@ -301,8 +300,9 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
         <Route exact path={`materials`}
           element={
             renderDisciplineSection(
-              <DisciplineTeacherMaterials
+              <DisciplineMaterials
                 windowWidth={windowWidth}
+                disciplineId={disciplineId}
               /> 
             )
           }

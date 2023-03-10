@@ -60,6 +60,8 @@ function App() {
             semesterUserInfoRequest(res.id);
           } else if (res.access_role === 'tutor') {
             semesterTeacherInfoRequest();
+          } else if (res.access_role === 'admin') {
+            semesterTeacherInfoRequest();
           } else {
             if (pathname === '/') {
               navigate('/person');
@@ -238,6 +240,7 @@ function App() {
                         <Route path='webinars' element={
                           <Webinar
                           windowWidth={windowWidth}
+                          semesterOptions={[{name: 'Не выбран', id: 'empty'}, ...semesterInfo.map((elem) => { return { name: elem.semesterName, id: elem.semesterId }}), {name: 'Другое', id: ''},]}
                           onLogout={handleLogout}
                           />
                         }/>

@@ -1,158 +1,172 @@
 import React from 'react';
 import './DisciplineUserInfo.css';
+import DisciplineInfo from '../../DisciplineInfo/DisciplineInfo.js';
+import EducationAdvertisement from '../../EducationAdvertisement/EducationAdvertisement.js';
 import Table from '../../../Table/Table.js';
+import StudentViewAdvertisementPopup from '../../EducationPopup/StudentViewAdvertisementPopup/StudentViewAdvertisementPopup.js';
 
 function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
 
   const containerHeightRef = React.createRef();
   const tableHeaderHeightRef = React.createRef();
-  const teacherInfoHeightRef = React.createRef();
 
   const [tableHeight, setTableHeight] = React.useState(0);
-  const [commentHeight, setCommentHeight] = React.useState(0);
+  const [advertisementHeight, setAdvertisementHeight] = React.useState(0);
+
+  const [currentAdvertisement, setCurrentAdvertisement] = React.useState({});
+
+  const [isOpenViewAdvertisementPopup, setIsOpenViewAdvertisementPopup] = React.useState(false);
 
   React.useEffect(() => {
     if (windowWidth >= 833) {
       setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
-      setCommentHeight(containerHeightRef.current.clientHeight - teacherInfoHeightRef.current.clientHeight - 24);
+      setAdvertisementHeight(containerHeightRef.current.clientHeight);
     }
-  }, [windowWidth, containerHeightRef, tableHeaderHeightRef, teacherInfoHeightRef]);
+  }, [windowWidth, containerHeightRef, tableHeaderHeightRef]);
 
   const tableStyle = {
-    height: tableHeight, // + mainHeight + marginTop
+    height: tableHeight,
   };
 
-  const commentStyle = {
-    height: commentHeight, // + mainHeight + marginTop
+  const advertisementStyle = {
+    height: advertisementHeight + 20, //margin top
   };
+
+  function openViewAdvertisementPopup(data) {
+    setCurrentAdvertisement(data);
+    setIsOpenViewAdvertisementPopup(true);
+  }
+
+  function closePopup() {
+    setIsOpenViewAdvertisementPopup(false);
+  }
+
+  React.useEffect(() => {
+    return(() => {
+      setCurrentAdvertisement({});
+    })
+  }, []);
 
   return (
-    <div className='discipline-info'>
-      <div ref={containerHeightRef} className='discipline-info__container'>
-        <div className='discipline-info__teacher'>
-          <div ref={teacherInfoHeightRef} className='discipline-info__teacher-container'>
-            {
-              disciplineInfo.tutor.pict_url 
-              ?
-              <img className='discipline-info__teacher-img' src={disciplineInfo.tutor.pict_url} alt=''></img>
-              :
-              <div className='discipline-info__teacher-img'></div>
-            }
-            <div className='discipline-info__teacher-info'>
-              <h3 className='discipline-info__teacher-name'>{disciplineInfo.tutor.fullname}</h3>
-              <ul className='discipline-info__teacher-info-list'>
-                <li className='discipline-info__teacher-info-item'>
-                  <p className='discipline-info__teacher-text'>Преподаватель</p>
-                  <p className='discipline-info__teacher-text discipline-info__teacher-text_type_job discipline-info__teacher-text_margin_top'>{disciplineInfo.tutor.job}</p>
-                </li>
-                <li className='discipline-info__teacher-info-item'>
-                  <p className='discipline-info__teacher-text'>{disciplineInfo.tutor.phone}</p>
-                  <p className='discipline-info__teacher-text discipline-info__teacher-text_type_mail discipline-info__teacher-text_margin_top'>{disciplineInfo.tutor.email}</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div 
-          style={Object.assign({}, windowWidth <= 1279 ? { height: 'auto' } : commentStyle)}
-          className='discipline-info__teacher-comment scroll-inside'
-          >
-            {
-              disciplineInfo.message 
-              ? 
-              <p className='discipline-info__teacher-comment-text'>{disciplineInfo.message}</p>
-              :
-              <p className='discipline-info__teacher-comment-text discipline-info__teacher-comment-text_type_empty'>Комментарий отсутствует</p>
-            }
-          </div>
-        </div>
-        <div className='discipline-info__document'>
-        {
-        windowWidth < 833
-        ?
-          <>
+    <DisciplineInfo>
+      <div className='discipline-info__teacher'>
+        <div className='discipline-info__teacher-container'>
           {
-            disciplineInfo.additional_files.length > 0 &&
-            <>
-              <h5 className='discipline-list__caption'>Материалы для загрузки:</h5>
-              <ul className='discipline-list'>
-                {
-                  disciplineInfo.additional_files.map((item, i) => (
-                    <li className='discipline-list__item' key={i}>
-                      <span className='discipline-list__count'>{i + 1}.</span>
-                      <div className='discipline-list__info'>
-                        <h6 className='discipline-list__info-name'>{item.name}</h6>
-                        <p className='discipline-list__info-date'>{item.date}</p>
-                      </div>
-                      <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
-                        <div className='btn btn_type_download btn_type_download_status_active discipline-list__btn'></div>
-                      </a>
-                    </li>
-                  ))
-                }
-              </ul>
-            </>
+            disciplineInfo.tutor.pict_url 
+            ?
+            <img className='discipline-info__teacher-img' src={disciplineInfo.tutor.pict_url} alt=''></img>
+            :
+            <div className='discipline-info__teacher-img'></div>
           }
-          </>
-        :
-          <Table>
-            <div className='table__container'>
-              <div ref={tableHeaderHeightRef} className='table__header'>
-                <div className='table__main-column'>
-                  <div className='table__column table__column_type_header table__column_type_count'>
-                    <p className='table__text table__text_type_header'>№</p>
-                  </div>
-                  <div className='table__column table__column_type_header table__column_type_date'>
-                    <p className='table__text table__text_type_header'>Дата</p>
-                  </div>
-                  <div className='table__column table__column_type_header table__column_type_name'>
-                    <p className='table__text table__text_type_header'>Наименование</p>
-                  </div>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                  <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
-                </div>
-              </div>
-              {
-                disciplineInfo.additional_files.length < 1 ?
-                <span className='table__caption_type_empty'>Дополнительные материалы не загружены!</span>
-                :
-                <ul 
-                style={Object.assign({}, windowWidth <= 1279 ? { height: 'auto' } : tableStyle)} 
-                className='table__main table__main_type_info scroll'
-                >
-                {
-                  disciplineInfo.additional_files.map((item, i) => (
-                    <li className='table__row' key={i}>
-                      <div className='table__main-column'>
-                        <div className='table__column table__column_type_count'>
-                          <p className='table__text'>{i + 1}</p>
-                        </div>
-                        <div className='table__column table__column_type_date'>
-                          <p className='table__text'>{item.date}</p>
-                        </div>
-                        <div className='table__column table__column_type_name'>
-                          <p className='table__text'>{item.name}</p>
-                        </div>
-                      </div>
-                      <div className='table__column table__column_type_btn'>
-                        <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
-                          <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
-                        </a>
-                      </div>
-                    </li>
-                  ))
-                }
-              </ul>
-              }
-            </div>
-          </Table>
-        }
+          <div className='discipline-info__teacher-info'>
+            <h3 className='discipline-info__teacher-name'>{disciplineInfo.tutor.fullname}</h3>
+            <ul className='discipline-info__teacher-info-list'>
+              <li className='discipline-info__teacher-info-item'>
+                <p className='discipline-info__teacher-text'>
+                  <span className='discipline-info__teacher-text_weight_bold'>Дожность: </span>
+                  {disciplineInfo.tutor.job}
+                </p>
+              </li>
+              <li className='discipline-info__teacher-info-item'>
+                <p className='discipline-info__teacher-text'>
+                  <span className='discipline-info__teacher-text_weight_bold'>Телефон: </span>
+                  {disciplineInfo.tutor.phone}
+                </p>
+              </li>
+              <li className='discipline-info__teacher-info-item'>
+                <p className='discipline-info__teacher-text'>
+                  <span className='discipline-info__teacher-text_weight_bold'>Почта: </span>
+                  {disciplineInfo.tutor.email}
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div> 
+      </div>
 
+      <div className='discipline-info__section'>
+        <div className='discipline-info__materials'>
+          <div className='discipline-info__section-header'>
+            <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
+          </div>
+          <div className='discipline-info__materials-table'>
+            <Table>
+              <div ref={containerHeightRef} className='table__container'>
+                <div ref={tableHeaderHeightRef} className='table__header'>
+                  <div className='table__main-column'>
+                    <div className='table__column table__column_type_header table__column_type_count'>
+                      <p className='table__text table__text_type_header'>№</p>
+                    </div>
+                    <div className="table__column table__column_type_header table__column_type_date">
+                      <p className="table__text table__text_type_header">Дата</p>
+                    </div>
+                    <div className='table__column table__column_type_header table__column_type_name'>
+                      <p className='table__text table__text_type_header'>Наименование</p>
+                    </div>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                    <div className='btn btn_type_download btn_type_download_status_active'></div>
+                  </div>
+                </div>
+                <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+                  {
+                    disciplineInfo.materials.length < 1 
+                    ?
+                    <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
+                    :
+                    disciplineInfo.materials.map((item, i) => (
+                      <li className='table__row' key={i}>
+                        <div className='table__main-column'>
+                          <div className='table__column table__column_type_count'>
+                            <p className='table__text'>{i + 1}</p>
+                          </div>
+                          <div className="table__column table__column_type_date">
+                            <p className="table__text">{item.date}</p>
+                          </div>
+                          <div className='table__column table__column_type_name'>
+                            <p className='table__text'>{item.title}</p>
+                          </div>
+                        </div>
+                        <div className='table__column table__column_type_btn'>
+                          <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
+                        </div>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </Table>
+          </div>
         </div>
 
+        <div className='discipline-info__advertisement'>
+          <div className='discipline-info__section-header'>
+            <h4 className='discipline-info__section-title'>Объявления</h4>
+          </div>
+          <ul style={Object.assign({}, advertisementStyle)} className='discipline-info__advertisement-list scroll'>
+            {
+              disciplineInfo.announces.length < 1 
+              ?
+              <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
+              :
+              disciplineInfo.announces.reverse().map((elem, i) => (
+                <EducationAdvertisement onOpen={openViewAdvertisementPopup} advertisement={elem} key={i} />
+              ))
+            }
+          </ul>
+        </div>
       </div>
-     
-    </div>
+
+      {
+        isOpenViewAdvertisementPopup &&
+        <StudentViewAdvertisementPopup 
+          isOpen={isOpenViewAdvertisementPopup}
+          onClose={closePopup}
+          currentAdvertisement={currentAdvertisement}
+        />
+      }
+  
+    </DisciplineInfo>
   );
 }
 

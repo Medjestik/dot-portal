@@ -1,0 +1,140 @@
+.discipline-info {
+  margin: 24px 0px 0px 0px;
+  width: 100%;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+}
+.discipline-info__section {
+  margin: 24px 0px 0px 0px;
+  width: 100%;
+  display: flex;
+  flex-grow: 2;
+}
+.discipline-info__section-header {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+}
+.discipline-info__section-title {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--main-black-color);
+}
+.discipline-info__chart {
+  margin: 0px;
+  width: 100%;
+}
+.discipline-info__chart-list {
+  margin: 0px;
+  width: 100%;
+  padding: 0px;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+.discipline-info__chart-item {
+  margin: 0px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.discipline-info__chart-caption {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--main-black-color);
+}
+.discipline-info__materials {
+  margin: 0px 20px 0px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+.discipline-info__materials-table {
+  margin: 20px 0px 0px 0px;
+  width: 100%;
+  height: 100%;
+}
+.discipline-info__advertisement {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+.discipline-info__advertisement-list {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px 12px 0px 0px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.discipline-info__teacher {
+  margin: 0px;
+  display: flex;
+  width: 100%;
+}
+.discipline-info__teacher-container {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+}
+.discipline-info__teacher-img {
+  margin: 0px 20px 0px 0px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--main-grey-color);
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  pointer-events: none;
+  border: none;
+  flex-shrink: 0;
+}
+.discipline-info__teacher-info {
+  display: flex;
+  flex-direction: column;
+}
+.discipline-info__teacher-name {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 26px;
+  color: var(--main-black-color);
+}
+.discipline-info__teacher-info-list {
+  margin: 20px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  list-style-type: none;
+}
+.discipline-info__teacher-info-item {
+  margin: 0px 0px 12px 0px;
+}
+.discipline-info__teacher-info-item:last-of-type {
+  margin: 0px;
+}
+.discipline-info__teacher-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.discipline-info__teacher-text_weight_bold {
+  font-weight: 500;
+}

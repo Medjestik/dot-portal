@@ -26,12 +26,15 @@
 .semester-table__column {
   margin: 0px 32px 0px 0px;
 }
+.semester-table__column:last-of-type {
+  margin: 0px;
+}
 .semester-table__column-number {
   width: 30px;
   flex-shrink: 0;
 }
 .semester-table__column-time {
-  width: 98px;
+  width: 80px;
   flex-shrink: 0;
 }
 .semester-table__column-discipline {
@@ -43,15 +46,15 @@
   flex-shrink: 1;
 }
 .semester-table__column-type {
-  width: 64px;
+  width: 48px;
   flex-shrink: 0;
 }
 .semester-table__column-score {
-  width: 81px;
+  width: 80px;
   flex-shrink: 0;
 }
 .semester-table__column-comment {
-  width: 153px;
+  width: 124px;
   flex-shrink: 0;
 }
 .semester-table__text {

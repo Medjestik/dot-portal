@@ -26,7 +26,7 @@ function PopupSelect({ options, currentOption, onChooseOption }) {
         <div className={`select-popup__arrow ${isOpenSelectOptions ? 'select-popup__arrow_status_open' : ''}`}></div>
       </div>
       <div className={`select-popup__options-container ${isOpenSelectOptions ? 'select-popup__options-container_status_open' : ''}`}>
-        <ul className='select-popup__options-list'>
+        <ul className='select-popup__options-list scroll'>
           {
             options.filter(item => item.id !== currentOption.id).map((item, i) => (
               <li className='select-popup__options-item' key={i} onClick={() => chooseOption(item)}>

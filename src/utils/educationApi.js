@@ -57,7 +57,7 @@ export const uploadDisciplineTask = ({ token, disciplineId, currentUserId, task 
   .then(res => handleResponse(res))
 };
 
-export const getDisciplineMaterial = ({ token, disciplineId, currentUserId }) => {
+export const getDisciplineMaterialUser = ({ token, disciplineId, currentUserId }) => {
   return fetch(`${API_URL}/education/action/discipline_course/discipline_id/${disciplineId}/student_id/${currentUserId}`, { 
     method: 'GET',
     headers: {
@@ -69,7 +69,19 @@ export const getDisciplineMaterial = ({ token, disciplineId, currentUserId }) =>
   .then(res => handleResponse(res))
 };
 
-export const getDisciplineInfoTeacher = ({ token, teacherId, disciplineId }) => {
+export const getDisciplineMaterialTeacher = ({ token, disciplineId }) => {
+  return fetch(`${API_URL}/tutors/action/view_course/discipline_id/${disciplineId}`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getDisciplineTeacher = ({ token, teacherId, disciplineId }) => {
   return fetch(`${API_URL}/tutors/id/${teacherId}/action/discipline/discipline_id/${disciplineId}`, {
     method: 'GET',
     headers: {
@@ -116,6 +128,69 @@ export const teacherEditComment = ({ token, discipline_id, student_id, comment_i
       'Authorization': `Basic ${token}`,
     },
     body: JSON.stringify({ discipline_id, student_id, comment })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const teacherAddAdvertisement = ({ token, disciplineId, advertisement }) => {
+  return fetch(`${API_URL}/tutors/action/add_announcement_to_discipline/discipline_id/${disciplineId}`, { 
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ title: advertisement.title, text: advertisement.text, })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const teacherEditAdvertisement = ({ token, advertisement }) => {
+  return fetch(`${API_URL}/tutors/action/update_announcement/announcement_id/${advertisement.id}`, { 
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ title: advertisement.title, text: advertisement.text, })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getDisciplineInfoTeacher = ({ token, disciplineId }) => {
+  return fetch(`${API_URL}/tutors/action/get_discipline_info/discipline_id/${disciplineId}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const uploadDisciplineMaterial = ({ token, disciplineId, material }) => {
+  return fetch(`${API_URL}/tutors/action/add_file_to_discipline/discipline_id/${disciplineId}`, { 
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ material })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const removeDisciplineMaterial = ({ token, material }) => {
+  return fetch(`${API_URL}/tutors/action/delete_file_from_discipline/file_id/${material.id}`, { 
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
   })
   .then(res => handleResponse(res))
 };
