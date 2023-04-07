@@ -152,10 +152,9 @@
   margin: 20px 0px 0px 0px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 .person-area__data-control-text {
-  margin: 0px;
+  margin: 0px 20px 0px 0px;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -163,6 +162,9 @@
   text-align: left;
   color: var(--accent-blue-color);
   transition: all .3s ease-in-out;
+}
+.person-area__data-control-text:last-of-type {
+  margin: 0px;
 }
 .person-area__data-control-text:hover {
   cursor: pointer;

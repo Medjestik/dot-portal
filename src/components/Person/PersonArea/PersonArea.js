@@ -12,6 +12,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
     <section className='section person-area'>
       <div className='person-area__container'>
         <div className='person-area__data'>
+          
           <div className='person-area__data-container'>
             {
               currentUser.avatar.link
