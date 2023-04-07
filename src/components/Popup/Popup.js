@@ -12,7 +12,6 @@ function Popup({ isOpen, onSubmit, formWidth, formName, children }) {
     }
   }, [height]);
 
-
   return (
     <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
       <div className='scroll popup__container'>

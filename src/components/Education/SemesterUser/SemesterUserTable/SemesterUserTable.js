@@ -1,11 +1,14 @@
 import React from 'react';
 import './SemesterUserTable.css';
+import Table from '../../../Table/Table.js';
 import StudentViewCommentsPopup from '../../EducationPopup/StudentViewCommentsPopup/StudentViewCommentsPopup.js';
 
-function SemesterUserTable({ disciplines, openDiscipline }) {
+function SemesterUserTable({ data, onOpen }) {
 
   const [isOpenCommentPopup, setIsOpenCommentPopup] = React.useState(false);
   const [currentComments, setCurrentComments] = React.useState('');
+
+  console.log(data);
 
   function openCommentPopup(comment) {
     setCurrentComments(comment);
@@ -51,99 +54,105 @@ function SemesterUserTable({ disciplines, openDiscipline }) {
 
   return (
     <>
-    <div className='semester-table'>
 
-      <div className='semester-table__line semester-table__header'>
-        <div className='semester-table__column semester-table__column-number'>
-          <p className='semester-table__text semester-table__text_weight_bold'>№</p>
-        </div>
-        <div className='semester-table__column semester-table__column-time'>
-          <p className='semester-table__text semester-table__text_weight_bold'>Период</p>
-        </div>
-        <div className='semester-table__column semester-table__column-discipline'>
-          <p className='semester-table__text semester-table__text_weight_bold'>Дисциплина</p>
-        </div>
-        <div className='semester-table__column semester-table__column-teacher'>
-          <p className='semester-table__text semester-table__text_weight_bold'>Преподаватель</p>
-        </div>
-        <div className='semester-table__column semester-table__column-type'>
-          <p className='semester-table__text semester-table__text_weight_bold'>Тип</p>
-        </div>
-        <div className='semester-table__column semester-table__column-score'>
-          <p className='semester-table__text semester-table__text_weight_bold'>Оценка</p>
-        </div>
-        <div className='semester-table__column semester-table__column-score'>
-          <p className='semester-table__text semester-table__text_weight_bold'>КР</p>
-        </div>
-        <div className='semester-table__column semester-table__column-comment'>
-          <p className='semester-table__text semester-table__text_weight_bold'>Комментарий</p>
+    <Table>
+      <div className='table__header'>
+        <div className='table__main-column table__main-column_type_full'>
+          <div className='table__column table__column_type_header table__column_type_count'>
+            <p className='table__text table__text_type_header'>№</p>
+          </div>
+          <div className='table__column table__column_type_header table__column_type_date'>
+            <p className='table__text table__text_type_header'>Период</p>
+          </div>
+          <div className='table__column table__column_type_header table__column_type_full'>
+            <p className='table__text table__text_type_header'>Дисциплина</p>
+          </div>
+          <div className='table__column table__column_type_header table__column_type_teacher'>
+            <p className='table__text table__text_type_header'>Преподаватель</p>
+          </div>
+          <div className='table__column table__column_type_header table__column_type_small'>
+            <p className='table__text table__text_type_header'>Тип</p>
+          </div>
+          <div className='table__column table__column_type_header table__column_type_small'>
+            <p className='table__text table__text_type_header'>Оценка</p>
+          </div>
+          <div className='table__column table__column_type_header table__column_type_small'>
+            <p className='table__text table__text_type_header'>КР</p>
+          </div>
+          <div className='table__column table__column_type_header table__column_type_teacher'>
+            <p className='table__text table__text_type_header'>Комментарий</p>
+          </div>
         </div>
       </div>
 
       {
-        disciplines.length > 0 
+        data.length > 0 
         ?
-        <ul className='semester-table__line-list'>
-          {
-            disciplines.map((item, i) => (
-              <li className='semester-table__line' key={i}>
-                <div className='semester-table__column semester-table__column-number'>
-                  <p className='semester-table__text'>{i + 1}</p>
+        <ul className='table__main table__main_scroll_auto'>
+        {
+          data.map((item, i) => (
+            <li className='table__row' key={i}>
+              <div className='table__main-column table__main-column_type_full'>
+                <div className='table__column table__column_type_count'>
+                  <p className='table__text'>{i + 1}</p>
                 </div>
-                <div className='semester-table__column semester-table__column-time'>
-                  <p className='semester-table__text'>{item.startDate} - {item.endDate}</p>
+                <div className='table__column table__column_type_date'>
+                  <p className='table__text'>{item.startDate} - {item.endDate}</p>
                 </div>
-                <div className='semester-table__column semester-table__column-discipline'>
+                <div className='table__column table__column_type_full'>
                   <p 
-                  className='semester-table__text semester-table__text_weight_bold semester-table__text_type_active' 
-                  onClick={() => openDiscipline(item)}>
+                  className='table__text table__text_type_header table__text_type_active' 
+                  onClick={() => onOpen(item)}>
                     {item.name}
                   </p>
                 </div>
-                <div className='semester-table__column semester-table__column-teacher'>
-                  <p className='semester-table__text'>{item.tutor}</p>
+                <div className='table__column table__column_type_teacher'>
+                  <p className='table__text'>{item.tutor}</p>
                 </div>
-                <div className='semester-table__column semester-table__column-type'>
-                  <p className='semester-table__text'>{item.control}</p>
+                <div className='table__column table__column_type_small'>
+                  <p className='table__text'>{item.control}</p>
                 </div>
-                <div className='semester-table__column semester-table__column-score'>
-                  {renderMark(item.mark.name)}
+                <div className='table__column table__column_type_small'>
+                  {item.mark && renderMark(item.mark.name)}
                 </div>
                 {
                   item.course_work 
                   ?
-                  <div className='semester-table__column semester-table__column-score'>
-                    {renderMark(item.course_mark.name)}
+                  <div className='table__column table__column_type_small'>
+                    {item.mark && renderMark(item.course_mark.name)}
                   </div>
                   :
-                  <div className='semester-table__column semester-table__column-score'>
-                    <p className='semester-table__text'></p>
+                  <div className='table__column table__column_type_small'>
+                    <p className='table__text'></p>
                   </div>
                 }
 
                 {
                   item.comments.length < 1 
                   ?
-                  <div className='semester-table__column semester-table__column-comment'>
-                    <p className='semester-table__text semester-table__text_color_grey'>Нет комментария</p>
+                  <div className='table__column table__column_type_teacher'>
+                    <p className='table__text table__text_type_empty'>Нет комментария</p>
                   </div>
                   :
-                  <div className='semester-table__column semester-table__column-comment'>
-                    <p className='semester-table__text semester-table__text_type_cut semester-table__text_type_active' 
+                  <div className='table__column table__column_type_teacher'>
+                    <p className='table__text table__text_type_cut table__text_type_active' 
                     onClick={() => openCommentPopup(item.comments)}>
                       {item.comments[item.comments.length - 1].text}
                     </p>
                   </div>
                 }
-              </li>
-            ))
-          }
+              </div>
+            </li>
+          ))
+        }
         </ul>
         :
-        <div className='table__caption_type_empty'>Дисциплины отсутствуют</div>
+        <div className='table__caption_type_empty'>В этом семестре у вас отсутствуют дисциплины!</div>
       }
-    </div>
+    </Table>
+
     {
+      isOpenCommentPopup &&
       <StudentViewCommentsPopup
         isOpen={isOpenCommentPopup}
         onClose={closeCommentPopup}

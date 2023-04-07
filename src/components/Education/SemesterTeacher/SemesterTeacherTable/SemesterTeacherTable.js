@@ -49,7 +49,6 @@ function DisciplinesTeacherTable({ disciplines, openDiscipline }) {
         :
         <p className='table__caption_type_empty'>В этом семестре у вас отсутствуют дисциплины!</p>
       }
-      
     </Table>
   );
 }

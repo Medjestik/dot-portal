@@ -34,7 +34,9 @@ function StudentViewAdvertisementPopup({ isOpen, onClose, currentAdvertisement, 
         </div>
       </div>
 
-      <p className='popup__textarea popup__textarea_height_medium  scroll-inside'>{currentAdvertisement.text}</p>
+      <p className='popup__textarea popup__textarea_height_medium scroll-inside'>{currentAdvertisement.text}</p>
+
+      <div className='popup__btn_margin_top'></div>
       
       <button className='popup__btn-back' type='submit'>Назад</button>
 

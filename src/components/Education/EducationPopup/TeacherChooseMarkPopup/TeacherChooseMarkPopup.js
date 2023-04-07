@@ -52,17 +52,17 @@ function TeacherChooseMarkPopup({ isOpen, onClose, currentStudent, disciplineInf
       <h2 className='popup__title'>Выберите оценку и введите комментарий</h2>
       <p className='popup__subtitle'>Студент: {currentStudent.student.fullname}</p>
 
-      <label className='popup__field'>
+      <div className='popup__field'>
         <h4 className='popup__input-caption'>Оценка по дисциплине:</h4>
         <PopupSelect options={disciplineInfo.possible_marks} currentOption={currentMark} onChooseOption={handleChooseMark} />
-      </label>
+      </div>
 
       {
         disciplineInfo.course_work &&
-        <label className='popup__field'>
+        <div className='popup__field'>
           <h4 className='popup__input-caption'>Оценка за курсовую работу:</h4>
           <PopupSelect options={disciplineInfo.possible_marks} currentOption={currentCourseMark} onChooseOption={handleChooseCourseMark} />
-        </label>
+        </div>
       }
 
       <label className='popup__field'>

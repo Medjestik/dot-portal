@@ -3,18 +3,28 @@
   width: 100%;
   flex-grow: 2;
   display: flex;
+}
+.discipline-info__column {
+  width: 100%;
+  margin: 0px 32px 0px 0px;
+  display: flex;
   flex-direction: column;
 }
-.discipline-info__section {
-  margin: 24px 0px 0px 0px;
-  width: 100%;
-  display: flex;
-  flex-grow: 2;
+.discipline-info__column:last-of-type {
+  margin: 0px;
 }
-.discipline-info__section-header {
+.discipline-info__section {
   margin: 0px;
   width: 100%;
   display: flex;
+}
+.discipline-info__section-header {
+  margin: 0px 0px 12px 0px;
+  width: 100%;
+  display: flex;
+}
+.discipline-info__section-header_margin_bottom {
+  margin: 0px;
 }
 .discipline-info__section-title {
   margin: 0px;
@@ -53,46 +63,72 @@
   color: var(--main-black-color);
 }
 .discipline-info__materials {
-  margin: 0px 20px 0px 0px;
-  width: 100%;
+  margin: 32px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   flex-grow: 2;
 }
 .discipline-info__materials-table {
-  margin: 20px 0px 0px 0px;
+  margin: 0px;
   width: 100%;
   height: 100%;
 }
 .discipline-info__advertisement {
-  margin: 0px;
-  width: 100%;
+  margin: 32px 0px 0px 0px;
   display: flex;
   flex-direction: column;
-  flex-grow: 2;
 }
 .discipline-info__advertisement-list {
   width: 100%;
-  height: 100%;
+  height: 200px;
   margin: 0px;
   padding: 0px 12px 0px 0px;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: scroll;
+}
+.discipline-info__advertisement-item {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.discipline-info__advertisement-title {
+  margin: 0px 0px 8px 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--main-black-color);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
+.discipline-info__advertisement-info {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0px 16px;
+  padding: 16px 0px;
+  border-bottom: 1px solid var(--slider-color);
+}
+.discipline-info__advertisement-item:last-of-type .discipline-info__advertisement-info {
+  border-bottom: none;
 }
 .discipline-info__teacher {
   margin: 0px;
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 .discipline-info__teacher-container {
   margin: 0px;
   display: flex;
-  align-items: center;
+  width: 100%;
 }
 .discipline-info__teacher-img {
   margin: 0px 20px 0px 0px;
-  width: 120px;
-  height: 120px;
+  width: 114px;
+  height: 114px;
   border-radius: 50%;
   background: var(--main-grey-color);
   object-fit: cover;
@@ -110,12 +146,12 @@
   margin: 0px;
   font-style: normal;
   font-weight: 900;
-  font-size: 22px;
-  line-height: 26px;
+  font-size: 18px;
+  line-height: 24px;
   color: var(--main-black-color);
 }
 .discipline-info__teacher-info-list {
-  margin: 20px 0px 0px 0px;
+  margin: 12px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   padding: 0px;

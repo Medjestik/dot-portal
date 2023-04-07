@@ -165,6 +165,138 @@ input[type=number] {
   opacity: .8;
   box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
 }
+.btn_type_advertisement {
+  position: relative;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  background: var(--gradient-blue-color);
+  border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
+}
+.btn_type_advertisement::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-image: url('../../images/button/advertisement-white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+.btn_type_advertisement:hover  {
+  cursor: pointer;
+  user-select: auto;
+  pointer-events: all;
+  opacity: .8;
+  box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
+}
+.btn_type_comment {
+  position: relative;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  background: var(--gradient-blue-color);
+  border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
+}
+.btn_type_comment::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-image: url('../../images/button/comment-white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+.btn_type_comment:hover  {
+  cursor: pointer;
+  user-select: auto;
+  pointer-events: all;
+  opacity: .8;
+  box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
+}
+.btn_type_create {
+  position: relative;
+  margin: 0px 12px 0px 0px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  background: var(--slider-color);
+  border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
+}
+.btn_type_create::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-image: url('../../images/button/add-white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+.btn_type_create_status_active  {
+  background: var(--gradient-blue-color);
+}
+.btn_type_create_status_active:hover  {
+  cursor: pointer;
+  user-select: auto;
+  pointer-events: all;
+  opacity: .8;
+  box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
+}
+.btn_type_edit {
+  position: relative;
+  margin: 0px 12px 0px 0px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  background: var(--slider-color);
+  border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
+}
+.btn_type_edit::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-image: url('../../images/button/edit-white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+.btn_type_edit_status_active  {
+  background: var(--gradient-blue-color);
+}
+.btn_type_edit:hover {
+  user-select: none;
+  pointer-events: none;
+  box-shadow: none;
+}
+.btn_type_edit_status_active:hover  {
+  cursor: pointer;
+  user-select: auto;
+  pointer-events: all;
+  opacity: .8;
+  box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
+}
+
 .btn_type_add {
   position: relative;
   margin: 0px 0px 0px 12px;
@@ -182,9 +314,45 @@ input[type=number] {
   transition: all .3s ease-in-out;
 }
 .btn_type_add:hover {
+  opacity: .7;
   cursor: pointer;
   box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
 }
+
+.btn_type_copy {
+  position: relative;
+  margin: 0px 12px 0px 0px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  background: var(--slider-color);
+  border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
+}
+.btn_type_copy::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-image: url('../../images/button/copy-white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+.btn_type_copy_status_active  {
+  background: var(--gradient-blue-color);
+}
+.btn_type_copy_status_active:hover  {
+  cursor: pointer;
+  user-select: auto;
+  pointer-events: all;
+  opacity: .8;
+  box-shadow: 0px 8px 12px -8px rgba(0, 55, 196, 0.9);
+}
+
 .btn_type_upload {
   position: relative;
   margin: 0px 12px 0px 0px;
@@ -394,6 +562,9 @@ input[type=number] {
 }  
 .btn-more_margin_top {
   margin: 16px auto 0px;
+}
+.btn_margin_right {
+  margin: 12px 0px 0px 0px;
 }
 .btn_margin_zero {
   margin: 0px;

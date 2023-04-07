@@ -1,0 +1,7 @@
+.control {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  min-height: calc(100vh - 24px);
+}

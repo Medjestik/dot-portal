@@ -8,6 +8,7 @@ import Header from '../Header/Header.js';
 import Person from '../Person/Person.js';
 import SemesterUser from '../Education/SemesterUser/SemesterUser.js';
 import Journal from '../Journal/Journal.js';
+import Control from '../Control/Control.js';
 import Webinar from '../Webinar/Webinar.js';
 import Document from '../Document/Document.js';
 import Library from '../Library/Library.js';
@@ -234,6 +235,14 @@ function App() {
                           <Journal
                           windowWidth={windowWidth}
                           onLogout={handleLogout}
+                          />
+                        }/>
+
+                        <Route path='control/*' element={
+                          <Control
+                          windowWidth={windowWidth}
+                          onLogout={handleLogout}
+                          semesterInfo={semesterInfo}
                           />
                         }/>
 

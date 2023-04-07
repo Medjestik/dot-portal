@@ -68,7 +68,6 @@
   margin: 0px 0px 24px 0px;
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 .section__header-item {
@@ -86,10 +85,33 @@
   font-weight: 300;
   font-size: 14px;
   line-height: 18px;
+  min-height: 18px;
   color: var(--main-black-color);
 }
 .section__header-caption_margin_bottom {
   margin: 0px 0px 8px 0px;
+}
+.section__header-btn {
+  margin: 0px;
+  max-width: 216px;
+  width: 100%;
+  padding: 11px;
+  background: var(--gradient-blue-color);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--main-white-color);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  transition: all .3s ease-in-out;
+}
+.section__header-btn:hover  {
+  cursor: pointer;
+  opacity: .8;
+}
+.section__header-btn_type_full {
+  max-width: 100%;
 }
 
 @media all and (max-width: 833px) {
