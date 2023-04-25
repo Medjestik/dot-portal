@@ -4,6 +4,12 @@
   flex-grow: 2;
   display: flex;
 }
+.discipline-info_type_user {
+  flex-direction: row;
+}
+.discipline-info_type_teacher {
+  flex-direction: column;
+}
 .discipline-info__column {
   width: 100%;
   margin: 0px 32px 0px 0px;

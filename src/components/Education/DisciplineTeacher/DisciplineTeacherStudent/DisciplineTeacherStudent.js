@@ -28,11 +28,11 @@ function DisciplineTeacherStudent({ windowWidth, disciplineInfo, getStudent, cur
   function renderComment(comment) {
     if (currentUser.id === comment.author_id) {
       return (
-        <h4 className='popup__item-name popup__item-name_type_active' onClick={() => onEditComment(comment)}>{comment.text}</h4>
+        <h4 className='popup__author-title popup__author-title_font_small popup__author-title_type_active' onClick={() => onEditComment(comment)}>{comment.text}</h4>
       )
     } else {
       return (
-        <h4 className='popup__item-name'>{comment.text}</h4>
+        <h4 className='popup__author-title popup__author-title_font_small'>{comment.text}</h4>
       )
     }
   }
@@ -60,8 +60,8 @@ function DisciplineTeacherStudent({ windowWidth, disciplineInfo, getStudent, cur
               }
               <div className='discipline-teacher__student-data'>
                 <h3 className='discipline-teacher__student-name'>{currentStudent.student.fullname}</h3>
-                <p className='discipline-teacher__student-mail'>{currentStudent.student.email}</p>
-                <p className='discipline-teacher__student-mail'>{currentStudent.student.phone}</p>
+                <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Почта: </span>{currentStudent.student.email}</p>
+                <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Телефон: </span>{currentStudent.student.phone}</p>
               </div>
               <div className='discipline-teacher__student-marks'>
                 <div className='discipline-teacher__student-marks-row'>
@@ -84,17 +84,19 @@ function DisciplineTeacherStudent({ windowWidth, disciplineInfo, getStudent, cur
           
           <ul className='discipline-teacher__student-sections'>
             <li className='discipline-teacher__student-section' ref={containerHeightRef}>
-              <h5 className='discipline-teacher__student-section-title'>Тестирование ({currentStudent.learning.completed_tests_count}/{currentStudent.learning.total_tests_count})</h5>
+              <div className='section__header-title-container'>
+                <h5 className='section__header-title'>Тестирование ({currentStudent.learning.completed_tests_count}/{currentStudent.learning.total_tests_count})</h5>
+              </div>
               <ul className='discipline-teacher__student-section-list scroll' style={Object.assign({}, listStyle)}>
               {
                 currentStudent.learning.tests_info.map((elem, i) => (
-                  <li key={i} className='discipline-teacher__student-section-item'>
-                    <div className='discipline-teacher__student-section-item-container'>
+                  <li key={i} className='popup__item popup__item_type_scroll'>
+                    <div className='popup__item-container'>
                       <TestChart test={elem} />
-                      <div className='discipline-teacher__student-section-item-info'>
-                        <h4 className='discipline-teacher__student-section-item-title'>{elem.name}</h4>
-                        <p className='discipline-teacher__student-section-item-text'>Лучшая попытка: {elem.score}/{elem.max_score}</p>
-                        <p className='discipline-teacher__student-section-item-text'>Количество попыток: {elem.attempts}</p>
+                      <div className='popup__item-info'>
+                        <h4 className='popup__item-title'>{elem.name}</h4>
+                        <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Лучшая попытка: </span>{elem.score}/{elem.max_score}</p>
+                        <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Количество попыток: </span>{elem.attempts}</p>
                       </div>
                     </div>
                   </li>
@@ -103,16 +105,18 @@ function DisciplineTeacherStudent({ windowWidth, disciplineInfo, getStudent, cur
             </ul>
             </li>
             <li className='discipline-teacher__student-section'>
-              <h5 className='discipline-teacher__student-section-title'>Файлы ({currentStudent.files.length})</h5>
+              <div className='section__header-title-container'>
+                <h5 className='section__header-title'>Файлы ({currentStudent.files.length})</h5>
+              </div>
               <ul className='discipline-teacher__student-section-list scroll' style={Object.assign({}, listStyle)}>
                 {
-                  currentStudent.files.map((elem, i) => (
-                    <li key={i} className='discipline-teacher__student-section-item'>
-                      <a className='btn btn_type_download btn_type_download_status_active' target='_blank' rel='noreferrer' href={elem.link}> </a>
-                      <div className='discipline-teacher__student-section-item-container'>
-                        <div className='discipline-teacher__student-section-item-info'>
-                          <h4 className='discipline-teacher__student-section-item-title'>{elem.name}</h4>
-                          <p className='discipline-teacher__student-section-item-text'>Дата загрузки: {elem.date}</p>
+                  [...currentStudent.files].reverse().map((elem, i) => (
+                    <li key={i} className='popup__item popup__item_type_scroll'>
+                      <div className='popup__item-container'>
+                      <a className='btn btn_type_download btn_type_download_status_active btn_margin_zero' target='_blank' rel='noreferrer' href={elem.link}> </a>
+                        <div className='popup__item-info'>
+                          <h4 className='popup__item-title'>{elem.name}</h4>
+                          <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Дата загрузки: </span>{elem.date}</p>
                         </div>
                       </div>
                     </li>
@@ -121,18 +125,20 @@ function DisciplineTeacherStudent({ windowWidth, disciplineInfo, getStudent, cur
               </ul>
             </li>
             <li className='discipline-teacher__student-section'>
-              <div className='discipline-teacher__student-section-add' onClick={() => onAddComment()}></div>
-              <h5 className='discipline-teacher__student-section-title'>Комментарии ({currentStudent.comments.length})</h5>
+              <div className='section__header-title-container'>
+                <h5 className='section__header-title'>Комментарии ({currentStudent.comments.length})</h5>
+                <button class='btn_type_add' type='button' onClick={() => onAddComment()}></button>
+              </div>
+
               <ul className='discipline-teacher__student-section-list scroll' style={Object.assign({}, listStyle)}>
                 {
                   currentStudent.comments.slice(0).reverse().map((elem, i) => (
-                    <li key={i} className='discipline-teacher__student-section-item'>
-                      <div className='discipline-teacher__student-section-item-container'>
-                        <img className='discipline-teacher__student-section-item-img' src={elem.author_avatar_link} alt='аватар автора комментария'></img>
-                        <div className='discipline-teacher__student-section-item-info'>
+                    <li key={i} className='popup__item popup__item_type_scroll'>
+                      <div className='popup__author'>
+                        <div className='popup__author-info'>
                           {renderComment(elem)}
-                          <p className='discipline-teacher__student-section-item-text'>{elem.author_fullname}</p>
-                          <p className='discipline-teacher__student-section-item-text'>{elem.date}</p>
+                          <p className='popup__author-text'><span className='popup__item-text_weight_bold'>Автор: </span>{elem.author_fullname}</p>
+                          <p className='popup__author-text'><span className='popup__item-text_weight_bold'>Дата публикации: </span>{elem.date}</p>
                         </div>
                       </div>
                     </li>

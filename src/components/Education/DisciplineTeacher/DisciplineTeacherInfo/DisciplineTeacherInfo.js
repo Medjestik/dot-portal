@@ -43,14 +43,14 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
       setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
       setAdvertisementHeight(containerHeightRef.current.clientHeight);
     }
-  }, [isLoadingData, windowWidth, containerHeightRef, tableHeaderHeightRef]);
+  }, [isLoadingData, windowWidth, containerHeightRef, tableHeaderHeightRef]); 
 
   const tableStyle = {
     height: tableHeight,
   };
 
   const advertisementStyle = {
-    height: advertisementHeight + 20, //margin top
+    height: advertisementHeight,
   };
 
   function openAddMaterialPopup() {
@@ -176,7 +176,6 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
     });
   }
 
-
   React.useEffect(() => {
     disciplineInfoRequest(disciplineId);
   
@@ -196,7 +195,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
         isLoadingData ?
         <Preloader />
         :
-        <DisciplineInfo>
+        <DisciplineInfo type='teacher'>
           <div className='discipline-info__chart'>
             <ul className='discipline-info__chart-list'>
               <li className='discipline-info__chart-item'>
@@ -245,87 +244,94 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
               </li>
             </ul>
           </div>
-          <div className='discipline-info__section'>
-            <div className='discipline-info__materials'>
-              <div className='discipline-info__section-header'>
-                <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
-                <button className='btn_type_add' type='button' onClick={() => openAddMaterialPopup()}></button>
-              </div>
-              <div className='discipline-info__materials-table'>
-                <Table>
-                  <div ref={containerHeightRef} className='table__container'>
-                    <div ref={tableHeaderHeightRef} className='table__header'>
-                      <div className='table__main-column'>
-                        <div className='table__column table__column_type_header table__column_type_count'>
-                          <p className='table__text table__text_type_header'>№</p>
+
+          <div className='discipline-info'>
+            <div className='discipline-info__column'>
+              <div className='discipline-info__materials'>
+                <div className='discipline-info__section-header'>
+                  <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
+                  <button className='btn_type_add' type='button' onClick={() => openAddMaterialPopup()}></button>
+                </div>
+                <div className='discipline-info__materials-table'>
+                  <Table>
+                    <div ref={containerHeightRef} className='table__container'>
+                      <div ref={tableHeaderHeightRef} className='table__header'>
+                        <div className='table__main-column'>
+                          <div className='table__column table__column_type_header table__column_type_count'>
+                            <p className='table__text table__text_type_header'>№</p>
+                          </div>
+                          <div className="table__column table__column_type_header table__column_type_date">
+                            <p className="table__text table__text_type_header">Дата</p>
+                          </div>
+                          <div className='table__column table__column_type_header table__column_type_name'>
+                            <p className='table__text table__text_type_header'>Наименование</p>
+                          </div>
                         </div>
-                        <div className="table__column table__column_type_header table__column_type_date">
-                          <p className="table__text table__text_type_header">Дата</p>
-                        </div>
-                        <div className='table__column table__column_type_header table__column_type_name'>
-                          <p className='table__text table__text_type_header'>Наименование</p>
+                        <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                          <div className='btn btn_type_download btn_type_download_status_active'></div>
+                          <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
                         </div>
                       </div>
-                      <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                        <div className='btn btn_type_download btn_type_download_status_active'></div>
-                        <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
-                      </div>
+                      <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+                        {
+                          materials.length < 1 
+                          ?
+                          <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
+                          :
+                          materials.map((item, i) => (
+                            <li className='table__row' key={i}>
+                              <div className='table__main-column'>
+                                <div className='table__column table__column_type_count'>
+                                  <p className='table__text'>{i + 1}</p>
+                                </div>
+                                <div className="table__column table__column_type_date">
+                                  <p className="table__text">{item.date}</p>
+                                </div>
+                                <div className='table__column table__column_type_name'>
+                                  <p className='table__text'>{item.title}</p>
+                                </div>
+                              </div>
+                              <div className='table__column table__column_type_btn'>
+                                <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
+                                <button 
+                                className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
+                                type='button' 
+                                onClick={(() => openRemoveMaterialPopup(item))}
+                                >
+                                </button>
+                              </div>
+                            </li>
+                          ))
+                        }
+                      </ul>
                     </div>
-                    <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
-                      {
-                        materials.length < 1 
-                        ?
-                        <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
-                        :
-                        materials.map((item, i) => (
-                          <li className='table__row' key={i}>
-                            <div className='table__main-column'>
-                              <div className='table__column table__column_type_count'>
-                                <p className='table__text'>{i + 1}</p>
-                              </div>
-                              <div className="table__column table__column_type_date">
-                                <p className="table__text">{item.date}</p>
-                              </div>
-                              <div className='table__column table__column_type_name'>
-                                <p className='table__text'>{item.title}</p>
-                              </div>
-                            </div>
-                            <div className='table__column table__column_type_btn'>
-                              <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
-                              <button 
-                              className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
-                              type='button' 
-                              onClick={(() => openRemoveMaterialPopup(item))}
-                              >
-                              </button>
-                            </div>
-                          </li>
-                        ))
-                      }
-                    </ul>
-                  </div>
-                </Table>
+                  </Table>
+                </div>
               </div>
             </div>
 
-            <div className='discipline-info__advertisement'>
-              <div className='discipline-info__section-header'>
-                <h4 className='discipline-info__section-title'>Объявления</h4>
-                <button className='btn_type_add' type='button' onClick={() => openAddAdvertisementPopup()}></button>
+            <div className='discipline-info__column'>             
+              <div className='discipline-info__advertisement'>
+                <div className='discipline-info__section-header'>
+                  <h4 className='discipline-info__section-title'>Объявления</h4>
+                  <button className='btn_type_add' type='button' onClick={() => openAddAdvertisementPopup()}></button>
+                </div>
+                <ul style={Object.assign({}, advertisementStyle)} className='discipline-info__advertisement-list scroll'>
+                  {
+                    advertisement.length < 1 
+                    ?
+                    <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
+                    :
+                    [...advertisement.map((elem) => ({...elem, type: 'advertisement'}))].reverse().map((elem, i) => (
+                      <EducationAdvertisement key={i} advertisement={elem} onOpen={openEditAdvertisementPopup} />
+                    ))
+                  }
+                </ul>
               </div>
-              <ul style={Object.assign({}, advertisementStyle)} className='discipline-info__advertisement-list scroll'>
-                {
-                  advertisement.length < 1 
-                  ?
-                  <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
-                  :
-                  advertisement.reverse().map((elem, i) => (
-                    <EducationAdvertisement onOpen={openEditAdvertisementPopup} advertisement={elem} key={i} />
-                  ))
-                }
-              </ul>
             </div>
+
           </div>
+
         </DisciplineInfo>
       }
 

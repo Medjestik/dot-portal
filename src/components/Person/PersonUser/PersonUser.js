@@ -178,12 +178,12 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
             currentUser={currentUser}
             studentData={studentData}
             openPhotoPopup={openPhotoPopup}
-            />
-            <PersonData
-            windowWidth={windowWidth}
-            currentUser={currentUser}
-            openChangePasswordPopup={openChangePasswordPopup} 
+            openChangePasswordPopup={openChangePasswordPopup}
             openDataPopup={openDataPopup}
+            />
+            <PersonAdministration
+              windowWidth={windowWidth}
+              studentData={studentData}
             />
             </>
           }
@@ -198,6 +198,7 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
             <PersonData
               windowWidth={windowWidth}
               currentUser={currentUser}
+              studentData={studentData}
               openChangePasswordPopup={openChangePasswordPopup}
               openDataPopup={openDataPopup}
             />

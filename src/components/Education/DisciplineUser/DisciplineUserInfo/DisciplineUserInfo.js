@@ -3,22 +3,26 @@ import './DisciplineUserInfo.css';
 import DisciplineInfo from '../../DisciplineInfo/DisciplineInfo.js';
 import Table from '../../../Table/Table.js';
 import StudentViewAdvertisementPopup from '../../EducationPopup/StudentViewAdvertisementPopup/StudentViewAdvertisementPopup.js';
+import StudentViewCommentPopup from '../../EducationPopup/StudentViewCommentPopup/StudentViewCommentPopup.js';
+import EducationAdvertisement from '../../EducationAdvertisement/EducationAdvertisement.js';
 
 function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
 
   const containerHeightRef = React.createRef();
   const tableHeaderHeightRef = React.createRef();
-  const advertisementHeightRef = React.createRef();
 
   const [tableHeight, setTableHeight] = React.useState(0);
+  const [advertisementHeight, setAdvertisementHeight] = React.useState(0);
 
-  const [currentAdvertisement, setCurrentAdvertisement] = React.useState({});
+  const [currentData, setCurrentData] = React.useState({});
 
   const [isOpenViewAdvertisementPopup, setIsOpenViewAdvertisementPopup] = React.useState(false);
+  const [isOpenViewCommentPopup, setIsOpenViewCommentPopup] = React.useState(false);
 
   React.useEffect(() => {
     if (windowWidth >= 833) {
       setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
+      setAdvertisementHeight(containerHeightRef.current.clientHeight);
     }
   }, [windowWidth, containerHeightRef, tableHeaderHeightRef]);
 
@@ -26,23 +30,32 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
     height: tableHeight,
   };
 
-  function openViewAdvertisementPopup(data) {
-    setCurrentAdvertisement(data);
-    setIsOpenViewAdvertisementPopup(true);
+  const advertisementStyle = {
+    height: advertisementHeight,
+  };
+
+  function openPopup(data) {
+    setCurrentData(data);
+    if (data.type === 'advertisement') {
+      setIsOpenViewAdvertisementPopup(true);
+    } else {
+      setIsOpenViewCommentPopup(true);
+    }
   }
 
   function closePopup() {
     setIsOpenViewAdvertisementPopup(false);
+    setIsOpenViewCommentPopup(false);
   }
 
   React.useEffect(() => {
     return(() => {
-      setCurrentAdvertisement({});
+      setCurrentData({});
     })
   }, []);
 
   return (
-    <DisciplineInfo>
+    <DisciplineInfo type='user'>
       
       <div className='discipline-info__column'>
 
@@ -68,9 +81,9 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
                 </p>
               </li>
             </ul>
-          </div>
+        </div>
 
-          <div className='discipline-info__section discipline-info__materials'>
+        <div className='discipline-info__section discipline-info__materials'>
             <div className='discipline-info__section-header'>
               <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
             </div>
@@ -99,7 +112,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
                       ?
                       <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
                       :
-                      disciplineInfo.additional_files.map((item, i) => (
+                      [...disciplineInfo.additional_files].reverse().map((item, i) => (
                         <li className='table__row' key={i}>
                           <div className='table__main-column'>
                             <div className='table__column table__column_type_count'>
@@ -109,7 +122,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
                               <p className="table__text">{item.date}</p>
                             </div>
                             <div className='table__column table__column_type_name'>
-                              <p className='table__text'>{item.name}</p>
+                              <p className='table__text'>{item.title}</p>
                             </div>
                           </div>
                           <div className='table__column table__column_type_btn'>
@@ -122,11 +135,11 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
                 </div>
               </Table>
             </div>
-          </div>
-
         </div>
 
-        <div className='discipline-info__column'>
+      </div>
+
+      <div className='discipline-info__column'>
 
         <div className='discipline-info__section'>
           <div className='discipline-info__teacher'>
@@ -166,60 +179,17 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
         </div>
       
         <div className='discipline-info__section discipline-info__advertisement'>
-          <div className='discipline-info__section-header discipline-info__section-header_margin_bottom'>
-            <h4 className='discipline-info__section-title'>Объявления</h4>
+          <div className='discipline-info__section-header'>
+            <h4 className='discipline-info__section-title'>Объявления и комментарии</h4>
           </div>
-          <ul className='discipline-info__advertisement-list scroll'>
+          <ul style={Object.assign({}, advertisementStyle)} className='discipline-info__advertisement-list scroll'>
             {
               disciplineInfo.announces.length < 1 
               ?
               <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
               :
-              disciplineInfo.announces.reverse().map((elem, i) => (
-                <li key={i} className='discipline-info__advertisement-item'>
-                  <button className='btn_type_advertisement' type='button' onClick={(() => openViewAdvertisementPopup(elem))}></button>
-                  <div className='discipline-info__advertisement-info'>
-                    <h5 className='discipline-info__advertisement-title'>{elem.title}</h5>
-                    <p className='discipline-info__teacher-text'>
-                      <span className='discipline-info__teacher-text_weight_bold'>Автор: </span>
-                      {elem.author}
-                    </p>
-                    <p className='discipline-info__teacher-text'>
-                      <span className='discipline-info__teacher-text_weight_bold'>Дата публикации: </span>
-                      {elem.date}
-                    </p>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div ref={advertisementHeightRef} className='discipline-info__section discipline-info__advertisement'>
-          <div className='discipline-info__section-header discipline-info__section-header_margin_bottom'>
-            <h4 className='discipline-info__section-title'>Комментарии</h4>
-          </div>
-          <ul className='discipline-info__advertisement-list scroll'>
-            {
-              disciplineInfo.announces.length < 1 
-              ?
-              <p className='table__caption_type_empty'>Комментарии отстутствуют.</p>
-              :
-              disciplineInfo.comments.reverse().map((elem, i) => (
-                <li key={i} className='discipline-info__advertisement-item'>
-                  <button className='btn btn_type_comment' type='button' onClick={(() => openViewAdvertisementPopup(elem))}></button>
-                  <div className='discipline-info__advertisement-info'>
-                    <h5 className='discipline-info__advertisement-title'>{elem.text}</h5>
-                    <p className='discipline-info__teacher-text'>
-                      <span className='discipline-info__teacher-text_weight_bold'>Автор: </span>
-                      {elem.author_fullname}
-                    </p>
-                    <p className='discipline-info__teacher-text'>
-                      <span className='discipline-info__teacher-text_weight_bold'>Дата публикации: </span>
-                      {elem.date}
-                    </p>
-                  </div>
-                </li>
+              [...disciplineInfo.announces.map((elem) => ({...elem, title: elem.text, type: 'advertisement'})), ...disciplineInfo.comments.map((elem) => ({...elem, title: elem.text, author: elem.author_fullname, type: 'comment'}))].sort((a,b) => b.seconds - a.seconds).map((elem, i) => (
+                <EducationAdvertisement advertisement={elem} key={i} onOpen={() => openPopup(elem)} />
               ))
             }
           </ul>
@@ -230,9 +200,22 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
           <StudentViewAdvertisementPopup 
             isOpen={isOpenViewAdvertisementPopup}
             onClose={closePopup}
-            currentAdvertisement={currentAdvertisement}
+            currentAdvertisement={currentData}
+            isLoading={false}
           />
         }
+
+        {
+          isOpenViewCommentPopup &&
+          <StudentViewCommentPopup
+            isOpen={isOpenViewCommentPopup}
+            onClose={closePopup}
+            currentAdvertisement={currentData}
+            isLoading={false}
+          />
+        }
+
+
 
       </div>
   

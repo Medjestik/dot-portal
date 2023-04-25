@@ -85,7 +85,7 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
           {
             currentWebinar.speakers.length < 1 
             ?
-            <h4 className='popup__author-name'>{currentWebinar.name || ''}</h4>
+            <h4 className='popup__author-title'>{currentWebinar.name || ''}</h4>
             :
             <>
             {
@@ -96,8 +96,8 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
               <div className='popup__author-img'></div>
             }
             <div className='popup__author-info'>
-              <p className='popup__author-description'>{currentWebinar.speakers[0].fullname || ''}</p>    
-              <h4 className='popup__author-name'>{currentWebinar.name || ''}</h4>
+              <h4 className='popup__author-title'>{currentWebinar.name || ''}</h4>
+              <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Спикер: </span>{currentWebinar.speakers[0].fullname || ''}</p>
             </div>
             </>
           }

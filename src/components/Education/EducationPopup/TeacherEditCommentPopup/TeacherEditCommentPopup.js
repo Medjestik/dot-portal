@@ -39,7 +39,7 @@ function TeacherEditCommentPopup({ isOpen, onClose, currentStudent, currentComme
       formName={'education-teacher-edit-comment-popup'}
     >
       <h2 className='popup__title'>Редактирование комментария</h2>
-      <p className='popup__subtitle'>Студент: {currentStudent.student.fullname}</p>
+      <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Студент: </span>{currentStudent.student.fullname}</p>
 
       <label className='popup__field'>
         <h4 className='popup__input-caption'>Комментарий:</h4>

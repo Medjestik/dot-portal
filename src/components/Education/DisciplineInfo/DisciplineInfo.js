@@ -1,10 +1,10 @@
 import React from 'react';
 import './DisciplineInfo.css';
 
-function DisciplineInfo({ children }) {
+function DisciplineInfo({ children, type }) {
 
   return (
-    <div className='discipline-info'>
+    <div className={`discipline-info discipline-info_type_${type}`}>
       {children}
     </div>
   );

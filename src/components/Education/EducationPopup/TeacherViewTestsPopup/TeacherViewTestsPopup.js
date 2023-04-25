@@ -18,7 +18,7 @@ function TeacherViewTestsPopup({ isOpen, onClose, currentStudent, }) {
       formName={'education-teacher-view-tests-popup'}
     >
       <h2 className='popup__title'>Тестирование студента ({currentStudent.learning.completed_tests_count}/{currentStudent.learning.total_tests_count})</h2>
-      <p className='popup__subtitle'>Студент: {currentStudent.student.fullname}</p>
+      <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Студент: </span>{currentStudent.student.fullname}</p>
 
       {
         currentStudent.learning.tests_info.length > 0 &&
@@ -29,9 +29,9 @@ function TeacherViewTestsPopup({ isOpen, onClose, currentStudent, }) {
                 <div className='popup__item-container'>
                   <TestChart test={elem} />
                   <div className='popup__item-info'>
-                    <h4 className='popup__item-name'>{elem.name}</h4>
-                    <p className='popup__item-date'>Лучшая попытка: {elem.score}/{elem.max_score}</p>
-                    <p className='popup__item-date'>Количество попыток: {elem.attempts}</p>
+                    <h4 className='popup__item-title'>{elem.name}</h4>
+                    <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Лучшая попытка: </span>{elem.score}/{elem.max_score}</p>
+                    <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Количество попыток: </span>{elem.attempts}</p>
                   </div>
                 </div>
               </li>

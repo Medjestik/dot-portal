@@ -1,21 +1,7 @@
 import React from 'react';
-import './SemesterUserTable.css';
 import Table from '../../../Table/Table.js';
-import StudentViewCommentsPopup from '../../EducationPopup/StudentViewCommentsPopup/StudentViewCommentsPopup.js';
 
-function SemesterUserTable({ data, onOpen }) {
-
-  const [isOpenCommentPopup, setIsOpenCommentPopup] = React.useState(false);
-  const [currentComments, setCurrentComments] = React.useState('');
-
-  function openCommentPopup(comment) {
-    setCurrentComments(comment);
-    setIsOpenCommentPopup(true);
-  }
-
-  function closeCommentPopup() {
-    setIsOpenCommentPopup(false);
-  }
+function PracticeUserTable({ data, onOpen }) {
 
   function renderMark(mark) {
     if (mark === 'Не аттестован') {
@@ -45,11 +31,6 @@ function SemesterUserTable({ data, onOpen }) {
     }
   }
 
-  React.useEffect(() => {
-    setCurrentComments('');
-    setIsOpenCommentPopup(false);
-  }, []);
-
   return (
     <>
 
@@ -63,7 +44,7 @@ function SemesterUserTable({ data, onOpen }) {
             <p className='table__text table__text_type_header'>Период</p>
           </div>
           <div className='table__column table__column_type_header table__column_type_full'>
-            <p className='table__text table__text_type_header'>Дисциплина</p>
+            <p className='table__text table__text_type_header'>Практика</p>
           </div>
           <div className='table__column table__column_type_header table__column_type_teacher'>
             <p className='table__text table__text_type_header'>Преподаватель</p>
@@ -73,12 +54,6 @@ function SemesterUserTable({ data, onOpen }) {
           </div>
           <div className='table__column table__column_type_header table__column_type_small'>
             <p className='table__text table__text_type_header'>Оценка</p>
-          </div>
-          <div className='table__column table__column_type_header table__column_type_small'>
-            <p className='table__text table__text_type_header'>КР</p>
-          </div>
-          <div className='table__column table__column_type_header table__column_type_teacher'>
-            <p className='table__text table__text_type_header'>Комментарий</p>
           </div>
         </div>
       </div>
@@ -113,52 +88,17 @@ function SemesterUserTable({ data, onOpen }) {
                 <div className='table__column table__column_type_small'>
                   {item.mark && renderMark(item.mark.name)}
                 </div>
-                {
-                  item.course_work 
-                  ?
-                  <div className='table__column table__column_type_small'>
-                    {item.mark && renderMark(item.course_mark.name)}
-                  </div>
-                  :
-                  <div className='table__column table__column_type_small'>
-                    <p className='table__text'></p>
-                  </div>
-                }
-
-                {
-                  item.comments.length < 1 
-                  ?
-                  <div className='table__column table__column_type_teacher'>
-                    <p className='table__text table__text_type_empty'>Нет комментария</p>
-                  </div>
-                  :
-                  <div className='table__column table__column_type_teacher'>
-                    <p className='table__text table__text_type_cut table__text_type_active' 
-                    onClick={() => openCommentPopup(item.comments)}>
-                      {item.comments[item.comments.length - 1].text}
-                    </p>
-                  </div>
-                }
               </div>
             </li>
           ))
         }
         </ul>
         :
-        <div className='table__caption_type_empty'>В этом семестре у вас отсутствуют дисциплины!</div>
+        <div className='table__caption_type_empty'>В этом семестре у вас отсутствуют практики!</div>
       }
     </Table>
-
-    {
-      isOpenCommentPopup &&
-      <StudentViewCommentsPopup
-        isOpen={isOpenCommentPopup}
-        onClose={closeCommentPopup}
-        comments={currentComments}
-      />
-    }
     </>
   );
 }
 
-export default SemesterUserTable;  
+export default PracticeUserTable;  

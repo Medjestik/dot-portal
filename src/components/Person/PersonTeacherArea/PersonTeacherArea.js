@@ -69,7 +69,7 @@ function PersonArea({ currentUser, openPhotoPopup, openChangePasswordPopup, open
             <p className='person-area__data-control-text' onClick={openChangePasswordPopup}>Изменить пароль</p>
           </div>
         </div>
-        
+
       </div>
     </section>
   );

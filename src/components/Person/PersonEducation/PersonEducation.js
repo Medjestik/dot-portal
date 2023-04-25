@@ -57,7 +57,7 @@ function PersonEducation({ studentEducationInfo, windowWidth }) {
           {
             studentEducationInfo.semesters.map((sem, i) => (
               <li className='person-education__item' key={i}>
-                <NavLink className='person-education__item-link' to={`/education/semester/` + sem.semesterId}>
+                <NavLink className='person-education__item-link' to={`/education/semester/` + sem.semesterId + '/disciplines'}>
                   <ul className='person-education__indicators'>
                     <li className='person-education__indicator'>
                       <span 

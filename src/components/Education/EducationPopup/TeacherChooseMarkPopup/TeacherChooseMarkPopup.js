@@ -50,7 +50,7 @@ function TeacherChooseMarkPopup({ isOpen, onClose, currentStudent, disciplineInf
       formName={'education-teacher-choose-mark-popup'}
     >
       <h2 className='popup__title'>Выберите оценку и введите комментарий</h2>
-      <p className='popup__subtitle'>Студент: {currentStudent.student.fullname}</p>
+      <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Студент: </span>{currentStudent.student.fullname}</p>
 
       <div className='popup__field'>
         <h4 className='popup__input-caption'>Оценка по дисциплине:</h4>

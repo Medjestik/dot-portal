@@ -7,6 +7,7 @@ import Section from '../../Section/Section.js';
 import SemesterUserTable from './SemesterUserTable/SemesterUserTable.js';
 import SemesterUserCardList from './SemesterUserCardList/SemesterUserCardList.js';
 import DisciplineUser from '../DisciplineUser/DisciplineUser.js';
+import PracticeUserTable from '../PracticeUser/PracticeUserTable/PracticeUserTable.js';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext.js';
 import * as educationApi from '../../../utils/educationApi.js';
 import Preloader from '../../Preloader/Preloader.js';
@@ -23,7 +24,7 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
   const [disciplines, setDisciplines] = React.useState([]);
   const [practices, setPractices] = React.useState([]);
   const [currentDiscipline, setCurrentDiscipline] = React.useState({ name: '', });
-  const [isDisciplineOpen, setIsDisciplineOpen] = React.useState(location.pathname.includes('disciplines' || 'practices') ? false : true);
+  const [isDisciplineOpen, setIsDisciplineOpen] = React.useState(false);
 
   const [currentSemester, setCurrentSemester] = React.useState({});
   const [tabs, setTabs] = React.useState([]);
@@ -33,26 +34,18 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
   function chooseSemester(semester) {
     setCurrentSemester(semester);
     disciplineRequest(semester.semesterId);
-    setTabs([ 
-      { title: 'Дисциплины', link: '/education/semester/' + semester.semesterId + '/disciplines' },
-      { title: 'Практика', link: '/education/semester/' + semester.semesterId + '/practices' }, 
-    ]);
     navigate('/education/semester/' + semester.semesterId + '/disciplines');
   }
 
   function openDiscipline(discipline) {
     setCurrentDiscipline({ name: '', });
     navigate('/education/semester/' + currentSemester.id + '/discipline/' + discipline.discipline_id + '/info');
-    setIsDisciplineOpen(true);
+    //setIsDisciplineOpen(true);
   }
 
   function backToSemester() {
     navigate('/education/semester/' + currentSemester.semesterId + '/disciplines');
-        setTabs([ 
-      { title: 'Дисциплины', link: '/education/semester/' + currentSemester.semesterId + '/disciplines' },
-      { title: 'Практика', link: '/education/semester/' + currentSemester.semesterId + '/practices' }, 
-    ]);
-    setIsDisciplineOpen(false);
+    //setIsDisciplineOpen(false);
   }
 
   function disciplineRequest(semesterId) {
@@ -63,6 +56,16 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
       console.log('SemesterData', res);
       setDisciplines(res.disciplines);
       setPractices(res.practics);
+      if (res.practics.length > 0) {
+        setTabs([ 
+          { title: 'Дисциплины', link: '/education/semester/' + semesterId + '/disciplines' },
+          { title: 'Практика', link: '/education/semester/' + semesterId + '/practices' }, 
+        ]);
+      } else {
+        setTabs([ 
+          { title: 'Дисциплины', link: '/education/semester/' + semesterId + '/disciplines' },
+        ]);
+      }
     })
     .catch((err) => {
       console.error(err);
@@ -77,14 +80,14 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
   }
 
   React.useEffect(() => {
+    setIsDisciplineOpen(!(location.pathname.includes('disciplines') || location.pathname.includes('practices')));
+  }, [location]);
+
+  React.useEffect(() => {
     setCurrentSemester(semesterInfo.find((sem) => sem.semesterId === params.semesterId));
-    setIsDisciplineOpen(location.pathname.includes('disciplines' || 'practices') ? false : true);
+    setIsDisciplineOpen(!(location.pathname.includes('disciplines') || location.pathname.includes('practices')));
     disciplineRequest(params.semesterId);
-    setTabs([ 
-      { title: 'Дисциплины', link: '/education/semester/' + params.semesterId + '/disciplines' },
-      { title: 'Практика', link: '/education/semester/' + params.semesterId + '/practices' }, 
-    ]);
-    
+
     return(() => {
       setCurrentDiscipline({ name: '', });
       setCurrentSemester({});
@@ -127,7 +130,7 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
 
               <Route exact path='/practices'
               element={
-                <SemesterUserTable data={practices} onOpen={openDiscipline} />
+                <PracticeUserTable data={practices} onOpen={openDiscipline} /> 
               }
               />
             </Routes>

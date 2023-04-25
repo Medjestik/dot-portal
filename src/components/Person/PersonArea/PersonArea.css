@@ -10,7 +10,7 @@
   width: 100%;
   margin: 0px;
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
 }
 .person-area__data-container {
   width: 100%;
@@ -308,96 +308,64 @@
 }
 
 @media all and (max-width: 1439px) {
-  .person-area__container {
-    padding: 32px;
-  }
-  .person-area__photo-container {
-    margin: 0px 16px 0px 0px;
-  }
-  .person-area__separate {
-    height: 276px;
-  }
-  .person-area__achievements-item {
-    margin: 0px 16px 0px 0px;
-  }
-  .person-area__group {
-    margin: 0px 18px 0px 0px;
-    grid-area: none;
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    padding: 10px 20px;
-  }
-  .person-area__education-card {
-    justify-content: center;
-  }
-  .person-area__education-card_type_course {
-    grid-area: none;
-    margin: 0px 18px 0px 0px;
-  }
-  .person-area__education-card_type_semester {
-    grid-area: none;
-    margin: 0px;
-  }
-  .person-area__group-title {
-    margin: 0px;
-  }
-  .person-area__education-count {
-    margin: 0px 4px 0px 0px;
-    font-size: 16px;
-    line-height: 20px;
-  }
   .person-area__contact {
     max-width: none;
     width: 100%;
+    display: flex;
+    flex-direction: row;
   }
-  .person-area__contact-info {
-    margin: 0px 0px 32px 0px;
+  .person-area__contact-container {
+    margin: 0px 20px 0px 0px;
   }
-  .person-area__contact-info:last-of-type {
+  .person-area__contact-container:last-of-type {
     margin: 0px;
   }
 }
 
 @media all and (max-width: 833px) {
-  .person-area__container {
-    padding: 20px;
-  }
-  .person-area-laptop__info-data {
-    justify-content: space-between;
-  }
-  .person-area__group {
-    margin: 0px 10px 0px 0px;
-    padding: 10px;
-    max-width: 100%;
+  .person-area__data-mobile {
     width: 100%;
+    margin: 0px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
-  .person-area__education-card_type_course {
-    margin: 0px 10px 0px 0px;
+  .person-area__data-list {
+    margin: 16px 0px 0px 0px;
+  }
+  .person-area__data-list_margin_top {
+    margin: 0px;
+  }
+  .person-area__name {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  .person-area__achievements-list {
+    margin: 12px 0px 0px 0px;
+  }
+  .person-area__achievements-item {
+    margin: 0px 12px 0px 0px;
+  }
+  .person-area__education {
+    margin: 20px 0px 0px 0px;
+    max-width: none;
+  }
+  .person-area__education-container {
+    gap: 16px;
   }
   .person-area__education-card {
-    padding: 10px;
-    max-width: 100%;
+    padding: 8px;
+    justify-content: center;
   }
-  .person-area__photo-container {
-    width: 100px;
-    height: 100px;
+  .person-area__contact {
+    display: flex;
+    flex-direction: column;
   }
-  .person-area__photo {
-    width: 100px;
-    height: 100px;
+  .person-area__contact-container {
+    margin: 0px 0px 20px 0px;
   }
-  .person-area__icon-container {
-    width: 100px;
-    height: 50px;
-  }
-  .person-area__photo-icon {
-    opacity: 0;
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    bottom: 12px;
-    left: 34px;
+  .person-area__contact-container:last-of-type {
+    margin: 0px;
   }
 }

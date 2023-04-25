@@ -144,7 +144,6 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
     .then((res) => {
       const index = disciplineStudents.indexOf(disciplineStudents.find((elem) => (elem.student.id === currentStudent.student.id)));
       const indexComment = disciplineStudents[index].comments.indexOf(disciplineStudents[index].comments.find((elem) => (elem.id === res.id)));
-      console.log(indexComment);
       const comments = ([ 
         ...disciplineStudents[index].comments.slice(0, indexComment), 
         res, 

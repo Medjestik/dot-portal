@@ -15,11 +15,11 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
   function renderComment(comment) {
     if (currentUser.id === comment.author_id) { 
       return (
-        <h4 className='popup__item-name popup__item-name_type_active' onClick={() => onEditComment(comment)}>{comment.text}</h4>
+        <h4 className='popup__author-title popup__author-title_font_small popup__author-title_type_active' onClick={() => onEditComment(comment)}>{comment.text}</h4>
       )
     } else {
       return (
-        <h4 className='popup__item-name'>{comment.text}</h4>
+        <h4 className='popup__author-title popup__author-title_font_small'>{comment.text}</h4>
       )
     }
   }
@@ -32,7 +32,7 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
     formName={'education-teacher-view-comments-popup'}
     >
       <h2 className='popup__title'>Комментарии для студента</h2>
-      <p className='popup__subtitle'>Студент: {currentStudent.student.fullname}</p>
+      <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Студент: </span>{currentStudent.student.fullname}</p>
 
       {
         currentStudent.comments.length > 0 &&
@@ -40,12 +40,12 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
           {
             currentStudent.comments.slice(0).reverse().map((elem, i) => (
               <li key={i} className='popup__item'>
-                <div className='popup__item-container'>
-                  <img className='popup__item-img' src={elem.author_avatar_link} alt='аватар автора комментария'></img>
-                  <div className='popup__item-info'>
+                <div className='popup__author'>
+                  <img className='popup__author-img' src={elem.author_avatar_link} alt='аватар'></img>
+                  <div className='popup__author-info'>
                     {renderComment(elem)}
-                    <p className='popup__item-date'>Автор: {elem.author_fullname}</p>
-                    <p className='popup__item-date'>Дата публикации: {elem.date}</p>
+                    <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Автор: </span>{elem.author_fullname}</p>
+                    <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Дата публикации: </span>{elem.date}</p>
                   </div>
                 </div>
               </li>
