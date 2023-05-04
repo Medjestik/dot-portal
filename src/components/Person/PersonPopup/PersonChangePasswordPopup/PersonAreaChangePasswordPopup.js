@@ -92,7 +92,7 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose, onChangePassword, isLo
           name='currentPassword'
           placeholder='Введите ваш текущий пароль'
           minLength='6'
-          autoComplete='off'
+          autoComplete='disabled'
           required 
           />
           <div 
@@ -119,7 +119,7 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose, onChangePassword, isLo
           name='newPassword'
           placeholder='Введите ваш новый пароль'
           minLength='6'
-          autoComplete='off'
+          autoComplete='disabled'
           required 
           />
           <div 
@@ -146,7 +146,7 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose, onChangePassword, isLo
           name='repeatPassword' 
           placeholder='Повторите ваш новый пароль' 
           minLength='6'
-          autoComplete='off'
+          autoComplete='disabled'
           required 
           />
           <div 

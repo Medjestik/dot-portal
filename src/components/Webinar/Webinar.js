@@ -213,7 +213,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
             ?
             <p className='table__caption_type_empty'>По заданным параметрам вебинаров не найдено.</p>
             :
-            <ul className='table__main table__main_type_webinar scroll'>
+            <ul className='table__main scroll'>
               {
                 [...filteredWebinars].reverse().map((item, i) => (
                   <li className='table__row' key={i}>

@@ -5,7 +5,7 @@ import * as educationApi from '../../../utils/educationApi.js';
 import { CurrentUserContext } from '../../../contexts/CurrentUserContext.js';
 import Preloader from '../../Preloader/Preloader.js';
 import Section from '../../Section/Section.js';
-import DisciplineSectionSelect from '../DisciplineSectionSelect/DisciplineSectionSelect.js';
+import SectionSelect from '../../Section/SectionSelect/SectionSelect.js';
 import DisciplineTeacherGroup from './DisciplineTeacherGroup/DisciplineTeacherGroup.js';
 import DisciplineTeacherStudent from './DisciplineTeacherStudent/DisciplineTeacherStudent.js';
 import DisciplineTeacherInfo from './DisciplineTeacherInfo/DisciplineTeacherInfo.js';
@@ -221,11 +221,14 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
     return (
       <Section title={disciplineInfo.name} heightType='page' headerType='large'>
         <div className='discipline-teacher'> 
-          <div className='discipline-teacher__header'>
-            <p className='discipline-teacher__header-caption'>Выберите раздел дисциплины:</p>
-            <div className='discipline-teacher__header-container'>
-              <DisciplineSectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
-              <div className='discipline-teacher__header-group'>Группа: {groupInfo.current_name}</div>
+          <div className='section__header'>
+            <div className='section__header-item'>
+              <p className='section__header-caption section__header-caption_margin_bottom'>Выберите раздел:</p>
+              <SectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
+            </div>
+            <div className='section__header-item section__header-item_type_content'>
+              <p className='section__header-caption section__header-caption_margin_bottom'>Группа:</p>
+              <div className='discipline-teacher__header-group'>{groupInfo.current_name}</div>
             </div>
           </div>
         </div>

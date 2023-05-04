@@ -28,7 +28,7 @@ function Search({ type, id, data, onSearch }) {
       type='text'
       id={`search-filter-${id}`}
       name={`search-filter-${id}`}
-      autoComplete='off'
+      autoComplete='disabled'
       value={searchText}
       onChange={handleSearchText}
       >

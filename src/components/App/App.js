@@ -8,6 +8,7 @@ import Header from '../Header/Header.js';
 import Person from '../Person/Person.js';
 import SemesterUser from '../Education/SemesterUser/SemesterUser.js';
 import Journal from '../Journal/Journal.js';
+import Curator from '../Curator/Curator.js';
 import Control from '../Control/Control.js';
 import Webinar from '../Webinar/Webinar.js';
 import Document from '../Document/Document.js';
@@ -233,6 +234,13 @@ function App() {
 
                         <Route path='journal/*' element={
                           <Journal
+                          windowWidth={windowWidth}
+                          onLogout={handleLogout}
+                          />
+                        }/>
+
+                        <Route path='curator/*' element={
+                          <Curator
                           windowWidth={windowWidth}
                           onLogout={handleLogout}
                           />

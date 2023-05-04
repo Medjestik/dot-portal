@@ -121,7 +121,6 @@ function PersonAreaDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoa
           autoComplete='off'
           required 
           />
-
         </div>
         <span className={`popup__input-error ${dateError.isShow ? 'popup__input-error_status_show' : ''}`}>
           {dateError.text}

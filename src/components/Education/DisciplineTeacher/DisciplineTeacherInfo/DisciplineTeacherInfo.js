@@ -5,8 +5,8 @@ import Preloader from '../../../Preloader/Preloader.js';
 import DisciplineInfo from '../../DisciplineInfo/DisciplineInfo.js';
 import EducationChart from '../../EducationChart/EducationChart.js';
 import EducationAdvertisement from '../../EducationAdvertisement/EducationAdvertisement.js';
-import TeacherAddAdvertisementPopup from '../../EducationPopup/TeacherAddAdvertisementPopup/TeacherAddAdvertisementPopup';
-import TeacherEditAdvertisementPopup from '../../EducationPopup/TeacherEditAdvertisementPopup/TeacherEditAdvertisementPopup.js';
+import AddAdvertisementPopup from '../../EducationPopup/AddAdvertisementPopup/AddAdvertisementPopup';
+import EditAdvertisementPopup from '../../EducationPopup/EditAdvertisementPopup/EditAdvertisementPopup.js';
 import Table from '../../../Table/Table.js';
 import UploadFilePopup from '../../../Popup/UploadFilePopup/UploadFilePopup.js';
 import ConfirmRemovePopup from '../../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
@@ -362,7 +362,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
 
       {
         isOpenTeacherAddAdvertisement &&
-        <TeacherAddAdvertisementPopup
+        <AddAdvertisementPopup
           isOpen={isOpenTeacherAddAdvertisement}
           onClose={closePopup}
           onAdd={addAdvertisement}
@@ -373,7 +373,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
 
       {
         isOpenTeacherEditAdvertisement &&
-        <TeacherEditAdvertisementPopup 
+        <EditAdvertisementPopup 
           isOpen={isOpenTeacherEditAdvertisement}
           onClose={closePopup}
           currentAdvertisement={currentAdvertisement}

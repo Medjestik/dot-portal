@@ -1,7 +1,7 @@
 import React from 'react';
 import './DisciplineUser.css';
 import { Route, Routes, useNavigate, useParams, useLocation } from 'react-router-dom';
-import DisciplineSectionSelect from '../DisciplineSectionSelect/DisciplineSectionSelect.js';
+import SectionSelect from '../../Section/SectionSelect/SectionSelect.js';
 import DisciplineUserInfo from './DisciplineUserInfo/DisciplineUserInfo.js';
 import DisciplineMaterials from '../DisciplineMaterials/DisciplineMaterials.js';
 import DisciplineWebinars from '../DisciplineWebinars/DisciplineWebinars.js';
@@ -68,10 +68,10 @@ function Discipline({ windowWidth, currentSemester, getDisciplineName }) {
       <Preloader />
       :
       <>
-      <div className='discipline-user__header'>
-        <p className='discipline-user__header-caption'>Выберите раздел дисциплины:</p>
-        <div className='discipline-user__header-container'>
-          <DisciplineSectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />  
+      <div className='section__header'>
+        <div className='section__header-item section__header-item_type_content'>
+          <p className='section__header-caption section__header-caption_margin_bottom'>Выберите раздел:</p>
+          <SectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
         </div>
       </div>
 

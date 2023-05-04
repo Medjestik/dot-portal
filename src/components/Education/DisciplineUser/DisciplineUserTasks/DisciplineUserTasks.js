@@ -14,6 +14,7 @@ function DisciplineUserTasks({ windowWidth, disciplineId }) {
   const [isLoadingTasks, setIsLoadingTasks] = React.useState(true);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
   const [taskName, setTaskName] = React.useState('');
+  const [taskNameError, setTaskNameError] = React.useState({ isShow: false, text: '' });
   const [isBlockSaveButton, setIsBlockSaveButton] = React.useState(true);
 
   const [fileName, setFileName] = React.useState({ isShow: false, name: '', });
@@ -63,6 +64,11 @@ function DisciplineUserTasks({ windowWidth, disciplineId }) {
 
   function handleChangeTaskName(e) {
     setTaskName(e.target.value);
+    if (e.target.checkValidity()) {
+      setTaskNameError({ text: '', isShow: false });
+    } else {
+      setTaskNameError({ text: 'Укажите корректное название', isShow: true });
+    }
   }
 
   function disciplineTasksRequest(id) {
@@ -136,44 +142,52 @@ function DisciplineUserTasks({ windowWidth, disciplineId }) {
           id='discipline-tasks-upload-file'
           onSubmit={disciplineTasksUpload}
           >
-            <p className='discipline-tasks__caption'>Загрузите выполненную работу:</p>
-            <div className='popup__input-field'>
-              <input 
-              className='popup__input'
-              type='text'
-              id='discipline-tasks-name'
-              value={taskName}
-              onChange={handleChangeTaskName}
-              name='discipline-tasks-name'
-              placeholder='Введите название работы'
-              minLength='1'
-              autoComplete='off'
-              required 
-              >
-              </input>
-            </div>
-            <p className='discipline-tasks__caption'>Выберите файл:</p>
-            <div className='upload-form__container'>
-              <div className='upload-form__section'>
-                <label htmlFor='discipline-tasks-upload' className='upload-form__field'>
-                  <p className='upload-form__text'>{fileName.isShow ? fileName.name : ''}</p>
-                  <div className='upload-form__icon'></div>
-                </label>
-                <input onChange={handleChangeTask} id='discipline-tasks-upload' className='upload-form__input' type="file" />
+            <div className='popup__field'>
+              <p className='popup__input-caption'>Загрузите выполненную работу:</p>
+              <div className='popup__input-field'>
+                <input 
+                className='popup__input'
+                type='text'
+                id='discipline-tasks-name'
+                value={taskName}
+                onChange={handleChangeTaskName}
+                name='discipline-tasks-name'
+                placeholder='Введите название работы'
+                minLength='1'
+                autoComplete='off'
+                required 
+                >
+                </input>
               </div>
-              <div className='upload-form__buttons'>
-                <button className='btn_type_large btn-cancel_type_large' type='button' onClick={cleanForm}>Отменить</button>
-                  {
-                    isLoadingRequest ? 
-                    <button className='btn_type_large btn-save_type_large btn-save_type_large_status_loading' disabled type='button'>Сохранение..</button>
-                    :
-                    <button 
-                    className={`btn_type_large btn-save_type_large ${isBlockSaveButton ? 'btn-save_type_large_status_block' : ''}`} 
-                    type='submit'
-                    >
-                      Сохранить
-                    </button>
-                  }
+              <span className={`popup__input-error ${taskNameError.isShow ? 'popup__input-error_status_show' : ''}`}>
+                {taskNameError.text}
+              </span>
+            </div>
+
+            <div className='popup__field'>
+              <p className='popup__input-caption'>Выберите файл:</p>
+              <div className='upload-form__container'>
+                <div className='upload-form__section'>
+                  <label htmlFor='discipline-tasks-upload' className='upload-form__field'>
+                    <p className='upload-form__text'>{fileName.isShow ? fileName.name : ''}</p>
+                    <div className='upload-form__icon'></div>
+                  </label>
+                  <input onChange={handleChangeTask} id='discipline-tasks-upload' className='upload-form__input' type="file" />
+                </div>
+                <div className='upload-form__buttons'>
+                  <button className='btn_type_large btn-cancel_type_large' type='button' onClick={cleanForm}>Отменить</button>
+                    {
+                      isLoadingRequest ? 
+                      <button className='btn_type_large btn-save_type_large btn-save_type_large_status_loading' disabled type='button'>Сохранение..</button>
+                      :
+                      <button 
+                      className={`btn_type_large btn-save_type_large ${isBlockSaveButton ? 'btn-save_type_large_status_block' : ''}`} 
+                      type='submit'
+                      >
+                        Сохранить
+                      </button>
+                    }
+                </div>
               </div>
             </div>
           </form>

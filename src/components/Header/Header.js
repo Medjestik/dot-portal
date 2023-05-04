@@ -3,7 +3,7 @@ import './Header.css';
 import HeaderMobile from './HeaderMobile/HeaderMobile.js';
 import { useLocation, NavLink } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
-import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon, disciplineIcon, journalIcon, controlIcon } from './HeaderIcons/HeaderIcons.js';
+import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon, disciplineIcon, journalIcon, controlIcon, curatorIcon } from './HeaderIcons/HeaderIcons.js';
 import useOnClickOutside from '../../hooks/useOnClickOutside.js';
 
 function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
@@ -16,6 +16,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
   const [isShowMobileMenu, setIsShowMobileMenu] = React.useState(false);
   const [isEducationOpen, setIsEducationOpen] = React.useState(location.pathname.includes('/education') ? true : false);
   const [isDisciplinesOpen, setIsDisciplinesOpen] = React.useState(location.pathname.includes('/semester') ? true : false);
+  const [isCuratorOpen, setIsCuratorOpen] = React.useState(location.pathname.includes('/curator') ? true : false);
 
   function showMobileMenu() {
     setIsShowMobileMenu(true);
@@ -88,7 +89,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
             { disciplineIcon }
           </div>
         </div>
-        <p className='header__nav-link-text'>Дисциплины</p> 
+        <p className='header__nav-link-text'>Обучение</p> 
       </NavLink>
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/journal'>
         <div className='header__nav-link-icon'>
@@ -97,6 +98,17 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
           </div>
         </div>
         <p className='header__nav-link-text'>Ведомости</p> 
+      </NavLink>
+      <NavLink 
+      onClick={hideMobileMenu}
+      className={`header__nav-link + ${isCuratorOpen ? 'header__nav-link_type_active' : ''}`}
+      to='/curator/groups/current'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { curatorIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Куратор</p> 
       </NavLink>
       </>
     )
@@ -164,6 +176,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
   React.useEffect(() => {
     setIsEducationOpen(location.pathname.includes('/education') ? true : false);
     setIsDisciplinesOpen(location.pathname.includes('/semester') ? true : false);
+    setIsCuratorOpen(location.pathname.includes('/curator') ? true : false);
   }, [location]);
  
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 
-function TeacherEditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, onEdit, isLoadingRequest, isShowRequestError }) {
+function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, onEdit, isLoadingRequest, isShowRequestError }) {
 
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true); 
 
@@ -51,7 +51,7 @@ function TeacherEditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, 
       isOpen={isOpen}
       onSubmit={handleSubmit}
       formWidth={'medium'}
-      formName={'education-teacher-edit-advertisement-popup'}
+      formName={'education-edit-advertisement-popup'}
     >
       <h2 className='popup__title'>Создание объявления</h2>
 
@@ -61,10 +61,10 @@ function TeacherEditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, 
           <input 
           className='popup__input'
           type='text'
-          id='teacher-edit-advertisement-title'
+          id='edit-advertisement-title'
           value={title}
           onChange={handleChangeTitle}
-          name='teacher-edit-advertisement-title' 
+          name='edit-advertisement-title' 
           placeholder='Введите текст заголовка..'
           autoComplete='off'
           minLength={1}
@@ -80,7 +80,7 @@ function TeacherEditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, 
         <h4 className='popup__input-caption'>Текст:</h4>
         <textarea 
           className='popup__textarea scroll'
-          name='teacher-edit-advertisement-text' 
+          name='edit-advertisement-text' 
           placeholder='Введите текст объявления..'            
           value={text}
           onChange={handleChangeText}
@@ -103,4 +103,4 @@ function TeacherEditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, 
   )
 }
 
-export default TeacherEditAdvertisementPopup;
+export default EditAdvertisementPopup;

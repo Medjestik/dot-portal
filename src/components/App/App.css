@@ -564,7 +564,7 @@ input[type=number] {
   margin: 16px auto 0px;
 }
 .btn_margin_right {
-  margin: 12px 0px 0px 0px;
+  margin: 0px 12px 0px 0px;
 }
 .btn_margin_zero {
   margin: 0px;

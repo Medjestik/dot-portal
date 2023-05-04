@@ -1,8 +1,8 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
-import './TeacherAddAdvertisementPopup.css';
+import './AddAdvertisementPopup.css';
 
-function TeacherAddAdvertisementPopup({ isOpen, onClose, onAdd, isLoadingRequest, isShowRequestError }) {
+function AddAdvertisementPopup({ isOpen, onClose, onAdd, isLoadingRequest, isShowRequestError }) {
 
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true); 
 
@@ -52,7 +52,7 @@ function TeacherAddAdvertisementPopup({ isOpen, onClose, onAdd, isLoadingRequest
       isOpen={isOpen}
       onSubmit={handleSubmit}
       formWidth={'medium'}
-      formName={'education-teacher-add-advertisement-popup'}
+      formName={'education-add-advertisement-popup'}
     >
       <h2 className='popup__title'>Создание объявления</h2>
 
@@ -62,16 +62,15 @@ function TeacherAddAdvertisementPopup({ isOpen, onClose, onAdd, isLoadingRequest
           <input 
           className='popup__input'
           type='text'
-          id='teacher-add-advertisement-title'
+          id='add-advertisement-title'
           value={title}
           onChange={handleChangeTitle}
-          name='teacher-add-advertisement-title' 
+          name='add-advertisement-title' 
           placeholder='Введите текст заголовка..'
           autoComplete='off'
           minLength={1}
           required 
           />
-
         </div>
         <span className={`popup__input-error ${titleError.isShow ? 'popup__input-error_status_show' : ''}`}>
           {titleError.text}
@@ -82,7 +81,8 @@ function TeacherAddAdvertisementPopup({ isOpen, onClose, onAdd, isLoadingRequest
         <h4 className='popup__input-caption'>Текст:</h4>
         <textarea 
           className='popup__textarea scroll'
-          name='teacher-add-advertisement-text' 
+          name='add-advertisement-text'
+          id='add-advertisement-text'
           placeholder='Введите текст объявления..'            
           value={text}
           onChange={handleChangeText}
@@ -105,4 +105,4 @@ function TeacherAddAdvertisementPopup({ isOpen, onClose, onAdd, isLoadingRequest
   )
 }
 
-export default TeacherAddAdvertisementPopup;
+export default AddAdvertisementPopup;
