@@ -44,3 +44,51 @@ export const getGroupList = ({ token, groupId }) => {
   .then(res => handleResponse(res))
 };
 
+export const getGroupAdvertisement = ({ token, groupId }) => {
+  return fetch(`${API_URL}/curators/action/announcements/group_id/${groupId}`, {  
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const curatorAddAdvertisement = ({ token, groupId, advertisement }) => {
+  return fetch(`${API_URL}/curators/action/add_announcement/group_id/${groupId}`, { 
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ title: advertisement.title, text: advertisement.text, })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const removeAdvertisement = ({ token, advertisementId }) => {
+  return fetch(`${API_URL}/curators/action/delete_announcement/announcement_id/${advertisementId}`, { 
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getGroupDisciplines = ({ token, groupId }) => {
+  return fetch(`${API_URL}/curators/action/disciplines/group_id/${groupId}`, {  
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};

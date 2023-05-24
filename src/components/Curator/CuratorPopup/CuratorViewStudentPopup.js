@@ -24,7 +24,7 @@ function CuratorViewStudentPopup({ isOpen, onClose, currentStudent }) {
         {
         currentStudent.pict_url
         ?
-        <img className='popup__author-img' src={'https://api.emiit.ru' + currentStudent.pict_url} alt='аватар'></img>
+        <img className='popup__author-img' src={currentStudent.pict_url} alt='аватар'></img>
         :
         <div className='popup__author-img'></div>
         }

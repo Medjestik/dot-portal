@@ -1,13 +1,20 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
+import * as educationApi from '../../../../utils/educationApi.js';
+import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 
-function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, onEdit, isLoadingRequest, isShowRequestError }) {
 
-  const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true); 
+function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisementId, onEdit, isLoadingRequest, isShowRequestError }) {
+
+  const [isLoadingInfo, setIsLoadingInfo] = React.useState(true);
+
+  const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
 
   const [title, setTitle] = React.useState('');
   const [titleError, setTitleError] = React.useState({ isShow: false, text: '' });
   const [text, setText] = React.useState('');
+
+  const [currentAdvertisement, setCurrentAdvertisement] = React.useState({});
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -28,6 +35,26 @@ function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, onEdit,
     setText(e.target.value);
   }
 
+  function getAdvertisementInfo() {
+    setIsLoadingInfo(true);
+    const token = localStorage.getItem('token');
+    educationApi.getAdvertisementInfo({ token: token, advertisementId: currentAdvertisementId })
+    .then((res) => {
+      console.log('AdvertisementInfo', res);
+      setCurrentAdvertisement(res);
+      setTitle(res.title);
+      setTitleError({ text: '', isShow: false });
+      setText(res.text);
+      setIsBlockSubmitButton(true);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {  
+      setIsLoadingInfo(false);
+    });
+  }
+
   React.useEffect(() => {
     if (titleError.isShow || title.length < 1) {
       setIsBlockSubmitButton(true);
@@ -35,16 +62,18 @@ function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, onEdit,
       setIsBlockSubmitButton(false);
     }
   // eslint-disable-next-line
-  }, [title]);
+  }, [isLoadingInfo, title]);
 
   React.useEffect(() => {
-    setTitle(currentAdvertisement.title);
-    setTitleError({ text: '', isShow: false });
-    setText(currentAdvertisement.text);
-    setIsBlockSubmitButton(true);
+    setIsLoadingInfo(true);
+    getAdvertisementInfo();
+
     return(() => {
+      setCurrentAdvertisement({});
     })
-  }, [isOpen, currentAdvertisement]);
+
+  // eslint-disable-next-line
+  }, [isOpen]);
 
   return (
     <Popup
@@ -53,7 +82,27 @@ function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, onEdit,
       formWidth={'medium'}
       formName={'education-edit-advertisement-popup'}
     >
-      <h2 className='popup__title'>Создание объявления</h2>
+      {
+      isLoadingInfo 
+      ?
+      <PreloaderPopup />
+      :
+      <>
+      <h2 className='popup__title popup__title_margin_bottom'>Редактирование объявления</h2>
+
+      <div className='popup__author'>
+        {
+        currentAdvertisement.authorImg
+        ?
+        <img className='popup__author-img popup__author-img_size_small' src={currentAdvertisement.authorImg} alt='аватар'></img>
+        :
+        <div className='popup__author-img popup__author-img_size_small'></div>
+        }
+        <div className='popup__author-info'>
+          <h4 className='popup__author-title'>{currentAdvertisement.author}</h4>
+          <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Дата публикации: </span>{currentAdvertisement.date}</p>
+        </div>
+      </div>
 
       <label className='popup__field'>
         <h4 className='popup__input-caption'>Заголовок:</h4>
@@ -99,6 +148,8 @@ function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisement, onEdit,
         }
       </div>
       <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
+      </>
+      }
     </Popup>
   )
 }

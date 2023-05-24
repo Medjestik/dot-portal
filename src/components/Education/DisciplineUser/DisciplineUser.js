@@ -69,7 +69,7 @@ function Discipline({ windowWidth, currentSemester, getDisciplineName }) {
       :
       <>
       <div className='section__header'>
-        <div className='section__header-item section__header-item_type_content'>
+        <div className='section__header-item'>
           <p className='section__header-caption section__header-caption_margin_bottom'>Выберите раздел:</p>
           <SectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
         </div>

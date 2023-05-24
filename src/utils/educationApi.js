@@ -145,7 +145,19 @@ export const teacherAddAdvertisement = ({ token, disciplineId, advertisement }) 
   .then(res => handleResponse(res))
 };
 
-export const teacherEditAdvertisement = ({ token, advertisement }) => {
+export const getAdvertisementInfo = ({ token, advertisementId }) => {
+  return fetch(`${API_URL}/tutors/action/announcement/announcement_id/${advertisementId}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const editAdvertisement = ({ token, advertisement }) => {
   return fetch(`${API_URL}/tutors/action/update_announcement/announcement_id/${advertisement.id}`, { 
     method: 'PATCH',
     headers: {

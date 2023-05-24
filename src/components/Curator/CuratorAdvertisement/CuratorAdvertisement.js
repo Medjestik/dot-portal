@@ -1,19 +1,23 @@
 import React from 'react';
 import './CuratorAdvertisement.css';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import * as curatorApi from '../../../utils/curatorApi.js';
+import * as educationApi from '../../../utils/educationApi.js';
 import Search from '../../Search/Search.js';
 import Preloader from '../../Preloader/Preloader.js';
 import Table from '../../Table/Table.js';
 import AddAdvertisementPopup from '../../Education/EducationPopup/AddAdvertisementPopup/AddAdvertisementPopup.js';
+import EditAdvertisementPopup from '../../Education/EducationPopup/EditAdvertisementPopup/EditAdvertisementPopup.js';
+import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 
-function CuratorAdvertisement({ windowWidth }) {
+function CuratorAdvertisement({ windowWidth, groupInfo }) {
 
-  const [advertisements, setAdvertisements] = React.useState([{ title: 'test', name: 'test', date: '20.04.2023', time: '14:00', author: 'Медникова Оксана Васильевна', discipline: 'Информационные системы управления документооборотом' }]);
+  const [advertisements, setAdvertisements] = React.useState([]);
+  const [searchedAdvertisements, setSearchedAdvertisements] = React.useState([]);
   const [currentAdvertisement, setCurrentAdvertisement] = React.useState({});
 
   const [isOpenAddAdvertisement, setIsOpenAddAdvertisement] = React.useState(false);
   const [isOpenEditAdvertisement, setIsOpenEditAdvertisement] = React.useState(false);
+  const [isOpenRemoveAdvertisement, setIsOpenRemoveAdvertisement] = React.useState(false);
 
   const [isLoadingAdvertisement, setIsLoadingAdvertisement] = React.useState(true);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
@@ -43,46 +47,50 @@ function CuratorAdvertisement({ windowWidth }) {
     setIsOpenEditAdvertisement(true);
   }
 
+  function openRemoveAdvertisementPopup(data) {
+    setCurrentAdvertisement(data);
+    setIsOpenRemoveAdvertisement(true);
+  }
+
   function closePopup() {
     setIsOpenAddAdvertisement(false);
     setIsOpenEditAdvertisement(false);
+    setIsOpenRemoveAdvertisement(false);
     setIsShowRequestError({ isShow: false, text: '', })
   }
 
-  function handleSearch() {
-
+  function handleSearch(data) {
+    setSearchedAdvertisements(data);
   }
 
   function groupRequest() {
     setIsLoadingAdvertisement(false);
-    /*
     const token = localStorage.getItem('token');
-    curatorApi.getGroupInfo({ token: token, groupId: groupId })
+    curatorApi.getGroupAdvertisement({ token: token, groupId: groupInfo.id })
     .then((res) => {
-      console.log('GroupInfo', res);
-      setGroupInfo(res);
+      console.log('GroupAdvertisement', res);
+      setAdvertisements(res);
+      setSearchedAdvertisements(res);
     })
     .catch((err) => {
       console.error(err);
     })
     .finally(() => {  
-      setIsLoadingGroup(false);
+      setIsLoadingAdvertisement(false);
     });
-    */
   }
 
   function addAdvertisement(data) {
     setIsLoadingRequest(true);
-    console.log(data);
-    /*
     const token = localStorage.getItem('token');
-    educationApi.teacherAddAdvertisement({
+    curatorApi.curatorAddAdvertisement({
       token: token,
-      disciplineId: disciplineId,
+      groupId: groupInfo.id,
       advertisement: data,
     })
     .then((res) => {
-      setAdvertisement([res, ...advertisement]);
+      setAdvertisements([res, ...advertisements]);
+      setSearchedAdvertisements([res, ...searchedAdvertisements]);
       closePopup();
     })
     .catch((err) => {
@@ -91,21 +99,20 @@ function CuratorAdvertisement({ windowWidth }) {
     .finally(() => {  
       setIsLoadingRequest(false);
     });
-    */
   }
 
   function editAdvertisement(data) {
-    console.log(data);
-    /*
     setIsLoadingRequest(true);
     const token = localStorage.getItem('token');
-    educationApi.teacherEditAdvertisement({
+    educationApi.editAdvertisement({
       token: token,
       advertisement: data,
     })
     .then((res) => {
-      const index = advertisement.indexOf(advertisement.find((elem) => (elem.id === data.id)));
-      setAdvertisement([ ...advertisement.slice(0, index), res, ...advertisement.slice(index + 1)]);
+      const index = advertisements.indexOf(advertisements.find((elem) => (elem.id === data.id)));
+      const searchIndex = searchedAdvertisements.indexOf(searchedAdvertisements.find((elem) => (elem.id === data.id)));
+      setAdvertisements([...advertisements.slice(0, index), res, ...advertisements.slice(index + 1)]);
+      setSearchedAdvertisements([...searchedAdvertisements.slice(0, searchIndex), res, ...searchedAdvertisements.slice(index + 1)]);
       closePopup();
     })
     .catch((err) => {
@@ -114,13 +121,33 @@ function CuratorAdvertisement({ windowWidth }) {
     .finally(() => {  
       setIsLoadingRequest(false);
     });
-    */
+  }
+
+  function removeAdvertisement(data) {
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+    curatorApi.removeAdvertisement({
+      token: token,
+      advertisementId: data.id,
+    })
+    .then(() => {
+      setAdvertisements(advertisements.filter((elem) => data.id !== elem.id));
+      setSearchedAdvertisements(searchedAdvertisements.filter((elem) => data.id !== elem.id));
+      closePopup();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {  
+      setIsLoadingRequest(false);
+    })
   }
 
   React.useEffect(() => {
     groupRequest();
     return (() => {
       setAdvertisements([]);
+      setSearchedAdvertisements([]);
       setCurrentAdvertisement({})
     })
     // eslint-disable-next-line
@@ -135,7 +162,7 @@ function CuratorAdvertisement({ windowWidth }) {
     <div className='section__header'>
       <div className='section__header-item'>
         <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по заголовку:</span>
-        <Search type='large' id='webinar' data={advertisements} onSearch={handleSearch} />
+        <Search type='large' id='webinar' data={advertisements.map((elem) => { return {...elem, name: elem.title} })} onSearch={handleSearch} />
       </div>
       <div className='section__header-item'>
         <span className='section__header-caption section__header-caption_margin_bottom'></span>
@@ -156,9 +183,6 @@ function CuratorAdvertisement({ windowWidth }) {
             <div className='table__column table__column_type_header table__column_type_name'>
               <p className='table__text table__text_type_header'>Заголовок</p>
             </div>
-            <div className='table__column table__column_type_header table__column_type_full'>
-              <p className='table__text table__text_type_header'>Дисциплина</p>
-            </div>
             <div className='table__column table__column_type_header table__column_type_teacher'>
               <p className='table__text table__text_type_header'>Автор</p>
             </div>
@@ -170,11 +194,11 @@ function CuratorAdvertisement({ windowWidth }) {
         </div>
         <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
           {
-            advertisements.length < 1 
+            searchedAdvertisements.length < 1 
             ?
             <p className='table__caption_type_empty'>Объявления пока не загружены.</p>
             :
-            advertisements.map((item, i) => (
+            searchedAdvertisements.map((item, i) => (
               <li className='table__row' key={i}>
                 <div className='table__main-column'>
                   <div className='table__column table__column_type_count'>
@@ -182,13 +206,9 @@ function CuratorAdvertisement({ windowWidth }) {
                   </div>
                   <div className='table__column table__column_type_date'>
                     <p className='table__text'>{item.date}</p>
-                    <p className='table__text'>{item.time}</p>
                   </div>
                   <div className='table__column table__column_type_name'>
                     <p className='table__text table__text_type_header'>{item.title}</p>
-                  </div>
-                  <div className='table__column table__column_type_full'>
-                    <p className='table__text'>{item.discipline}</p>
                   </div>
                   <div className='table__column table__column_type_teacher'>
                     <p className='table__text'>{item.author}</p>
@@ -197,12 +217,14 @@ function CuratorAdvertisement({ windowWidth }) {
                 <div className='table__column table__column_type_btn'>
                   <button 
                   className='btn btn_type_advertisement btn_margin_right' 
-                  type='button' 
+                  type='button'
+                  onClick={() => openEditAdvertisementPopup(item)} 
                   >
-                </button>
+                </button> 
                   <button 
                   className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
                   type='button' 
+                  onClick={() => openRemoveAdvertisementPopup(item)} 
                   >
                   </button>
                 </div>
@@ -219,6 +241,31 @@ function CuratorAdvertisement({ windowWidth }) {
         isOpen={isOpenAddAdvertisement}
         onClose={closePopup}
         onAdd={addAdvertisement}
+        isLoadingRequest={isLoadingRequest}
+        isShowRequestError={isShowRequestError}
+      />
+    }
+
+    {
+      isOpenEditAdvertisement &&
+      <EditAdvertisementPopup 
+        isOpen={isOpenEditAdvertisement}
+        onClose={closePopup}
+        currentAdvertisementId={currentAdvertisement.id}
+        onEdit={editAdvertisement}
+        isLoadingRequest={isLoadingRequest}
+        isShowRequestError={isShowRequestError}
+      />
+    }
+
+    {
+      isOpenRemoveAdvertisement &&
+      <ConfirmRemovePopup
+        isOpen={isOpenRemoveAdvertisement}
+        onClose={closePopup}
+        popupName='curator-advertisement-remove'
+        onConfirm={removeAdvertisement}
+        data={currentAdvertisement}
         isLoadingRequest={isLoadingRequest}
         isShowRequestError={isShowRequestError}
       />

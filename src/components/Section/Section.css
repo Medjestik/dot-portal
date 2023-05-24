@@ -119,6 +119,12 @@
 .section__header-btn_type_full {
   max-width: 100%;
 }
+.section__header-btn_type_block {
+  background: var(--slider-color);
+  box-shadow: none;
+  user-select: none;
+  pointer-events: none;
+}
 .section__header-title-container {
   width: 100%;
   margin: 0px;

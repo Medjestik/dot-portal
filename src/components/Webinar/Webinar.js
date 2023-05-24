@@ -152,9 +152,9 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
   React.useEffect(() => {
     webinarRequest();
     return (() => {
-      setWebinars();
-      setFilteredWebinars();
-      setSearchedWebinars();
+      setWebinars([]);
+      setFilteredWebinars([]);
+      setSearchedWebinars([]);
       setCurrentWebinar({});
     })
     // eslint-disable-next-line

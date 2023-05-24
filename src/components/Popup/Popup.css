@@ -64,6 +64,9 @@
 .popup__form_width_full {
   width: 1000px;
 }
+.popup__form_width_1440 {
+  width: 1440px;
+}
 .popup__main {
   margin: 0px 8px;
   max-height: 70vh;

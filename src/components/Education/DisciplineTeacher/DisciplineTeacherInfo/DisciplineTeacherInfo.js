@@ -159,7 +159,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
   function editAdvertisement(data) {
     setIsLoadingRequest(true);
     const token = localStorage.getItem('token');
-    educationApi.teacherEditAdvertisement({
+    educationApi.editAdvertisement({
       token: token,
       advertisement: data,
     })
@@ -322,7 +322,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
                     ?
                     <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
                     :
-                    [...advertisement.map((elem) => ({...elem, type: 'advertisement'}))].reverse().map((elem, i) => (
+                    [...advertisement.map((elem) => ({...elem, type: 'advertisement'}))].map((elem, i) => (
                       <EducationAdvertisement key={i} advertisement={elem} onOpen={openEditAdvertisementPopup} />
                     ))
                   }
@@ -376,7 +376,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
         <EditAdvertisementPopup 
           isOpen={isOpenTeacherEditAdvertisement}
           onClose={closePopup}
-          currentAdvertisement={currentAdvertisement}
+          currentAdvertisementId={currentAdvertisement.id}
           onEdit={editAdvertisement}
           isLoadingRequest={isLoadingRequest}
           isShowRequestError={isShowRequestError}

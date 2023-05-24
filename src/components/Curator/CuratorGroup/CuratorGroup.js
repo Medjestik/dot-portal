@@ -7,6 +7,7 @@ import Section from '../../Section/Section.js';
 import SectionSelect from '../../Section/SectionSelect/SectionSelect.js';
 import CuratorGroupList from '../CuratorGroupList/CuratorGroupList.js';
 import CuratorAdvertisement from '../CuratorAdvertisement/CuratorAdvertisement.js';
+import CuratorDisciplines from '../CuratorDisciplines/CuratorDisciplines.js';
 
 function CuratorGroup({ windowWidth }) {
 
@@ -95,7 +96,17 @@ function CuratorGroup({ windowWidth }) {
           />
           }
         />
+        <Route exact path={`disciplines`}
+          element={
+          <CuratorDisciplines
+            windowWidth={windowWidth} 
+            groupInfo={groupInfo} 
+          />
+          }
+        />
       </Routes>
+
+      
 
     </Section>
   );
