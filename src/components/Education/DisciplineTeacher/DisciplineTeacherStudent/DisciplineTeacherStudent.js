@@ -127,7 +127,7 @@ function DisciplineTeacherStudent({ windowWidth, disciplineInfo, getStudent, cur
             <li className='discipline-teacher__student-section'>
               <div className='section__header-title-container'>
                 <h5 className='section__header-title'>Комментарии ({currentStudent.comments.length})</h5>
-                <button class='btn_type_add' type='button' onClick={() => onAddComment()}></button>
+                <button className='btn_type_add' type='button' onClick={() => onAddComment()}></button>
               </div>
 
               <ul className='discipline-teacher__student-section-list scroll' style={Object.assign({}, listStyle)}>

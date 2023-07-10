@@ -3,7 +3,7 @@ import './Header.css';
 import HeaderMobile from './HeaderMobile/HeaderMobile.js';
 import { useLocation, NavLink } from "react-router-dom";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
-import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon, disciplineIcon, journalIcon, controlIcon, curatorIcon } from './HeaderIcons/HeaderIcons.js';
+import { personIcon, educationIcon, webinarIcon, ratingIcon, documentIcon, libraryIcon, logoutIcon, disciplineIcon, journalIcon, controlIcon, curatorIcon, admissionIcon } from './HeaderIcons/HeaderIcons.js';
 import useOnClickOutside from '../../hooks/useOnClickOutside.js';
 
 function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
@@ -136,6 +136,14 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
           </div>
         </div>
         <p className='header__nav-link-text'>Управление</p> 
+      </NavLink>
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/admission'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { admissionIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Поступление</p> 
       </NavLink>
       </>
     )

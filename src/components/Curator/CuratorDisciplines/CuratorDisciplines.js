@@ -69,7 +69,7 @@ function CuratorDisciplines({ windowWidth, groupInfo }) {
     .then((res) => {
       console.log('GroupDisciplines', res);
       
-      let uniqSemester = res.reduce((acc, item) => {
+      let uniqSemesters = res.reduce((acc, item) => {
         if (acc.map[item.semestr]) // если данный семестр уже был
           return acc; // ничего не делаем, возвращаем уже собранное
     
@@ -82,7 +82,7 @@ function CuratorDisciplines({ windowWidth, groupInfo }) {
       })
       .disc; // получаем конечный массив
 
-      setSemesterOptions([semesterOptions[0], ...uniqSemester]);
+      setSemesterOptions([semesterOptions[0], ...uniqSemesters]);
       setDisciplines(res);
       setFilteredDisciplines(res);
       setSearchedDisciplines(res);
@@ -98,6 +98,7 @@ function CuratorDisciplines({ windowWidth, groupInfo }) {
   React.useEffect(() => {
     dataRequest();
     return (() => {
+      setSemesterOptions([]);
       setDisciplines([]);
     })
     // eslint-disable-next-line
@@ -199,6 +200,7 @@ function CuratorDisciplines({ windowWidth, groupInfo }) {
       <ViewSemesterDetailPopup 
         isOpen={isOpenViewSemesterDetail}
         onClose={closePopup}
+        semesterOptions={semesterOptions.filter((elem) => elem.id !== 'empty')}
         currentSemesterId={currentSemesterOption.id}
       />
     }

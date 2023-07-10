@@ -15,9 +15,10 @@
   background: var(--main-grey-color);
   border-radius: var(--border-radius);
   font-style: normal;
-  font-weight: 300;
+  font-weight: 600;
   font-size: 14px;
   line-height: 18px;
+  letter-spacing: 0.5px;
   color: var(--main-black-color);
   user-select: none;
   pointer-events: none;
