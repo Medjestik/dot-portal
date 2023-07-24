@@ -7,8 +7,10 @@ import { CurrentUserContext } from '../../../contexts/CurrentUserContext.js';
 import Section from '../../Section/Section.js';
 import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import SemesterHeaderWithOptionsTeacher from '../SemesterHeader/SemesterHeaderWithOptionsTeacher/SemesterHeaderWithOptionsTeacher.js';
-import SemesterTeacherTable from './SemesterTeacherTable/SemesterTeacherTable.js';
+import DisciplineTeacherTable from '../DisciplinesTeacherTable/DisciplinesTeacherTable.js';
+import PracticeTeacherTable from '../PracticeTeacherTable/PracticeTeacherTable.js';
 import DisciplineTeacher from '../DisciplineTeacher/DisciplineTeacher.js';
+import PracticeTeacher from '../PracticeTeacher/PracticeTeacher.js';
 
 function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) { 
 
@@ -21,8 +23,9 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
   const [currentSemester, setCurrentSemester] = React.useState({});
 
   const [disciplines, setDisciplines] = React.useState([]);
+  const [practice, serPractice] = React.useState([]);
   
-  const [isDisciplineOpen, setIsDisciplineOpen] = React.useState(location.pathname.includes('discipline') ? true : false);
+  const [isDisciplineOpen, setIsDisciplineOpen] = React.useState(location.pathname.includes('discipline') || location.pathname.includes('practice') ? true : false);
 
   const [isLoadingDiscipline, setIsLoadingDisciplines] = React.useState(true);
 
@@ -31,8 +34,8 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
     const token = localStorage.getItem('token');
     disciplineApi.getDisciplines({ token: token, teacherId: currentUser.id, semesterId: id })
     .then((res) => {
-      console.log('Disciplines', res.discs);
       setDisciplines(res.discs);
+      serPractice(res.practics);
     })
     .catch((err) => {
       console.error(err);
@@ -52,6 +55,10 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
     navigate(location.pathname + '/discipline/' + discipline.discipline_id + '/group');
   }
 
+  function openPractice(practice) {
+    navigate(location.pathname + '/practice/' + practice.practic_id + '/group');
+  }
+
   function backToSemester() {
     location.pathname.includes('student') ? navigate(-1) : navigate('/semester/' + currentSemester.id);
   }
@@ -62,13 +69,14 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
 
     return(() => {
       setDisciplines([]);
+      serPractice([]);
       setCurrentSemester({});
     })
     // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
-    location.pathname.includes('discipline') ? setIsDisciplineOpen(true) : setIsDisciplineOpen(false);
+    location.pathname.includes('discipline') || location.pathname.includes('practice') ? setIsDisciplineOpen(true) : setIsDisciplineOpen(false);
   }, [location]);
 
   return (
@@ -91,9 +99,15 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
         <Routes>
           <Route exact path='/'
           element={
-            <Section title={currentSemester.name}  heightType='content' headerType='small' >
-              <SemesterTeacherTable disciplines={disciplines} openDiscipline={openDiscipline} />
+            <>
+            <Section title='Дисциплины'  heightType='content' headerType='small' >
+              <DisciplineTeacherTable disciplines={disciplines} openDiscipline={openDiscipline} />
             </Section>
+            <div className='separate_type_empty'></div>
+            <Section title='Практика'  heightType='content' headerType='small' >
+              <PracticeTeacherTable practice={practice} openDiscipline={openPractice} />
+            </Section>
+            </>
           }
           />
         </Routes>
@@ -102,6 +116,14 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
           <Route exact path={`/discipline/:disciplineId/*`}
           element={
             <DisciplineTeacher 
+              windowWidth={windowWidth} 
+              currentSemester={currentSemester} 
+            />
+          }
+          />
+          <Route exact path={`/practice/:practiceId/*`}
+          element={
+            <PracticeTeacher 
               windowWidth={windowWidth} 
               currentSemester={currentSemester} 
             />

@@ -61,22 +61,22 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
 
         <div className='discipline-info__description'>
             <h3 className='discipline-info__teacher-name'>{disciplineInfo.name}</h3>
-            <ul className='discipline-info__teacher-info-list'>
-              <li className='discipline-info__teacher-info-item'>
-                <p className='discipline-info__teacher-text'>
-                  <span className='discipline-info__teacher-text_weight_bold'>Период: </span>
+            <ul className='data__list data__list_margin_top'>
+              <li className='data__item'>
+                <p className='data__text'>
+                  <span className='data__text data__text_font_bold'>Период: </span>
                   {disciplineInfo.start_data + ' - ' + disciplineInfo.end_date}
                 </p>
               </li>
-              <li className='discipline-info__teacher-info-item'>
-                <p className='discipline-info__teacher-text'>
-                  <span className='discipline-info__teacher-text_weight_bold'>Тип: </span>
+              <li className='data__item'>
+                <p className='data__text'>
+                  <span className='data__text data__text_font_bold'>Тип: </span>
                   {disciplineInfo.control}
                 </p>
               </li>
-              <li className='discipline-info__teacher-info-item'>
-                <p className='discipline-info__teacher-text'>
-                  <span className='discipline-info__teacher-text_weight_bold'>Оценка: </span>
+              <li className='data__item'>
+                <p className='data__text'>
+                  <span className='data__text data__text_font_bold'>Оценка: </span>
                   {disciplineInfo.mark.name}
                 </p>
               </li>
@@ -153,22 +153,22 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
               }
               <div className='discipline-info__teacher-info'>
                 <h3 className='discipline-info__teacher-name'>{disciplineInfo.tutor.fullname}</h3>
-                <ul className='discipline-info__teacher-info-list'>
-                  <li className='discipline-info__teacher-info-item'>
-                    <p className='discipline-info__teacher-text'>
-                      <span className='discipline-info__teacher-text_weight_bold'>Дожность: </span>
+                <ul className='data__list data__list_margin_top'>
+                  <li className='data__item'>
+                    <p className='data__text'>
+                      <span className='data__text data__text_font_bold'>Дожность: </span>
                       {disciplineInfo.tutor.job}
                     </p>
                   </li>
-                  <li className='discipline-info__teacher-info-item'>
-                    <p className='discipline-info__teacher-text'>
-                      <span className='discipline-info__teacher-text_weight_bold'>Телефон: </span>
+                  <li className='data__item'>
+                    <p className='data__text'>
+                      <span className='data__text data__text_font_bold'>Телефон: </span>
                       {disciplineInfo.tutor.phone}
                     </p>
                   </li>
-                  <li className='discipline-info__teacher-info-item'>
-                    <p className='discipline-info__teacher-text'>
-                      <span className='discipline-info__teacher-text_weight_bold'>Почта: </span>
+                  <li className='data__item'>
+                    <p className='data__text'>
+                      <span className='data__text data__text_font_bold'>Почта: </span>
                       {disciplineInfo.tutor.email}
                     </p>
                   </li>
@@ -194,8 +194,9 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
             }
           </ul>
         </div>
+      </div>
 
-        {
+      {
           isOpenViewAdvertisementPopup &&
           <StudentViewAdvertisementPopup 
             isOpen={isOpenViewAdvertisementPopup}
@@ -214,10 +215,6 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
             isLoading={false}
           />
         }
-
-
-
-      </div>
   
     </DisciplineInfo>
   );

@@ -92,3 +92,16 @@ export const getGroupDisciplines = ({ token, groupId }) => {
   })
   .then(res => handleResponse(res))
 };
+
+
+export const getGroupPractice = ({ token, groupId }) => {
+  return fetch(`${API_URL}/curators/action/practics/group_id/${groupId}`, {  
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};

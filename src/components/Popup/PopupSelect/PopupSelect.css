@@ -69,7 +69,7 @@
   margin: 0px;
   padding: 0px;
   list-style-type: none;
-  max-height: 240px;
+  max-height: 180px;
   overflow-y: auto;
 }
 .select-popup__options-item {

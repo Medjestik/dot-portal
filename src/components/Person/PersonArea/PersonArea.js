@@ -65,7 +65,6 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
 
           <div className='person-area__data-control'>
             <p className='person-area__data-control-text' onClick={openDataPopup}>Изменить данные</p>
-            <p className='person-area__data-control-text' onClick={openChangePasswordPopup}>Изменить пароль</p>
           </div>
         </div>
       

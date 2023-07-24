@@ -149,7 +149,6 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
         res, 
         ...disciplineStudents[index].comments.slice(indexComment + 1) 
       ]);
-      console.log(comments);
       const student = { ...disciplineStudents[index], comments: comments, };
       setCurrentStudent(student);
       setDisciplineStudents([ ...disciplineStudents.slice(0, index), student, ...disciplineStudents.slice(index + 1) ]);

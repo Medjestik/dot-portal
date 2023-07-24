@@ -9,7 +9,7 @@ import DisciplineUserTasks from './DisciplineUserTasks/DisciplineUserTasks.js';
 import * as educationApi from '../../../utils/educationApi.js';
 import Preloader from '../../Preloader/Preloader.js';
 
-function Discipline({ windowWidth, currentSemester, getDisciplineName }) {
+function DisciplineUser({ windowWidth, currentSemester, getDisciplineName }) {
 
   const navigate = useNavigate();
   const { disciplineId } = useParams();
@@ -124,4 +124,4 @@ function Discipline({ windowWidth, currentSemester, getDisciplineName }) {
   );
 }
 
-export default Discipline; 
+export default DisciplineUser; 

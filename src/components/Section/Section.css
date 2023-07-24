@@ -139,6 +139,16 @@
   font-weight: bold;
   line-height: 20px;
 }
+.section__header-title_margin_top {
+  margin-top: 12px;
+}
+.section__header-title_margin_bottom {
+  margin-bottom: 12px;
+}
+.section__header-title_size_14 {
+  font-size: 14px;
+  line-height: 18px;
+}
 
 @media all and (max-width: 833px) {
   .section__education-container {

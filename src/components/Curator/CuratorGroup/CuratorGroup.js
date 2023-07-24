@@ -8,6 +8,8 @@ import SectionSelect from '../../Section/SectionSelect/SectionSelect.js';
 import CuratorGroupList from '../CuratorGroupList/CuratorGroupList.js';
 import CuratorAdvertisement from '../CuratorAdvertisement/CuratorAdvertisement.js';
 import CuratorDisciplines from '../CuratorDisciplines/CuratorDisciplines.js';
+import CuratorPractice from '../CuratorPractice/CuratorPractice.js';
+import CuratorPracticeList from '../CuratorPracticeList/CuratorPracticeList.js';
 
 function CuratorGroup({ windowWidth }) {
 
@@ -30,6 +32,10 @@ function CuratorGroup({ windowWidth }) {
 
   function chooseSection(option) {
     navigate('/curator/group/' + groupId + option.link);
+  }
+
+  function openPractice(practiceId) {
+    navigate('/curator/group/' + groupId + '/practice/' + practiceId + '/info');
   }
   
   function groupRequest() {
@@ -104,6 +110,23 @@ function CuratorGroup({ windowWidth }) {
           />
           }
         />
+        <Route exact path={`practice/:practiceId/*`}
+          element={
+          <CuratorPractice
+            windowWidth={windowWidth} 
+            groupId={groupId}
+          />
+          }
+        />
+        <Route exact path={`practice`}
+          element={
+          <CuratorPracticeList
+            windowWidth={windowWidth} 
+            groupInfo={groupInfo}
+            openPractice={openPractice}
+          />
+          }
+        />
       </Routes>
 
       
@@ -112,4 +135,4 @@ function CuratorGroup({ windowWidth }) {
   );
 }
 
-export default CuratorGroup; 
+export default CuratorGroup;  

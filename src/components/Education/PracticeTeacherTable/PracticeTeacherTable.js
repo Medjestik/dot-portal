@@ -1,8 +1,8 @@
 import React from 'react';
-import './SemesterTeacherTable.css';
-import Table from '../../../Table/Table.js';
+import './PracticeTeacherTable.css';
+import Table from '../../Table/Table.js';
 
-function DisciplinesTeacherTable({ disciplines, openDiscipline }) {
+function PracticeTeacherTable({ practice, openDiscipline }) {
 
   return (
     <Table>
@@ -23,23 +23,23 @@ function DisciplinesTeacherTable({ disciplines, openDiscipline }) {
         </div>
       </div>
       {
-        disciplines.length > 0 ?
+        practice.length > 0 ?
         <ul className='table__main table__main_scroll_auto'>
           {
-            disciplines.map((item, i) => (
+            practice.map((item, i) => (
               <li className='table__row' key={i}>
                 <div className='table__main-column'>
                   <div className='table__column table__column_type_count'>
                     <p className='table__text'>{i + 1}</p>
                   </div>
                   <div className='table__column table__column_type_name'>
-                    <p className='table__text table__text_type_header table__text_type_active' onClick={() => openDiscipline(item)}>{item.name}</p>
+                    <p className='table__text table__text_type_header table__text_type_active' onClick={() => openDiscipline(item)}>{item.practic_name || ''}</p>
                   </div>
                   <div className='table__column table__column_type_text'>
                     <p className='table__text'>{`${item.group_name} (${item.group_current_name})`}</p>
                   </div>
                   <div className='table__column table__column_type_control'>
-                    <p className='table__text'>{item.control}</p>
+                    <p className='table__text'>ЗаО</p>
                   </div>
                 </div>
               </li>
@@ -47,10 +47,10 @@ function DisciplinesTeacherTable({ disciplines, openDiscipline }) {
           }
         </ul>
         :
-        <p className='table__caption_type_empty'>В этом семестре у вас отсутствуют дисциплины!</p>
+        <p className='table__caption_type_empty'>В этом семестре у вас отсутствует практика!</p>
       }
     </Table>
   );
 }
 
-export default DisciplinesTeacherTable;  
+export default PracticeTeacherTable;  

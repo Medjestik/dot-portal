@@ -118,7 +118,7 @@ function CuratorDisciplines({ windowWidth, groupInfo }) {
       </div>
       <div className='section__header-item'>
         <span className='section__header-caption'>Выберите семестр:</span>
-        <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
+        <PopupSelect filterType='byId' options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
       </div>
       <div className='section__header-item'>
         <span className='section__header-caption section__header-caption_margin_bottom'></span>

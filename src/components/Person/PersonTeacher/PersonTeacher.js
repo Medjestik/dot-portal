@@ -13,8 +13,6 @@ function PersonTeacher({ windowWidth, currentUser, openPhotoPopup, openChangePas
   // eslint-disable-next-line
   }, []);
 
-  console.log(currentUser)
-
   return (
     <>
       <PersonTeacherArea
