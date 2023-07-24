@@ -82,7 +82,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
       <NavLink
       onClick={hideMobileMenu}
       className={`header__nav-link + ${isDisciplinesOpen ? 'header__nav-link_type_active' : ''}`}
-      to={`/semester/${semesterInfo[0].id}`}
+      to={`/semester/${semesterInfo[0].id}/disciplines`}
       >
         <div className='header__nav-link-icon'>
           <div className='header__nav-link-icon-container'>

@@ -123,7 +123,7 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
         <>
 
         {
-          location.pathname.includes('disciplines') || location.pathname.includes('practices') ?
+          (location.pathname.includes('disciplines') || location.pathname.includes('practices')) &&
           <SectionTabs type='small' tabs={tabs} >
             <Routes>
               <Route exact path='/disciplines'
@@ -143,8 +143,6 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
               />
             </Routes>
           </SectionTabs>
-          :
-          <div></div>
         }
 
         <Routes>

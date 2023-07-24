@@ -87,7 +87,7 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
           <h3 className='discipline-info__teacher-name'>Задание на практику</h3>
           <ul className='data__list data__list_margin_top'>
             <li className='data__item'>
-              <div style={Object.assign({}, taskStyle)} className='data__area scroll-inside'>{practiceInfo.description}</div>
+              <div style={Object.assign({}, taskStyle)} className='data__area scroll-inside'>{practiceInfo.individual.task}</div>
             </li>
           </ul>
         </div>
