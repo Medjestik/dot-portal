@@ -46,9 +46,6 @@ function PracticeUserTable({ data, onOpen }) {
           <div className='table__column table__column_type_header table__column_type_full'>
             <p className='table__text table__text_type_header'>Практика</p>
           </div>
-          <div className='table__column table__column_type_header table__column_type_teacher'>
-            <p className='table__text table__text_type_header'>Преподаватель</p>
-          </div>
           <div className='table__column table__column_type_header table__column_type_small'>
             <p className='table__text table__text_type_header'>Тип</p>
           </div>
@@ -78,9 +75,6 @@ function PracticeUserTable({ data, onOpen }) {
                   onClick={() => onOpen(item)}>
                     {item.name}
                   </p>
-                </div>
-                <div className='table__column table__column_type_teacher'>
-                  <p className='table__text'>{item.tutor}</p>
                 </div>
                 <div className='table__column table__column_type_small'>
                   <p className='table__text'>{item.control}</p>

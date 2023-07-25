@@ -89,7 +89,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
             { disciplineIcon }
           </div>
         </div>
-        <p className='header__nav-link-text'>Обучение</p> 
+        <p className='header__nav-link-text'>Учебная работа</p> 
       </NavLink>
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/journal'>
         <div className='header__nav-link-icon'>
@@ -120,14 +120,14 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
       <NavLink
       onClick={hideMobileMenu}
       className={`header__nav-link + ${isDisciplinesOpen ? 'header__nav-link_type_active' : ''}`}
-      to={`/semester/${semesterInfo[0].id}`}
+      to={`/semester/${semesterInfo[0].id}/disciplines`}
       >
         <div className='header__nav-link-icon'>
           <div className='header__nav-link-icon-container'>
             { disciplineIcon }
           </div>
         </div>
-        <p className='header__nav-link-text'>Дисциплины</p> 
+        <p className='header__nav-link-text'>Учебная работа</p> 
       </NavLink>
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/control'>
         <div className='header__nav-link-icon'>
@@ -137,14 +137,18 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
         </div>
         <p className='header__nav-link-text'>Управление</p> 
       </NavLink>
-      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/admission'>
-        <div className='header__nav-link-icon'>
-          <div className='header__nav-link-icon-container'>
-            { admissionIcon }
+      {
+        /*
+        <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/admission'>
+          <div className='header__nav-link-icon'>
+            <div className='header__nav-link-icon-container'>
+              { admissionIcon }
+            </div>
           </div>
-        </div>
-        <p className='header__nav-link-text'>Поступление</p> 
-      </NavLink>
+          <p className='header__nav-link-text'>Поступление</p> 
+        </NavLink>
+        */
+      }
       </>
     )
   }
