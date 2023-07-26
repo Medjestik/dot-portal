@@ -13,6 +13,7 @@ import Control from '../Control/Control.js';
 import Webinar from '../Webinar/Webinar.js';
 import Document from '../Document/Document.js';
 import Library from '../Library/Library.js';
+import Course from '../Course/Course.js';
 import Notifications from '../Notifications/Notifications.js';
 import Events from '../Events/Events.js';
 import SemesterTeacher from '../Education/SemesterTeacher/SemesterTeacher.js';
@@ -268,8 +269,15 @@ function App() {
                           />
                         }/>
 
-                        <Route path='library/*' element={
+                        <Route path='library/*' element={ 
                           <Library 
+                          windowWidth={windowWidth}
+                          onLogout={handleLogout}
+                          />
+                        }/>
+
+                        <Route path='courses/*' element={ 
+                          <Course
                           windowWidth={windowWidth}
                           onLogout={handleLogout}
                           />

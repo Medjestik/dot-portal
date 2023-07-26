@@ -1,0 +1,7 @@
+.course {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 24px);
+    height: 100%;
+  }
