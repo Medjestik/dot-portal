@@ -55,8 +55,8 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
   }, []);
 
   return (
+    <>
     <DisciplineInfo type='user'>
-      
       <div className='discipline-info__column'>
 
         <div className='discipline-info__description'>
@@ -195,28 +195,27 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
           </ul>
         </div>
       </div>
-
-      {
-          isOpenViewAdvertisementPopup &&
-          <StudentViewAdvertisementPopup 
-            isOpen={isOpenViewAdvertisementPopup}
-            onClose={closePopup}
-            currentAdvertisement={currentData}
-            isLoading={false}
-          />
-        }
-
-        {
-          isOpenViewCommentPopup &&
-          <StudentViewCommentPopup
-            isOpen={isOpenViewCommentPopup}
-            onClose={closePopup}
-            currentAdvertisement={currentData}
-            isLoading={false}
-          />
-        }
-  
     </DisciplineInfo>
+    {
+      isOpenViewAdvertisementPopup &&
+      <StudentViewAdvertisementPopup 
+        isOpen={isOpenViewAdvertisementPopup}
+        onClose={closePopup}
+        currentAdvertisement={currentData}
+        isLoading={false}
+      />
+    }
+
+    {
+      isOpenViewCommentPopup &&
+      <StudentViewCommentPopup
+        isOpen={isOpenViewCommentPopup}
+        onClose={closePopup}
+        currentAdvertisement={currentData}
+        isLoading={false}
+      />
+    }
+    </>
   );
 }
 

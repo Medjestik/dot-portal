@@ -181,7 +181,7 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
         <div className='person'>
 
           {
-            currentUser.access_role === 'user' 
+            currentUser.access_role === 'dot' 
             ?
             <PersonUser
               windowWidth={windowWidth}

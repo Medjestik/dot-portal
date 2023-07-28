@@ -23,7 +23,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  const [semesterInfo, setSemesterInfo] = React.useState({});
+  const [semesterInfo, setSemesterInfo] = React.useState([]);
 
   const [requestError, setRequestError] = React.useState(false);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
@@ -59,7 +59,7 @@ function App() {
           console.log('UserInfo', res);
           setLoggedIn(true);
           setCurrentUser(res);
-          if (res.access_role === 'user') {
+          if (res.access_role === 'dot') {
             semesterUserInfoRequest(res.id);
           } else if (res.access_role === 'tutor') {
             semesterTeacherInfoRequest();
@@ -157,7 +157,7 @@ function App() {
 
     return(() => {
       setCurrentUser({});
-      setSemesterInfo({});
+      setSemesterInfo([]);
     })
     // eslint-disable-next-line
   }, []);

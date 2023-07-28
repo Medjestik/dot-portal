@@ -27,8 +27,8 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
     setIsShowMobileMenu(false);
     document.body.style.overflow = '';
   }
-
-  function renderUserLinks() {
+  
+  function renderDotLinks() {
     return (
       <>
       <NavLink 
@@ -72,6 +72,30 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
         </div>
         <p className='header__nav-link-text'>Документы</p>
       </NavLink>
+      </>
+    )
+  }
+
+  function renderUserLinks() {
+    return (
+      <>
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/courses'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { journalIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Курсы</p> 
+      </NavLink>
+
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
+      <div className='header__nav-link-icon'>
+        <div className='header__nav-link-icon-container'>
+          { webinarIcon }
+        </div>
+      </div>
+      <p className='header__nav-link-text'>Вебинары</p>
+    </NavLink>
       </>
     )
   }
@@ -237,17 +261,17 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
             }
 
             {
+              currentUser.access_role === 'dot' && renderDotLinks()
+            }
+
+            {
               currentUser.access_role === 'tutor' && renderTeacherLinks()
             }
             
             {
               currentUser.access_role === 'admin' && renderAdminLinks()
             }
-
-            {
-              renderLibraryLinks()
-            }
-            
+        
           </nav>
           
           <button className='header__nav-link header__nav-link_type_logout' onClick={onLogout}>

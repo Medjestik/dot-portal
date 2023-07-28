@@ -83,7 +83,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
               <h6 className='person-area__education-title'><span className='person-area__education-count person-area__education-count_margin_right'>{studentData.semesterNum || ''}</span> семестр</h6>
             </div>
             <div className='person-area__education-card person-area__education-card_type_count'>
-              <h6 className='person-area__education-title'>Порядковый номер в группе: <span className='person-area__education-count person-area__education-count_margin_left'>{21 || ''}</span></h6>
+              <h6 className='person-area__education-title'>Порядковый номер в группе: <span className='person-area__education-count person-area__education-count_margin_left'>{studentData.groupPosition || '—'}</span></h6>
             </div>
           </div>
 

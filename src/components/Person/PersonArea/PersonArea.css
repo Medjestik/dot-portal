@@ -257,6 +257,9 @@
 }
 .person-area__education-card_type_count {
   grid-area: 3 / 1 / 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .person-area__group-icon {
   width: 32px;
@@ -292,6 +295,7 @@
   color: var(--main-black-color);
   display: flex;
   align-items: center;
+  text-align: center;
 }
 .person-area__education-count {
   margin: 0px;
