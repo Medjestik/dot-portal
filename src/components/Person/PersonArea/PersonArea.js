@@ -44,7 +44,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
 
           <ul className='person-area__data-list'>
             <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Статус:</span>{studentData.qualification || ''}</p>
+              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Статус:</span>Студент</p>
             </li>
             <li className='person-area__data-item'>
               <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Логин:</span>{currentUser.login || ''}</p>
@@ -65,6 +65,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
 
           <div className='person-area__data-control'>
             <p className='person-area__data-control-text' onClick={openDataPopup}>Изменить данные</p>
+            <p className='person-area__data-control-text' onClick={openChangePasswordPopup}>Изменить пароль</p>
           </div>
         </div>
       

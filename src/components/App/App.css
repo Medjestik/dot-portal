@@ -853,7 +853,7 @@ input[type=number] {
 .data__text {
   margin: 0px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 300;
   font-size: 14px;
   line-height: 18px;
   text-align: left;
@@ -861,19 +861,19 @@ input[type=number] {
 }
 .data__text_font_bold {
   margin: 0px 8px 0px 0px;
-  font-weight: bold;
+  font-weight: 500;
 }
 .data__text_font_active {
   margin: 0px 8px 0px 0px;
   color: var(--accent-blue-color);
-  font-weight: bold;
+  font-weight: 500;
 }
 .data__area {
   resize: none;
   width: 100%;
   padding: 11px 16px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 300;
   font-size: 14px;
   line-height: 18px;
   color: var(--title-color);

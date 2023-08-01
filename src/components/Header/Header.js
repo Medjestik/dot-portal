@@ -92,7 +92,8 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
       <div className='header__nav-link-icon'>
         <div className='header__nav-link-icon-container'>
           { webinarIcon }
-        </div>
+        </div>  
+
       </div>
       <p className='header__nav-link-text'>Вебинары</p>
     </NavLink>
@@ -123,14 +124,20 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
         </div>
         <p className='header__nav-link-text'>Курсы</p> 
       </NavLink>
-      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/journal'>
+
+      {
+        /*
+        <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/journal'>
         <div className='header__nav-link-icon'>
           <div className='header__nav-link-icon-container'>
             { journalIcon }
           </div>
         </div>
         <p className='header__nav-link-text'>Ведомости</p> 
-      </NavLink>
+        </NavLink>
+        */
+      }
+
       <NavLink 
       onClick={hideMobileMenu}
       className={`header__nav-link + ${isCuratorOpen ? 'header__nav-link_type_active' : ''}`}
@@ -257,11 +264,11 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
             }
             
             {
-              currentUser.access_role === 'user' && renderUserLinks()
+              currentUser.access_role === 'dot' && renderUserLinks()
             }
 
             {
-              currentUser.access_role === 'dot' && renderDotLinks()
+              currentUser.access_role === 'user' && renderDotLinks()
             }
 
             {

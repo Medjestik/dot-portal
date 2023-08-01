@@ -59,7 +59,7 @@ function App() {
           console.log('UserInfo', res);
           setLoggedIn(true);
           setCurrentUser(res);
-          if (res.access_role === 'dot') {
+          if (res.access_role === 'user') {
             semesterUserInfoRequest(res.id);
           } else if (res.access_role === 'tutor') {
             semesterTeacherInfoRequest();
