@@ -44,15 +44,15 @@ function PersonAdministration({ windowWidth, studentData }) {
             }
             <div className='person-area__contact-info'>
               <h3 className='person-area__contact-name'>{studentData.decan.fullname || ''}</h3>
-              <ul className='person-area__data-list'>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Должность:</span>Декан</p>
+              <ul className='data__list data__list_margin_top'>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Должность:</span>Декан</p>
                 </li>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Телефон:</span>{studentData.decan.phone || '+7 (000) 000-00-00'}</p>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Телефон:</span>{studentData.decan.phone || '+7 (000) 000-00-00'}</p>
                 </li>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Почта:</span>{studentData.decan.email || '0000000000000@000000.ru'}</p>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Почта:</span>{studentData.decan.email || '0000000000000@000000.ru'}</p>
                 </li>
               </ul>
             </div>
@@ -67,15 +67,15 @@ function PersonAdministration({ windowWidth, studentData }) {
             }
             <div className='person-area__contact-info'>
               <h3 className='person-area__contact-name'>{studentData.curator.fullname || ''}</h3>
-              <ul className='person-area__data-list'>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Должность:</span>Куратор</p>
+              <ul className='data__list data__list_margin_top'>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Должность:</span>Куратор</p>
                 </li>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Телефон:</span>{studentData.curator.phone || '+7 (000) 000-00-00'}</p>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Телефон:</span>{studentData.curator.phone || '+7 (000) 000-00-00'}</p>
                 </li>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Почта:</span>{studentData.curator.email || '0000000000000@000000.ru'}</p>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Почта:</span>{studentData.curator.email || '0000000000000@000000.ru'}</p>
                 </li>
               </ul>
             </div>

@@ -11,7 +11,7 @@
 .person-communication__social-title {
   margin: 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
@@ -74,14 +74,14 @@
   border-radius: var(--border-radius);
   outline: none;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--accent-blue-color);
 }
 .person-communication__social-input::placeholder {
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--accent-grey-color);
@@ -114,7 +114,7 @@
 .person-communication__classmates-title {
   margin: 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
@@ -148,7 +148,7 @@
 .person-communication__classmates-name {
   margin: 0px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
@@ -174,7 +174,7 @@
   margin: 0px;
   padding: 11px 16px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--accent-grey-color);
@@ -187,7 +187,7 @@
   max-width: calc(184px - 48px);
   text-decoration: none;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--accent-blue-color);

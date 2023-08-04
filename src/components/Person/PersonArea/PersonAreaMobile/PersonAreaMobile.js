@@ -57,12 +57,12 @@ function PersonAreaMobile({ currentUser, studentData, openPhotoPopup }) {
           </div>
         </div>
 
-        <ul className='person-area__data-list'>
-          <li className='person-area__data-item'>
-            <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Направление:</span>{studentData.direction || ''}</p>
+        <ul className='data__list data__list_margin_top'>
+          <li className='data__item'>
+            <p className='data__text'><span className='data__text_font_bold'>Направление:</span>{studentData.direction || ''}</p>
           </li>
-          <li className='person-area__data-item'>
-            <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Профиль:</span>{studentData.profil || ''}</p>
+          <li className='data__item'>
+            <p className='data__text'><span className='data__text_font_bold'>Профиль:</span>{studentData.profil || ''}</p>
           </li>
         </ul>
 

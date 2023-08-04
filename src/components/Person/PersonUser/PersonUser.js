@@ -17,7 +17,7 @@ import PersonDiploma from '../PersonDiploma/PersonDiploma.js';
 
 function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, openNotificationPopup }) {
 
-  const user = {
+  /*const user = {
     photo: '',
     name: 'Костюлин Иван Алексеевич',
     educationLevel: 'Бакалавр',
@@ -82,6 +82,8 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
     { text: 'Иванова Елена Ивановна', count: '5', },
     { text: 'Иванова Елена Ивановна Иванова Елена Ивановна', count: '1', },
   ]
+
+  */
 
   const [studentData, setStudentData] = React.useState({});
   const [studentEducationInfo, setStudentEducationInfo] = React.useState({});
@@ -213,38 +215,49 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
             studentEducationInfo={studentEducationInfo} 
             windowWidth={windowWidth} 
           />
-          <PersonAchievement 
-            user={user} 
-            windowWidth={windowWidth} 
-          />
-          <PersonDocument 
-            windowWidth={windowWidth} 
-            userDocuments={userDocuments} 
-            userCheck={userCheck} 
-          />
-          <PersonDeclaration 
-            windowWidth={windowWidth} 
-            userDeclaration={userDeclaration} 
-            declarationTemplate={declarationTemplate} 
-          />
+
           <PersonNotification 
             windowWidth={windowWidth} 
             userNotifications={userNotifications} 
             onOpen={openNotificationPopup} 
             currentNotification={currentNotification} 
           />
-          <PersonRating 
-            scores={scores} 
-            windowWidth={windowWidth} 
-          />
+
           <PersonCommunication 
             windowWidth={windowWidth}
             studentSocial={studentSocial}
             onChange={handleChangeSocialLink}
             isLoading={isLoadingSocialRequest}
           />
+
           {
-            //<PersonDiploma windowWidth={windowWidth} />
+            /*
+            <PersonAchievement 
+              user={user} 
+              windowWidth={windowWidth} 
+            />
+
+            <PersonDocument 
+              windowWidth={windowWidth} 
+              userDocuments={userDocuments} 
+              userCheck={userCheck} 
+            />
+
+            <PersonDeclaration 
+              windowWidth={windowWidth} 
+              userDeclaration={userDeclaration} 
+              declarationTemplate={declarationTemplate} 
+            />
+
+            <PersonRating 
+              scores={scores} 
+              windowWidth={windowWidth} 
+            />
+
+            <PersonDiploma 
+              windowWidth={windowWidth} 
+            />
+            */
           }
         </>
       }

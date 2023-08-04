@@ -29,7 +29,7 @@
 .select-popup__text {
   margin: 0px 20px 0px 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
@@ -84,7 +84,7 @@
 .select-popup__options-text {
   margin: 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);

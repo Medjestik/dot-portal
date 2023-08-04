@@ -104,7 +104,7 @@
 .person-area__education-level {
   margin: 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   cursor: default;
@@ -120,55 +120,6 @@
 }
 .person-area__achievement_type_legendary {
   background: var(--gradient-orange-color);
-}
-.person-area__data-list {
-  margin: 12px 0px 0px 0px;
-  padding: 0px;
-  list-style-type: none;
-}
-.person-area__data-item {
-  margin: 0px 0px 12px 0px;
-  display: flex;
-  align-items: center;
-}
-.person-area__data-item:last-of-type {
-  margin: 0px;
-}
-.person-area__data-text {
-  margin: 0px;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-  text-align: left;
-  color: var(--main-black-color);
-}
-.person-area__data-text_font_bold {
-  margin: 0px 8px 0px 0px;
-  font-weight: 500;
-}
-.person-area__data-control {
-  width: 100%;
-  margin: 20px 0px 0px 0px;
-  display: flex;
-  align-items: center;
-}
-.person-area__data-control-text {
-  margin: 0px 20px 0px 0px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  text-align: left;
-  color: var(--accent-blue-color);
-  transition: all .3s ease-in-out;
-}
-.person-area__data-control-text:last-of-type {
-  margin: 0px;
-}
-.person-area__data-control-text:hover {
-  cursor: pointer;
-  opacity: .7;
 }
 .person-area__separate {
   margin: auto 16px;
@@ -289,7 +240,7 @@
 .person-area__education-title {
   margin: 0px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
@@ -335,12 +286,6 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-  }
-  .person-area__data-list {
-    margin: 16px 0px 0px 0px;
-  }
-  .person-area__data-list_margin_top {
-    margin: 0px;
   }
   .person-area__name {
     font-size: 20px;

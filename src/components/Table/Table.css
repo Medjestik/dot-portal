@@ -153,7 +153,7 @@
 .table__text {
   margin: 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
@@ -193,12 +193,12 @@
   text-decoration: underline;
 }
 .table__text_type_header {
-  font-weight: 500;
+  font-weight: bold;
 }
 .table__caption_type_empty {
   margin: 16px 0px 0px 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--accent-grey-color);

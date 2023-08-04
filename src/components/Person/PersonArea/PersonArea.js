@@ -42,30 +42,30 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
             </div>
           </div>
 
-          <ul className='person-area__data-list'>
-            <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Статус:</span>Студент</p>
+          <ul className='data__list data__list_margin_top'>
+            <li className='data__item'>
+              <p className='data__text'><span className='data__text_font_bold'>Статус:</span>Студент</p>
             </li>
-            <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Логин:</span>{currentUser.login || ''}</p>
+            <li className='data__item'>
+              <p className='data__text'><span className='data__text_font_bold'>Логин:</span>{currentUser.login || ''}</p>
             </li>
-            <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Дата рождения:</span>{currentUser.birthDate ? convertDate(currentUser.birthDate) : '00.00.0000' }</p>
+            <li className='data__item'>
+              <p className='data__text'><span className='data__text_font_bold'>Дата рождения:</span>{currentUser.birthDate ? convertDate(currentUser.birthDate) : '00.00.0000' }</p>
             </li>
-            <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>СНИЛС:</span>{currentUser.snils || '000-000-000 00'}</p>
+            <li className='data__item'>
+              <p className='data__text'><span className='data__text_font_bold'>СНИЛС:</span>{currentUser.snils || '000-000-000 00'}</p>
             </li>
-            <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Телефон:</span>{currentUser.phone || '+7 (000) 000-00-00'}</p>
+            <li className='data__item'>
+              <p className='data__text'><span className='data__text_font_bold'>Телефон:</span>{currentUser.phone || '+7 (000) 000-00-00'}</p>
             </li>
-            <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Почта:</span>{currentUser.email || '0000000000000@000000.ru'}</p>
+            <li className='data__item'>
+              <p className='data__text'><span className='data__text_font_bold'>Почта:</span>{currentUser.email || '0000000000000@000000.ru'}</p>
             </li>
           </ul>
 
-          <div className='person-area__data-control'>
-            <p className='person-area__data-control-text' onClick={openDataPopup}>Изменить данные</p>
-            <p className='person-area__data-control-text' onClick={openChangePasswordPopup}>Изменить пароль</p>
+          <div className='data__control'>
+            <p className='data__control-text' onClick={openDataPopup}>Изменить данные</p>
+            <p className='data__control-text' onClick={openChangePasswordPopup}>Изменить пароль</p>
           </div>
         </div>
       
@@ -88,12 +88,12 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
             </div>
           </div>
 
-          <ul className='person-area__data-list'>
-            <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Направление:</span>{studentData.direction || ''}</p>
+          <ul className='data__list data__list_margin_top'>
+            <li className='data__item'>
+              <p className='data__text'><span className='data__text_font_bold'>Направление:</span>{studentData.direction || ''}</p>
             </li>
-            <li className='person-area__data-item'>
-              <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Профиль:</span>{studentData.profil || ''}</p>
+            <li className='data__item'>
+              <p className='data__text'><span className='data__text_font_bold'>Профиль:</span>{studentData.profil || ''}</p>
             </li>
           </ul>
 
@@ -112,15 +112,15 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
             }
             <div className='person-area__contact-info'>
               <h3 className='person-area__contact-name'>{studentData.decan.fullname || ''}</h3>
-              <ul className='person-area__data-list'>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Должность:</span>Декан</p>
+              <ul className='data__list data__list_margin_top'>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Должность:</span>Декан</p>
                 </li>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Телефон:</span>{studentData.decan.phone || '+7 (000) 000-00-00'}</p>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Телефон:</span>{studentData.decan.phone || '+7 (000) 000-00-00'}</p>
                 </li>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Почта:</span>{studentData.decan.email || '0000000000000@000000.ru'}</p>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Почта:</span>{studentData.decan.email || '0000000000000@000000.ru'}</p>
                 </li>
               </ul>
             </div>
@@ -135,15 +135,15 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
             }
             <div className='person-area__contact-info'>
               <h3 className='person-area__contact-name'>{studentData.curator.fullname || ''}</h3>
-              <ul className='person-area__data-list'>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Должность:</span>Куратор</p>
+              <ul className='data__list data__list_margin_top'>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Должность:</span>Куратор</p>
                 </li>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Телефон:</span>{studentData.curator.phone || '+7 (000) 000-00-00'}</p>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Телефон:</span>{studentData.curator.phone || '+7 (000) 000-00-00'}</p>
                 </li>
-                <li className='person-area__data-item'>
-                  <p className='person-area__data-text'><span className='person-area__data-text_font_bold'>Почта:</span>{studentData.curator.email || '0000000000000@000000.ru'}</p>
+                <li className='data__item'>
+                  <p className='data__text'><span className='data__text_font_bold'>Почта:</span>{studentData.curator.email || '0000000000000@000000.ru'}</p>
                 </li>
               </ul>
             </div>

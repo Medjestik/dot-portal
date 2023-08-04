@@ -15,21 +15,21 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
       case 'completed':
         return ( 
           <div className='status'>
-            <p className='table__text'>Завершен</p>
+            <p className='popup__row-text'>Завершен</p>
           </div>
         )
       
         case 'canceled':
           return ( 
             <div className='status'>
-              <p className='table__text'>Отменен</p>
+              <p className='popup__row-text'>Отменен</p>
             </div>
           )
 
       default:
         return ( 
           <div className='status'>
-            <p className='table__text'>Планируется</p>
+            <p className='popup__row-text'>Планируется</p>
           </div>
         )
     }

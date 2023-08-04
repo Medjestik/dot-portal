@@ -59,7 +59,7 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser, onChangePhoto, isL
       formName={'person-area-photo-popup'}
     >
       <h2 className='popup__title'>Фотография</h2>
-      <p className='popup__subtitle'>Загрузите вашу фотографию на портал:</p>
+      <p className='popup__subtitle'>Загрузите вашу фотографию:</p>
       <div className='popup__upload-section'>
         <div className='popup__upload-text-container'>
           <p className='popup__upload-text'>{fileName.isShow ? fileName.name : ''}</p>

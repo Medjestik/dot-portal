@@ -106,7 +106,7 @@ function PersonAreaDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoa
       <h2 className='popup__title'>Персональные данные</h2>
 
       <label className='popup__field'>
-        <h4 className='popup__input-caption'>Укажите вашу дату рождения:</h4>
+        <h4 className='popup__input-caption'>Дата рождения:</h4>
         <div className='popup__input-field'>
           <input 
           className='popup__input'
@@ -128,7 +128,7 @@ function PersonAreaDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoa
       </label>
 
       <label className='popup__field'>
-        <h4 className='popup__input-caption'>Укажите ваш страховой номер индивидуального лицевого счета:</h4>
+        <h4 className='popup__input-caption'>Cтраховой номер индивидуального лицевого счета:</h4>
         <div className='popup__input-field'>
         <InputMask mask='999 999 999 99' 
           className='popup__input'
@@ -148,7 +148,7 @@ function PersonAreaDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoa
       </label>
 
       <label className='popup__field'>
-        <h4 className='popup__input-caption'>Укажите ваш актуальный номер мобильного телефона для связи:</h4>
+        <h4 className='popup__input-caption'>Номер мобильного телефона:</h4>
         <div className='popup__input-field'>
         <InputMask mask='9 (999) 999-99-99' 
           className='popup__input'
@@ -168,7 +168,7 @@ function PersonAreaDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoa
       </label>
 
       <label className='popup__field'>
-        <h4 className='popup__input-caption'>Укажите ваш актуальный e-mail для связи:</h4>
+        <h4 className='popup__input-caption'>Электронная почта:</h4>
         <div className='popup__input-field'>
           <input 
           className='popup__input'

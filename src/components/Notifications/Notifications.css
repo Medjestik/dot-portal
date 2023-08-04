@@ -78,14 +78,14 @@
 .notification__date {
   margin: 0px 20px 0px 0px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   color: var(--accent-grey-color);
   flex-shrink: 0;
 }
 .notification__item_type_unread .notification__date  {
-  font-weight: 500;
+  font-weight: bold;
   color: var(--main-white-color);
 }
 .notification__item_type_unread .notification__info:hover .notification__date {
@@ -94,7 +94,7 @@
 .notification__text {
   margin: 0px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   color: var(--accent-grey-color);
@@ -104,7 +104,7 @@
   overflow: hidden;
 }
 .notification__item_type_unread .notification__text  {
-  font-weight: 500;
+  font-weight: bold;
   color: var(--accent-blue-color);
 }
 .notification__item_type_unread .notification__text {
@@ -113,7 +113,7 @@
 .notification__caption_type_empty {
   margin: 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--accent-grey-color);
