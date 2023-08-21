@@ -4,8 +4,7 @@ import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router
 import SemesterHeader from '../SemesterHeader/SemesterHeader.js';
 import SemesterHeaderWithOptionsUser from '../SemesterHeader/SemesterHeaderWithOptionsUser/SemesterHeaderWithOptionsUser.js';
 import Section from '../../Section/Section.js';
-import SemesterUserTable from './SemesterUserTable/SemesterUserTable.js';
-import SemesterUserCardList from './SemesterUserCardList/SemesterUserCardList.js';
+import DisciplineUserTable from '../DisciplineUser/DisciplineUserTable/DisciplineUserTable.js';
 import DisciplineUser from '../DisciplineUser/DisciplineUser.js';
 import PracticeUser from '../PracticeUser/PracticeUser.js';
 import PracticeUserTable from '../PracticeUser/PracticeUserTable/PracticeUserTable.js';
@@ -128,17 +127,12 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
             <Routes>
               <Route exact path='/disciplines'
               element={
-                windowWidth <= 833 
-                ?
-                  <SemesterUserCardList disciplines={disciplines} openDiscipline={openDiscipline} />
-                :
-                  <SemesterUserTable data={disciplines} onOpen={openDiscipline} />
-                }
+                <DisciplineUserTable windowWidth={windowWidth} data={disciplines} onOpen={openDiscipline} />
+              }
               />
-
               <Route exact path='/practices'
               element={
-                <PracticeUserTable data={practices} onOpen={openPractice} /> 
+                <PracticeUserTable windowWidth={windowWidth} data={practices} onOpen={openPractice} /> 
               }
               />
             </Routes>

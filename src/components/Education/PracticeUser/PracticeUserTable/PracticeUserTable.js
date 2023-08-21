@@ -1,7 +1,8 @@
 import React from 'react';
 import Table from '../../../Table/Table.js';
+import TableCard from '../../../Table/TableCard/TableCard.js';
 
-function PracticeUserTable({ data, onOpen }) {
+function PracticeUserTable({ windowWidth, data, onOpen }) {
 
   function renderMark(mark) {
     if (mark === 'Не аттестован') {
@@ -33,7 +34,43 @@ function PracticeUserTable({ data, onOpen }) {
 
   return (
     <>
-
+    {
+      windowWidth <= 833
+      ?
+      <>
+      {
+        data.length > 0 
+        ?
+        <TableCard>
+        {
+          data.map((item, i) => (
+            <li className='table-card__item' key={i}>
+              <p className='table-card__text table-card__date'>{item.startDate} - {item.endDate}</p>
+              <p 
+                className='table-card__text table-card__text_weight_bold table-card__text_type_active table-card__title' 
+                onClick={() => onOpen(item)}>
+                {item.name}
+              </p>
+              
+              <div className='table-card__info'>
+                <ul className='table-card__info-list'>
+                  <li className='table-card__info-item'>
+                    <p className='data__text'><span className='data__text_font_bold'>Тип:</span>{item.control || ''}</p>
+                  </li>
+                  <li className='table-card__info-item'>
+                    <p className='data__text'><span className='data__text_font_bold'>Оценка:</span>{item.mark.name || 'Н/А'}</p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </TableCard>
+      :
+      <div className='table__caption_type_empty'>В этом семестре у вас отсутствуют дисциплины!</div>
+      }
+    </>
+    :
     <Table>
       <div className='table__header'>
         <div className='table__main-column table__main-column_type_full'>
@@ -77,7 +114,7 @@ function PracticeUserTable({ data, onOpen }) {
                   </p>
                 </div>
                 <div className='table__column table__column_type_small'>
-                  <p className='table__text'>{item.control}</p>
+                  <p className='table__text'>{item.control || ''}</p>
                 </div>
                 <div className='table__column table__column_type_small'>
                   {item.mark && renderMark(item.mark.name)}
@@ -91,6 +128,7 @@ function PracticeUserTable({ data, onOpen }) {
         <div className='table__caption_type_empty'>В этом семестре у вас отсутствуют практики!</div>
       }
     </Table>
+    }
     </>
   );
 }

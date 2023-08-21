@@ -1,20 +1,20 @@
-.section__education {
+.section__page {
   margin: 0px;
   width: 100%;
 }
-.section__education_type_page {
+.section__page_type_page {
   flex-grow: 2;
   display: flex;
   flex-direction: column;
 }
-.section__education-list {
+.section__page-list {
   margin: 0px;
   padding: 0px;
   list-style-type: none;
   display: flex;
   align-items: center;
 }
-.section__education-item {
+.section__page-item {
   width: min-content;
   min-width: 164px;
   height: 120px;
@@ -23,19 +23,19 @@
   background: var(--gradient-blue-color);
   border-radius: var(--border-radius);
 }
-.section__education-item_type_small {
+.section__page-item_type_small {
   width: min-content;
   min-width: 164px;
 }
-.section__education-item_type_medium {
+.section__page-item_type_medium {
   width: min-content;
   min-width: 256px;
 }
-.section__education-item_type_large {
+.section__page-item_type_large {
   width: 100%;
   min-width: 100%;
 }
-.section__education-title {
+.section__page-title {
   margin: 0px;
   font-style: normal;
   font-weight: 900;
@@ -47,7 +47,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.section__education-container {
+.section__page-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -58,10 +58,10 @@
   box-sizing: border-box;
   min-height: max-content;
 }
-.section__education-container_type_content {
+.section__page-container_type_content {
   min-height: max-content;
 }
-.section__education-container_type_page {
+.section__page-container_type_page {
   flex-grow: 2;
 }
 .section__header {
@@ -151,15 +151,21 @@
 }
 
 @media all and (max-width: 833px) {
-  .section__education-container {
+  .section__page-container {
     padding: 20px;
   }
-  .section__education-item {
-    padding: 7px 16px;
+  .section__page-item {
+    padding: 8px 20px;
     height: 112px;
   }
-  .section__education-title {
-    font-size: 15px;
+  .section__page-title {
+    font-size: 14px;
     line-height: 18px;
+  }
+  .section__header {
+    margin: 0px 0px 16px 0px;
+  }
+  .section__header-item {
+    margin: 0px 12px 0px 0px;
   }
 }

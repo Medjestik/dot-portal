@@ -9,13 +9,13 @@ function SemesterHeaderBtnBack({ onBack, isPerformFunction }) {
     isPerformFunction
     ?
     <button className='semester-header__btn-back' type='button' onClick={() => onBack()}> 
-      <p className='semester-header__btn-back-text'>Назад</p>
       <div className='semester-header__btn-back-arrow'></div>
+      <p className='semester-header__btn-back-text'>Назад</p>
     </button>
     :
     <button className='semester-header__btn-back' type='button' onClick={() => navigate(-1)}> 
-      <p className='semester-header__btn-back-text'>Назад</p>
       <div className='semester-header__btn-back-arrow'></div>
+      <p className='semester-header__btn-back-text'>Назад</p>
     </button>
   );
 }

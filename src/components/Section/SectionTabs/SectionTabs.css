@@ -68,6 +68,8 @@
 @media all and (max-width: 833px) {
   .section__tabs-item {
     min-width: max-content;
+    padding: 8px 20px;
+    margin: 0px 12px 0px 0px;
   }
   .section__tabs-item_type_small {
     min-width: max-content;
@@ -75,7 +77,20 @@
   .section__tabs-item_type_medium {
     min-width: max-content;
   }
+  .section__tabs-title {
+    font-size: 14px;
+    line-height: 18px;
+  }
   .section__tabs-container {
+    width: 100%;
+    margin: -88px 0px 0px 0px;
+    min-height: 80px;
     padding: 20px;
+    background: var(--main-white-color);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
   }
 }

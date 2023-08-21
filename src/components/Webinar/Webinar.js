@@ -174,6 +174,30 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
       </SemesterHeader>
 
       <Section title='Вебинары' heightType='page' headerType='small'>
+
+        {
+        windowWidth <= 833
+        ?
+        <>
+        <div className='section__header'>
+          <div className='section__header-item'>
+            <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по названию:</span>
+            <Search type='large' id='webinar' data={webinars} onSearch={handleSearch} />
+          </div>
+        </div>
+        <div className='section__header'>
+          <div className='section__header-item'>
+            <span className='section__header-caption'>Период:</span>
+            <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
+          </div>
+          <div className='section__header-item'>
+            <span className='section__header-caption'>Статус:</span>
+            <PopupSelect options={statusOptions} currentOption={currentStatusOption} onChooseOption={filterByStatus} />
+          </div>
+        </div>
+        </>
+        :
+        <>
         <div className='section__header'>
           <div className='section__header-item'>
             <span className='section__header-caption'>Период:</span>
@@ -188,6 +212,10 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
             <Search type='medium' id='webinar' data={webinars} onSearch={handleSearch} />
           </div>
         </div>
+        </>
+        }
+
+
         <Table>
           <div className='table__header'>
             <div className='table__main-column table__main-column_type_empty'>
@@ -241,6 +269,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
             </ul>
           }
         </Table>
+
       </Section>
       </>
       }

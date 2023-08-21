@@ -84,11 +84,41 @@
 .select-popup__options-text {
   margin: 0px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: normal; 
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
 }
 .select-popup__options-item:hover .select-popup__options-text {
   color: var(--accent-blue-color);
+}
+@media all and (max-width: 833px) {
+  .select-popup {
+    margin: 8px 0px 0px 0px;
+    min-width: 140px;
+    min-height: 32px;
+  }
+  .select-popup__main {
+    padding: 4px 8px 4px 12px;
+  }
+  .select-popup__text {
+    margin: 0px 12px 0px 0px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .select-popup__arrow {
+    width: 16px;
+    height: 16px;
+    background-size: 16px;
+  }
+  .select-popup__options-container {
+    top: 32px;
+  }
+  .select-popup__options-item {
+    margin: 0px 12px;
+  }
+  .select-popup__options-text {
+    font-size: 12px;
+    line-height: 16px;
+  }
 }

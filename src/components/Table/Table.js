@@ -12,4 +12,4 @@ function Table({ children }) {
   );
 }
 
-export default Table; 
+export default Table;

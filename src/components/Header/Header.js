@@ -61,8 +61,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
             </div>
           </div>
           <p className='header__nav-link-text'>Рейтинг</p>
-        </NavLink>*/
-      }
+        </NavLink>
 
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/document'>
         <div className='header__nav-link-icon'>
@@ -72,6 +71,8 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
         </div>
         <p className='header__nav-link-text'>Документы</p>
       </NavLink>
+      */
+      }
       </>
     )
   }
@@ -93,7 +94,6 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
         <div className='header__nav-link-icon-container'>
           { webinarIcon }
         </div>  
-
       </div>
       <p className='header__nav-link-text'>Вебинары</p>
     </NavLink>
