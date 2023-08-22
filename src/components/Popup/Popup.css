@@ -24,7 +24,6 @@
 .popup__container {
   margin: 10vh auto 0px;
   width: max-content;
-
   position: relative;
   display: flex;
   flex-direction: column;
@@ -508,7 +507,7 @@
 }
 .popup__item-text_size_small {
   font-size: 12px;
-  line-height: 15px;
+  line-height: 16px;
 }
 .popup__item-text_weight_bold {
   font-weight: bold;
@@ -620,6 +619,7 @@
 @media all and (max-width: 833px) {
   .popup__container {
     margin: 10vh auto 0px;
+    width: 100%;
   }
   .popup__form {
     padding: 20px 24px 20px 24px;
@@ -630,6 +630,21 @@
   .popup__form_type_medium {
     width: 95vw;
   }
+  .popup__form_width_small {
+    width: 100%;
+  }
+  .popup__form_width_medium {
+    width: 100%;
+  }
+  .popup__form_width_large {
+    width: 100%;
+  }
+  .popup__form_width_full {
+    width: 100%;
+  }
+  .popup__form_width_1440 {
+    width: 100%;
+  }
   .popup__field {
     margin: 12px 0px 0px 0px;
   }
@@ -638,18 +653,49 @@
     padding: 7px 12px 7px 12px;
   }
   .popup__input-caption {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 16px;
   }
   .popup__input {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 16px;
   }
   .popup__input::placeholder {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 16px;
   }
   .popup__btn-container {
     padding: 16px 0px 0px 0px;
+  }
+  .popup__row-title {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .popup__row-title_margin_right {
+    margin: 0px 4px 0px 0px;
+  }
+  .popup__row-text {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .popup__author-img {
+    width: 64px;
+    height: 64px;
+  }
+  .popup__author-img_size_small {
+    width: 56px;
+    height: 56px;
+  }
+  .popup__author-title {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .popup__author-title_font_small {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .popup__author-text {
+    font-size: 12px;
+    line-height: 16px;
   }
 }

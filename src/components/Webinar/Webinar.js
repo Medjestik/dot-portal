@@ -7,28 +7,17 @@ import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import Search from '../Search/Search.js';
 import Table from '../Table/Table.js';
+import TableCard from '../Table/TableCard/TableCard.js';
 import PopupSelect from '../Popup/PopupSelect/PopupSelect.js';
 import ViewWebinarPopup from './WebinarPopup/ViewWebinarPopup/ViewWebinarPopup.js';
 
 function Webinar({ windowWidth, semesterOptions, onLogout }) {
 
   const statusOptions = [
-    {
-      name: 'Не выбран',
-      id: 'empty',
-    },
-    {
-      name: 'Планируется',
-      id: 'planned',
-    },
-    {
-      name: 'Отменен',
-      id: 'canceled',
-    },
-    {
-      name: 'Завершен',
-      id: 'completed',
-    },
+    { name: 'Не выбран', id: 'empty', },
+    { name: 'Планируется', id: 'planned', },
+    { name: 'Отменен', id: 'canceled', },
+    { name: 'Завершен', id: 'completed', },
   ]
 
   const [isLoadingWebinar, setIsLoadingWebinar] = React.useState(true);
@@ -181,7 +170,6 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
         <>
         <div className='section__header'>
           <div className='section__header-item'>
-            <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по названию:</span>
             <Search type='large' id='webinar' data={webinars} onSearch={handleSearch} />
           </div>
         </div>
@@ -215,7 +203,45 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
         </>
         }
 
+        {
+        windowWidth <= 833
+        ?
+        <TableCard>
+          {
+            filteredWebinars.length < 1 
+            ?
+            <p className='table__caption_type_empty'>По заданным параметрам вебинаров не найдено.</p>
+            :
+            <>
+            {
+              [...filteredWebinars].reverse().map((item, i) => (
+                <li className='table-card__item' key={i}>
+                  {renderStatus(item.status)}
+                  
+                  <p className='table-card__text table-card__text_weight_bold table-card__text_type_active table-card__title' 
+                    onClick={() => openViewWebinarPopup(item)}>
+                    {item.name}
+                  </p>
 
+                  <p className='table-card__text table-card__subtitle'>{item.speakers.join(', ')}</p>
+
+                  <div className='table-card__info'>
+                    <ul className='table-card__info-list'>
+                      <li className='table-card__info-item'>
+                        <p className='data__text'><span className='data__text_font_bold'>Дата:</span>{item.date || ''}</p>
+                      </li>
+                      <li className='table-card__info-item'>
+                        <p className='data__text'><span className='data__text_font_bold'>Время:</span>{item.time || ''}</p>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              ))
+            }
+            </>
+          }
+        </TableCard>
+        :
         <Table>
           <div className='table__header'>
             <div className='table__main-column table__main-column_type_empty'>
@@ -269,6 +295,8 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
             </ul>
           }
         </Table>
+
+        }
 
       </Section>
       </>
