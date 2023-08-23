@@ -4,6 +4,7 @@ import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 import * as educationApi from '../../../../utils/educationApi.js';
 import Preloader from '../../../Preloader/Preloader.js';
 import Table from '../../../Table/Table.js';
+import TableCard from '../../../Table/TableCard/TableCard.js';
 import GetBase64File from '../../../../custom/GetBase64File.js';
 
 function DisciplineUserTasks({ windowWidth, disciplineId }) {
@@ -200,7 +201,7 @@ function DisciplineUserTasks({ windowWidth, disciplineId }) {
           {
             tasks.length > 0 &&
             <>
-              <h5 className='discipline-list__caption'>Загруженные материалы:</h5>
+              <h5 className='table__title'>Загруженные материалы:</h5>
               <ul className='discipline-list'>
                 {
                   tasks.map((item, i) => (

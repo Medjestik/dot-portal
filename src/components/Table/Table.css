@@ -5,6 +5,14 @@
   display: flex;
   flex-direction: column;
 }
+.table__title {
+  margin: 0px 0px 12px 0px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
 .table__container {
   margin: 0px;
   height: 100%;
@@ -205,4 +213,11 @@
 }
 .table__btn {
   margin: 0px;
+}
+@media all and (max-width: 833px) {
+  .table__title {
+    margin: 0px 0px 8px 0px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }

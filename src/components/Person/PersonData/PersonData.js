@@ -37,7 +37,7 @@ function PersonData({ windowWidth, currentUser, studentData, openChangePasswordP
     <>
     <Accordion icon={dataIcon} name='Данные' height={sectionHeight} openInfoPopup={openInfoPopup}> 
       <div ref={heightRef} className='person-area__data'>  
-        <ul className='data__list data__list_margin_top'>
+        <ul className='data__list'>
           <li className='data__item'>
             <p className='data__text'><span className='data__text_font_bold'>Статус:</span>Студент</p>
           </li>

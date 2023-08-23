@@ -667,6 +667,20 @@
   .popup__btn-container {
     padding: 16px 0px 0px 0px;
   }
+  .popup__textarea {
+    min-height: 80px;
+    padding: 8px 12px;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+  }
+  .popup__textarea::placeholder {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .popup__btn-back {
+    padding: 8px;
+  }
   .popup__row-title {
     font-size: 12px;
     line-height: 16px;
