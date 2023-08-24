@@ -23,15 +23,21 @@ function StudentViewCommentsPopup({ isOpen, onClose, comments, }) {
         <ul className='popup__list'>
           {
             comments.slice(0).reverse().map((elem, i) => (
-              <li key={i} className='popup__item'>
+              <li key={i} className='popup__item popup__item_type_column'>
                 <div className='popup__author'>
-                  <img className='popup__author-img' src={elem.author_avatar_link} alt='аватар'></img>
+                  {
+                  elem.author_avatar_link
+                  ?
+                  <img className='popup__author-img popup__author-img_size_small' src={elem.author_avatar_link} alt='аватар'></img>
+                  :
+                  <div className='popup__author-img popup__author-img_size_small'></div>
+                  }
                   <div className='popup__author-info'>
-                    <h4 className='popup__author-title popup__author-title_font_small'>{elem.text}</h4>
-                    <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Автор: </span>{elem.author_fullname}</p>
+                    <h4 className='popup__author-title'>{elem.author_fullname}</h4>
                     <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Дата публикации: </span>{elem.date}</p>
                   </div>
                 </div>
+                <p className='popup__author-text'>{elem.text}</p>
               </li>
             ))
           }

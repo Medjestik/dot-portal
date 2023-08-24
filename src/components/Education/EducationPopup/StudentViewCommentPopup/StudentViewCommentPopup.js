@@ -29,9 +29,9 @@ function StudentViewCommentPopup({ isOpen, onClose, currentAdvertisement, isLoad
         {
         currentAdvertisement.author_avatar_link
         ?
-        <img className='popup__author-img' src={currentAdvertisement.author_avatar_link} alt='аватар'></img>
+        <img className='popup__author-img popup__author-img_size_small' src={currentAdvertisement.author_avatar_link} alt='аватар'></img>
         :
-        <div className='popup__author-img'></div>
+        <div className='popup__author-img popup__author-img_size_small'></div>
         }
         <div className='popup__author-info'>
           <h4 className='popup__author-title'>{currentAdvertisement.author}</h4>

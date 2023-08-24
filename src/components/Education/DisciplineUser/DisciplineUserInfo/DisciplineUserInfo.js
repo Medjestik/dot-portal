@@ -2,6 +2,7 @@ import React from 'react';
 import './DisciplineUserInfo.css';
 import DisciplineInfo from '../../DisciplineInfo/DisciplineInfo.js';
 import Table from '../../../Table/Table.js';
+import TableList from '../../../Table/TableList/TableList.js';
 import StudentViewAdvertisementPopup from '../../EducationPopup/StudentViewAdvertisementPopup/StudentViewAdvertisementPopup.js';
 import StudentViewCommentPopup from '../../EducationPopup/StudentViewCommentPopup/StudentViewCommentPopup.js';
 import EducationAdvertisement from '../../EducationAdvertisement/EducationAdvertisement.js';
@@ -20,7 +21,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
   const [isOpenViewCommentPopup, setIsOpenViewCommentPopup] = React.useState(false);
 
   React.useEffect(() => {
-    if (windowWidth >= 833) {
+    if (windowWidth > 950) {
       setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
       setAdvertisementHeight(containerHeightRef.current.clientHeight);
     }
@@ -57,6 +58,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
   return (
     <>
     <DisciplineInfo type='user'>
+
       <div className='discipline-info__column'>
 
         <div className='discipline-info__description'>
@@ -84,61 +86,100 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
         </div>
 
         <div className='discipline-info__section discipline-info__materials'>
-            <div className='discipline-info__section-header'>
-              <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
-            </div>
-            <div className='discipline-info__materials-table'>
-              <Table>
-                <div ref={containerHeightRef} className='table__container'>
-                  <div ref={tableHeaderHeightRef} className='table__header'>
-                    <div className='table__main-column'>
-                      <div className='table__column table__column_type_header table__column_type_count'>
-                        <p className='table__text table__text_type_header'>№</p>
+
+          {
+            windowWidth > 950 ?
+            <>
+              <div className='discipline-info__section-header'>
+                <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
+              </div>
+              <div className='discipline-info__materials-table'>
+                <Table>
+                  <div ref={containerHeightRef} className='table__container'>
+                    <div ref={tableHeaderHeightRef} className='table__header'>
+                      <div className='table__main-column'>
+                        <div className='table__column table__column_type_header table__column_type_count'>
+                          <p className='table__text table__text_type_header'>№</p>
+                        </div>
+                        <div className="table__column table__column_type_header table__column_type_date">
+                          <p className="table__text table__text_type_header">Дата</p>
+                        </div>
+                        <div className='table__column table__column_type_header table__column_type_name'>
+                          <p className='table__text table__text_type_header'>Наименование</p>
+                        </div>
                       </div>
-                      <div className="table__column table__column_type_header table__column_type_date">
-                        <p className="table__text table__text_type_header">Дата</p>
-                      </div>
-                      <div className='table__column table__column_type_header table__column_type_name'>
-                        <p className='table__text table__text_type_header'>Наименование</p>
+                      <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                        <div className='btn btn_type_download btn_type_download_status_active'></div>
                       </div>
                     </div>
-                    <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                      <div className='btn btn_type_download btn_type_download_status_active'></div>
-                    </div>
+                    <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+                      {
+                        disciplineInfo.additional_files.length < 1 
+                        ?
+                        <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
+                        :
+                        [...disciplineInfo.additional_files].reverse().map((item, i) => (
+                          <li className='table__row' key={i}>
+                            <div className='table__main-column'>
+                              <div className='table__column table__column_type_count'>
+                                <p className='table__text'>{i + 1}</p>
+                              </div>
+                              <div className="table__column table__column_type_date">
+                                <p className="table__text">{item.date}</p>
+                              </div>
+                              <div className='table__column table__column_type_name'>
+                                <p className='table__text'>{item.title}</p>
+                              </div>
+                            </div>
+                            <div className='table__column table__column_type_btn'>
+                              <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
+                            </div>
+                          </li>
+                        ))
+                      }
+                    </ul>
                   </div>
-                  <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
-                    {
-                      disciplineInfo.additional_files.length < 1 
-                      ?
-                      <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
-                      :
-                      [...disciplineInfo.additional_files].reverse().map((item, i) => (
-                        <li className='table__row' key={i}>
-                          <div className='table__main-column'>
-                            <div className='table__column table__column_type_count'>
-                              <p className='table__text'>{i + 1}</p>
-                            </div>
-                            <div className="table__column table__column_type_date">
-                              <p className="table__text">{item.date}</p>
-                            </div>
-                            <div className='table__column table__column_type_name'>
-                              <p className='table__text'>{item.title}</p>
-                            </div>
-                          </div>
-                          <div className='table__column table__column_type_btn'>
-                            <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
-                          </div>
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </div>
-              </Table>
-            </div>
+                </Table>
+              </div>
+            </>
+            :
+            <>
+            {
+              disciplineInfo.additional_files.length > 0 ?
+              <>
+                <h5 className='table__title'>Дополнительные материалы:</h5>
+                <TableList>
+                  {
+                    [...disciplineInfo.additional_files].reverse().map((item, i) => (
+                      <li className='table-list__item' key={i}>
+                        <span className='table-list__count'>{i + 1}.</span>
+                        <div className='table-list__info'>
+                          <h6 className='table-list__info-title'>{item.title || ''}</h6>
+                          <ul className='table-list__info-list'>
+                            <li className='table-list__info-item'>
+                              <p className='table-list__info-text'><span className='table-list__info-text_font_bold'>Дата загрузки:</span>{item.date || ''}</p>
+                            </li>
+                          </ul>
+                        </div>
+                        <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
+                          <div className='btn btn_type_download btn_type_download_status_active discipline-list__btn'></div>
+                        </a>
+                      </li>
+                    ))
+                  }
+                </TableList>
+              </>
+              :
+              <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
+            }
+            </>
+          }
         </div>
 
       </div>
 
+      {
+        windowWidth > 950 && 
       <div className='discipline-info__column'>
 
         <div className='discipline-info__section'>
@@ -195,6 +236,8 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
           </ul>
         </div>
       </div>
+      }
+
     </DisciplineInfo>
     {
       isOpenViewAdvertisementPopup &&

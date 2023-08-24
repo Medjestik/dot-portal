@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 import * as educationApi from '../../../../utils/educationApi.js';
 import Preloader from '../../../Preloader/Preloader.js';
 import Table from '../../../Table/Table.js';
-import TableCard from '../../../Table/TableCard/TableCard.js';
+import TableList from '../../../Table/TableList/TableList.js';
 import GetBase64File from '../../../../custom/GetBase64File.js';
 
 function DisciplineUserTasks({ windowWidth, disciplineId }) {
@@ -202,14 +202,18 @@ function DisciplineUserTasks({ windowWidth, disciplineId }) {
             tasks.length > 0 &&
             <>
               <h5 className='table__title'>Загруженные материалы:</h5>
-              <ul className='discipline-list'>
+              <TableList>
                 {
                   tasks.map((item, i) => (
-                    <li className='discipline-list__item' key={i}>
-                      <span className='discipline-list__count'>{i + 1}.</span>
-                      <div className='discipline-list__info'>
-                        <h6 className='discipline-list__info-name'>{item.name}</h6>
-                        <p className='discipline-list__info-date'>{item.date}</p>
+                    <li className='table-list__item' key={i}>
+                      <span className='table-list__count'>{i + 1}.</span>
+                      <div className='table-list__info'>
+                        <h6 className='table-list__info-title'>{item.name || ''}</h6>
+                        <ul className='table-list__info-list'>
+                          <li className='table-list__info-item'>
+                            <p className='table-list__info-text'><span className='table-list__info-text_font_bold'>Дата загрузки:</span>{item.date || ''}</p>
+                          </li>
+                        </ul>
                       </div>
                       <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
                         <div className='btn btn_type_download btn_type_download_status_active discipline-list__btn'></div>
@@ -217,7 +221,7 @@ function DisciplineUserTasks({ windowWidth, disciplineId }) {
                     </li>
                   ))
                 }
-              </ul>
+              </TableList>
             </>
           }
           </>

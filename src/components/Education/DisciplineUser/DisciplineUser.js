@@ -6,6 +6,7 @@ import DisciplineUserInfo from './DisciplineUserInfo/DisciplineUserInfo.js';
 import DisciplineMaterials from '../DisciplineMaterials/DisciplineMaterials.js';
 import DisciplineWebinars from '../DisciplineWebinars/DisciplineWebinars.js';
 import DisciplineUserTasks from './DisciplineUserTasks/DisciplineUserTasks.js';
+import DisciplineUserTeacher from './DisciplineUserTeacher/DisciplineUserTeacher.js';
 import * as educationApi from '../../../utils/educationApi.js';
 import Preloader from '../../Preloader/Preloader.js';
 
@@ -26,6 +27,14 @@ function DisciplineUser({ windowWidth, currentSemester, getDisciplineName }) {
     { title: 'Загрузка заданий', id: 4, link: '/tasks' },
   ];
 
+  const mobileSections = [
+    { title: 'Информация о дисциплине', id: 1, link: '/info' },
+    { title: 'Преподаватель', id: 5, link: '/teacher' },
+    { title: 'Учебные материалы', id: 2, link: '/materials' },
+    { title: 'Вебинары', id: 3, link: '/webinars' },
+    { title: 'Загрузка заданий', id: 4, link: '/tasks' },
+  ];
+
   const [currentSection, setCurrentSection] = React.useState({});
 
   function chooseSection(option) {
@@ -41,11 +50,19 @@ function DisciplineUser({ windowWidth, currentSemester, getDisciplineName }) {
       console.log('DisciplineInfo', res);
       setDisciplineInfo(res);
       getDisciplineName(res.name);
-      sections.forEach((section) => {
-        if (location.pathname.includes(section.link)) {
-          setCurrentSection(section);
-        }
-      })
+      if (windowWidth > 950) {
+        sections.forEach((section) => {
+          if (location.pathname.includes(section.link)) {
+            setCurrentSection(section);
+          }
+        })
+      } else {
+        mobileSections.forEach((section) => {
+          if (location.pathname.includes(section.link)) {
+            setCurrentSection(section);
+          }
+        })
+      }
     })
     .catch((err) => {
       console.error(err);
@@ -71,7 +88,7 @@ function DisciplineUser({ windowWidth, currentSemester, getDisciplineName }) {
       <div className='section__header'>
         <div className='section__header-item'>
           <p className='section__header-caption section__header-caption_margin_bottom'>Выберите раздел:</p>
-          <SectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
+          <SectionSelect sections={windowWidth > 950 ? sections : mobileSections} currentSection={currentSection} onChooseSection={chooseSection} />
         </div>
       </div>
 
@@ -79,6 +96,17 @@ function DisciplineUser({ windowWidth, currentSemester, getDisciplineName }) {
         <Route exact path={`info`}
         element={
           <DisciplineUserInfo 
+          windowWidth={windowWidth}
+          disciplineInfo={disciplineInfo}
+          /> 
+        }
+        />
+      </Routes>
+
+      <Routes>
+        <Route exact path={`teacher`}
+        element={
+          <DisciplineUserTeacher 
           windowWidth={windowWidth}
           disciplineInfo={disciplineInfo}
           /> 

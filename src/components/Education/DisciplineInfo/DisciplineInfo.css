@@ -180,3 +180,12 @@
 .discipline-info__teacher-text_weight_bold {
   font-weight: 500;
 }
+
+@media all and (max-width: 833px)  {
+  .discipline-info__materials {
+    margin: 20px 0px 0px 0px;
+  }
+  .discipline-info__advertisement {
+    margin: 20px 0px 0px 0px;
+  }
+}

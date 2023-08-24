@@ -81,7 +81,7 @@ function SemesterUserTable({ windowWidth, data, onOpen }) {
                       <p className='data__text'><span className='data__text_font_bold'>Оценка:</span>{item.mark.name || 'Н/А'}</p>
                     </li>
                     <li className='table-card__info-item'>
-                      <p className='data__text'><span className='data__text_font_bold'>КР:</span>{item.markDate || 'Н/А'}</p>
+                      <p className='data__text'><span className='data__text_font_bold'>КР:</span>{item.course_mark.name || 'Н/А'}</p>
                     </li>
                   </ul>
                 </div>
