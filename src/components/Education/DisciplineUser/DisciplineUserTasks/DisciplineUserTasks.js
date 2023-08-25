@@ -282,4 +282,4 @@ function DisciplineUserTasks({ windowWidth, disciplineId }) {
   );
 }
 
-export default DisciplineUserTasks; 
+export default DisciplineUserTasks;

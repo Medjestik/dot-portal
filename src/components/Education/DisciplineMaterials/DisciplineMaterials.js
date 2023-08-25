@@ -43,6 +43,10 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
     }
   }
 
+  var windowReference = window.open();
+
+
+
   const handleOpenMaterial = async (item) => {
 
     const token = localStorage.getItem('token');
@@ -58,13 +62,7 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
 
     const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024';
 
-    if (windowWidth > 950) {
-      window.open(url, '_blank', windowFeatures).focus();
-    } else {
-      setTimeout(() => {
-        window.open(url, '_top', windowFeatures).focus();
-      })
-    }
+    window.open(url, '_blank', windowFeatures).focus();
 
     /*fetch(url, {
       method: 'POST',

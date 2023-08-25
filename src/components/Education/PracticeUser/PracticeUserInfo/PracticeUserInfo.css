@@ -1,6 +1,12 @@
 .practice-info__container {
-    margin: 0px;
-    width: 100%;
-    flex-grow: 2;
-    display: flex;
+  margin: 0px;
+  width: 100%;
+  flex-grow: 2;
+  display: flex;
+}
+
+@media all and (max-width: 833px)  {
+  .practice-info__container {
+    flex-direction: column;
+  }
 }

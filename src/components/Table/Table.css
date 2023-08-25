@@ -13,6 +13,9 @@
   line-height: 18px;
   color: var(--main-black-color);
 }
+.table__title_margin_top {
+  margin: 20px 0px 12px 0px;
+}
 .table__container {
   margin: 0px;
   height: 100%;
@@ -219,5 +222,8 @@
     margin: 0px 0px 8px 0px;
     font-size: 12px;
     line-height: 16px;
+  }
+  .table__title_margin_top {
+    margin: 20px 0px 8px 0px;
   }
 }

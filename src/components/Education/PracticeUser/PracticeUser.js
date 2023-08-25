@@ -6,6 +6,7 @@ import * as educationApi from '../../../utils/educationApi.js';
 import Preloader from '../../Preloader/Preloader.js';
 import PracticeUserInfo from './PracticeUserInfo/PracticeUserInfo.js';
 import PracticeUserTasks from './PracticeUserTasks/PracticeUserTasks.js';
+import PracticeUserDescription from './PracticeUserDescription/PracticeUserDescription.js';
 
 function PracticeUser({ windowWidth, currentSemester, getDisciplineName }) {
 
@@ -19,6 +20,12 @@ function PracticeUser({ windowWidth, currentSemester, getDisciplineName }) {
 
   const sections = [
     { title: 'Информация о практике', id: 1, link: '/info' },
+    { title: 'Загрузка заданий', id: 3, link: '/tasks' },
+  ];
+
+  const mobileSections = [
+    { title: 'Информация о практике', id: 1, link: '/info' },
+    { title: 'Описание задания', id: 2, link: '/description' },
     { title: 'Загрузка заданий', id: 3, link: '/tasks' },
   ];
 
@@ -37,11 +44,20 @@ function PracticeUser({ windowWidth, currentSemester, getDisciplineName }) {
       console.log('PracticeInfo', res);
       setPracticeInfo(res);
       getDisciplineName(res.name);
-      sections.forEach((section) => {
-        if (location.pathname.includes(section.link)) {
-          setCurrentSection(section);
-        }
-      })
+      if (windowWidth > 832) {
+        sections.forEach((section) => {
+          if (location.pathname.includes(section.link)) {
+            setCurrentSection(section);
+          }
+        })
+      } else {
+        mobileSections.forEach((section) => {
+          if (location.pathname.includes(section.link)) {
+            setCurrentSection(section);
+          }
+        })
+      }
+
     })
     .catch((err) => {
       console.error(err);
@@ -52,7 +68,7 @@ function PracticeUser({ windowWidth, currentSemester, getDisciplineName }) {
   }
 
   function practiceAddTask(task) {
-    setPracticeInfo({...practiceInfo, individual: {...practiceInfo.individual, files: [task, ...practiceInfo.individual.files]}});
+    setPracticeInfo({...practiceInfo, individual: {...practiceInfo.individual, files: [...practiceInfo.individual.files, task ]}});
   }
 
   React.useEffect(() => {
@@ -71,7 +87,7 @@ function PracticeUser({ windowWidth, currentSemester, getDisciplineName }) {
       <div className='section__header'>
         <div className='section__header-item'>
           <p className='section__header-caption section__header-caption_margin_bottom'>Выберите раздел:</p>
-          <SectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
+          <SectionSelect sections={windowWidth > 832 ? sections : mobileSections} currentSection={currentSection} onChooseSection={chooseSection} />
         </div>
       </div>
 
@@ -79,6 +95,17 @@ function PracticeUser({ windowWidth, currentSemester, getDisciplineName }) {
         <Route exact path={`info`}
         element={
           <PracticeUserInfo 
+          windowWidth={windowWidth}
+          practiceInfo={practiceInfo}
+          /> 
+        }
+        />
+      </Routes>
+
+      <Routes>
+        <Route exact path={`description`}
+        element={
+          <PracticeUserDescription
           windowWidth={windowWidth}
           practiceInfo={practiceInfo}
           /> 

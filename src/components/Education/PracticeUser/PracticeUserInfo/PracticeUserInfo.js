@@ -82,71 +82,80 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
           </ul>
         </div>
       </div>
-      <div className='discipline-info__column'>
-        <div className='discipline-info__description'>
-          <h3 className='discipline-info__teacher-name'>Задание на практику</h3>
-          <ul className='data__list data__list_margin_top'>
-            <li className='data__item'>
-              <div style={Object.assign({}, taskStyle)} className='data__area scroll-inside'>{practiceInfo.individual.task}</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <div className='discipline-info__section discipline-info__materials'>
-      <div className='discipline-info__section-header'>
-        <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
-      </div>
-      <div className='discipline-info__materials-table'>
-        <Table>
-          <div ref={containerHeightRef} className='table__container'>
-            <div ref={tableHeaderHeightRef} className='table__header'>
-              <div className='table__main-column'>
-                <div className='table__column table__column_type_header table__column_type_count'>
-                    <p className='table__text table__text_type_header'>№</p>
-                </div>
-                <div className="table__column table__column_type_header table__column_type_date">
-                    <p className="table__text table__text_type_header">Дата</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_name'>
-                    <p className='table__text table__text_type_header'>Наименование</p>
-                </div>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                <div className='btn btn_type_download btn_type_download_status_active'></div>
-              </div>
-            </div>
-            <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
-                {
-                practiceInfo.files.length < 1 
-                ?
-                <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
-                :
-                [...practiceInfo.files].reverse().map((item, i) => (
-                  <li className='table__row' key={i}>
-                    <div className='table__main-column'>
-                        <div className='table__column table__column_type_count'>
-                        <p className='table__text'>{i + 1}</p>
-                        </div>
-                        <div className="table__column table__column_type_date">
-                        <p className="table__text">{item.date ? convertDate(item.date) : '00.00.0000' }</p>
-                        </div>
-                        <div className='table__column table__column_type_name'>
-                        <p className='table__text'>{item.title}</p>
-                        </div>
-                    </div>
-                    <div className='table__column table__column_type_btn'>
-                        <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
-                    </div>
-                  </li>
-                ))
-                }
+      {
+        windowWidth >= 833 &&
+        <div className='discipline-info__column'>
+          <div className='discipline-info__description'>
+            <h3 className='discipline-info__teacher-name'>Задание на практику</h3>
+            <ul className='data__list data__list_margin_top'>
+              <li className='data__item'>
+                <div style={Object.assign({}, taskStyle)} className='data__area scroll-inside'>{practiceInfo.individual.task}</div>
+              </li>
             </ul>
           </div>
-        </Table>
-      </div>
+        </div>
+      }
+
     </div>
+
+    {
+      windowWidth >= 833 &&
+      <div className='discipline-info__section discipline-info__materials'>
+        <div className='discipline-info__section-header'>
+          <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
+        </div>
+        <div className='discipline-info__materials-table'>
+          <Table>
+            <div ref={containerHeightRef} className='table__container'>
+              <div ref={tableHeaderHeightRef} className='table__header'>
+                <div className='table__main-column'>
+                  <div className='table__column table__column_type_header table__column_type_count'>
+                    <p className='table__text table__text_type_header'>№</p>
+                  </div>
+                  <div className="table__column table__column_type_header table__column_type_date">
+                    <p className="table__text table__text_type_header">Дата</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_name'>
+                    <p className='table__text table__text_type_header'>Наименование</p>
+                  </div>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                  <div className='btn btn_type_download btn_type_download_status_active'></div>
+                </div>
+              </div>
+              <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+                  {
+                  practiceInfo.files.length < 1 
+                  ?
+                  <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
+                  :
+                  [...practiceInfo.files].reverse().map((item, i) => (
+                    <li className='table__row' key={i}>
+                      <div className='table__main-column'>
+                        <div className='table__column table__column_type_count'>
+                          <p className='table__text'>{i + 1}</p>
+                        </div>
+                        <div className="table__column table__column_type_date">
+                          <p className="table__text">{item.date ? convertDate(item.date) : '00.00.0000' }</p>
+                        </div>
+                        <div className='table__column table__column_type_name'>
+                          <p className='table__text'>{item.title}</p>
+                        </div>
+                      </div>
+                      <div className='table__column table__column_type_btn'>
+                        <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
+                      </div>
+                    </li>
+                  ))
+                  }
+              </ul>
+            </div>
+          </Table>
+        </div>
+      </div>
+    }
+
     </>
   );
 }

@@ -3,6 +3,7 @@ import './PracticeUserTasks.css';
 import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 import * as educationApi from '../../../../utils/educationApi.js';
 import Table from '../../../Table/Table.js';
+import TableList from '../../../Table/TableList/TableList.js';
 import GetBase64File from '../../../../custom/GetBase64File.js';
 
 function PracticeUserTasks({ windowWidth, practiceInfo, practiceAddTask }) {
@@ -175,15 +176,19 @@ function PracticeUserTasks({ windowWidth, practiceInfo, practiceAddTask }) {
           {
             practiceInfo.individual.files.length > 0 &&
             <>
-              <h5 className='discipline-list__caption'>Загруженные материалы:</h5>
-              <ul className='discipline-list'>
+              <h5 className='table__title'>Загруженные материалы:</h5>
+              <TableList>
                 {
                   [...practiceInfo.individual.files].reverse().map((item, i) => (
-                    <li className='discipline-list__item' key={i}>
-                      <span className='discipline-list__count'>{i + 1}.</span>
-                      <div className='discipline-list__info'>
-                        <h6 className='discipline-list__info-name'>{item.name}</h6>
-                        <p className='discipline-list__info-date'>{item.date}</p>
+                    <li className='table-list__item' key={i}>
+                      <span className='table-list__count'>{i + 1}.</span>
+                      <div className='table-list__info'>
+                        <h6 className='table-list__info-title'>{item.name || ''}</h6>
+                        <ul className='table-list__info-list'>
+                          <li className='table-list__info-item'>
+                            <p className='table-list__info-text'><span className='table-list__info-text_font_bold'>Дата загрузки:</span>{item.date || ''}</p>
+                          </li>
+                        </ul>
                       </div>
                       <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
                         <div className='btn btn_type_download btn_type_download_status_active discipline-list__btn'></div>
@@ -191,7 +196,7 @@ function PracticeUserTasks({ windowWidth, practiceInfo, practiceAddTask }) {
                     </li>
                   ))
                 }
-              </ul>
+              </TableList>
             </>
           }
           </>
