@@ -58,9 +58,13 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
 
     const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024';
 
-    setTimeout(() => {
+    if (windowWidth > 950) {
       window.open(url, '_blank', windowFeatures).focus();
-    })
+    } else {
+      setTimeout(() => {
+        window.open(url, '_top', windowFeatures).focus();
+      })
+    }
 
     /*fetch(url, {
       method: 'POST',
