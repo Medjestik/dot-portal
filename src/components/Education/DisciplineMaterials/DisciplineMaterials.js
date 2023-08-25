@@ -58,8 +58,10 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
 
     const windowFeatures = 'toolbar=no,location=no,status=no,menubar=no,resizable=yes,directories=no,scrollbars=yes,width=1920,height=1024';
 
-    window.open(url, '_blank', windowFeatures).focus();
-    
+    setTimeout(() => {
+      window.open(url, '_blank', windowFeatures).focus();
+    })
+
     /*fetch(url, {
       method: 'POST',
       body: formData,
