@@ -41,7 +41,7 @@ function PracticeUser({ windowWidth, currentSemester, getDisciplineName }) {
     const token = localStorage.getItem('token');
     educationApi.getPracticeInfo({ token: token, practiceId: practiceId })
     .then((res) => {
-      console.log('PracticeInfo', res);
+      //console.log('PracticeInfo', res);
       setPracticeInfo(res);
       getDisciplineName(res.name);
       if (windowWidth > 832) {

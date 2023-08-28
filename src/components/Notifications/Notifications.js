@@ -37,11 +37,11 @@ function Notifications({ windowWidth, onLogout }) {
     const token = localStorage.getItem('token');
     personApi.getUserNotifications({ token: token })
     .then((res) => {
-      console.log('UserNotifications', res);
+      //console.log('UserNotifications', res);
       setUserNotifications(res)
     })
     .catch((err) => {
-        console.error(err);
+      console.error(err);
     })
     .finally(() => {
       setIsLoadingPage(false);
@@ -148,11 +148,17 @@ function Notifications({ windowWidth, onLogout }) {
             >
             </Route>
 
-            <Route exact path='/news' element={ 
-              renderNotifications(userNotifications.filter(elem => elem.type === 'news'))
+            {
+              /*
+              <Route exact path='/news' element={ 
+                renderNotifications(userNotifications.filter(elem => elem.type === 'news'))
+              }
+              >
+              </Route>
+              */
             }
-            >
-            </Route>
+
+
 
           </Routes>
 

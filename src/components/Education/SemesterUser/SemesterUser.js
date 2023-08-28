@@ -60,7 +60,7 @@ function SemesterUser({ windowWidth, semesterInfo, onLogout }) {
     const token = localStorage.getItem('token');
     educationApi.getSemesterData({ token: token, semesterId: semesterId, currentUserId: currentUser.id })
     .then((res) => {
-      console.log('SemesterData', res);
+      //console.log('SemesterData', res);
       setDisciplines(res.disciplines);
       setPractices(res.practics);
       if (res.practics.length > 0) {

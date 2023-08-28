@@ -77,7 +77,7 @@ function DisciplineUserTasks({ windowWidth, disciplineId }) {
     const token = localStorage.getItem('token');
     educationApi.getDisciplineTask({ token: token, disciplineId: id, currentUserId: currentUser.id })
     .then((res) => {
-      console.log('DisciplineTasks', res);
+      //console.log('DisciplineTasks', res);
       setTasks(res);
     })
     .catch((err) => {

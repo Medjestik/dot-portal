@@ -58,7 +58,7 @@ function DisciplineWebinars({ windowWidth, disciplineId }) {
     const token = localStorage.getItem('token');
     webinarApi.getWebinarsDiscipline({ token: token, disciplineId: disciplineId })
     .then((res) => {
-      console.log('Webinars', res);
+      //console.log('Webinars', res);
       setWebinars(res);
     })
     .catch((err) => {

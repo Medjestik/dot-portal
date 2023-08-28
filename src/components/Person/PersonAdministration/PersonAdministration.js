@@ -38,7 +38,7 @@ function PersonAdministration({ windowWidth, studentData }) {
             {
               studentData.decan.pict_url
               ?
-                <img className='person-area__contact-photo' src={studentData.decan.pict_url} alt='фотография декана'></img>
+                <img className='person-area__contact-photo' src={studentData.decan.pict_url} alt='фото'></img>
               :
                 <div className='person-area__contact-photo-empty'></div>
             }
@@ -59,9 +59,9 @@ function PersonAdministration({ windowWidth, studentData }) {
           </div>
           <div className='person-area__contact-container'>
             {
-              studentData.decan.pict_url
+              studentData.curator.pict_url
               ?
-                <img className='person-area__contact-photo' src={studentData.curator.pict_url} alt='фотография декана'></img>
+                <img className='person-area__contact-photo' src={studentData.curator.pict_url} alt='фото'></img>
               :
                 <div className='person-area__contact-photo-empty'></div>
             }

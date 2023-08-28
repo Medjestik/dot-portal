@@ -125,7 +125,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
     const token = localStorage.getItem('token');
     webinarApi.getWebinars({ token: token })
     .then((res) => {
-      console.log('Webinars', res);
+      //console.log('Webinars', res);
       setWebinars(res);
       setFilteredWebinars(res);
       setSearchedWebinars(res);

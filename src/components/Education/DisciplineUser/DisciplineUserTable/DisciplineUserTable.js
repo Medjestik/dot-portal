@@ -19,13 +19,14 @@ function SemesterUserTable({ windowWidth, data, onOpen }) {
   }
 
   function renderMark(mark) {
+    console.log(mark);
     if (mark === 'Не аттестован') {
       return (
         <p className='table__text'>Н/А</p>
       )
-    } else if (mark === 'Нет оценки') {
+    } else if (mark === 'Без оценки') {
       return (
-        <p className='table__text table__text_type_empty'>Нет оценки</p>
+        <p className='table__text table__text_type_empty'>Нет</p>
       )
     } else if (mark === 'Отлично') {
       return (
@@ -43,6 +44,22 @@ function SemesterUserTable({ windowWidth, data, onOpen }) {
       return (
         <p className='table__text'>{mark}</p>
       )
+    }
+  }
+
+  function renderCardMark(mark) {
+    if (mark === 'Не аттестован') {
+      return 'Н/А';
+    } else if (mark === 'Без оценки') {
+      return 'Нет';
+    } else if (mark === 'Отлично') {
+      return '5 (отл.)';
+    } else if (mark === 'Хорошо') {
+      return '4 (хор.)';
+    } else if (mark === 'Удовлетворительно') {
+      return '3 (удов.)';
+    } else {
+      return mark;
     }
   }
 
@@ -78,11 +95,14 @@ function SemesterUserTable({ windowWidth, data, onOpen }) {
                       <p className='data__text'><span className='data__text_font_bold'>Тип:</span>{item.control || ''}</p>
                     </li>
                     <li className='table-card__info-item'>
-                      <p className='data__text'><span className='data__text_font_bold'>Оценка:</span>{item.mark.name || 'Н/А'}</p>
+                      <p className='data__text'><span className='data__text_font_bold'>Оценка:</span>{item.mark && renderCardMark(item.mark.name)}</p>
                     </li>
+                    {
+                    item.course_work &&
                     <li className='table-card__info-item'>
-                      <p className='data__text'><span className='data__text_font_bold'>КР:</span>{item.course_mark.name || 'Н/А'}</p>
+                      <p className='data__text'><span className='data__text_font_bold'>КР:</span>{item.course_mark && renderCardMark(item.course_mark.name)}</p>
                     </li>
+                    }
                   </ul>
                 </div>
                 {
@@ -165,7 +185,7 @@ function SemesterUserTable({ windowWidth, data, onOpen }) {
                     item.course_work 
                     ?
                     <div className='table__column table__column_type_small'>
-                      {item.mark && renderMark(item.course_mark.name)}
+                      {item.course_mark && renderMark(item.course_mark.name)}
                     </div>
                     :
                     <div className='table__column table__column_type_small'>

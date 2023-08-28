@@ -10,6 +10,7 @@
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .accordion_state_open {
   padding: 20px 36px 36px 36px;
@@ -17,6 +18,7 @@
 .accordion__main {
   display: flex;
   align-items: center;
+  position: relative;
 }
 .accordion__title {
   margin: 0px 20px 0px 0px;
@@ -70,6 +72,23 @@
   object-position: center;
   user-select: none;
   pointer-events: none;
+  position: relative;
+}
+.accordion__icon-count {
+  position: absolute;
+  top: -5px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: bold;
+  color: var(--main-white-color);
+  background-color: var(--accent-blue-color);
 }
 
 @media all and (max-width: 833px) {

@@ -1,9 +1,12 @@
 import React from 'react';
 import './Select.css';
+import useOnClickOutside from '../../hooks/useOnClickOutside.js';
 
 function Select({ options, currentOption, onChooseOption }) {
 
   const [isOpenSelectOptions, setIsOpenSelectOptions] = React.useState(false);
+
+  const selectRef = React.useRef();
 
   function openSelectOptions() {
     setIsOpenSelectOptions(!isOpenSelectOptions);
@@ -14,13 +17,19 @@ function Select({ options, currentOption, onChooseOption }) {
     setIsOpenSelectOptions(false);
   }
 
+  function handleClickOutside() {
+    setIsOpenSelectOptions(false);
+  }
+
+  useOnClickOutside(selectRef, handleClickOutside);
+
   React.useEffect(() => {
     setIsOpenSelectOptions(false);
     // eslint-disable-next-line
   }, []);
 
   return (
-    <div className={`select ${isOpenSelectOptions ? 'select_status_open' : ''}`}>
+    <div ref={selectRef} className={`select ${isOpenSelectOptions ? 'select_status_open' : ''}`}>
       <div className='select__main' onClick={openSelectOptions}>
         <p className='select__text'>{currentOption.name}</p>
         <div className={`select__arrow ${isOpenSelectOptions ? 'select__arrow_status_open' : ''}`}></div>

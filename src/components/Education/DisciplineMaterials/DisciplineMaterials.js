@@ -19,7 +19,7 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
     if (currentUser.access_role === 'user') {
       educationApi.getDisciplineMaterialUser({ token: token, disciplineId: id, currentUserId: currentUser.id })
       .then((res) => {
-        console.log('DisciplineMaterial', res);
+        //console.log('DisciplineMaterial', res);
         setMaterials(res);
       })
       .catch((err) => {
@@ -42,10 +42,6 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
       });
     }
   }
-
-  var windowReference = window.open();
-
-
 
   const handleOpenMaterial = async (item) => {
 

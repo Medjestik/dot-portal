@@ -47,7 +47,7 @@ function DisciplineUser({ windowWidth, currentSemester, getDisciplineName }) {
     const token = localStorage.getItem('token');
     educationApi.getDisciplineInfo({ token: token, disciplineId: disciplineId })
     .then((res) => {
-      console.log('DisciplineInfo', res);
+      //console.log('DisciplineInfo', res);
       setDisciplineInfo(res);
       getDisciplineName(res.name);
       if (windowWidth > 950) {

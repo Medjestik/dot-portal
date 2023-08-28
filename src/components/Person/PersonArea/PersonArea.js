@@ -8,6 +8,17 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
     return new Date(date).toLocaleString('ru', { month: 'numeric', day: 'numeric', }) + '.' + new Date(date).toLocaleString('sv', { year: 'numeric', });
   }
 
+  function renderStatus(status) {
+    switch(status) {
+      case 'tutor':
+        return 'Преподаватель';
+      case 'admin':
+        return 'Администратор';
+      default:
+        return 'Пользователь';
+    }
+  }
+
   return (
     <section className='section person-area'>
       <div className='person-area__container'>
@@ -44,7 +55,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
 
           <ul className='data__list data__list_margin_top'>
             <li className='data__item'>
-              <p className='data__text'><span className='data__text_font_bold'>Статус:</span>Студент</p>
+              <p className='data__text'><span className='data__text_font_bold'>Статус:</span>{renderStatus(currentUser.access_role)}</p>
             </li>
             <li className='data__item'>
               <p className='data__text'><span className='data__text_font_bold'>Логин:</span>{currentUser.login || ''}</p>
@@ -83,9 +94,14 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
             <div className='person-area__education-card person-area__education-card_type_semester'>
               <h6 className='person-area__education-title'><span className='person-area__education-count person-area__education-count_margin_right'>{studentData.semesterNum || ''}</span> семестр</h6>
             </div>
-            <div className='person-area__education-card person-area__education-card_type_count'>
-              <h6 className='person-area__education-title'>Порядковый номер в группе: <span className='person-area__education-count person-area__education-count_margin_left'>{studentData.groupPosition || '—'}</span></h6>
-            </div>
+            {
+              /*
+              <div className='person-area__education-card person-area__education-card_type_count'>
+                <h6 className='person-area__education-title'>Порядковый номер в группе: <span className='person-area__education-count person-area__education-count_margin_left'>{studentData.groupPosition || '—'}</span></h6>
+              </div>
+              */
+            }
+
           </div>
 
           <ul className='data__list data__list_margin_top'>
@@ -106,7 +122,7 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
             {
               studentData.decan.pict_url
               ?
-                <img className='person-area__contact-photo' src={studentData.decan.pict_url} alt='фотография декана'></img>
+                <img className='person-area__contact-photo' src={studentData.decan.pict_url} alt='фото'></img>
               :
                 <div className='person-area__contact-photo-empty'></div>
             }
@@ -127,9 +143,9 @@ function PersonArea({ currentUser, studentData, openPhotoPopup, openChangePasswo
           </div>
           <div className='person-area__contact-container'>
             {
-              studentData.decan.pict_url
+              studentData.curator.pict_url
               ?
-                <img className='person-area__contact-photo' src={studentData.curator.pict_url} alt='фотография декана'></img>
+                <img className='person-area__contact-photo' src={studentData.curator.pict_url} alt='фото'></img>
               :
                 <div className='person-area__contact-photo-empty'></div>
             }

@@ -160,13 +160,23 @@
   .home-page__link {
     margin: 12px auto 0px;
   }
+  .home-page__info-title {
+    font-size: 12px;
+    line-height: 16px;
+  }
   .home-page__info-email {
     margin: 12px 0px 0px 0px;
+    font-size: 12px;
+    line-height: 16px;
   }
   .home-page__info-phone {
     margin: 12px 0px 0px 0px;
+    font-size: 12px;
+    line-height: 16px;
   }
   .home-page__info-copy {
-    margin: 32px 0px 0px 0px;
+    margin: 20px 0px 0px 0px;
+    font-size: 12px;
+    line-height: 16px;
   }
 }

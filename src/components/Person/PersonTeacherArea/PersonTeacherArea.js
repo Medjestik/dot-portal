@@ -4,6 +4,17 @@ import '../PersonArea/PersonArea.css';
 
 function PersonArea({ currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup }) {
 
+  function renderStatus(status) {
+    switch(status) {
+      case 'tutor':
+        return 'Преподаватель';
+      case 'admin':
+        return 'Администратор';
+      default:
+        return 'Пользователь';
+    }
+  }
+
   function convertDate(date) {
     return new Date(date).toLocaleString('ru', { month: 'numeric', day: 'numeric', }) + '.' + new Date(date).toLocaleString('sv', { year: 'numeric', });
   }
@@ -45,7 +56,7 @@ function PersonArea({ currentUser, openPhotoPopup, openChangePasswordPopup, open
 
           <ul className='data__list data__list_margin_top'>
             <li className='data__item'>
-              <p className='data__text'><span className='data__text_font_bold'>Статус:</span>Студент</p>
+              <p className='data__text'><span className='data__text_font_bold'>Статус:</span>{renderStatus(currentUser.access_role)}</p>
             </li>
             <li className='data__item'>
               <p className='data__text'><span className='data__text_font_bold'>Логин:</span>{currentUser.login || ''}</p>

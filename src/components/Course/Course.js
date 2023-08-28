@@ -31,7 +31,7 @@ function Course({ windowWidth, onLogout }) {
     const token = localStorage.getItem('token');
     courseApi.getCourse({ token: token })
     .then((res) => {
-      console.log('Course', res);
+      //console.log('Course', res);
       setCourseList(res);
       setFilteredCourse(res);
     })

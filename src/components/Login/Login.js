@@ -9,6 +9,8 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
   const [isShowPassword, setIsShowPassword] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState({ isShow: false, text: '' });
 
+  const [isShowForgotPassword, setIsShowForgotPassword] = React.useState(false);
+
   const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(true);
 
   function handleChangeLogin(e) {
@@ -31,6 +33,11 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
     }
   }
 
+  function handleForgotPassword() {
+    onHideRequestError();
+    setIsShowForgotPassword(true);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     onHideRequestError();
@@ -38,6 +45,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
   }
 
   React.useEffect(() => {
+    setIsShowForgotPassword(false);
     if (login.length < 1 || password.length < 1 || loginError.isShow || passwordError.isShow) {
       setIsBlockSubmitButton(true);
     } else {
@@ -52,6 +60,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
     setPassword('');
     setIsShowPassword(false);
     setPasswordError({ text: '', isShow: false });
+    setIsShowForgotPassword(false);
   }, []);
 
   return (
@@ -108,7 +117,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
         </label>
 
         <div className='login__btn-container'>
-          <button className='login__btn-forgot' type='button'>Забыли пароль?</button>
+          <button className='login__btn-forgot' type='button' onClick={handleForgotPassword}>Забыли пароль?</button>
           {
             isLoadingRequest ? 
             <button className='popup__btn-save popup__btn-save_type_loading' disabled type='button'>Вход..</button>
@@ -117,6 +126,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
           }
         </div>
         <span className={`popup__input-error ${requestError && 'popup__input-error_status_show'}`}>К сожалению, произошла ошибка!</span>
+        <span className={`popup__input-error ${isShowForgotPassword && 'popup__input-error_status_show'}`}>Обратитесь в техническую поддержку портала ief07@bk.ru</span>
 
       </form>
     </div>

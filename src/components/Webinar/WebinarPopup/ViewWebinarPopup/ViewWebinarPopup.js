@@ -45,7 +45,7 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
     const token = localStorage.getItem('token');
     webinarApi.getWebinarInfo({ token: token, webinarId: currentWebinarId })
     .then((res) => {
-      console.log('webinar', res);
+      //console.log('webinar', res);
       setCurrentWebinar(res);
     })
     .catch((err) => {

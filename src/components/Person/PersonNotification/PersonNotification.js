@@ -4,7 +4,7 @@ import Accordion from '../../Accordion/Accordion.js';
 import PersonNotificationInfoPopup from './PersonNotificationInfoPopup/PersonNotificationInfoPopup.js';
 import notificationIcon from '../../../images/accordion/accordion-notification.svg';
 
-function PersonNotification({ windowWidth, userNotifications, onOpen, currentNotification }) {
+function PersonNotification({ windowWidth, userNotifications, onOpen, currentNotification,countNewNotification }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
 
@@ -43,6 +43,8 @@ function PersonNotification({ windowWidth, userNotifications, onOpen, currentNot
     )
   }
 
+
+
   React.useEffect(() => {
     setSectionHeight(heightRef.current.clientHeight);
   }, [heightRef, windowWidth]);
@@ -56,7 +58,7 @@ function PersonNotification({ windowWidth, userNotifications, onOpen, currentNot
 
   return (
     <>
-    <Accordion icon={notificationIcon} name='Уведомления' height={sectionHeight} openInfoPopup={openInfoPopup}>
+    <Accordion icon={notificationIcon} name='Уведомления' height={sectionHeight} openInfoPopup={openInfoPopup} addInfo={{ count: countNewNotification }}>
       <div ref={heightRef} className='person-notification__container'>
       {
         windowWidth <= 833 

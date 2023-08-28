@@ -11,6 +11,21 @@ export const types = [
     title: 'Система',
     link: '/notifications/system'
   },
+]
+
+export const newTypes = [
+  {
+    title: 'Преподаватель',
+    link: '/notifications'
+  },
+  {
+    title: 'Деканат',
+    link: '/notifications/office'
+  },
+  {
+    title: 'Система',
+    link: '/notifications/system'
+  },
   {
     title: 'Новости',
     link: '/notifications/news'

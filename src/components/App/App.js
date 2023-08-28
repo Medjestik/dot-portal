@@ -59,7 +59,7 @@ function App() {
           console.log('UserInfo', res);
           setLoggedIn(true);
           setCurrentUser(res);
-          if (res.access_role === 'user') {
+          if (res.access_role === 'dot') {
             semesterUserInfoRequest(res.id);
           } else if (res.access_role === 'tutor') {
             semesterTeacherInfoRequest();
@@ -94,7 +94,7 @@ function App() {
     const token = localStorage.getItem('token');
     api.getUserSemesterInfo({ token: token, userId: userId })
     .then((res) => {
-      console.log('SemesterInfo', res);
+      //console.log('SemesterInfo', res);
       const newArr = res.map((item) => {
         return ({ ...item, id: item.semesterId, name: 'Семестр ' + item.position})
       })
@@ -117,7 +117,7 @@ function App() {
     const token = localStorage.getItem('token');
     api.getTeacherSemesterInfo({ token: token })
     .then((res) => {
-      console.log('SemesterInfo', res);
+      //console.log('SemesterInfo', res);
       setSemesterInfo(res);
       if (pathname === '/') {
         navigate('/person');
@@ -180,6 +180,10 @@ function App() {
     const doc = document.documentElement;
     doc.style.setProperty('--vh', (window.innerHeight*.01) + 'px');
   }
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   
   window.addEventListener('resize', appHeight);
   appHeight();

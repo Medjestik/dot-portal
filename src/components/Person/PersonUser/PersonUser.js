@@ -15,7 +15,7 @@ import PersonRating from '../PersonRating/PersonRating.js';
 import PersonCommunication from '../PersonCommunication/PersonCommunication.js';
 import PersonDiploma from '../PersonDiploma/PersonDiploma.js';
 
-function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, openNotificationPopup }) {
+function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, countNewNotification, openNotificationPopup }) {
 
   /*const user = {
     photo: '',
@@ -127,9 +127,9 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       personApi.getStudentSocial({ token: token, userId: id }),
     ])
     .then(([studentData, studentEducationInfo, studentSocial, userNotifications]) => {
-      console.log('StudentData', studentData);
-      console.log('StudentEducationInfo', studentEducationInfo);
-      console.log('StudentSocial', studentSocial);
+      //console.log('StudentData', studentData);
+      //console.log('StudentEducationInfo', studentEducationInfo);
+      //console.log('StudentSocial', studentSocial);
       setStudentData(studentData);
       setStudentEducationInfo(studentEducationInfo);
       setStudentSocial(studentSocial);
@@ -220,7 +220,8 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
             windowWidth={windowWidth} 
             userNotifications={userNotifications} 
             onOpen={openNotificationPopup} 
-            currentNotification={currentNotification} 
+            currentNotification={currentNotification}
+            countNewNotification={countNewNotification}
           />
 
           <PersonCommunication 

@@ -35,7 +35,6 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
     const token = localStorage.getItem('token');
     disciplineApi.getDisciplines({ token: token, teacherId: currentUser.id, semesterId: id })
     .then((res) => {
-      console.log(res);
       setDisciplines(res.discs);
       serPractice(res.practics);
       if (res.practics.length > 0) {

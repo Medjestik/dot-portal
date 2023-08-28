@@ -20,6 +20,7 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
   const [isNotificationPopupOpen, setIsNotificationPopupOpen] = React.useState(false);
 
   const [userNotifications, setUserNotifications] = React.useState([]);
+  const [countNewNotification, setCountNewNotification] = React.useState(0);
   const [currentNotification, setCurrentNotification] = React.useState({});
   const [isLoadingNotificationData, setIsLoadingNotificationData] = React.useState(false);
 
@@ -149,6 +150,13 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
     .then(([userNotifications]) => {
       console.log('UserNotifications', userNotifications);
       setUserNotifications(userNotifications);
+      const count = userNotifications.reduce((total, current) => {
+        if (!current.viewed) {
+          total = total + 1;
+        }
+        return total;
+      }, 0);
+      setCountNewNotification(count);
     })
     .catch((err) => {
         console.error(err);
@@ -159,6 +167,16 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
   }
 
   React.useEffect(() => {
+    if (JSON.stringify(currentNotification) !== '{}') {
+      const notification = userNotifications.find((elem) => (elem.id === currentNotification.notification_id));
+      if (!notification.viewed) {
+        setCountNewNotification(countNewNotification - 1);
+      }
+    }
+    // eslint-disable-next-line
+  }, [currentNotification]);
+
+  React.useEffect(() => {
     setIsPhotoPopupOpen(false);
     setIsChangePasswordPopupOpen(false);
     setIsDataPopupOpen(false);
@@ -167,6 +185,8 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
 
     return () => {
       setUserNotifications([]);
+      setCurrentNotification({});
+      setCountNewNotification(0);
     }
   // eslint-disable-next-line
   }, []);
@@ -181,7 +201,7 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
         <div className='person'>
 
           {
-            currentUser.access_role === 'user' 
+            currentUser.access_role === 'dot' 
             ?
             <PersonUser
               windowWidth={windowWidth}
@@ -191,6 +211,7 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
               openDataPopup={openDataPopup}
               userNotifications={userNotifications}
               currentNotification={currentNotification}
+              countNewNotification={countNewNotification}
               openNotificationPopup={handleOpenNotificationPopup}
             />
             :
