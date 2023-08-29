@@ -62,7 +62,7 @@
 .discipline-info__chart-caption {
   margin: 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   text-align: center;
@@ -101,7 +101,7 @@
 .discipline-info__advertisement-title {
   margin: 0px 0px 8px 0px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 16px;
   line-height: 20px;
   color: var(--main-black-color);
@@ -172,13 +172,13 @@
 .discipline-info__teacher-text {
   margin: 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
 }
 .discipline-info__teacher-text_weight_bold {
-  font-weight: 500;
+  font-weight: bold;
 }
 
 @media all and (max-width: 833px)  {

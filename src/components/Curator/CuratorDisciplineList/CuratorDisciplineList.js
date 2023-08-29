@@ -1,5 +1,6 @@
 import React from 'react';
-import './CuratorDisciplines.css';
+import './CuratorDisciplineList.css';
+import { useNavigate } from 'react-router-dom';
 import * as curatorApi from '../../../utils/curatorApi.js';
 import Preloader from '../../Preloader/Preloader.js';
 import Table from '../../Table/Table.js';
@@ -7,7 +8,9 @@ import PopupSelect from '../../Popup/PopupSelect/PopupSelect.js';
 import Search from '../../Search/Search.js';
 import ViewSemesterDetailPopup from '../../Education/EducationPopup/ViewSemesterDetailPopup/ViewSemesterDetailPopup.js';
 
-function CuratorDisciplines({ windowWidth, groupInfo }) {
+function CuratorDisciplineList({ windowWidth, groupInfo }) {
+
+  const navigate = useNavigate();
 
   const [semesterOptions, setSemesterOptions] = React.useState([{ name: 'Не выбран', id: 'empty', },]);
   const [currentSemesterOption, setCurrentSemesterOption] = React.useState(semesterOptions[0]);
@@ -52,6 +55,10 @@ function CuratorDisciplines({ windowWidth, groupInfo }) {
     } else {
       setFilteredDisciplines(searchedDisciplines.filter((elem) => (elem.semestr === option.id)));
     }
+  }
+
+  function openDiscipline(id) {
+    navigate('/curator/discipline/' + id + '/info')
   }
 
   function openViewSemesterDetailPopup() {
@@ -170,7 +177,8 @@ function CuratorDisciplines({ windowWidth, groupInfo }) {
                   </div>
                   <div className='table__column table__column_type_full'>
                     <p 
-                    className='table__text table__text_type_header table__text_type_active' 
+                    className='table__text table__text_type_header table__text_type_active'
+                    onClick={() => openDiscipline(item.id)} 
                     >
                       {item.name}
                     </p>
@@ -209,4 +217,4 @@ function CuratorDisciplines({ windowWidth, groupInfo }) {
   );
 }
 
-export default CuratorDisciplines;  
+export default CuratorDisciplineList;  

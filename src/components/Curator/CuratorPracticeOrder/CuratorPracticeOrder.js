@@ -16,7 +16,7 @@ function CuratorPracticeOrder({ windowWidth, practice, onAssign, onDelete }) {
     }, [windowWidth, containerHeightRef, tableHeaderHeightRef]); 
   
     const tableStyle = {
-      height: tableHeight,
+        height: tableHeight - 1,
     };
 
     return (

@@ -45,7 +45,7 @@ function PopupSelect({ filterType, options, currentOption, onChooseOption }) {
               </li>
             ))
             :
-            options.filter(item => (item.id !== currentOption.id) && (item.id !== 'empty')).map((item, i) => (
+            options.filter(item => (item.id !== currentOption.id)).map((item, i) => (
               <li className='select-popup__options-item' key={i} onClick={() => chooseOption(item)}>
                 <p className='select-popup__options-text'>{item.name}</p>
               </li>

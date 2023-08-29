@@ -12,6 +12,8 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
     onClose();
   }
 
+  console.log(currentStudent);
+
   function renderComment(comment) {
     if (currentUser.id === comment.author_id) { 
       return (
@@ -41,7 +43,13 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
             currentStudent.comments.slice(0).reverse().map((elem, i) => (
               <li key={i} className='popup__item'>
                 <div className='popup__author'>
+                  {
+                  elem.author_avatar_link
+                  ?
                   <img className='popup__author-img' src={elem.author_avatar_link} alt='аватар'></img>
+                  :
+                  <div className='popup__author-img'></div>
+                  }
                   <div className='popup__author-info'>
                     {renderComment(elem)}
                     <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Автор: </span>{elem.author_fullname}</p>

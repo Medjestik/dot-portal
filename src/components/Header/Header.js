@@ -83,7 +83,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/courses'>
         <div className='header__nav-link-icon'>
           <div className='header__nav-link-icon-container'>
-            { journalIcon }
+            { libraryIcon }
           </div>
         </div>
         <p className='header__nav-link-text'>Курсы</p> 
@@ -110,7 +110,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/courses'>
         <div className='header__nav-link-icon'>
           <div className='header__nav-link-icon-container'>
-            { journalIcon }
+            { libraryIcon }
           </div>
         </div>
         <p className='header__nav-link-text'>Курсы</p> 
@@ -162,7 +162,7 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/courses'>
         <div className='header__nav-link-icon'>
           <div className='header__nav-link-icon-container'>
-            { journalIcon }
+            { libraryIcon }
           </div>
         </div>
         <p className='header__nav-link-text'>Курсы</p> 

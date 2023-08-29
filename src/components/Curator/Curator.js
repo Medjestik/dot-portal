@@ -8,6 +8,7 @@ import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtn
 import SectionTabs from '../Section/SectionTabs/SectionTabs.js';
 import CuratorGroupsTable from './CuratorGroupsTable/CuratorGroupsTable.js';
 import CuratorGroup from './CuratorGroup/CuratorGroup.js';
+import CuratorDiscipline from './CuratorDiscipline/CuratorDiscipline.js';
  
 function Curator({ windowWidth, onLogout }) {
 
@@ -28,7 +29,7 @@ function Curator({ windowWidth, onLogout }) {
     const token = localStorage.getItem('token');
     curatorApi.getGroups({ token: token })
     .then((res) => {
-      console.log('CuratorGroups', res);
+      //console.log('CuratorGroups', res);
       setGroups(res);
     })
     .catch((err) => {
@@ -44,9 +45,7 @@ function Curator({ windowWidth, onLogout }) {
   }
 
   React.useEffect(() => {
-    if (pathname.includes('groups')) {
       groupsRequest();
-    }
     return (() => {
       setGroups([]);
     })
@@ -88,11 +87,12 @@ function Curator({ windowWidth, onLogout }) {
                   >
                   </Route>
                 </Routes>
-              </SectionTabs>
+              </SectionTabs> 
             </div>
             }
           >
           </Route>
+
           <Route exact path='/group/:groupId/*' element={ 
               <CuratorGroup
                 windowWidth={windowWidth}
@@ -100,6 +100,15 @@ function Curator({ windowWidth, onLogout }) {
             }
           >
           </Route>
+
+          <Route path='/discipline/:disciplineId/*' element={ 
+              <CuratorDiscipline
+                windowWidth={windowWidth}
+              />
+            }
+          >
+          </Route>
+
         </Routes>
       
     </div>

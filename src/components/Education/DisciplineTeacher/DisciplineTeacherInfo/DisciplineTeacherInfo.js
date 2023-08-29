@@ -46,11 +46,11 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
   }, [isLoadingData, windowWidth, containerHeightRef, tableHeaderHeightRef]); 
 
   const tableStyle = {
-    height: tableHeight,
+    height: tableHeight - 1,
   };
 
   const advertisementStyle = {
-    height: advertisementHeight,
+    height: advertisementHeight - 1,
   };
 
   function openAddMaterialPopup() {

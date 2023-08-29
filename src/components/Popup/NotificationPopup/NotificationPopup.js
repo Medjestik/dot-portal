@@ -14,9 +14,13 @@ function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
     onClose();
   }
 
+  console.log(notification);
+
+  function createMarkup(text) { return {__html: text }; };
+
   function defineCreator(elem) {
     if (elem.type === 'system') {
-      setCreator({ name: 'Техническая поддержка', pic: supportAvatar });
+      setCreator({ name: 'Учебный портал', pic: supportAvatar });
     } else if (elem.type === 'news') {
       setCreator({ name: 'РУТ (МИИТ)', pic: logo });
     } else {
@@ -60,7 +64,7 @@ function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
         </div>
         <h2 className='popup__title'>{notification.title}</h2>
         <div className='popup__text-container scroll'>
-          <p className='popup__text'>{notification.text}</p>
+          <div className='popup__text' dangerouslySetInnerHTML={createMarkup(notification.text)} />
         </div>
         {
           notification.files.length > 0 &&

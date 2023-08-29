@@ -7,9 +7,10 @@ import Section from '../../Section/Section.js';
 import SectionSelect from '../../Section/SectionSelect/SectionSelect.js';
 import CuratorGroupList from '../CuratorGroupList/CuratorGroupList.js';
 import CuratorAdvertisement from '../CuratorAdvertisement/CuratorAdvertisement.js';
-import CuratorDisciplines from '../CuratorDisciplines/CuratorDisciplines.js';
+import CuratorDisciplineList from '../CuratorDisciplineList/CuratorDisciplineList.js';
 import CuratorPractice from '../CuratorPractice/CuratorPractice.js';
 import CuratorPracticeList from '../CuratorPracticeList/CuratorPracticeList.js';
+import CuratorDiploma from '../CuratorDiploma/CuratorDiploma.js';
 
 function CuratorGroup({ windowWidth }) {
 
@@ -104,7 +105,7 @@ function CuratorGroup({ windowWidth }) {
         />
         <Route exact path={`disciplines`}
           element={
-          <CuratorDisciplines
+          <CuratorDisciplineList
             windowWidth={windowWidth} 
             groupInfo={groupInfo} 
           />
@@ -127,9 +128,14 @@ function CuratorGroup({ windowWidth }) {
           />
           }
         />
-      </Routes>
-
-      
+        <Route exact path={`diploma`}
+          element={
+          <CuratorDiploma
+            windowWidth={windowWidth} 
+          />
+          }
+        />
+      </Routes> 
 
     </Section>
   );
