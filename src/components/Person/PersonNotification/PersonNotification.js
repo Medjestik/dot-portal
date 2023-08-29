@@ -4,7 +4,7 @@ import Accordion from '../../Accordion/Accordion.js';
 import PersonNotificationInfoPopup from './PersonNotificationInfoPopup/PersonNotificationInfoPopup.js';
 import notificationIcon from '../../../images/accordion/accordion-notification.svg';
 
-function PersonNotification({ windowWidth, userNotifications, onOpen, currentNotification,countNewNotification }) {
+function PersonNotification({ windowWidth, userNotifications, onOpen, currentNotification, countNewNotification }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
 

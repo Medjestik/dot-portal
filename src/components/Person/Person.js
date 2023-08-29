@@ -223,6 +223,7 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
               openDataPopup={openDataPopup}
               userNotifications={userNotifications}
               currentNotification={currentNotification}
+              countNewNotification={countNewNotification}
               openNotificationPopup={handleOpenNotificationPopup}
             />
           }

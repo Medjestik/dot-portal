@@ -3,7 +3,7 @@ import './PersonTeacher.css';
 import PersonTeacherArea from '../PersonTeacherArea/PersonTeacherArea.js';
 import PersonNotification from '../PersonNotification/PersonNotification.js';
 
-function PersonTeacher({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, openNotificationPopup }) {
+function PersonTeacher({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, countNewNotification, openNotificationPopup }) {
 
   React.useEffect(() => {
 
@@ -25,6 +25,7 @@ function PersonTeacher({ windowWidth, currentUser, openPhotoPopup, openChangePas
         windowWidth={windowWidth}
         userNotifications={userNotifications}
         currentNotification={currentNotification}
+        countNewNotification={countNewNotification}
         onOpen={openNotificationPopup}
       />
     </>
