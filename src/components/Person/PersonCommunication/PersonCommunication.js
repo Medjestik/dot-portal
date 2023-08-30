@@ -82,18 +82,24 @@ function PersonCommunication({ windowWidth, studentSocial, onChange, isLoading }
               <a className='person-communication__classmates-social-link' href={item.vk} target='_blank' rel='noreferrer'>{item.vk}</a>
             }
           </li>
-          <li className='person-communication__classmates-social-item'>
-            {
-              item.instagram.length < 1
-              ?
-              <>
-              <p className='person-communication__classmates-social-empty'>Отсутствует</p>
-              <div className='person-communication__classmates-social-inst'></div>
-              </>
-              :
-              <a className='person-communication__classmates-social-link' href={item.instagram} target='_blank' rel='noreferrer'>{item.instagram}</a>
-            }
-          </li>
+          
+          {
+            /*
+            <li className='person-communication__classmates-social-item'>
+              {
+                item.instagram.length < 1
+                ?
+                <>
+                <p className='person-communication__classmates-social-empty'>Отсутствует</p>
+                <div className='person-communication__classmates-social-inst'></div>
+                </>
+                :
+                <a className='person-communication__classmates-social-link' href={item.instagram} target='_blank' rel='noreferrer'>{item.instagram}</a>
+              }
+            </li>
+            */
+          }
+
           <li className='person-communication__classmates-social-item'>
             {
               item.telegram.length < 1
@@ -157,41 +163,46 @@ function PersonCommunication({ windowWidth, studentSocial, onChange, isLoading }
                 <button className='person-communication__social-btn' type='submit'></button>
               </form>
             </li>
-            <li className='person-communication__social-item'>
-              <div 
-              className={`person-communication__social-img 
-              ${studentSocial.student.instagram.length < 1 ? 'person-communication__social-img_type_empty' : '' }
-              `}>
-                {
-                  isLoading.isShow && isLoading.type === 'instagram' 
-                  ?
-                  <PreloaderIcon />
-                  :
-                  <img className='person-communication__social-icon' src={instagramIcon} alt='Иконка instagram'></img>
-                }
-              </div>
-              <form 
-              className='person-communication__social-form' 
-              id='social-inst-upload' 
-              name='social-inst-upload'
-              onSubmit={(e) => handleChangeLink(e, 'instagram')}
-              action='#' 
-              noValidate
-              >
-                <input 
-                className='person-communication__social-input' 
-                placeholder='instagram.com/'
-                value={instagramLink}
-                onChange={handleChangeInstagram}
-                type='text'
-                id='social-instagram-upload-input'
-                name='social-instagram-upload-input' 
-                autoComplete='off'
+            {
+              /*
+              <li className='person-communication__social-item'>
+                <div 
+                className={`person-communication__social-img 
+                ${studentSocial.student.instagram.length < 1 ? 'person-communication__social-img_type_empty' : '' }
+                `}>
+                  {
+                    isLoading.isShow && isLoading.type === 'instagram' 
+                    ?
+                    <PreloaderIcon />
+                    :
+                    <img className='person-communication__social-icon' src={instagramIcon} alt='Иконка instagram'></img>
+                  }
+                </div>
+                <form 
+                className='person-communication__social-form' 
+                id='social-inst-upload' 
+                name='social-inst-upload'
+                onSubmit={(e) => handleChangeLink(e, 'instagram')}
+                action='#' 
+                noValidate
                 >
-                </input>
-                <button className='person-communication__social-btn' type='submit'></button>
-              </form>
-            </li>
+                  <input 
+                  className='person-communication__social-input' 
+                  placeholder='instagram.com/'
+                  value={instagramLink}
+                  onChange={handleChangeInstagram}
+                  type='text'
+                  id='social-instagram-upload-input'
+                  name='social-instagram-upload-input' 
+                  autoComplete='off'
+                  >
+                  </input>
+                  <button className='person-communication__social-btn' type='submit'></button>
+                </form>
+              </li>
+              */
+            }
+
             <li className='person-communication__social-item'>
               <div 
               className={`person-communication__social-img 

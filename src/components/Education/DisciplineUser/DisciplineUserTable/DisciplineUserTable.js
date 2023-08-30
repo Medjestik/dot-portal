@@ -19,7 +19,6 @@ function SemesterUserTable({ windowWidth, data, onOpen }) {
   }
 
   function renderMark(mark) {
-    console.log(mark);
     if (mark === 'Не аттестован') {
       return (
         <p className='table__text'>Н/А</p>

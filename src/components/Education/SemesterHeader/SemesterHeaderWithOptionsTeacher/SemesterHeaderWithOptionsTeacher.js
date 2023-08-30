@@ -8,7 +8,7 @@ function SemesterHeaderWithOptionsTeacher({ semesterInfo, currentSemester, choos
   return (
     isDisciplineOpen 
     ?
-      <SemesterHeaderBtnBack onBack={backToSemester} isPerformFunction={true} />
+      <SemesterHeaderBtnBack onBack={{}} isPerformFunction={false} />
     :
       <Select options={semesterInfo} currentOption={currentSemester} onChooseOption={chooseSemester} />
   );

@@ -20,6 +20,7 @@
   margin: 12px 0px 0px 0px;
   padding: 20px 22px;
   width: 100%;
+  min-height: 200px;
   box-sizing: border-box;
   background: var(--main-grey-color);
   border-radius: var(--border-radius);
@@ -99,6 +100,7 @@
   background-repeat: no-repeat;
   background-size: 20px;
   transition: all .3s ease-in-out;
+  border-radius: var(--border-radius);
 }
 .person-communication__social-btn:hover {
   background-image: url('../../../images/button/upload-hover.svg');
@@ -162,7 +164,6 @@
 }
 .person-communication__classmates-social-item {
   margin: 0px 12px 0px 0px;
-  max-width: 184px;
   width: 100%;
   background: var(--main-white-color);
   border-radius: var(--border-radius);
@@ -238,6 +239,9 @@
   .person-communication__social {
     margin: 0px;
     max-width: none;
+  }
+  .person-communication__social-list {
+    min-height: auto;
   }
   .person-communication__classmates {
     margin: 20px 0px 0px 0px;
