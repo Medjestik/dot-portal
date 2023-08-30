@@ -16,7 +16,7 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
   function disciplineMaterialRequest(id) {
     setIsLoadingMaterials(true);
     const token = localStorage.getItem('token');
-    if (currentUser.access_role === 'user') {
+    if (currentUser.access_role === 'dot') {
       educationApi.getDisciplineMaterialUser({ token: token, disciplineId: id, currentUserId: currentUser.id })
       .then((res) => {
         //console.log('DisciplineMaterial', res);
@@ -104,7 +104,7 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
         ?
         <>
          {
-          currentUser.access_role === 'user' 
+          currentUser.access_role === 'dot' 
           ?
           <DisciplineUserMaterialsList windowWidth={windowWidth} materials={materials.parts.part} handleOpenMaterial={handleOpenMaterial} />
           :
