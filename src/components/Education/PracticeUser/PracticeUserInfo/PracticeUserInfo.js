@@ -8,19 +8,16 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
   const tableHeaderHeightRef = React.createRef();
   const taskHeightRef = React.createRef();
 
-  const [tableHeight, setTableHeight] = React.useState(0);
   const [taskHeight, setTaskHeight] = React.useState(0);
 
   React.useEffect(() => {
     if (windowWidth >= 833) {
-      setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
+      console.log(taskHeightRef.current.clientHeight)
       setTaskHeight(taskHeightRef.current.clientHeight);
     }
   }, [windowWidth, containerHeightRef, tableHeaderHeightRef, taskHeightRef]);
 
-  const tableStyle = {
-    height: tableHeight,
-  };
+
 
   const taskStyle = {
     height: taskHeight - 36,
@@ -90,7 +87,7 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
             <h3 className='discipline-info__teacher-name'>Задание на практику</h3>
             <ul className='data__list data__list_margin_top'>
               <li className='data__item'>
-                <div style={Object.assign({}, taskStyle)} className='data__area scroll-inside'>{practiceInfo.individual.task}</div>
+                <div className='data__area scroll-inside'>{practiceInfo.individual.task}</div>
               </li>
             </ul>
           </div>
@@ -124,7 +121,7 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
                   <div className='btn btn_type_download btn_type_download_status_active'></div>
                 </div>
               </div>
-              <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+              <ul className='table__main table__main_scroll_auto'>
                   {
                   practiceInfo.files.length < 1 
                   ?

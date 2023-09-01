@@ -44,7 +44,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
     if (currentSemesterOption.id === 'empty') {
       setFilteredDisciplines(data);
     } else {
-      setFilteredDisciplines(data.filter((elem) => (elem.semestr === currentSemesterOption.id)));
+      setFilteredDisciplines(data.filter((elem) => (elem.semester_id === currentSemesterOption.id)));
     }
   }
 
@@ -53,7 +53,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
     if (option.id === 'empty') {
       setFilteredDisciplines(searchedDisciplines);
     } else {
-      setFilteredDisciplines(searchedDisciplines.filter((elem) => (elem.semestr === option.id)));
+      setFilteredDisciplines(searchedDisciplines.filter((elem) => (elem.semester_id === option.id)));
     }
   }
 
@@ -81,7 +81,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
           return acc; // ничего не делаем, возвращаем уже собранное
     
         acc.map[item.semestr] = true; // помечаем семестр, как обработанный
-        acc.disc.push({id: item.semestr, name: 'Семестр ' + item.semestr}); // добавляем объект в массив семестров
+        acc.disc.push({id: item.semester_id, name: 'Семестр ' + item.semestr}); // добавляем объект в массив семестров
         return acc; // возвращаем собранное
       }, {
         map: {}, // здесь будут отмечаться обработанные дисциплины

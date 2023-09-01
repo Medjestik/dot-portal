@@ -252,11 +252,15 @@ function App() {
                         }/>
 
                         <Route path='control/*' element={
+                          currentUser.access_role === 'admin' 
+                          ? 
                           <Control
                           windowWidth={windowWidth}
                           onLogout={handleLogout}
                           semesterInfo={semesterInfo}
                           />
+                          :
+                          <Navigate to='/person' />
                         }/>
 
                         <Route path='webinars' element={

@@ -167,6 +167,17 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
         </div>
         <p className='header__nav-link-text'>Курсы</p> 
       </NavLink>
+      <NavLink 
+      onClick={hideMobileMenu}
+      className={`header__nav-link + ${isCuratorOpen ? 'header__nav-link_type_active' : ''}`}
+      to='/curator/groups/current'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { curatorIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Куратор</p> 
+      </NavLink>
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/control'>
         <div className='header__nav-link-icon'>
           <div className='header__nav-link-icon-container'>

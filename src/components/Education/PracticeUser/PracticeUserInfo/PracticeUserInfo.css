@@ -1,7 +1,6 @@
 .practice-info__container {
   margin: 0px;
   width: 100%;
-  flex-grow: 2;
   display: flex;
 }
 

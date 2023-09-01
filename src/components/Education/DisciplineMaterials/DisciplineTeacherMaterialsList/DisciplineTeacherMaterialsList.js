@@ -98,7 +98,7 @@ function DisciplineTeacherMaterialsList({ windowWidth, materials }) {
         rel='noreferrer'
         className='discipline-materials__item-btn discipline-materials__item-btn_type_start' 
         >
-          Октрыть
+          Открыть
         </a>
       ) 
     } else {
@@ -109,7 +109,7 @@ function DisciplineTeacherMaterialsList({ windowWidth, materials }) {
         rel='noreferrer'
         className='discipline-materials__item-btn discipline-materials__item-btn_type_start' 
         >
-          Октрыть
+          Открыть
         </a>
       ) 
     }

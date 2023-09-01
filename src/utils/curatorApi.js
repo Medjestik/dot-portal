@@ -105,3 +105,15 @@ export const getGroupPractice = ({ token, groupId }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const getSemesterDetail = ({ token, semesterId }) => {
+  return fetch(`${API_URL}/curators/action/expanded_report/semester_id/${semesterId}`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};

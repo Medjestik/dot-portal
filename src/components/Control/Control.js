@@ -1,6 +1,6 @@
 import React from 'react';
 import './Control.css';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import Section from '../Section/Section.js';
@@ -9,7 +9,7 @@ import ControlWebinar from './ControlWebinar/ControlWebinar.js';
 
 function Control({ windowWidth, onLogout, semesterInfo }) {
 
-  const navigate = useNavigate();
+  
 
   return (
     <div className='control'>
@@ -21,10 +21,10 @@ function Control({ windowWidth, onLogout, semesterInfo }) {
           </SemesterHeader>
           <Section title='Управление'  heightType='content' headerType='small' >
             <div className='control__container'>
-              <button className='btn btn_type_large' type='button' onClick={() => navigate('/control/webinar/list')}>Вебинары</button>
-              <ControlList windowWidth={windowWidth} />
+              
             </div>
           </Section>
+          <ControlList windowWidth={windowWidth} />
           </>
           }
         >
