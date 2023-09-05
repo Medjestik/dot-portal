@@ -79,7 +79,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
             onChange={handleChangeLogin}
             name='login' 
             placeholder='Введите логин...' 
-            minLength='6'
+            minLength='2'
             autoComplete='off'
             required 
             />

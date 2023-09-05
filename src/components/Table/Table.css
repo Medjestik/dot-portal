@@ -54,6 +54,9 @@
   display: flex;
   align-items: center;
 }
+.table__row_type_complete {
+  background-color: var(--main-grey-color);
+}
 .table__column {
   margin: 0px 12px 0px 0px;
   padding: 16px 0px;

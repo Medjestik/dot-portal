@@ -142,16 +142,16 @@ function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, is
       </label>
 
       <label className='checkbox'>
-          <input 
-          name='edit-practice-visible'
-          type='checkbox'
-          id='edit-practice-visible'
-          value={isVisible}
-          defaultChecked={isVisible}
-          onChange={() => setIsVisible(!isVisible)}
-          >
-          </input>
-          <span>Доступна для студентов</span>
+        <input 
+        name='edit-practice-visible'
+        type='checkbox checkbox_margin_top'
+        id='edit-practice-visible'
+        value={isVisible}
+        defaultChecked={isVisible}
+        onChange={() => setIsVisible(!isVisible)}
+        >
+        </input>
+        <span>Доступна для студентов</span>
       </label>
 
       <div className='popup__btn-container'>

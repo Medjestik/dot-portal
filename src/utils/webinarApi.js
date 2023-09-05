@@ -165,3 +165,16 @@ export const getDisciplinesWithWebinars = ({ token, semesterId }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const changeWebinarDisciplineStatus = ({ token, data }) => {
+  return fetch(`${API_URL}/webinars/action/admin_webinar_ready`, { 
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify(data),
+  })
+  .then(res => handleResponse(res))
+};

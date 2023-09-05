@@ -52,6 +52,39 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
     setSearchGroupText(e.target.value);
   }
 
+  function handleChangeStatus(item) {
+    const itemData = { activity_id: item.id, webinar_ready: !item.webinar_ready }
+    const token = localStorage.getItem('token');
+    webinarApi.changeWebinarDisciplineStatus({
+      token: token,
+      data: itemData,
+    })
+    .then((res) => {
+      console.log(res);
+      const newStatus = { ...item, webinar_ready: !item.webinar_ready };
+      const indexWebinars = webinars.indexOf(webinars.find((elem) => (elem.id === item.id)));
+      const indexFilteredWebinars = filteredWebinars.indexOf(filteredWebinars.find((elem) => (elem.id === item.id)));
+      const newWebinars = ([ 
+        ...webinars.slice(0, indexWebinars), 
+        newStatus, 
+        ...webinars.slice(indexWebinars + 1) 
+      ]);
+      const newFilteredWebinars = ([ 
+        ...filteredWebinars.slice(0, indexFilteredWebinars), 
+        newStatus, 
+        ...filteredWebinars.slice(indexFilteredWebinars + 1) 
+      ]);
+      setWebinars(newWebinars);
+      setFilteredWebinars(newFilteredWebinars);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {  
+      //setIsLoadingRequest(false);
+    });
+  }
+
   function handleChangeSemester(item) {
     setCurrentSemester(item);
     webinarRequest(item.id)
@@ -218,7 +251,7 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
           <div ref={tableHeaderHeightRef} className='table__header'>
             <div className='table__main-column'>
               <div className='table__column table__column_type_header table__column_type_count'>
-                <p className='table__text table__text_type_header'>№</p>
+                <p className='table__text table__text_type_header'></p>
               </div>
               <div className='table__column table__column_type_header table__column_type_full'>
                 <p className='table__text table__text_type_header'>Дисциплина</p>
@@ -248,11 +281,22 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
             :
             <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_webinar scroll'>
               {
-                [...filteredWebinars].reverse().map((item, i) => (
-                  <li className='table__row' key={i}>
+                filteredWebinars.map((item) => (
+                  <li className={`table__row ${item.webinar_ready && 'table__row_type_complete'}`} key={item.id}>
                     <div className='table__main-column'>
                       <div className='table__column table__column_type_count'>
-                        <p className='table__text'>{i + 1}</p>
+                        <label className='checkbox'>
+                          <input 
+                          name={`webinar-discipline-complete-${item.id}`}
+                          type='checkbox'
+                          id={`webinar-discipline-complete-${item.id}`}
+                          value={item.webinar_ready}
+                          defaultChecked={item.webinar_ready}
+                          onChange={() => handleChangeStatus(item)}
+                          >
+                          </input>
+                          <span></span>
+                        </label>
                       </div>
                       <div className='table__column table__column_type_full'>
                         <p className='table__text table__text_type_header'>{item.activity_name}</p>
