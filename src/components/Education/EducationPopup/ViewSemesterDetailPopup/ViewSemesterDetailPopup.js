@@ -1,15 +1,17 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
+import { useNavigate } from 'react-router-dom';
 import * as curatorApi from '../../../../utils/curatorApi.js';
 import TableHorizontal from '../../../Table/TableHorizontal/TableHorizontal.js';
 import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
 
-function ViewSemesterDetailPopup({ isOpen, onClose, semesterOptions, currentSemesterId }) {
+function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId }) {
+
+  const navigate = useNavigate();
 
   const [isLoadingInfo, setIsLoadingInfo] = React.useState(true);
-  const [semesterOptionsPopup, setSemesterOptionsPopup] = React.useState(semesterOptions);
-  const [currentSemesterOption, setCurrentSemesterOption] = React.useState(semesterOptions[0]);
+  const [currentSemesterOption, setCurrentSemesterOption] = React.useState(semesterOptions.find((elem) => currentSemesterId === elem.id));
 
   const [currentData, setCurrentData] = React.useState({});
 
@@ -22,19 +24,52 @@ function ViewSemesterDetailPopup({ isOpen, onClose, semesterOptions, currentSeme
     onClose();
   }
 
-  function filterBySemester(option) {
-    /*setCurrentSemesterOption(option);
-    if (option.id === 'empty') {
-      setFilteredDisciplines(searchedDisciplines);
+  function openElem(elem) {
+    if (elem.type === 'practice') {
+      navigate('/curator/group/' + groupId + '/practice/' + elem.id + '/info');
     } else {
-      setFilteredDisciplines(searchedDisciplines.filter((elem) => (elem.semestr === option.id)));
-    }*/
+      if (elem.id.includes('kr')) {
+        const id = elem.id.slice(0, -3);
+        navigate('/curator/discipline/' + id + '/info');
+      } else {
+        navigate('/curator/discipline/' + elem.id + '/info');
+      }
+    }
   }
 
-  function getSemesterDetail() {
+  function filterBySemester(option) {
+    setCurrentSemesterOption(option);
+    getSemesterDetail(option.id);
+  }
+
+  function getStudentMark(studentId, disciplineId) { 
+    const studentMark = currentData.results.find((item) => item.student_id === studentId && item.activity_id === disciplineId);
+
+    if (studentMark) {
+      if (studentMark.mark.name === 'Нет оценки') {
+        return (
+          <p className='table-horizontal__text table-horizontal__text_type_active table-horizontal__text_type_empty'>{studentMark.mark.name}</p>
+        )
+      } else if (studentMark.mark.name === 'Не аттестован') {
+        return (
+          <p className='table-horizontal__text table-horizontal__text_type_active table-horizontal__text_type_error'>{studentMark.mark.name}</p>
+        )
+      } else {
+        return (
+          <p className='table-horizontal__text table-horizontal__text_type_active'>{studentMark.mark.name}</p>
+        )
+      }
+    } else {
+      return (
+        <p className='table-horizontal__text table-horizontal__text_type_active'>Не найдено</p>
+      )
+    }
+  }
+
+  function getSemesterDetail(id) {
     setIsLoadingInfo(true);
     const token = localStorage.getItem('token');
-    curatorApi.getSemesterDetail({ token: token, semesterId: currentSemesterId })
+    curatorApi.getSemesterDetail({ token: token, semesterId: id })
     .then((res) => {
       console.log('SemesterDetail', res);
       setCurrentData(res);
@@ -59,7 +94,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, semesterOptions, currentSeme
 
   React.useEffect(() => {
     setIsLoadingInfo(false);
-    getSemesterDetail();
+    getSemesterDetail(currentSemesterId);
 
     return(() => {
       setCurrentData({});
@@ -109,12 +144,12 @@ function ViewSemesterDetailPopup({ isOpen, onClose, semesterOptions, currentSeme
           <div className='table-horizontal__header' style={Object.assign({}, tableStyle)}>
             <div className='table-horizontal__main-row' ref={tableWidthRef}>
               <div className='table-horizontal__column table-horizontal__column_type_header table-horizontal__column_type_name table-horizontal__column_type_main'>
-                <p className='table-horizontal__text table-horizontal__text_weight_bold'>ФИО</p>
+                <p className='table-horizontal__text table-horizontal__text_weight_bold'>ФИО / Дисциплина</p>
               </div>
               {
                 currentData.activities.map((elem, i) => (
                   <div key={i} className='table-horizontal__column table-horizontal__column_type_header table-horizontal__column_type_text'>
-                    <p className='table-horizontal__text table-horizontal__text_weight_bold'>{elem.name}({elem.control})</p>
+                    <p className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_cut table-horizontal__text_type_active' onClick={() => openElem(elem)}>({elem.control}) {elem.name}</p>
                     <p className='table-horizontal__text'>{elem.lector}</p>
                   </div>
                 ))
@@ -124,16 +159,16 @@ function ViewSemesterDetailPopup({ isOpen, onClose, semesterOptions, currentSeme
 
           <ul className='table-horizontal__main' style={Object.assign({}, tableStyle)}>
             {
-              currentData.students.map((item, i) => (
+              currentData.students.map((student, i) => (
                 <li className='table-horizontal__row' key={i}>
                   <div className='table-horizontal__main-row'>
                     <div className='table-horizontal__column table-horizontal__column_type_name'>
-                      <p className='table-horizontal__text table-horizontal__text_weight_bold'>{item.fullname}</p>
+                      <p className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_active'>{student.fullname}</p>
                     </div>
                     {
-                      currentData.activities.map((elem, i) => (
+                      currentData.activities.map((discipline, i) => (
                         <div className='table-horizontal__column table-horizontal__column_type_text' key={i}>
-                          <p className='table-horizontal__text'>1</p>
+                          {getStudentMark(student.id, discipline.id)}
                         </div>
                       ))
                     }

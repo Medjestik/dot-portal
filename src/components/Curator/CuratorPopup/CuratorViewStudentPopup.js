@@ -7,9 +7,7 @@ function CuratorViewStudentPopup({ isOpen, onClose, currentStudent }) {
     e.preventDefault();
     onClose();
   }
-
-  console.log(currentStudent);
-
+  
   return (
     <Popup
     isOpen={isOpen}

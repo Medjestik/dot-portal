@@ -13,7 +13,6 @@ import CuratorDiscipline from './CuratorDiscipline/CuratorDiscipline.js';
 function Curator({ windowWidth, onLogout }) {
 
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const tabs = [
     { title: 'Текущие', link: '/curator/groups/current' },

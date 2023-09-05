@@ -45,13 +45,13 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
       </NavLink>
 
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
-      <div className='header__nav-link-icon'>
-        <div className='header__nav-link-icon-container'>
-          { webinarIcon }
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { webinarIcon }
+          </div>
         </div>
-      </div>
-      <p className='header__nav-link-text'>Вебинары</p>
-    </NavLink>
+        <p className='header__nav-link-text'>Вебинары</p>
+      </NavLink>
 
       {/*
         <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/rating'>
@@ -107,6 +107,14 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
         </div>
         <p className='header__nav-link-text'>Учебная работа</p> 
       </NavLink>
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { webinarIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Вебинары</p>
+      </NavLink>
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/courses'>
         <div className='header__nav-link-icon'>
           <div className='header__nav-link-icon-container'>
@@ -158,6 +166,14 @@ function Header({ windowWidth, pathname, onLogout, semesterInfo }) {
           </div>
         </div>
         <p className='header__nav-link-text'>Учебная работа</p> 
+      </NavLink>
+      <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/webinars'>
+        <div className='header__nav-link-icon'>
+          <div className='header__nav-link-icon-container'>
+            { webinarIcon }
+          </div>
+        </div>
+        <p className='header__nav-link-text'>Вебинары</p>
       </NavLink>
       <NavLink onClick={hideMobileMenu} className={({ isActive }) => 'header__nav-link ' + (isActive ? 'header__nav-link_type_active' : '')} to='/courses'>
         <div className='header__nav-link-icon'>

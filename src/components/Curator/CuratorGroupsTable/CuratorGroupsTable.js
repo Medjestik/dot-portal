@@ -29,7 +29,7 @@ function CuratorGroupsTable({ windowWidth, groups, openGroup }) {
             <div className='table__column table__column_type_header table__column_type_name'>
               <p className='table__text table__text_type_header'>Наименование группы</p>
             </div>
-            <div className='table__column table__column_type_header table__column_type_medium'>
+            <div className='table__column table__column_type_header table__column_type_large'>
               <p className='table__text table__text_type_header'>Форма обучения</p>
             </div>
             <div className='table__column table__column_type_header table__column_type_large'>
@@ -52,7 +52,7 @@ function CuratorGroupsTable({ windowWidth, groups, openGroup }) {
                   <div className='table__column table__column_type_name'>
                     <p className='table__text table__text_type_header table__text_type_active' onClick={() => openGroup(item)}>{item.name}</p>
                   </div>
-                  <div className='table__column table__column_type_medium'>
+                  <div className='table__column table__column_type_large'>
                     <p className='table__text'>{item.form}</p>
                   </div>
                   <div className='table__column table__column_type_large'>

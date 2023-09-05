@@ -1,6 +1,7 @@
 import React from 'react';
 import './Webinar.css';
 import * as webinarApi from '../../utils/webinarApi.js';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import Preloader from '../Preloader/Preloader.js';
 import Section from '../Section/Section.js';
 import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
@@ -19,6 +20,8 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
     { name: 'Отменен', id: 'canceled', },
     { name: 'Завершен', id: 'completed', },
   ]
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   const [isLoadingWebinar, setIsLoadingWebinar] = React.useState(true);
 
@@ -174,10 +177,13 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
           </div>
         </div>
         <div className='section__header'>
-          <div className='section__header-item'>
-            <span className='section__header-caption'>Период:</span>
-            <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
-          </div>
+          {            
+            currentUser.access_role === 'dot' && 
+            <div className='section__header-item'>
+              <span className='section__header-caption'>Период:</span>
+              <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
+            </div>         
+          }
           <div className='section__header-item'>
             <span className='section__header-caption'>Статус:</span>
             <PopupSelect options={statusOptions} currentOption={currentStatusOption} onChooseOption={filterByStatus} />
@@ -187,17 +193,20 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
         :
         <>
         <div className='section__header'>
+        {            
+          currentUser.access_role === 'dot' && 
           <div className='section__header-item'>
             <span className='section__header-caption'>Период:</span>
             <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
           </div>
+        }
           <div className='section__header-item'>
             <span className='section__header-caption'>Статус:</span>
             <PopupSelect options={statusOptions} currentOption={currentStatusOption} onChooseOption={filterByStatus} />
           </div>
           <div className='section__header-item'>
             <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по названию:</span>
-            <Search type='medium' id='webinar' data={webinars} onSearch={handleSearch} />
+            <Search type={currentUser.access_role === 'dot' ? 'medium' : 'large'} id='webinar' data={webinars} onSearch={handleSearch} />
           </div>
         </div>
         </>

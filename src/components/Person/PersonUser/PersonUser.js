@@ -7,13 +7,8 @@ import PersonAreaMobile from '../PersonArea/PersonAreaMobile/PersonAreaMobile.js
 import PersonData from '../PersonData/PersonData.js';
 import PersonAdministration from '../PersonAdministration/PersonAdministration.js';
 import PersonEducation from '../PersonEducation/PersonEducation.js';
-import PersonAchievement from '../PersonAchievement/PersonAchievement.js';
-import PersonDocument from '../PersonDocument/PersonDocument.js';
-import PersonDeclaration from '../PersonDeclaration/PersonDeclaration.js';
 import PersonNotification from '../PersonNotification/PersonNotification.js';
-import PersonRating from '../PersonRating/PersonRating.js';
 import PersonCommunication from '../PersonCommunication/PersonCommunication.js';
-import PersonDiploma from '../PersonDiploma/PersonDiploma.js';
 
 function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, countNewNotification, openNotificationPopup }) {
 

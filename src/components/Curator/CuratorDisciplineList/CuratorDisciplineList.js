@@ -40,7 +40,6 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
 
   function handleSearch(data) {
     setSearchedDisciplines(data);
-    console.log(data);
     if (currentSemesterOption.id === 'empty') {
       setFilteredDisciplines(data);
     } else {
@@ -208,6 +207,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
       <ViewSemesterDetailPopup 
         isOpen={isOpenViewSemesterDetail}
         onClose={closePopup}
+        groupId={groupInfo.id}
         semesterOptions={semesterOptions.filter((elem) => elem.id !== 'empty')}
         currentSemesterId={currentSemesterOption.id}
       />
