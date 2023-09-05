@@ -18,7 +18,7 @@ function CourseItem({ windowWidth }) {
     const token = localStorage.getItem('token');
     courseApi.getCourseMaterials({ token: token, courseId: id })
     .then((res) => {
-    console.log('CourseMaterial', res);
+    //console.log('CourseMaterial', res);
     setMaterials(res);
     })
     .catch((err) => {

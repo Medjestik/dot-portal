@@ -19,7 +19,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
     if (e.target.checkValidity()) {
       setLoginError({ text: '', isShow: false });
     } else {
-      setLoginError({ text: 'Логин должен содержать более 6 символов', isShow: true });
+      setLoginError({ text: 'Логин должен содержать более 2 символов', isShow: true });
     }
   }
 
@@ -29,7 +29,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
     if (e.target.checkValidity()) {
       setPasswordError({ text: '', isShow: false });
     } else {
-      setPasswordError({ text: 'Пароль должен содержать более 6 символов', isShow: true });
+      setPasswordError({ text: 'Пароль должен содержать более 2 символов', isShow: true });
     }
   }
 

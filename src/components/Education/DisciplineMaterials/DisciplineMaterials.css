@@ -57,6 +57,27 @@
 .discipline-materials__item-text_weight_bold {
   font-weight: bold;
 }
+.discipline-materials__item-test-info {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+.discipline-materials__item-test-info-container {
+  margin: 8px 0px 0px 0px;
+  display: flex;
+}
+.discipline-materials__item-test-text {
+  margin: 0px 20px 0px 0px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.discipline-materials__item-test-text_font_bold {
+  font-weight: bold;
+}
 .discipline-materials__item-status {
   margin: 0px 0px 0px auto;
   min-width: 104px;
@@ -195,5 +216,14 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+  }
+  .discipline-materials__item-test-info-container {
+    margin: 4px 0px 0px 0px;
+    display: flex;
+  }
+  .discipline-materials__item-test-text {
+    margin: 0px 8px 0px 0px;
+    font-size: 12px;
+    line-height: 16px;
   }
 }

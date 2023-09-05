@@ -50,7 +50,19 @@ function CourseMaterials({ windowWidth, materials, handleOpenMaterial }) {
           <li key={elem.code} className='discipline-materials__item'>
             <div className='discipline-materials__item-info'>
               {renderMaterialIcon(elem)}
-              <p className='discipline-materials__item-text'>{elem.name}</p>
+              { 
+                elem.type === 'test'
+                ?
+                <div className='discipline-materials__item-test-info'>
+                  <p className='discipline-materials__item-text'>{elem.name}</p>
+                  <div className='discipline-materials__item-test-info-container'>
+                    <p className='discipline-materials__item-test-text'><span className='discipline-materials__item-test-text_font_bold'>Попытки: </span>{elem.cur_attempt_num - 1}/{elem.attempts_num}</p>
+                    <p className='discipline-materials__item-test-text'><span className='discipline-materials__item-test-text_font_bold'>Вопросы: </span>{elem.score}/{elem.max_score}</p>
+                  </div>
+                </div>
+                :
+                <p className='discipline-materials__item-text'>{elem.name}</p>
+              }
               {renderMaterialStatus(elem)}
             </div>
             {renderMaterialBtn(elem)}
@@ -59,7 +71,19 @@ function CourseMaterials({ windowWidth, materials, handleOpenMaterial }) {
           <li key={elem.code} className='discipline-materials__item'>
             <div className='discipline-materials__item-info'>
               {renderMaterialIcon(elem)}
-              <p className='discipline-materials__item-text'>{elem.name}</p>
+              { 
+                elem.type === 'test'
+                ?
+                <div className='discipline-materials__item-test-info'>
+                  <p className='discipline-materials__item-text'>{elem.name}</p>
+                  <div className='discipline-materials__item-test-info-container'>
+                    <p className='discipline-materials__item-test-text'><span className='discipline-materials__item-test-text_font_bold'>Попытки: </span>{elem.cur_attempt_num - 1}/{elem.attempts_num}</p>
+                    <p className='discipline-materials__item-test-text'><span className='discipline-materials__item-test-text_font_bold'>Вопросы: </span>{elem.score}/{elem.max_score}</p>
+                  </div>
+                </div>
+                :
+                <p className='discipline-materials__item-text'>{elem.name}</p>
+              }
             </div>
             <div className='discipline-materials__item-mobile'>
               {renderMaterialStatus(elem)}
