@@ -104,6 +104,10 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
     closePopup();
   }
 
+  function handleRemoveDate(date) {
+    setCurrentDates(currentDates.filter(elem => ((elem.time !== date.time) || (elem.date !== date.date))));
+  }
+
   function handleAddWebinar() {
     const data = {
       title: title,
@@ -463,7 +467,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
                         </div>
                       </div>
                       <div className='table__column table__column_type_btn'>
-                        <button className='btn btn_type_cancel btn_type_cancel_status_active table__btn' onClick={() => handleUnSelectDiscipline(item)}></button>
+                        <button className='btn btn_type_cancel btn_type_cancel_status_active table__btn' onClick={() => handleRemoveDate(item)}></button>
                       </div>
                     </li>
                   ))
