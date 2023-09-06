@@ -4,6 +4,7 @@ import Table from '../../../Table/Table.js';
 import * as webinarApi from '../../../../utils/webinarApi.js';
 import Preloader from '../../../Preloader/Preloader.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
+import EditDisciplineFromWebinarPopup from '../../../Webinar/WebinarPopup/EditDisciplineFromWebinarPopup/EditDisciplineFromWebinarPopup.js'
  
 function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
 
@@ -13,11 +14,16 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
   const [tableHeight, setTableHeight] = React.useState(0);
   
   const [currentSemester, setCurrentSemester] = React.useState({});
+  const [currentData, setCurrentData] = React.useState({});
 
   const [webinars, setWebinars] = React.useState([]);
   const [filteredWebinars, setFilteredWebinars] = React.useState([]);
 
+  const [isDisciplineFromWebinarPopupOpen, setIsDisciplineFromWebinarPopupOpen] = React.useState(false);
+
   const [isLoadingWebinar, setIsLoadingWebinar] = React.useState(true);
+  const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
+  const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '' });
 
   const [searchDisciplineText, setSearchDisciplineText] = React.useState('');
   const [searchTeacherText, setSearchTeacherText] = React.useState('');
@@ -85,11 +91,44 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
     });
   }
 
-  function handleChangeSemester(item) {
+  function handleChangeSemester(item) { 
     setCurrentSemester(item);
     webinarRequest(item.id)
     setSearchDisciplineText('');
     setSearchGroupText('');
+  }
+
+  function handleChangeData(data, disciplineId ) {
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+    webinarApi.editDisciplineFromWebinar({
+      token: token,
+      data: data,
+      disciplineId: disciplineId,
+    })
+    .then((res) => {
+      const indexWebinars = webinars.indexOf(webinars.find((elem) => (elem.id === res.id)));
+      const indexFilteredWebinars = filteredWebinars.indexOf(filteredWebinars.find((elem) => (elem.id === res.id)));
+      const newWebinars = ([ 
+        ...webinars.slice(0, indexWebinars), 
+        res, 
+        ...webinars.slice(indexWebinars + 1) 
+      ]);
+      const newFilteredWebinars = ([ 
+        ...filteredWebinars.slice(0, indexFilteredWebinars), 
+        res, 
+        ...filteredWebinars.slice(indexFilteredWebinars + 1) 
+      ]);
+      setWebinars(newWebinars);
+      setFilteredWebinars(newFilteredWebinars);
+      closePopups();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {  
+      setIsLoadingRequest(false);
+    });
   }
 
   React.useEffect(() => {
@@ -168,12 +207,22 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
   // eslint-disable-next-line
   }, [searchGroupText]);
 
+  function openDisciplineFromWebinarPopup(data) { 
+    setCurrentData(data);
+    setIsDisciplineFromWebinarPopupOpen(true);
+  }
+
+  function closePopups() {
+    setIsDisciplineFromWebinarPopupOpen(false);
+  }
+
   React.useEffect(() => {
     webinarRequest(semesterInfo[0].id);
     setCurrentSemester(semesterInfo[0]);
 
     return(() => {
       setWebinars([]);
+      setCurrentData({});
       setFilteredWebinars([]);
       setCurrentSemester([]);
     })
@@ -285,7 +334,7 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
                   <li className={`table__row ${item.webinar_ready && 'table__row_type_complete'}`} key={item.id}>
                     <div className='table__main-column'>
                       <div className='table__column table__column_type_count'>
-                        <label className='checkbox'>
+                        <label className='checkbox checkbox_width_small'>
                           <input 
                           name={`webinar-discipline-complete-${item.id}`}
                           type='checkbox'
@@ -302,7 +351,7 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
                         <p className='table__text'>{item.start_date} - {item.end_date}</p>
                       </div>
                       <div className='table__column table__column_type_full'>
-                        <p className='table__text table__text_type_header'>({item.control_name}) {item.activity_name}</p>
+                        <p className='table__text table__text_type_header'>{item.activity_name} ({item.control_name})</p>
                       </div>
                       <div className='table__column table__column_type_teacher'>
                         <p className='table__text'>{item.lector_fullname}</p>
@@ -324,6 +373,7 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
                       <button 
                         className='btn btn_type_edit btn_type_edit_status_active table__btn' 
                         type='button'
+                        onClick={() => openDisciplineFromWebinarPopup(item)}
                       >  
                       </button> 
                     </div>
@@ -334,6 +384,17 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
           }
         </div>
       </Table>
+      }
+      {            
+      isDisciplineFromWebinarPopupOpen &&
+      <EditDisciplineFromWebinarPopup
+          isOpen={isDisciplineFromWebinarPopupOpen}
+          onClose={closePopups}
+          currentData={currentData}
+          onChangeData={handleChangeData}
+          isLoadingRequest={isLoadingRequest}
+          isShowRequestError={isShowRequestError}
+      />
       }
     </div>     
   );

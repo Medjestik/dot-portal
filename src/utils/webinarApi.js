@@ -178,3 +178,28 @@ export const changeWebinarDisciplineStatus = ({ token, data }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const webinarGetTutors = ({ token }) => {
+  return fetch(`${API_URL}/webinars/action/get_tutors`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const editDisciplineFromWebinar = ({ token, data, disciplineId }) => {
+  return fetch(`${API_URL}/webinars/action/update_discipline_parameters/discipline_id/${disciplineId }`, { 
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify(data),
+  })
+  .then(res => handleResponse(res))
+};

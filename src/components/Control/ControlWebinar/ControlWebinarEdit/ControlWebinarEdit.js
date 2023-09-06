@@ -46,6 +46,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
     { name: 'Планируется', id: 'planned', },
     { name: 'Отменен', id: 'canceled', },
     { name: 'Завершен', id: 'completed', },
+    { name: 'Проводится', id: 'active', },
   ]
 
   const [currentStatusOption, setCurrentStatusOption] = React.useState(statusOptions[0]);

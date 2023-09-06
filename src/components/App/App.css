@@ -692,11 +692,13 @@ input[type=number] {
   transform: scale(0.4);
 }
 .checkbox {
-  width: 22px;
-  height: 22px;
   margin: 0px;
   display: block;
   cursor: pointer;
+}
+.checkbox_width_small {
+  width: 22px;
+  height: 22px;
 }
 .checkbox_margin_top {
   margin: 12px 0px 0px 0px;

@@ -141,10 +141,10 @@ function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, is
         </textarea>
       </label>
 
-      <label className='checkbox'>
+      <label className='checkbox checkbox_margin_top'>
         <input 
         name='edit-practice-visible'
-        type='checkbox checkbox_margin_top'
+        type='checkbox'
         id='edit-practice-visible'
         value={isVisible}
         defaultChecked={isVisible}
