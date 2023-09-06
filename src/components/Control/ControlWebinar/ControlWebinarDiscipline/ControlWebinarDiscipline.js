@@ -253,11 +253,11 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
               <div className='table__column table__column_type_header table__column_type_count'>
                 <p className='table__text table__text_type_header'></p>
               </div>
+              <div className='table__column table__column_type_header table__column_type_date'>
+                <p className='table__text table__text_type_header'>Период</p>
+              </div>
               <div className='table__column table__column_type_header table__column_type_full'>
                 <p className='table__text table__text_type_header'>Дисциплина</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_small'>
-                <p className='table__text table__text_type_header'>Тип</p>
               </div>
               <div className='table__column table__column_type_header table__column_type_teacher'>
                 <p className='table__text table__text_type_header'>Спикер</p>
@@ -298,11 +298,11 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
                           <span></span>
                         </label>
                       </div>
-                      <div className='table__column table__column_type_full'>
-                        <p className='table__text table__text_type_header'>{item.activity_name}</p>
+                      <div className='table__column table__column_type_date'>
+                        <p className='table__text'>{item.start_date} - {item.end_date}</p>
                       </div>
-                      <div className='table__column table__column_type_small'>
-                        <p className='table__text'>{item.control_name}</p>
+                      <div className='table__column table__column_type_full'>
+                        <p className='table__text table__text_type_header'>({item.control_name}) {item.activity_name}</p>
                       </div>
                       <div className='table__column table__column_type_teacher'>
                         <p className='table__text'>{item.lector_fullname}</p>
