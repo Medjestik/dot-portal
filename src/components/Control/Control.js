@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import Section from '../Section/Section.js';
-import ControlList from './ControlList/ControlList.js';
+import ControlNavigate from './ControlNavigate/ControlNavigate.js';
 import ControlWebinar from './ControlWebinar/ControlWebinar.js';
 
 function Control({ windowWidth, onLogout, semesterInfo }) {
@@ -24,7 +24,7 @@ function Control({ windowWidth, onLogout, semesterInfo }) {
               
             </div>
           </Section>
-          <ControlList windowWidth={windowWidth} />
+          <ControlNavigate windowWidth={windowWidth} />
           </>
           }
         >

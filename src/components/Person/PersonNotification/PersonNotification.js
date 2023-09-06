@@ -43,8 +43,6 @@ function PersonNotification({ windowWidth, userNotifications, onOpen, currentNot
     )
   }
 
-
-
   React.useEffect(() => {
     setSectionHeight(heightRef.current.clientHeight);
   }, [heightRef, windowWidth]);

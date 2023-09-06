@@ -10,6 +10,8 @@ function UserWebinarPopup({ isOpen, onClose, onSave, currentUsers }) {
   const [isBlockSearchButton, setIsBlockSearchButton] = React.useState(true);
   const [isLoadingPageSearch, setIsLoadingSearch] = React.useState(false);
 
+  console.log(currentUsers);
+
   const roleOptions = [
     { name: 'Ведущий', id: 'moderator', },
     { name: 'Участник', id: 'user', },

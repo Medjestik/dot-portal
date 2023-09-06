@@ -309,7 +309,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
             <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_webinar scroll'>
               {
                 filteredWebinars.map((item, i) => (
-                  <li className='table__row' key={i}>
+                  <li className='table__row' key={item.id}>
                     <div className='table__main-column'>
                       <div className='table__column table__column_type_count'>
                         <p className='table__text'>{i + 1}</p>
@@ -319,7 +319,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
                         <p className='table__text'>{item.time}</p>
                       </div>
                       <div className='table__column table__column_type_name'>
-                        <p className='table__text table__text_type_header'>{item.name}</p>
+                        <a className='table__text table__text_weight_bold table__text_type_active' href={item.link} target='_blank' rel='noreferrer'>{item.name}</a>
                       </div>
                       <div className='table__column table__column_type_teacher'>
                         <p className='table__text'>{item.key_speaker}</p>

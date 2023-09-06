@@ -23,6 +23,11 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
+  const containerHeightRef = React.createRef();
+  const tableHeaderHeightRef = React.createRef();
+
+  const [tableHeight, setTableHeight] = React.useState(0);
+
   const [isLoadingWebinar, setIsLoadingWebinar] = React.useState(true);
 
   const [webinars, setWebinars] = React.useState([]);
@@ -152,6 +157,16 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
     // eslint-disable-next-line
   }, []);
 
+  React.useEffect(() => {
+    if (windowWidth >= 833 && !isLoadingWebinar) {
+      setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
+    }
+  }, [windowWidth, containerHeightRef, tableHeaderHeightRef, isLoadingWebinar]);
+
+  const tableStyle = {
+    height: tableHeight,
+  };
+
   return (
     <div className='webinar'>
 
@@ -252,57 +267,59 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
         </TableCard>
         :
         <Table>
-          <div className='table__header'>
-            <div className='table__main-column table__main-column_type_empty'>
-              <div className='table__column table__column_type_header table__column_type_count'>
-                <p className='table__text table__text_type_header'>№</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_date'>
-                <p className='table__text table__text_type_header'>Дата</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_name'>
-                <p className='table__text table__text_type_header'>Наименование</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_teacher'>
-                <p className='table__text table__text_type_header'>Спикеры</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_status'>
-                <p className='table__text table__text_type_header'>Статус</p>
+          <div ref={containerHeightRef} className='table__container'>
+            <div ref={tableHeaderHeightRef} className='table__header'>
+              <div className='table__main-column table__main-column_type_empty'>
+                <div className='table__column table__column_type_header table__column_type_count'>
+                  <p className='table__text table__text_type_header'>№</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_date'>
+                  <p className='table__text table__text_type_header'>Дата</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_name'>
+                  <p className='table__text table__text_type_header'>Наименование</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_teacher'>
+                  <p className='table__text table__text_type_header'>Спикеры</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_status'>
+                  <p className='table__text table__text_type_header'>Статус</p>
+                </div>
               </div>
             </div>
+            {
+              filteredWebinars.length < 1 
+              ?
+              <p className='table__caption_type_empty'>По заданным параметрам вебинаров не найдено.</p>
+              :
+              <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+                {
+                  [...filteredWebinars].reverse().map((item, i) => (
+                    <li className='table__row' key={i}>
+                      <div className='table__main-column'>
+                        <div className='table__column table__column_type_count'>
+                          <p className='table__text'>{i + 1}</p>
+                        </div>
+                        <div className='table__column table__column_type_date'>
+                          <p className='table__text'>{item.date}</p>
+                          <p className='table__text'>{item.time}</p>
+                        </div>
+                        <div className='table__column table__column_type_name' onClick={() => openViewWebinarPopup(item)}>
+                          <p className='table__text table__text_type_active table__text_type_header'>{item.name}</p>
+                        </div>
+                        <div className='table__column table__column_type_teacher'>
+                          <p className='table__text'>{item.speakers.join(', ')}</p>
+                        </div>
+                        <div className='table__column table__column_type_status'>
+                          {renderStatus(item.status)}
+                        </div>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ul>
+            }
           </div>
-          {
-            filteredWebinars.length < 1 
-            ?
-            <p className='table__caption_type_empty'>По заданным параметрам вебинаров не найдено.</p>
-            :
-            <ul className='table__main scroll'>
-              {
-                [...filteredWebinars].reverse().map((item, i) => (
-                  <li className='table__row' key={i}>
-                    <div className='table__main-column'>
-                      <div className='table__column table__column_type_count'>
-                        <p className='table__text'>{i + 1}</p>
-                      </div>
-                      <div className='table__column table__column_type_date'>
-                        <p className='table__text'>{item.date}</p>
-                        <p className='table__text'>{item.time}</p>
-                      </div>
-                      <div className='table__column table__column_type_name' onClick={() => openViewWebinarPopup(item)}>
-                        <p className='table__text table__text_type_active table__text_type_header'>{item.name}</p>
-                      </div>
-                      <div className='table__column table__column_type_teacher'>
-                        <p className='table__text'>{item.speakers.join(', ')}</p>
-                      </div>
-                      <div className='table__column table__column_type_status'>
-                        {renderStatus(item.status)}
-                      </div>
-                    </div>
-                  </li>
-                ))
-              }
-            </ul>
-          }
         </Table>
 
         }

@@ -4,8 +4,6 @@ function DisciplineUserMaterialsList({ windowWidth, materials, handleOpenMateria
 
   const [convertMaterials, setConvertMaterials] = React.useState([]);
 
-  console.log(materials);
-
   function convertArr(arr) {
     const newArr = arr.filter(item => item.parent_part_code === '').map((item) => {
       if (item.parent_part_code === '') {

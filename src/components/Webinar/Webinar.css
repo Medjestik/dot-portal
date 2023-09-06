@@ -1,6 +1,10 @@
 .webinar {
   margin: 0px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 24px);
+  height: 100%;
 }
 .table__main_type_webinar {
   max-height: calc(100vh - 306px);

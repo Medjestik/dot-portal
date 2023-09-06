@@ -171,6 +171,7 @@
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
+  text-decoration: none;
   transition: all .3s ease-in-out;
 }
 .table__text_weight_bold {
