@@ -29,7 +29,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
   const [searchNameText, setSearchNameText] = React.useState('');
   const [searchTeacherText, setSearchTeacherText] = React.useState('');
   const [date, setDate] = React.useState('');
-  const [dateError, setDateError] = React.useState({ isShow: false, text: '' });
+  const [dateError, setDateError] = React.useState({ isShow: false, text: '' }); 
 
   function renderStatus(status) {
     switch(status) {
@@ -67,14 +67,30 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
     }
   }
 
-  function webinarRequest() {
+  function webinarRequest(nameText, teacherText) {
     setIsLoadingWebinar(true);
     const token = localStorage.getItem('token');
     webinarApi.getAdminWebinarsList({ token: token })
     .then((res) => {
       console.log('AdminWebinars', res);
+      let changeData = [];
+      if ((nameText.length > 0) && (teacherText.length > 0)) {
+        changeData = res.filter((item) => {
+          return item.name.toLowerCase().includes(nameText.toLowerCase()) && item.key_speaker.toLowerCase().includes(teacherText.toLowerCase());
+        })
+      } else if ((nameText.length > 0) && (teacherText.length < 1)) {
+        changeData = res.filter((item) => {
+          return item.name.toLowerCase().includes(nameText.toLowerCase());
+        })
+      } else if ((nameText.length < 1) && (teacherText.length > 0)) {
+        changeData = res.filter((item) => {
+          return item.key_speaker.toLowerCase().includes(teacherText.toLowerCase());
+        })
+      } else {
+        changeData = res;
+      }
       setWebinars(res);
-      setFilteredWebinars(res);
+      setFilteredWebinars(changeData);
     })
     .catch((err) => {
       console.error(err);
@@ -140,10 +156,14 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
 
   function handleSearchName(e) {
    setSearchNameText(e.target.value);
+   localStorage.setItem('webinarSearchNameText', e.target.value);
+   setDate('');
   }
 
   function handleSearchTeacher(e) {
     setSearchTeacherText(e.target.value);
+    localStorage.setItem('webinarSearchTeacherText', e.target.value);
+    setDate('');
   }
 
   function handleChangeDate(e) {
@@ -152,6 +172,10 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
       if (e.target.checkValidity()) {
         setDateError({ text: '', isShow: false });
         handleSearchByDate(e.target.value);
+        setSearchNameText('');
+        localStorage.setItem('webinarSearchNameText', '');
+        setSearchTeacherText('');
+        localStorage.setItem('webinarSearchTeacherText', '');
       } else {
         setDateError({ text: 'Укажите корректную дату', isShow: true });
       }
@@ -204,7 +228,10 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
   }, [searchTeacherText]);
 
   React.useEffect(() => {
-    webinarRequest();
+    setSearchNameText(localStorage.getItem('webinarSearchNameText') || '');
+    setSearchTeacherText(localStorage.getItem('webinarSearchTeacherText') || '');
+    setDate('');
+    webinarRequest(localStorage.getItem('webinarSearchNameText') || '', localStorage.getItem('webinarSearchTeacherText') || '');
 
     return(() => {
       setDate('');
@@ -213,6 +240,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
       setFilteredWebinars([]);
       setCurrentWebinar({});
     })
+    // eslint-disable-next-line
   }, [])
 
   return (

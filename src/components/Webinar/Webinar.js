@@ -17,6 +17,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
   const statusOptions = [
     { name: 'Не выбран', id: 'empty', },
     { name: 'Планируется', id: 'planned', },
+    { name: 'Проводится', id: 'active', },
     { name: 'Отменен', id: 'canceled', },
     { name: 'Завершен', id: 'completed', },
   ]
@@ -108,6 +109,14 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
               <p className='table__text'>Отменен</p>
             </div>
           )
+
+          case 'active':
+            return ( 
+              <div className='status'>
+                <span className='status__icon status__icon_type_canceled'></span>
+                <p className='table__text'>Проводится</p>
+              </div>
+            )
 
       default:
         return ( 
