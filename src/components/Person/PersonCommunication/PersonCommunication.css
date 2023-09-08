@@ -185,7 +185,7 @@
 .person-communication__classmates-social-link {
   margin: 0px;
   padding: 11px 16px;
-  max-width: calc(184px - 48px);
+  max-width: 240px;
   text-decoration: none;
   font-style: normal;
   font-weight: normal;

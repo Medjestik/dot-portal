@@ -64,7 +64,7 @@ function CuratorAdvertisement({ windowWidth, groupInfo }) {
   }
 
   function groupRequest() {
-    setIsLoadingAdvertisement(false);
+    setIsLoadingAdvertisement(true);
     const token = localStorage.getItem('token');
     curatorApi.getGroupAdvertisement({ token: token, groupId: groupInfo.id })
     .then((res) => {

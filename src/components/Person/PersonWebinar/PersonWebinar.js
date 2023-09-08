@@ -127,8 +127,8 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
             <div className='person-webinar__slider'>
               <Carousel showArrows={false} itemsToShow={countCards}>
                 {
-                  webinars.map((elem) => (
-                    <div key={elem.id} className='person-webinar__card'>
+                  webinars.map((elem, i) => (
+                    <div key={`${elem.id} + id${i}`} className='person-webinar__card'>
                       {renderStatus(elem.status)}
                       <h4 className='table-card__text table-card__text_weight_bold table-card__text_type_cut table-card__title'>{elem.name}</h4>
                       <ul className='data__list data__list_margin_top'>

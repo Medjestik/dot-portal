@@ -69,7 +69,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
   }
 
   function dataRequest() {
-    setIsLoadingData(false);
+    setIsLoadingData(true);
     const token = localStorage.getItem('token');
     curatorApi.getGroupDisciplines({ token: token, groupId: groupInfo.id })
     .then((res) => {

@@ -26,12 +26,11 @@ function CuratorPracticeList({ windowWidth, groupInfo, openPractice }) {
   };
 
   function dataRequest() {
-    setIsLoadingData(false);
+    setIsLoadingData(true);
     const token = localStorage.getItem('token');
     curatorApi.getGroupPractice({ token: token, groupId: groupInfo.id })
     .then((res) => {
       console.log('GroupPracticeList', res);
-      
       setPracticeList(res);
     })
     .catch((err) => {
@@ -113,7 +112,7 @@ function CuratorPracticeList({ windowWidth, groupInfo, openPractice }) {
           }
           </ul>
           :
-          <div className='table__caption_type_empty'>В этом семестре у вас отсутствуют дисциплины!</div>
+          <div className='table__caption_type_empty'>Практика пока не открыта!</div>
         }
       </div>
     </Table>
