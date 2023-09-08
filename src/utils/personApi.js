@@ -120,3 +120,28 @@ export const changeStudentSocial = ({ token, userId, social }) => {
   })
   .then(res => handleResponse(res));
 };
+
+export const getPersonWebinarPlanned = ({ token }) => {
+  return fetch(`${API_URL}/webinars/action/my_upcoming_webinars/status/upcoming/limit/10`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getPersonWebinarCompleted = ({ token }) => {
+  return fetch(`${API_URL}/webinars/action/my_upcoming_webinars/status/completed/limit/10`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+

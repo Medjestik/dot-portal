@@ -11,6 +11,9 @@ function PracticeTeacherTable({ practice, openDiscipline }) {
           <div className='table__column table__column_type_header table__column_type_count'>
             <p className='table__text table__text_type_header'>№</p>
           </div>
+          <div className='table__column table__column_type_header table__column_type_date'>
+            <p className='table__text table__text_type_header'>Период</p>
+          </div>
           <div className='table__column table__column_type_header table__column_type_name'>
             <p className='table__text table__text_type_header'>Наименование</p>
           </div>
@@ -31,6 +34,9 @@ function PracticeTeacherTable({ practice, openDiscipline }) {
                 <div className='table__main-column'>
                   <div className='table__column table__column_type_count'>
                     <p className='table__text'>{i + 1}</p>
+                  </div>
+                  <div className='table__column table__column_type_date'>
+                    <p className='table__text'>{item.start_date} - {item.end_date}</p>
                   </div>
                   <div className='table__column table__column_type_name'>
                     <p className='table__text table__text_type_header table__text_type_active' onClick={() => openDiscipline(item)}>{item.practic_name || ''}</p>

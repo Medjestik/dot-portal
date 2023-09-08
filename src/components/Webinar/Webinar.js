@@ -330,9 +330,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
             }
           </div>
         </Table>
-
         }
-
       </Section>
       </>
       }

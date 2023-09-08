@@ -32,6 +32,12 @@
 .table-card__text_color_grey {
   color: var(--accent-grey-color);
 }
+.table-card__text_type_cut {
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
 .table-card__text_type_active:hover {
   cursor: pointer;
   color: var(--accent-blue-color);

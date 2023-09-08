@@ -210,6 +210,12 @@
 .table__text_type_header {
   font-weight: bold;
 }
+.table__text_margin_left {
+  margin: 0px 0px 0px 16px;
+}
+.table__text_margin_top {
+  margin: 16px 0px 0px 0px;
+}
 .table__caption_type_empty {
   margin: 16px 0px 0px 0px;
   font-style: normal;

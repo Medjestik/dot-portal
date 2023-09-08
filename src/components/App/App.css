@@ -59,7 +59,7 @@
 .link {
   max-width: min-content;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   text-align: center;
@@ -801,7 +801,7 @@ input[type=number] {
 .rec.rec-pagination {
   position: absolute;
   right: 0px;
-  bottom: -50px;
+  bottom: -36px;
 }
 .rec.rec-dot {
   width: 12px;
@@ -1020,5 +1020,8 @@ input[type=number] {
     background-size: 16px;
     background-repeat: no-repeat;
     background-position: center;
+  }
+  .rec.rec-slider-container {
+    margin: 0px;
   }
 }

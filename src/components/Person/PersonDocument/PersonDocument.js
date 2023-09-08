@@ -6,7 +6,7 @@ import PersonDocumentInfoPopup from './PersonDocumentInfoPopup/PersonDocumentInf
 import ConfirmRemovePopup from '../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 import documentIcon from '../../../images/accordion/accordion-document.svg';
 
-function PersonDocument({ windowWidth, userDocuments, userCheck }) { 
+function PersonDocument({ windowWidth, userDocuments, userCheck }) {
 
   const [isOpenInfoPopup, setIsOpenInfoPopup] = React.useState(false);
   const [sectionHeight, setSectionHeight] = React.useState(0);

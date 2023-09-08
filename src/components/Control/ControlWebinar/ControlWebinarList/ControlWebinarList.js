@@ -355,7 +355,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
                         <p className='table__text'>{item.time}</p>
                       </div>
                       <div className='table__column table__column_type_name'>
-                        <a className='table__text table__text_weight_bold table__text_type_active' href={item.link} target='_blank' rel='noreferrer'>{item.name}</a>
+                        <a className='table__text table__text_weight_bold table__text_type_active' href={item.status === 'completed' ? item.record_link : item.link} target='_blank' rel='noreferrer'>{item.name}</a>
                       </div>
                       <div className='table__column table__column_type_teacher'>
                         <p className='table__text'>{item.key_speaker}</p>

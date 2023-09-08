@@ -9,6 +9,7 @@ import PersonAdministration from '../PersonAdministration/PersonAdministration.j
 import PersonEducation from '../PersonEducation/PersonEducation.js';
 import PersonNotification from '../PersonNotification/PersonNotification.js';
 import PersonCommunication from '../PersonCommunication/PersonCommunication.js';
+import PersonWebinar from '../PersonWebinar/PersonWebinar.js';
 
 function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, countNewNotification, openNotificationPopup }) {
 
@@ -83,6 +84,8 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
   const [studentData, setStudentData] = React.useState({});
   const [studentEducationInfo, setStudentEducationInfo] = React.useState({});
   const [studentSocial, setStudentSocial] = React.useState({});
+  const [personWebinarsPlanned, setPersonWebinarsPlanned] = React.useState([]);
+  const [personWebinarsCompleted, setPersonWebinarsCompleted] = React.useState([]);
 
   const [isLoadingPage, setIsLoadingPage] = React.useState(true);
   const [isLoadingSocialRequest, setIsLoadingSocialRequest] = React.useState({ isShow: false, type: '' });
@@ -120,14 +123,19 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       personApi.getStudentData({ token: token, userId: id }),
       personApi.getStudentEducationInfo({ token: token, userId: id }),
       personApi.getStudentSocial({ token: token, userId: id }),
+      personApi.getPersonWebinarPlanned({ token: token, }),
+      personApi.getPersonWebinarCompleted({ token: token, }),
     ])
-    .then(([studentData, studentEducationInfo, studentSocial, userNotifications]) => {
+    .then(([studentData, studentEducationInfo, studentSocial, studentWebinarsPlanned, studentWebinarsCompleted]) => {
       //console.log('StudentData', studentData);
       //console.log('StudentEducationInfo', studentEducationInfo);
       //console.log('StudentSocial', studentSocial);
+      //console.log('StudentWebinars', studentWebinars);
       setStudentData(studentData);
       setStudentEducationInfo(studentEducationInfo);
       setStudentSocial(studentSocial);
+      setPersonWebinarsPlanned(studentWebinarsPlanned);
+      setPersonWebinarsCompleted(studentWebinarsCompleted);
     })
     .catch((err) => {
         console.error(err);
@@ -145,6 +153,8 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       setStudentData({});
       setStudentEducationInfo({});
       setStudentSocial({});
+      setPersonWebinarsPlanned([]);
+      setPersonWebinarsCompleted([]);
       setIsLoadingSocialRequest({ isShow: false, type: '' }); 
     }
   // eslint-disable-next-line
@@ -209,6 +219,12 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
           <PersonEducation 
             studentEducationInfo={studentEducationInfo} 
             windowWidth={windowWidth} 
+          />
+          
+          <PersonWebinar 
+            windowWidth={windowWidth}
+            personWebinarsPlanned={personWebinarsPlanned}
+            personWebinarsCompleted={personWebinarsCompleted}
           />
 
           <PersonNotification 

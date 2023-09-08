@@ -52,6 +52,8 @@ function EditPracticePopup({ isOpen, onClose, practice, currentStudent, onEdit, 
     >
         <h2 className='popup__title'>Редактирование практики</h2>
         <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Студент: </span>{currentStudent.student.name}</p>
+        <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Телефон: </span>{currentStudent.student.phone}</p>
+        <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Почта: </span>{currentStudent.student.email}</p>
 
         <div className='popup__field'>
             <h4 className='popup__input-caption'>Задание для студента:</h4>
