@@ -17,14 +17,20 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
     <>
     <div className='practice-info__container'>
 
-      <ul className='data__list'>
-        <li className='data__item'>
-          <span className='data__text data__text_font_bold'>Задание на практику:</span>
-        </li>
-        <li className='data__item'>
-          <div className='data__area data__area_height_small scroll-inside'>{practiceInfo.individual.task}</div>
-        </li>
-      </ul>
+    <ul className='data__list'>
+      <li className='data__item'>
+        <span className='data__text data__text_font_bold'>Описание задания: </span>
+      </li>
+      <li className='data__item'>
+        <textarea defaultValue={practiceInfo.description} id='practice-user-description' name='practice-user-description' disabled className='data__area data__area_height_small scroll-inside'></textarea>
+      </li>
+      <li className='data__item'>
+        <span className='data__text data__text_font_bold'>Индивидуальное задание: </span>
+      </li>
+      <li className='data__item'>
+        <textarea defaultValue={practiceInfo.individual.task} id='practice-user-task' name='practice-user-task' disabled className='data__area data__area_height_small scroll-inside'></textarea>
+      </li>
+    </ul>
 
       {
         practiceInfo.files.length > 0 &&

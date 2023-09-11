@@ -58,6 +58,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
     }
   }
 
+  /*
   function filterBySemester(option) {
     setCurrentSemesterOption(option);
     if (option.id === 'empty') {
@@ -74,6 +75,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
       }
     }
   }
+  */
 
   function filterByStatus(option) {
     setCurrentStatusOption(option);
@@ -201,12 +203,13 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
           </div>
         </div>
         <div className='section__header'>
-          {            
+          { /*       
             currentUser.access_role === 'dot' && 
             <div className='section__header-item'>
               <span className='section__header-caption'>Период:</span>
               <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
-            </div>         
+            </div> 
+            */        
           }
           <div className='section__header-item'>
             <span className='section__header-caption'>Статус:</span>
@@ -217,12 +220,13 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
         :
         <>
         <div className='section__header'>
-        {            
+        { /*       
           currentUser.access_role === 'dot' && 
           <div className='section__header-item'>
             <span className='section__header-caption'>Период:</span>
             <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
           </div>
+          */
         }
           <div className='section__header-item'>
             <span className='section__header-caption'>Статус:</span>
@@ -230,7 +234,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
           </div>
           <div className='section__header-item'>
             <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по названию:</span>
-            <Search type={currentUser.access_role === 'dot' ? 'medium' : 'large'} id='webinar' data={webinars} onSearch={handleSearch} />
+            <Search type='large' id='webinar' data={webinars} onSearch={handleSearch} />
           </div>
         </div>
         </>

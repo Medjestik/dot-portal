@@ -34,10 +34,11 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
 
   return (
     <>
+    <h3 className='discipline-info__teacher-name'>{practiceInfo.name}</h3>
     <div className='practice-info__container'>
+
       <div className='discipline-info__column'>
         <div ref={taskHeightRef} className='discipline-info__description'>
-          <h3 className='discipline-info__teacher-name'>{practiceInfo.name}</h3>
           <ul className='data__list data__list_margin_top'>
             <li className='data__item'>
               <p className='data__text'>
@@ -73,7 +74,7 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
               <span className='data__text data__text_font_bold'>Комментарий преподавателя: </span>
             </li>
             <li className='data__item'>
-              <div className='data__area data__area_height_small scroll-inside'>{practiceInfo.individual.komment}</div>
+              <textarea defaultValue={practiceInfo.individual.komment} id='practice-user-comment' name='practice-user-comment' disabled className='data__area data__area_height_small scroll-inside'></textarea>
             </li>
           </ul>
         </div>
@@ -83,10 +84,18 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
         windowWidth >= 833 &&
         <div className='discipline-info__column'>
           <div className='discipline-info__description'>
-            <h3 className='discipline-info__teacher-name'>Задание на практику</h3>
             <ul className='data__list data__list_margin_top'>
               <li className='data__item'>
-                <div className='data__area scroll-inside'>{practiceInfo.individual.task}</div>
+                <span className='data__text data__text_font_bold'>Описание задания: </span>
+              </li>
+              <li className='data__item'>
+                <textarea defaultValue={practiceInfo.description} id='practice-user-description' name='practice-user-description' disabled className='data__area data__area_height_small scroll-inside'></textarea>
+              </li>
+              <li className='data__item'>
+                <span className='data__text data__text_font_bold'>Индивидуальное задание: </span>
+              </li>
+              <li className='data__item'>
+                <textarea defaultValue={practiceInfo.individual.task} id='practice-user-task' name='practice-user-task' disabled className='data__area data__area_height_small scroll-inside'></textarea>
               </li>
             </ul>
           </div>
@@ -94,6 +103,7 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
       }
 
     </div>
+  
 
     {
       windowWidth >= 833 &&

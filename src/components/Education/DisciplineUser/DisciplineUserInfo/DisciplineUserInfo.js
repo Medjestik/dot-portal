@@ -229,7 +229,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
               ?
               <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
               :
-              [...disciplineInfo.announces.map((elem) => ({...elem, title: elem.text, type: 'advertisement'})), ...disciplineInfo.comments.map((elem) => ({...elem, title: elem.text, author: elem.author_fullname, type: 'comment'}))].sort((a,b) => b.seconds - a.seconds).map((elem, i) => (
+              [...disciplineInfo.announces.map((elem) => ({...elem, title: elem.title, type: 'advertisement'})), ...disciplineInfo.comments.map((elem) => ({...elem, title: elem.text, author: elem.author_fullname, type: 'comment'}))].sort((a,b) => b.seconds - a.seconds).map((elem, i) => (
                 <EducationAdvertisement advertisement={elem} key={i} onOpen={() => openPopup(elem)} />
               ))
             }

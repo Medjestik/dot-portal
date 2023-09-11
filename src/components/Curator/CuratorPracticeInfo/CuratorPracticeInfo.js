@@ -24,7 +24,10 @@ function CuratorPracticeInfo({ windowWidth, practice, onDelete }) {
           <p className='data__text'><span className='data__text_font_bold'>Дата окончания:</span>{practice.end_date ? convertDate(practice.end_date) : '00.00.0000' }</p>
         </li>
         <li className='data__item'>
-          <p className='data__text'><span className='data__text_font_bold'>Описание:</span>{practice.description || ''}</p>
+          <span className='data__text data__text_font_bold'>Описание задания: </span>
+        </li>
+        <li className='data__item'>
+          <textarea defaultValue={practice.description || ''} id='practice-curator-description' name='practice-curator-description' disabled className='data__area data__area_height_small scroll-inside'></textarea>
         </li>
       </ul>
 

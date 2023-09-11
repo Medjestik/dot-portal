@@ -40,9 +40,13 @@ function StudentViewAdvertisementPopup({ isOpen, onClose, currentAdvertisement, 
           <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Дата публикации: </span>{currentAdvertisement.date}</p>
         </div>
       </div>
-      
-      <p className='popup__textarea popup__textarea_height_medium scroll-inside'>{currentAdvertisement.text}</p>
 
+      <ul className='data__list data__list_margin_top'>
+        <dli className='data__item'>
+          <textarea defaultValue={currentAdvertisement.text} id='student-view-advertisement-text' name='student-view-advertisement-text' disabled className='data__area data__area_height_medium scroll-inside'></textarea>
+        </dli>
+      </ul>
+      
       <div className='popup__btn_margin_top'></div>
       
       <button className='popup__btn-back' type='submit'>Назад</button>
