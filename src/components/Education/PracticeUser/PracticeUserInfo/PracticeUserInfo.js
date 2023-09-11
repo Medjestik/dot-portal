@@ -12,7 +12,6 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
 
   React.useEffect(() => {
     if (windowWidth >= 833) {
-      console.log(taskHeightRef.current.clientHeight)
       setTaskHeight(taskHeightRef.current.clientHeight);
     }
   }, [windowWidth, containerHeightRef, tableHeaderHeightRef, taskHeightRef]);

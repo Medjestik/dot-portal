@@ -61,7 +61,7 @@ function TeacherChooseMarkPopup({ isOpen, onClose, currentStudent, disciplineInf
         disciplineInfo.course_work &&
         <div className='popup__field'>
           <h4 className='popup__input-caption'>Оценка за курсовую работу:</h4>
-          <PopupSelect options={disciplineInfo.possible_marks} currentOption={currentCourseMark} onChooseOption={handleChooseCourseMark} />
+          <PopupSelect options={disciplineInfo.course_work.possible_marks} currentOption={currentCourseMark} onChooseOption={handleChooseCourseMark} />
         </div>
       }
 
