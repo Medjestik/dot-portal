@@ -136,10 +136,10 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
                           <p className='data__text'><span className='data__text_font_bold'>Спикер:</span> {elem.speakers[0]}</p>
                         </li>
                         <li className='data__item'>
-                          <p className='data__text'><span className='data__text_font_bold'>Дата:</span> {elem.date}</p>
+                          <p className='data__text'><span className='data__text_font_bold'>Дата:</span> {elem.date}, {elem.time}</p>
                         </li>
                         <li className='data__item'>
-                          <p className='data__text'><span className='data__text_font_bold'>Время:</span> {elem.time}</p>
+                          <p className='data__text'><span className='data__text_font_bold'>Группа:</span> {elem.groups.map((elem) => elem.name).join(', ')}</p>
                         </li>
                       </ul>
                       <button className='person-webinar__card-button' type='button' onClick={() => handleOpenWebinarView(elem)}>Подробнее</button>
@@ -149,7 +149,7 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
               </Carousel>
             </div>
             :
-            <p className={`table__text table__text_type_empty table__text_margin_${windowWidth > 833 ? 'left' : 'top'}`}>{currentWebinarStatus === 'planned' ? 'Ближайшие вебинары пока не назначены' : 'Записи последних вебинаров не найдены!'}</p>
+            <p className={`table__text table__text_type_empty table__text_margin_${windowWidth > 833 ? 'left' : 'top'}`}>{currentWebinarStatus === 'planned' ? 'Ближайшие вебинары пока не назначены.' : 'Записи последних вебинаров не найдены.'}</p>
 
           }
 

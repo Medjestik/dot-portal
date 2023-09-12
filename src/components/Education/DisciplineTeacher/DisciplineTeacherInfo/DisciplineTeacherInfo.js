@@ -85,7 +85,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
     educationApi.getDisciplineInfoTeacher({ token: token, disciplineId: disciplineId })
     .then((res) => {
       console.log('DisciplineInfo', res);
-      setAdvertisement(res.announces);
+      setAdvertisement([...res.announces].reverse());
       setMaterials(res.files);
       setDisciplineStat(res.stat);
     })
@@ -322,7 +322,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
                     ?
                     <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
                     :
-                    [...advertisement.map((elem) => ({...elem, type: 'advertisement'}))].map((elem, i) => (
+                    advertisement.map((elem) => ({...elem, type: 'advertisement'})).map((elem, i) => (
                       <EducationAdvertisement key={i} advertisement={elem} onOpen={openEditAdvertisementPopup} />
                     ))
                   }

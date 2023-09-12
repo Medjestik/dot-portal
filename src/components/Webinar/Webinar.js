@@ -145,9 +145,12 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
     webinarApi.getWebinars({ token: token })
     .then((res) => {
       //console.log('Webinars', res);
-      setWebinars(res);
-      setFilteredWebinars(res);
-      setSearchedWebinars(res);
+      const ActiveWebinars = res.filter(elem => elem.status === 'active');
+      const PlannedWebinars = res.filter(elem => elem.status === 'planned');
+      const CompletedWebinars = res.filter(elem => elem.status === 'completed').reverse();
+      setWebinars([...ActiveWebinars, ...PlannedWebinars, ...CompletedWebinars]);
+      setFilteredWebinars([...ActiveWebinars, ...PlannedWebinars, ...CompletedWebinars]);
+      setSearchedWebinars([...ActiveWebinars, ...PlannedWebinars, ...CompletedWebinars]);
     })
     .catch((err) => {
       console.error(err);
@@ -251,7 +254,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
             :
             <>
             {
-              [...filteredWebinars].reverse().map((item, i) => (
+              filteredWebinars.map((item, i) => (
                 <li className='table-card__item' key={i}>
                   {renderStatus(item.status)}
                   
@@ -269,6 +272,20 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
                       </li>
                       <li className='table-card__info-item'>
                         <p className='data__text'><span className='data__text_font_bold'>Время:</span>{item.time || ''}</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className='table-card__info'>
+                    <ul className='table-card__info-list'>
+                      <li className='table-card__info-item'>
+                        {
+                          item.groups.length > 0
+                          ?
+                            <p className='data__text'><span className='data__text_font_bold'>Группа:</span>{item.groups.map((elem) => elem.name).join(', ')}</p>
+                          :
+                            <p className='data__text'><span className='data__text_font_bold'>Группа:</span> </p>
+                        }
+                        
                       </li>
                     </ul>
                   </div>
@@ -292,6 +309,9 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
                 <div className='table__column table__column_type_header table__column_type_name'>
                   <p className='table__text table__text_type_header'>Наименование</p>
                 </div>
+                <div className='table__column table__column_type_header table__column_type_medium'>
+                  <p className='table__text table__text_type_header'>Группа</p>
+                </div>
                 <div className='table__column table__column_type_header table__column_type_teacher'>
                   <p className='table__text table__text_type_header'>Спикеры</p>
                 </div>
@@ -307,7 +327,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
               :
               <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
                 {
-                  [...filteredWebinars].reverse().map((item, i) => (
+                  filteredWebinars.map((item, i) => (
                     <li className='table__row' key={i}>
                       <div className='table__main-column'>
                         <div className='table__column table__column_type_count'>
@@ -320,8 +340,23 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
                         <div className='table__column table__column_type_name' onClick={() => openViewWebinarPopup(item)}>
                           <p className='table__text table__text_type_active table__text_type_header'>{item.name}</p>
                         </div>
+                        <div className='table__column table__column_type_medium'>
+                          {
+                            item.groups.length > 0
+                            ?
+                              <p className='table__text'>{item.groups.map((elem) => elem.name).join(', ')}</p>
+                            :
+                              <p className='table__text'> </p>
+                          } 
+                        </div>
                         <div className='table__column table__column_type_teacher'>
-                          <p className='table__text'>{item.speakers.join(', ')}</p>
+                          {
+                            item.groups.length > 0
+                            ?
+                              <p className='table__text'>{item.speakers.join(', ')}</p>
+                            :
+                              <p className='table__text'> </p>
+                          } 
                         </div>
                         <div className='table__column table__column_type_status'>
                           {renderStatus(item.status)}

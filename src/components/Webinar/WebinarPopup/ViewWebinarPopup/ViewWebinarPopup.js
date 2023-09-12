@@ -18,13 +18,20 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
             <p className='popup__row-text'>Завершен</p>
           </div>
         )
+
+      case 'active':
+        return ( 
+          <div className='status'>
+            <p className='popup__row-text'>Проводится</p>
+          </div>
+        )
       
-        case 'canceled':
-          return ( 
-            <div className='status'>
-              <p className='popup__row-text'>Отменен</p>
-            </div>
-          )
+      case 'canceled':
+        return ( 
+          <div className='status'>
+            <p className='popup__row-text'>Отменен</p>
+          </div>
+        )
 
       default:
         return ( 
@@ -109,8 +116,14 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
             <p className='popup__row-text'>{currentWebinar.date || ''}</p>
           </div>
           <div className='popup__row-item'>
-            <h6 className='popup__row-title popup__row-title_margin_right'>Длительность:</h6>
-            <p className='popup__row-text'>{currentWebinar.duration || ''} мин.</p> 
+            <h6 className='popup__row-title popup__row-title_margin_right'>Группа:</h6>
+            {
+              currentWebinar.groups.length > 0 
+              ?
+                <p className='popup__row-text'>{currentWebinar.groups.map((elem) => elem.name).join(', ')}</p> 
+              :
+                <p className='popup__row-text'> </p> 
+            }
           </div>
         </div>
 
