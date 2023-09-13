@@ -35,7 +35,7 @@ function CuratorAdvertisement({ windowWidth, groupInfo }) {
   }, [isLoadingAdvertisement, windowWidth, containerHeightRef, tableHeaderHeightRef]);
 
   const tableStyle = {
-    height: tableHeight - 1,
+    height: tableHeight,
   };
 
   function openAddAdvertisementPopup() {

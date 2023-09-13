@@ -137,9 +137,9 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
             {
               currentWebinar.status === 'completed' 
               ?
-              <a className='popup__row-text popup__text_type_link' href={currentWebinar.recordLink} target='_blank' rel='noreferrer'>Запись</a>
+              <a className='popup__row-text popup__text_type_link' href={currentWebinar.recordLink} target='_blank' rel='noreferrer'>Запись вебинара</a>
               :
-              <a className='popup__row-text popup__text_type_link' href={currentWebinar.link} target='_blank' rel='noreferrer'>Комната</a>
+              <a className='popup__row-text popup__text_type_link' href={currentWebinar.link} target='_blank' rel='noreferrer'>Войти в комнату</a>
             }
           </div>
         </div>

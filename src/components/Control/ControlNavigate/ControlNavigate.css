@@ -67,3 +67,10 @@
 .control-navigate__column-item:hover::before{
   left: 5px;
 }
+
+@media all and (max-width: 833px) {
+  .control-navigate__column-item {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
