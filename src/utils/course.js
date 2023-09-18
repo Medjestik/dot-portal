@@ -31,3 +31,16 @@ export const getCourseMaterials = ({ token, courseId }) => {
     })
   .then(res => handleResponse(res))
 };
+
+export const changeData = ({ token, data }) => {
+  return fetch(`${API_URL}/users/action/save_pk_data`, {
+    method: 'POST', 
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ data })
+  })
+  .then(res => handleResponse(res));
+};

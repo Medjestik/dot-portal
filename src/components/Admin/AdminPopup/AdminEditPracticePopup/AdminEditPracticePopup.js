@@ -37,7 +37,6 @@ function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, is
 
   function handleChangeType(type) {
     setType(type);
-
   }
 
   function handleChangeStartDate(e) {

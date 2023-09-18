@@ -5,6 +5,7 @@ import Table from '../../../Table/Table.js';
 import * as webinarApi from '../../../../utils/webinarApi.js';
 import Preloader from '../../../Preloader/Preloader.js';
 import ConfirmRemovePopup from '../../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
+import StatusWebinarPopup from '../../../Webinar/WebinarPopup/StatusWebinarPopup/StatusWebinarPopup.js';
 
 function ControlWebinarList({ windowWidth, addWebinar }) {
 
@@ -18,6 +19,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
   const [currentWebinar, setCurrentWebinar] = React.useState({});
 
   const [isOpenWebinarRemove, setIsOpenWebinarRemove] = React.useState(false);
+  const [isOpenStatusWebinar, setIsOpenStatusWebinar] = React.useState(false);
 
   const [webinars, setWebinars] = React.useState([]);
   const [filteredWebinars, setFilteredWebinars] = React.useState([]);
@@ -125,9 +127,42 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
     });
   }
 
+  function openStatusWebinarPopup(data) {
+    setCurrentWebinar(data);
+    setIsOpenStatusWebinar(true);
+  }
+
   function openRemoveWebinarPopup(data) {
     setCurrentWebinar(data);
     setIsOpenWebinarRemove(true);
+  }
+
+  function handleChangeStatus(webinar, status, comment) {
+    const data = {
+      ...webinar,
+      description : comment,
+      status: status.id,
+    };
+
+    console.log(data);
+
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+    webinarApi.editWebinar({
+      token: token,
+      data: data,
+    })
+    .then((res) => {
+      console.log(res);
+
+    })
+    .catch((err) => {
+      console.error(err);
+      setIsShowRequestError({ text: 'Произошла ошибка, попробуйте еще раз', isShow: true });
+    })
+    .finally(() => {  
+      setIsLoadingRequest(false);
+    });
   }
 
   function handleRemoveWebinar(data) {
@@ -186,6 +221,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
 
   function closePopup() {
     setIsOpenWebinarRemove(false);
+    setIsOpenStatusWebinar(false);
     setIsShowRequestError({ isShow: false, text: '', })
   }
 
@@ -360,7 +396,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
                       <div className='table__column table__column_type_teacher'>
                         <p className='table__text'>{item.key_speaker}</p>
                       </div>
-                      <div className='table__column table__column_type_status'>
+                      <div className='table__column table__column_type_status' onClick={() => openStatusWebinarPopup(item)}>
                         {renderStatus(item.status)}
                       </div>
                     </div>
@@ -391,6 +427,18 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
           }
         </div>
       </Table>
+      }
+
+      {       
+        isOpenStatusWebinar &&
+        <StatusWebinarPopup
+          isOpen={isOpenStatusWebinar}
+          onClose={closePopup}
+          webinarId={currentWebinar.id}
+          onConfirm={handleChangeStatus}
+          isLoadingRequest={isLoadingRequest}
+          isShowRequestError={isShowRequestError}
+        />
       }
 
       {       

@@ -38,6 +38,7 @@ function TeacherViewFilesPopup({ isOpen, onClose, currentStudent, }) {
           }
         </ul>
       }
+      <div className='popup__btn_margin_top'></div>
       <button className='popup__btn-back' type='submit'>Назад</button>
     </Popup>
   )

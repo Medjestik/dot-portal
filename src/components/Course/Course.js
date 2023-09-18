@@ -10,7 +10,7 @@ import CourseItem from './CourseItem/CourseItem.js';
 import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
  
-function Course({ windowWidth, onLogout }) {
+function Course({ windowWidth, onLogout, onChangeUserData }) {
 
   const navigate = useNavigate();
 
@@ -84,7 +84,7 @@ function Course({ windowWidth, onLogout }) {
         </Route>
         <Route exact path={`/:courseId/*`}
           element={
-            <CourseItem windowWidth={windowWidth}  />
+            <CourseItem windowWidth={windowWidth} onChangeUserData={onChangeUserData} />
           }
           />
       </Routes>

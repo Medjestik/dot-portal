@@ -483,7 +483,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
 
         <div className='webinar-add__section-column'>
           <div className='webinar-add__section-header'>
-            <h4 className='webinar-add__subtitle'>Аннотация:</h4>
+            <h4 className='webinar-add__subtitle'>Комментарий:</h4>
           </div>
           <textarea 
             className='popup__textarea popup__textarea_height_max scroll'

@@ -148,8 +148,12 @@ function App() {
     setCurrentUser({ ...currentUser, avatar: avatar });
   }
 
-  function handleChangeUserData(data) {
+  function handleChangePresonData(data) {
     setCurrentUser({ ...currentUser, birthDate: data.birthDate, snils:  data.snils, phone:  data.phone, email:  data.email, });
+  }
+
+  function handleChangeUserData(data) {
+    setCurrentUser({ ...currentUser, birthDate: data.birthDate, snils:  data.snils, phone:  data.phone, email:  data.email, pers_data: 'true', edu_level: data.edu_level.name });
   }
 
   React.useEffect(() => {
@@ -225,7 +229,7 @@ function App() {
                           <Person 
                           windowWidth={windowWidth} 
                           onChangeUserPhoto={handleChangeUserPhoto} 
-                          onChangeUserData={handleChangeUserData} 
+                          onChangeUserData={handleChangePresonData} 
                           />
                         }/>
 
@@ -288,6 +292,7 @@ function App() {
                           <Course
                           windowWidth={windowWidth}
                           onLogout={handleLogout}
+                          onChangeUserData={handleChangeUserData} 
                           />
                         }/>
 
