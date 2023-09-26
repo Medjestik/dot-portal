@@ -43,6 +43,17 @@ function CuratorViewStudentPopup({ isOpen, onClose, currentStudent }) {
         </div>
       </div>
 
+      <div className='popup__row'>
+        <div className='popup__row-item'>
+          <h6 className='popup__row-title popup__row-title_margin_right'>Первое посещение:</h6>
+          <p className='popup__row-text'>{currentStudent.first_login || ''}</p>
+        </div>
+        <div className='popup__row-item'>
+          <h6 className='popup__row-title popup__row-title_margin_right'>Последнее посещение:</h6>
+          <p className='popup__row-text'>{currentStudent.last_login || ''}</p>
+        </div>
+      </div>
+
       <div className='popup__btn_margin_top'></div>
       
       <button className='popup__btn-back' type='submit'>Назад</button>

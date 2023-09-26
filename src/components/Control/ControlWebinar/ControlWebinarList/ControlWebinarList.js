@@ -39,7 +39,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
         return ( 
           <div className='status'>
             <span className='status__icon status__icon_type_completed'></span>
-            <p className='table__text'>Завершен</p>
+            <p className='table__text table__text_type_active'>Завершен</p>
           </div>
         )
       
@@ -47,7 +47,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
           return ( 
             <div className='status'>
               <span className='status__icon status__icon_type_canceled'></span>
-              <p className='table__text'>Отменен</p>
+              <p className='table__text table__text_type_active'>Отменен</p>
             </div>
           )
 
@@ -55,7 +55,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
             return ( 
               <div className='status'>
                 <span className='status__icon status__icon_type_canceled'></span>
-                <p className='table__text'>Проводится</p>
+                <p className='table__text table__text_type_active'>Проводится</p>
               </div>
             )
 
@@ -63,7 +63,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
         return ( 
           <div className='status'>
             <span className='status__icon status__icon_type_planned'></span>
-            <p className='table__text'>Планируется</p>
+            <p className='table__text table__text_type_active'>Планируется</p>
           </div>
         )
     }
@@ -138,13 +138,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
   }
 
   function handleChangeStatus(webinar, status, comment) {
-    const data = {
-      ...webinar,
-      description : comment,
-      status: status.id,
-    };
-
-    console.log(data);
+    const data = { ...webinar, description : comment, status: status.id, };
 
     setIsLoadingRequest(true);
     const token = localStorage.getItem('token');
@@ -153,8 +147,12 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
       data: data,
     })
     .then((res) => {
-      console.log(res);
-
+      const elem = webinars.find((elem) => (elem.id === res.id));
+      const newElemStatus = { ...elem, status: res.status }
+      const index = webinars.indexOf(elem);
+      const filteredIndex = filteredWebinars.indexOf(elem);
+      setWebinars([...webinars.slice(0, index), newElemStatus, ...webinars.slice(index + 1)]);
+      setFilteredWebinars([...filteredWebinars.slice(0, filteredIndex), newElemStatus, ...filteredWebinars.slice(filteredIndex + 1)]);
     })
     .catch((err) => {
       console.error(err);
@@ -162,6 +160,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
     })
     .finally(() => {  
       setIsLoadingRequest(false);
+      closePopup();
     });
   }
 

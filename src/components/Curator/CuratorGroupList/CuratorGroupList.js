@@ -80,6 +80,12 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
             <div className='table__column table__column_type_header table__column_type_large'>
               <p className='table__text table__text_type_header'>Телефон</p>
             </div>
+            <div className='table__column table__column_type_header table__column_type_date'>
+              <p className='table__text table__text_type_header'>Первое посещение</p>
+            </div>
+            <div className='table__column table__column_type_header table__column_type_date'>
+              <p className='table__text table__text_type_header'>Последнее посещение</p>
+            </div>
           </div>
         </div>
         {
@@ -108,10 +114,16 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
                       </p>
                     </div>
                     <div className='table__column table__column_type_full'>
-                      <p className='table__text'>{item.email}</p>
+                      <p className='table__text'>{item.email || ''}</p>
                     </div>
                     <div className='table__column table__column_type_large'>
-                      <p className='table__text'>{item.phone}</p>
+                      <p className='table__text'>{item.phone || ''}</p>
+                    </div>
+                    <div className='table__column table__column_type_date'>
+                      <p className='table__text'>{item.first_login || ''}</p>
+                    </div>
+                    <div className='table__column table__column_type_date'>
+                      <p className='table__text'>{item.last_login || ''}</p>
                     </div>
                   </div>
                 </li>

@@ -219,7 +219,6 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
       data: data,
     })
     .then((res) => {
-      console.log(res);
       navigate('/control/webinar/list');
     })
     .catch((err) => {

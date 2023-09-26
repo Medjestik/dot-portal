@@ -344,14 +344,14 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
                           {
                             item.groups.length > 0
                             ?
-                              <p className='table__text'>{item.groups.map((elem) => elem.name).join(', ')}</p>
+                              <p className='table__text'>{item.groups.length > 2 ? item.groups[0].name + ' (и еще ' + (item.groups.length - 1) + ')' : item.groups.map((elem) => elem.name).join(', ')}</p>
                             :
                               <p className='table__text'> </p>
                           } 
                         </div>
                         <div className='table__column table__column_type_teacher'>
                           {
-                            item.groups.length > 0
+                            item.speakers.length > 0
                             ?
                               <p className='table__text'>{item.speakers.join(', ')}</p>
                             :

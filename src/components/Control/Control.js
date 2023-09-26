@@ -6,10 +6,9 @@ import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtn
 import Section from '../Section/Section.js';
 import ControlNavigate from './ControlNavigate/ControlNavigate.js';
 import ControlWebinar from './ControlWebinar/ControlWebinar.js';
+import ControlGroup from './ControlGroup/ControlGroup.js';
 
 function Control({ windowWidth, onLogout, semesterInfo }) {
-
-  
 
   return (
     <div className='control'>
@@ -35,9 +34,15 @@ function Control({ windowWidth, onLogout, semesterInfo }) {
           }
         >
         </Route>
+
+        <Route exact path='/group/*' element={
+            <ControlGroup windowWidth={windowWidth} onLogout={onLogout} />
+          }
+        >
+        </Route>
       </Routes>
     </div>
   );
 }
 
-export default Control; 
+export default Control;

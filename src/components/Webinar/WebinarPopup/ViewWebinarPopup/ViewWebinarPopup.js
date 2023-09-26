@@ -120,7 +120,7 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
             {
               currentWebinar.groups.length > 0 
               ?
-                <p className='popup__row-text'>{currentWebinar.groups.map((elem) => elem.name).join(', ')}</p> 
+                <p className='popup__row-text'>{currentWebinar.groups.length > 2 ? currentWebinar.groups[0].name + ' (и еще ' + (currentWebinar.groups.length - 1) + ')' : currentWebinar.groups.map((elem) => elem.name).join(', ')}</p> 
               :
                 <p className='popup__row-text'> </p> 
             }

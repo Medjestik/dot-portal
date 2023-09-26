@@ -8,6 +8,30 @@ function handleResponse (res) {
   }
 }
 
+export const getActiveGroups = ({ token }) => {
+  return fetch(`${API_URL}/admin/action/get_groups/completed/false`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getCompletedGroups = ({ token }) => {
+  return fetch(`${API_URL}/admin/action/get_groups/completed/true`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
 export const getPractice = ({ token, practiceId }) => {
     return fetch(`${API_URL}/admin_practic/action/get_practic/practic_id/${practiceId}`, {  
         method: 'GET',

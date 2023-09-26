@@ -23,12 +23,10 @@ function StatusWebinarPopup({ isOpen, onClose, webinarId, onConfirm, isLoadingRe
 
   function handleSubmit(e) {
     e.preventDefault();
-    //onConfirm(currentWebinar, status, comment);
-    //onClose();
+    onConfirm(currentWebinar, status, comment);
   }
 
   function getWebinarInfo(id) {
-    console.log(id);
     setIsLoadingInfo(true);
     const token = localStorage.getItem('token');
     webinarApi.getWebinarItem({ token: token, webinarId: id })
@@ -36,7 +34,6 @@ function StatusWebinarPopup({ isOpen, onClose, webinarId, onConfirm, isLoadingRe
       setCurrentWebinar(res);
       setComment(res.description);
       setStatus(statusOptions.find((elem) => elem.id === res.status));
-      console.log(res);
     })
     .catch((err) => {
       console.error(err);

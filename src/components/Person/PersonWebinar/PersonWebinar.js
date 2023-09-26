@@ -139,7 +139,7 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
                           <p className='data__text'><span className='data__text_font_bold'>Дата:</span> {elem.date}, {elem.time}</p>
                         </li>
                         <li className='data__item'>
-                          <p className='data__text'><span className='data__text_font_bold'>Группа:</span> {elem.groups.map((elem) => elem.name).join(', ')}</p>
+                          <p className='data__text'><span className='data__text_font_bold'>Группа:</span> {elem.groups.length > 2 ? elem.groups[0].name + ' (и еще ' + (elem.groups.length - 1) + ')' : elem.groups.map((elem) => elem.name).join(', ')}</p>
                         </li>
                       </ul>
                       <button className='person-webinar__card-button' type='button' onClick={() => handleOpenWebinarView(elem)}>Подробнее</button>
