@@ -5,6 +5,7 @@ import SemesterHeader from '../../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import ControlGroupActive from './ControlGroupActive/ControlGroupActive.js';
 import ControlGroupCompleted from './ControlGroupCompleted/ControlGroupCompleted.js';
+import CuratorGroup from '../../Curator/CuratorGroup/CuratorGroup.js';
  
 function ControlGroup({ windowWidth, onLogout }) {
 
@@ -31,8 +32,8 @@ function ControlGroup({ windowWidth, onLogout }) {
         >
         </Route>
 
-        <Route exact path='/:groupId' element={
-            <ControlGroupActive windowWidth={windowWidth} />
+        <Route exact path='/:groupId/*' element={
+            <CuratorGroup windowWidth={windowWidth} />
           }
         >
         </Route>

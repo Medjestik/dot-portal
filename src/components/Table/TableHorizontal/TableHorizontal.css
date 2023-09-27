@@ -22,6 +22,9 @@
   list-style-type: none;
   flex-grow: 0;
 }
+.table-horizontal__row:hover {
+  background-color: var(--main-grey-color);
+}
 .table-horizontal__main-row {
   margin: 0px 12px 0px 0px;
   width: 100%;
@@ -67,6 +70,9 @@
   background-color: var(--main-white-color);
   border-right: 1px solid var(--slider-color);
   font-weight: bold;
+}
+.table-horizontal__row:hover .table-horizontal__column_type_name {
+  background-color: var(--main-grey-color);
 }
 .table-horizontal__column_type_main {
   position: sticky;

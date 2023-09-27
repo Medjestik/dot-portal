@@ -2,22 +2,33 @@ import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 import { useNavigate } from 'react-router-dom';
 import * as curatorApi from '../../../../utils/curatorApi.js';
+import * as educationApi from '../../../../utils/educationApi.js';
 import TableHorizontal from '../../../Table/TableHorizontal/TableHorizontal.js';
 import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
+import TeacherChooseMarkPopup from '../TeacherChooseMarkPopup/TeacherChooseMarkPopup.js';
 
 function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId }) {
 
   const navigate = useNavigate();
 
   const [isLoadingInfo, setIsLoadingInfo] = React.useState(true);
+  const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
+
   const [currentSemesterOption, setCurrentSemesterOption] = React.useState(semesterOptions.find((elem) => currentSemesterId === elem.id));
 
   const [currentData, setCurrentData] = React.useState({});
 
+  const [currentStudent, setCurrentStudent] = React.useState([]);
+  const [currentDiscipline, setCurrentDiscipline] = React.useState([]);
+
   const tableWidthRef = React.createRef();
 
   const [tableWidth, setTableWidth] = React.useState(0);
+
+  const [isOpenTeacherChooseMark, setIsOpenTeacherChooseMark] = React.useState(false);
+
+  const [isShowFullWidth, setIsShowFullWidth] = React.useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +46,43 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
         navigate('/curator/discipline/' + elem.id + '/info');
       }
     }
+  }
+
+  function openChooseMarkPopup(student) {
+    setCurrentStudent(student);
+    //setIsOpenTeacherChooseMark(true);
+  }
+
+  function setMark(data) {
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+    educationApi.teacherSetMark({
+      token: token,
+      discipline_id: currentDiscipline.id,
+      student_id: currentStudent.student.id,
+      mark_id: data.mark.id, 
+      kr_mark_id: data.courseMark.id,
+      comment: data.text
+    })
+    .then((res) => {
+      /*const index = disciplineStudents.indexOf(disciplineStudents.find((elem) => (elem.student.id === res.student.id)));
+      const student = {
+        ...disciplineStudents[index],
+        mark: res.mark,
+        course_mark: res.course_mark,
+        comments: res.new_comment ? [...disciplineStudents[index].comments, res.new_comment ] :  disciplineStudents[index].comments,
+      };
+      setCurrentStudent(student);
+      setDisciplineStudents([ ...disciplineStudents.slice(0, index), student, ...disciplineStudents.slice(index + 1) ]);
+      closeTeacherPopup();
+      */
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {  
+      setIsLoadingRequest(false);
+    });
   }
 
   function filterBySemester(option) {
@@ -61,7 +109,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
       }
     } else {
       return (
-        <p className='table-horizontal__text table-horizontal__text_type_active'>Не найдено</p>
+        <p className='table-horizontal__text table-horizontal__text_type_empty'>Не найдено</p>
       )
     }
   }
@@ -107,7 +155,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
     <Popup
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      formWidth={'1440'}
+      formWidth={isShowFullWidth ? '100' : '1440'}
       formName={'view-semester-detail-popup'}
     >
       {
@@ -129,6 +177,15 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
             <button 
             className={`section__header-btn section__header-btn_type_full`} type='button'>
               Экспорт в Excel
+            </button>
+          </div>
+          <div className='section__header-item'>
+            <span className='section__header-caption section__header-caption_margin_bottom'></span>
+            <button 
+            className={`section__header-btn section__header-btn_type_full`} type='button'
+            onClick={() => setIsShowFullWidth(!isShowFullWidth)}
+            >
+              {isShowFullWidth ? 'Скрыть' : 'Развернуть'} 
             </button>
           </div>
           <div className='section__header-item'>

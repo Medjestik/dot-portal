@@ -28,7 +28,7 @@ function ControlGroupCompleted({ windowWidth }) {
   const [groups, setGroups] = React.useState([]);
 
   function handleOpenGroup(group) {
-    navigate('/control/group/' + group.id);
+    navigate('/control/group/' + group.id + '/list');
   }
 
   function groupsRequest() {
