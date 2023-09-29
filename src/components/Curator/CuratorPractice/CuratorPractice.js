@@ -76,6 +76,7 @@ function CuratorPractice({ windowWidth }) {
     const token = localStorage.getItem('token');
     adminApi.editPractice({ token, info })
       .then((res) => {
+        console.log(res);
         setPractice(res);
         closePopups();
       })

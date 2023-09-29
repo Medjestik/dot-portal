@@ -97,7 +97,7 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
             {
               groupList.length < 1 
               ?
-              <p className='table__caption_type_empty'>Не найдено групп в которых вы являетесь куратором.</p>
+              <p className='table__caption_type_empty'>Студенты не найдены.</p>
               :
               groupList.map((item, i) => (
                 <li className='table__row' key={i}>

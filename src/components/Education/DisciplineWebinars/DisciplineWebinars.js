@@ -34,6 +34,14 @@ function DisciplineWebinars({ windowWidth, disciplineId }) {
             </div>
           )
 
+        case 'active':
+          return ( 
+            <div className='status'>
+              <span className='status__icon status__icon_type_canceled'></span>
+              <p className='table__text'>Проводится</p>
+            </div>
+          )
+
       default:
         return ( 
           <div className='status'>

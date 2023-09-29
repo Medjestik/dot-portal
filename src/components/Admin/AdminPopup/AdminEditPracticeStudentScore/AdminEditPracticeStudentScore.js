@@ -50,17 +50,17 @@ function AdminEditPracticeStudentScore({ isOpen, onClose, practice, currentStude
         <h2 className='popup__title'>Назначение студенту</h2>
         <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Студент: </span>{currentStudent.student.name}</p>
 
-        <label className='checkbox'>
-            <input 
-            name='edit-practice-student-score-transfer'
-            type='checkbox'
-            id='edit-practice-student-score-transfer'
-            value={transfer}
-            defaultChecked={transfer}
-            onChange={() => setTransfer(!transfer)}
-            >
-            </input>
-            <span>Студент переводник</span>
+        <label className='checkbox checkbox_margin_top '>
+          <input 
+          name='edit-practice-student-score-transfer'
+          type='checkbox'
+          id='edit-practice-student-score-transfer'
+          value={transfer}
+          defaultChecked={transfer}
+          onChange={() => setTransfer(!transfer)}
+          >
+          </input>
+          <span>Студент переводник</span>
         </label>
 
         <div className='popup__field'>
@@ -79,7 +79,7 @@ function AdminEditPracticeStudentScore({ isOpen, onClose, practice, currentStude
                     <div className='popup__item-container'>
                     <a className='btn btn_type_download btn_type_download_status_active btn_margin_zero' target='_blank' rel='noreferrer' href={elem.link}> </a>
                     <div className='popup__item-info'>
-                        <h4 className='popup__item-title'>{elem.file_name}</h4>
+                        <h4 className='popup__item-title'>{elem.name}</h4>
                         <p className='popup__item-text popup__item-text_size_small'><span className='popup__item-text_weight_bold'>Дата загрузки: </span>{elem.date}</p>
                     </div>
                     </div>

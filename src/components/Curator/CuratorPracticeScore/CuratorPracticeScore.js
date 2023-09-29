@@ -16,7 +16,7 @@ function CuratorPracticeScore({ windowWidth, practice, onEdit }) {
     }, [windowWidth, containerHeightRef, tableHeaderHeightRef]); 
   
     const tableStyle = {
-        height: tableHeight - 1,
+        height: tableHeight,
     };
 
     return (
