@@ -35,15 +35,39 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
     onClose();
   }
 
-  function openElem(elem) {
+  function generateElemLink(elem) {
     if (elem.type === 'practice') {
-      navigate('/curator/group/' + groupId + '/practice/' + elem.id + '/info');
+      return (
+        <a 
+        className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_cut table-horizontal__text_type_active' 
+        target='_blank' 
+        rel='noreferrer' 
+        href={'https://edu.emiit.ru/curator/group/' + groupId + '/practice/' + elem.id + '/info'}>
+          ({elem.control}) {elem.name}
+        </a>
+        )
     } else {
       if (elem.id.includes('kr')) {
         const id = elem.id.slice(0, -3);
-        navigate('/curator/discipline/' + id + '/info');
+        return (
+          <a 
+          className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_cut table-horizontal__text_type_active' 
+          target='_blank' 
+          rel='noreferrer' 
+          href={'https://edu.emiit.ru/curator/discipline/' + id + '/group'}>
+            ({elem.control}) {elem.name}
+          </a>
+          )
       } else {
-        navigate('/curator/discipline/' + elem.id + '/info');
+        return (
+          <a 
+          className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_cut table-horizontal__text_type_active' 
+          target='_blank' 
+          rel='noreferrer' 
+          href={'https://edu.emiit.ru/curator/discipline/' + elem.id + '/group'}>
+            ({elem.control}) {elem.name}
+          </a>
+          )
       }
     }
   }
@@ -206,7 +230,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
               {
                 currentData.activities.map((elem, i) => (
                   <div key={i} className='table-horizontal__column table-horizontal__column_type_header table-horizontal__column_type_text'>
-                    <p className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_cut table-horizontal__text_type_active' onClick={() => openElem(elem)}>({elem.control}) {elem.name}</p>
+                    {generateElemLink(elem)}
                     <p className='table-horizontal__text'>{elem.lector}</p>
                   </div>
                 ))

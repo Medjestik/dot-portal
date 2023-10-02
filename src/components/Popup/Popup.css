@@ -67,7 +67,7 @@
   width: 1440px;
 }
 .popup__form_width_100 {
-  width: 100%;
+  width: 100vw;
 }
 .popup__main {
   margin: 0px 8px;

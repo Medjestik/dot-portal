@@ -86,6 +86,7 @@
   font-size: 11px;
   line-height: 14px;
   color: var(--main-black-color);
+  text-decoration: none;
   transition: all .3s ease-in-out;
 }
 .table-horizontal__text_weight_bold {

@@ -246,7 +246,7 @@ function DateWebinarPopup({ isOpen, onClose, onSave, currentGroups, currentUsers
               ?
               <ul className='table__main table__main_height_large scroll'>
                 {
-                  [...searchedWebinars].reverse().map((item, i) => (
+                  searchedWebinars.map((item, i) => (
                     <li className='table__row' key={i}>
                       <div className={`table__main-column ${(currentGroups.map(element => element.id).some(el => item.groups.map(element => element.id).includes(el))) || (currentUsers.map(element => element.id).some(el => item.moderators.map(element => element.id).includes(el))) ? 'table__main-column_type_block' : ''}`}>
                         <div className='table__column table__column_type_small'>
