@@ -180,6 +180,9 @@
 .table__text_type_empty {
   color: var(--accent-grey-color);
 }
+.table__text_type_error {
+  color: var(--accent-orange-color);
+}
 .table__text_type_active:hover {
   color: var(--accent-blue-color);
   cursor: pointer;

@@ -40,7 +40,7 @@
   position: relative;
   margin: 16px auto 0px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   text-align: center;
@@ -65,7 +65,7 @@
 .home-page__info-title {
   margin: 0px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   color: #FFFFFF;
@@ -75,7 +75,7 @@
   margin: 16px 0px 0px 0px;
   padding: 0px 0px 0px 30px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: #FFFFFF;
@@ -97,7 +97,7 @@
   margin: 16px 0px 0px 0px;
   padding: 0px 0px 0px 30px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: #FFFFFF;
@@ -119,7 +119,7 @@
   margin: auto 0px 0px 0px;
   padding: 0px 0px 0px 30px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: #FFFFFF;

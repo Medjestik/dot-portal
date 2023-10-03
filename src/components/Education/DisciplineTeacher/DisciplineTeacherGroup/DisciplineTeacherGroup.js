@@ -7,7 +7,7 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
   function renderMark(mark) {
     if (mark === 'Не аттестован') {
       return (
-        <p className='table__text table__text_type_active'>Н/А</p>
+        <p className='table__text table__text_type_active table__text_type_error'>Н/А</p>
       )
     } else if (mark === 'Нет оценки') {
       return (

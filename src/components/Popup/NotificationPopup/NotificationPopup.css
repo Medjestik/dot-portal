@@ -33,7 +33,7 @@
 .notification-popup__creator-date {
   margin: 8px 0px 0px 0px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
@@ -48,7 +48,7 @@
   margin: 0px 0px 8px 0px;
   text-align: left;
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);

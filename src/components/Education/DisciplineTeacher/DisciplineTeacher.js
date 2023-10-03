@@ -31,6 +31,7 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
   const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '', });
 
   const [groupInfo, setGroupInfo] = React.useState({});
+  const [teacherInfo, setTeacherInfo] = React.useState({});
   const [disciplineInfo, setDisciplineInfo] = React.useState({});
   const [disciplineStudents, setDisciplineStudents] = React.useState([]);
 
@@ -62,6 +63,7 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
     .then((res) => {
       console.log('Discipline', res);
       setGroupInfo(res.group);
+      setTeacherInfo(res.tutor);
       setDisciplineInfo(res.discipline);
       setDisciplineStudents(res.students.filter((item) => (item.student.fullname !== null)));
     })
@@ -229,6 +231,22 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
               <p className='section__header-caption section__header-caption_margin_bottom'>Группа:</p>
               <div className='discipline-teacher__header-group'>{groupInfo.current_name}</div>
             </div>
+            <div className='section__header-item section__header-item_type_content'>
+              <p className='section__header-caption section__header-caption_margin_bottom'>Преподаватель:</p>
+              <div className='popup__author'>
+                {
+                teacherInfo.avatar
+                ?
+                <img className='popup__author-img popup__author-img_size_40' src={teacherInfo.avatar} alt='аватар'></img>
+                :
+                <div className='popup__author-img popup__author-img_size_40'></div>
+                }
+                <div className='popup__author-info'>
+                  <h4 className='popup__author-title popup__author-title_font_small popup__author-title_font_inline'>{teacherInfo.name}</h4>
+                  <p className='popup__author-text popup__author-text_font_small'><span className='popup__author-text_weight_bold'>Почта: </span>{teacherInfo.email}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         {children}
@@ -241,6 +259,7 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
 
     return(() => {
       setDisciplineInfo({});
+      setTeacherInfo({});
       setDisciplineStudents([]);
       setCurrentSection({});
       setCurrentStudent({});

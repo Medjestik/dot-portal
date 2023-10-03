@@ -57,7 +57,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
   }
 
   function openDiscipline(id) {
-    navigate('/curator/discipline/' + id + '/info')
+    navigate('/curator/discipline/' + id + '/group')
   }
 
   function openViewSemesterDetailPopup() {
