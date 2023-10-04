@@ -93,17 +93,13 @@ function Curator({ windowWidth, onLogout }) {
           </Route>
 
           <Route exact path='/group/:groupId/*' element={ 
-              <CuratorGroup
-                windowWidth={windowWidth}
-              />
+              <CuratorGroup windowWidth={windowWidth} role='curator' />
             }
           >
           </Route>
 
           <Route path='/discipline/:disciplineId/*' element={ 
-              <CuratorDiscipline
-                windowWidth={windowWidth}
-              />
+              <CuratorDiscipline windowWidth={windowWidth} role='curator' />
             }
           >
           </Route>

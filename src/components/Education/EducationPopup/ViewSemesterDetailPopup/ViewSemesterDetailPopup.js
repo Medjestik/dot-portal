@@ -2,13 +2,11 @@ import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 import { useNavigate } from 'react-router-dom';
 import * as curatorApi from '../../../../utils/curatorApi.js';
-import * as educationApi from '../../../../utils/educationApi.js';
 import TableHorizontal from '../../../Table/TableHorizontal/TableHorizontal.js';
 import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
-import TeacherChooseMarkPopup from '../TeacherChooseMarkPopup/TeacherChooseMarkPopup.js';
 
-function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId }) {
+function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId, role }) {
 
   const navigate = useNavigate();
 
@@ -19,14 +17,9 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
 
   const [currentData, setCurrentData] = React.useState({});
 
-  const [currentStudent, setCurrentStudent] = React.useState([]);
-  const [currentDiscipline, setCurrentDiscipline] = React.useState([]);
-
   const tableWidthRef = React.createRef();
 
   const [tableWidth, setTableWidth] = React.useState(0);
-
-  const [isOpenTeacherChooseMark, setIsOpenTeacherChooseMark] = React.useState(false);
 
   const [isShowFullWidth, setIsShowFullWidth] = React.useState(false);
 
@@ -42,19 +35,20 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
         className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_cut table-horizontal__text_type_active' 
         target='_blank' 
         rel='noreferrer' 
-        href={'https://edu.emiit.ru/curator/group/' + groupId + '/practice/' + elem.id + '/info'}>
+        href={'https://edu.emiit.ru/' + role + '/group/' + groupId + '/practice/' + elem.id + '/info'}>
           ({elem.control}) {elem.name}
         </a>
         )
     } else {
       if (elem.id.includes('kr')) {
-        const id = elem.id.slice(0, -3);
+        const id = elem.id.slice(0, -3);  
+        
         return (
           <a 
           className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_cut table-horizontal__text_type_active' 
           target='_blank' 
           rel='noreferrer' 
-          href={'https://edu.emiit.ru/curator/discipline/' + id + '/group'}>
+          href={'https://edu.emiit.ru/' + role + '/discipline/' + id + '/group'}>
             ({elem.control}) {elem.name}
           </a>
           )
@@ -64,7 +58,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
           className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_cut table-horizontal__text_type_active' 
           target='_blank' 
           rel='noreferrer' 
-          href={'https://edu.emiit.ru/curator/discipline/' + elem.id + '/group'}>
+          href={'https://edu.emiit.ru/' + role + '/discipline/' + elem.id + '/group'}>
             ({elem.control}) {elem.name}
           </a>
           )
@@ -72,63 +66,50 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
     }
   }
 
-  function openChooseMarkPopup(student) {
-    setCurrentStudent(student);
-    //setIsOpenTeacherChooseMark(true);
-  }
-
-  function setMark(data) {
-    setIsLoadingRequest(true);
-    const token = localStorage.getItem('token');
-    educationApi.teacherSetMark({
-      token: token,
-      discipline_id: currentDiscipline.id,
-      student_id: currentStudent.student.id,
-      mark_id: data.mark.id, 
-      kr_mark_id: data.courseMark.id,
-      comment: data.text
-    })
-    .then((res) => {
-      /*const index = disciplineStudents.indexOf(disciplineStudents.find((elem) => (elem.student.id === res.student.id)));
-      const student = {
-        ...disciplineStudents[index],
-        mark: res.mark,
-        course_mark: res.course_mark,
-        comments: res.new_comment ? [...disciplineStudents[index].comments, res.new_comment ] :  disciplineStudents[index].comments,
-      };
-      setCurrentStudent(student);
-      setDisciplineStudents([ ...disciplineStudents.slice(0, index), student, ...disciplineStudents.slice(index + 1) ]);
-      closeTeacherPopup();
-      */
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {  
-      setIsLoadingRequest(false);
-    });
-  }
 
   function filterBySemester(option) {
     setCurrentSemesterOption(option);
     getSemesterDetail(option.id);
   }
 
-  function getStudentMark(studentId, disciplineId) { 
-    const studentMark = currentData.results.find((item) => item.student_id === studentId && item.activity_id === disciplineId);
+  function getStudentMark(student, activities) { 
+    const studentMark = currentData.results.find((item) => item.student_id === student.id && item.activity_id === activities.id);
+
+    /*let link = '';
+
+    if (activities.type === 'practice') {
+      link = 'https://edu.emiit.ru/' + role + '/group/' + groupId + '/practice/' + activities.id + '/info';
+    } else if (activities.type === 'course') {
+      const courseId = activities.id.slice(0, -3); 
+      link = 'https://edu.emiit.ru/' + role + '/discipline/' + courseId + '/student/' + student.id;
+    } else {
+      link = 'https://edu.emiit.ru/' + role + '/discipline/' + activities.id + '/student/' + student.id;
+    }*/
 
     if (studentMark) {
       if (studentMark.mark.name === 'Нет оценки') {
         return (
-          <p className='table-horizontal__text table-horizontal__text_type_active table-horizontal__text_type_empty'>{studentMark.mark.name}</p>
+          <p 
+          className='table-horizontal__text table-horizontal__text_type_active table-horizontal__text_type_empty'
+          >
+            {studentMark.mark.name}
+          </p>
         )
       } else if (studentMark.mark.name === 'Не аттестован') {
         return (
-          <p className='table-horizontal__text table-horizontal__text_type_active table-horizontal__text_type_error'>{studentMark.mark.name}</p>
+          <p 
+          className='table-horizontal__text table-horizontal__text_type_active table-horizontal__text_type_error'
+          >
+            {studentMark.mark.name}
+          </p>
         )
       } else {
         return (
-          <p className='table-horizontal__text table-horizontal__text_type_active'>{studentMark.mark.name}</p>
+          <p 
+          className='table-horizontal__text table-horizontal__text_type_active'
+          >
+            {studentMark.mark.name}
+          </p>
         )
       }
     } else {
@@ -196,26 +177,39 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
             <span className='section__header-caption'>Выберите семестр:</span>
             <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
           </div>
-          <div className='section__header-item'>
+          <div className='section__header-item section__header-item_type_content'>
             <span className='section__header-caption section__header-caption_margin_bottom'></span>
             <button 
-            className={`section__header-btn section__header-btn_type_full`} type='button'>
-              Экспорт в Excel
+            className={`section__header-btn section__header-btn_type_small section__header-btn_type_import`} 
+            type='button'
+            >
             </button>
           </div>
-          <div className='section__header-item'>
+          <div className='section__header-item section__header-item_type_content'>
             <span className='section__header-caption section__header-caption_margin_bottom'></span>
             <button 
-            className={`section__header-btn section__header-btn_type_full`} type='button'
+            className={`section__header-btn section__header-btn_type_small section__header-btn_type_${isShowFullWidth ? 'collapse' : 'expand'}`} 
+            type='button'
             onClick={() => setIsShowFullWidth(!isShowFullWidth)}
             >
-              {isShowFullWidth ? 'Скрыть' : 'Развернуть'} 
             </button>
           </div>
-          <div className='section__header-item'>
+          <div className='section__header-item section__header-item_type_content'>
             <span className='section__header-caption section__header-caption_margin_bottom'></span>
             <button 
-            className={`section__header-btn section__header-btn_type_full`} type='button' onClick={() => onClose()}>
+            className={`section__header-btn section__header-btn_type_small section__header-btn_type_reload`} 
+            type='button'
+            onClick={() => getSemesterDetail(currentSemesterOption.id)}
+            >
+            </button>
+          </div>
+          <div className='section__header-item section__header-item_type_content'>
+            <span className='section__header-caption section__header-caption_margin_bottom'></span>
+            <button 
+            className={`section__header-btn section__header-btn_type_fix`} 
+            type='button' 
+            onClick={() => onClose()}
+            >
               Назад
             </button>
           </div>
@@ -247,9 +241,9 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
                       <p className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_active'>{student.fullname}</p>
                     </div>
                     {
-                      currentData.activities.map((discipline, i) => (
+                      currentData.activities.map((activities, i) => (
                         <div className='table-horizontal__column table-horizontal__column_type_text' key={i}>
-                          {getStudentMark(student.id, discipline.id)}
+                          {getStudentMark(student, activities)}
                         </div>
                       ))
                     }

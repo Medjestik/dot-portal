@@ -12,7 +12,7 @@ import CuratorPractice from '../CuratorPractice/CuratorPractice.js';
 import CuratorPracticeList from '../CuratorPracticeList/CuratorPracticeList.js';
 import CuratorDiploma from '../CuratorDiploma/CuratorDiploma.js';
 
-function CuratorGroup({ windowWidth }) {
+function CuratorGroup({ windowWidth, role }) {
 
   const { groupId } = useParams();
   const navigate = useNavigate();
@@ -32,11 +32,11 @@ function CuratorGroup({ windowWidth }) {
   ];
 
   function chooseSection(option) {
-    navigate('/curator/group/' + groupId + option.link);
+    navigate('/' + role + '/group/' + groupId + option.link);
   }
 
   function openPractice(practiceId) {
-    navigate('/curator/group/' + groupId + '/practice/' + practiceId + '/info');
+    navigate('/' + role + '/group/' + groupId + '/practice/' + practiceId + '/info');
   }
   
   function groupRequest() {
@@ -107,7 +107,8 @@ function CuratorGroup({ windowWidth }) {
           element={
           <CuratorDisciplineList
             windowWidth={windowWidth} 
-            groupInfo={groupInfo} 
+            groupInfo={groupInfo}
+            role={role}
           />
           }
         />
@@ -115,7 +116,7 @@ function CuratorGroup({ windowWidth }) {
           element={
           <CuratorPractice
             windowWidth={windowWidth} 
-            groupId={groupId}
+            role={role}
           />
           }
         />

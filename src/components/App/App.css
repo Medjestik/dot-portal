@@ -924,7 +924,6 @@ input[type=number] {
   margin: 12px 0px;
 }
 
-
 @media all and (max-width: 1439px) {
   .container {
     max-width: 1240px;

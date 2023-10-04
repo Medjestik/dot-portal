@@ -8,7 +8,7 @@ import PopupSelect from '../../Popup/PopupSelect/PopupSelect.js';
 import Search from '../../Search/Search.js';
 import ViewSemesterDetailPopup from '../../Education/EducationPopup/ViewSemesterDetailPopup/ViewSemesterDetailPopup.js';
 
-function CuratorDisciplineList({ windowWidth, groupInfo }) {
+function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
 
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
   }
 
   function openDiscipline(id) {
-    navigate('/curator/discipline/' + id + '/group')
+    navigate('/' + role + '/discipline/' + id + '/group')
   }
 
   function openViewSemesterDetailPopup() {
@@ -210,6 +210,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo }) {
         groupId={groupInfo.id}
         semesterOptions={semesterOptions.filter((elem) => elem.id !== 'empty')}
         currentSemesterId={currentSemesterOption.id}
+        role={role}
       />
     }
 

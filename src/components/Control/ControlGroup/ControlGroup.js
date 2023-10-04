@@ -33,7 +33,7 @@ function ControlGroup({ windowWidth, onLogout }) {
         </Route>
 
         <Route exact path='/:groupId/*' element={
-            <CuratorGroup windowWidth={windowWidth} />
+            <CuratorGroup windowWidth={windowWidth} role='control' />
           }
         >
         </Route>

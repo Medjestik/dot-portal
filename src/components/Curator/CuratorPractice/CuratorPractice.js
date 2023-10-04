@@ -17,7 +17,7 @@ import CuratorPracticeOrder from '../CuratorPracticeOrder/CuratorPracticeOrder.j
 import CuratorPracticeStudent from '../CuratorPracticeStudent/CuratorPracticeStudent.js';
 import CuratorPracticeScore from '../CuratorPracticeScore/CuratorPracticeScore.js';
 
-function CuratorPractice({ windowWidth }) {
+function CuratorPractice({ windowWidth, role }) {
 
   const [practice, setPractice] = React.useState({});
   const [currentFile, setCurrentFile] = React.useState({});
@@ -51,7 +51,7 @@ function CuratorPractice({ windowWidth }) {
   ];
 
   function chooseSection(option) {
-    navigate('/curator/group/' + groupId + '/practice/' + practiceId + option.link);
+    navigate('/' + role + '/group/' + groupId + '/practice/' + practiceId + option.link);
   }
 
   function dataRequest() {

@@ -20,7 +20,7 @@ function Popup({ isOpen, onSubmit, formWidth, formName, children }) {
           className={`popup__form popup__form_width_${formWidth} ${formHeight ? 'popup__form_height_min' : ''}`}
           name={formName}
           action='#'
-          noValidate
+          noValidate 
           onSubmit={onSubmit}
         >
           {children}

@@ -17,7 +17,7 @@ import TeacherViewCommentsPopup from '../../Education/EducationPopup/TeacherView
 import TeacherAddCommentPopup from '../../Education/EducationPopup/TeacherAddCommentPopup/TeacherAddCommentPopup.js';
 import TeacherEditCommentPopup from '../../Education/EducationPopup/TeacherEditCommentPopup/TeacherEditCommentPopup.js';
 
-function CuratorDiscipline({ windowWidth }) {
+function CuratorDiscipline({ windowWidth, role }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -53,7 +53,7 @@ function CuratorDiscipline({ windowWidth }) {
   const [currentComment, setCurrentComment] = React.useState({});
 
   function chooseSection(option) {
-    navigate('/curator/discipline/' + disciplineId + option.link);
+    navigate('/' + role + '/discipline/' + disciplineId + option.link);
   }
 
   function disciplineRequest(disciplineId) {
@@ -166,7 +166,7 @@ function CuratorDiscipline({ windowWidth }) {
   }
 
   function openStudent(item) {
-    navigate('/curator/discipline/' + disciplineId + '/student/' + item.student.id);
+    navigate('/' + role + '/discipline/' + disciplineId + '/student/' + item.student.id);
   }
 
   function getStudent(id) {

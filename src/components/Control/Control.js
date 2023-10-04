@@ -7,6 +7,7 @@ import Section from '../Section/Section.js';
 import ControlNavigate from './ControlNavigate/ControlNavigate.js';
 import ControlWebinar from './ControlWebinar/ControlWebinar.js';
 import ControlGroup from './ControlGroup/ControlGroup.js';
+import CuratorDiscipline from '../Curator/CuratorDiscipline/CuratorDiscipline.js';
 
 function Control({ windowWidth, onLogout, semesterInfo }) {
 
@@ -40,6 +41,18 @@ function Control({ windowWidth, onLogout, semesterInfo }) {
           }
         >
         </Route>
+
+        <Route path='/discipline/:disciplineId/*' element={
+            <>
+              <SemesterHeader onLogout={onLogout}>
+                <SemesterHeaderBtnBack onBack={() => {}} isPerformFunction={false} />
+              </SemesterHeader>
+              <CuratorDiscipline windowWidth={windowWidth} role='control' />
+            </>
+          }
+        >
+        </Route>
+
       </Routes>
     </div>
   );

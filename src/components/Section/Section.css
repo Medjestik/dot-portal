@@ -81,7 +81,7 @@
   margin: 0px;
 }
 .section__header-item_type_content {
-  width: min-content;
+  width: max-content;
 }
 .section__header-caption {
   margin: 0px;
@@ -97,6 +97,7 @@
 }
 .section__header-btn {
   margin: 0px;
+  position: relative;
   max-width: 216px;
   width: 100%;
   padding: 11px;
@@ -108,6 +109,8 @@
   font-weight: bold;
   font-size: 14px;
   line-height: 18px;
+  text-decoration: none;
+  flex-shrink: 0;
   transition: all .3s ease-in-out;
 }
 .section__header-btn:hover  {
@@ -120,11 +123,67 @@
 .section__header-btn_type_full {
   max-width: 100%;
 }
+.section__header-btn_type_fix {
+  width: 216px;
+}
 .section__header-btn_type_block {
   background: var(--slider-color);
   box-shadow: none;
   user-select: none;
   pointer-events: none;
+}
+.section__header-btn_type_small {
+  max-width: none;
+  width: 40px;
+  height: 40px;
+}
+.section__header-btn_type_import::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 28px;
+  height: 28px;
+  background-image: url('../../images/section/import.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.section__header-btn_type_expand:after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 28px;
+  height: 28px;
+  background-image: url('../../images/section/expand.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.section__header-btn_type_collapse:after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 28px;
+  height: 28px;
+  background-image: url('../../images/section/collapse.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.section__header-btn_type_reload:after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 28px;
+  height: 28px;
+  background-image: url('../../images/section/reload.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .section__header-title-container {
   width: 100%;
@@ -150,6 +209,7 @@
   font-size: 14px;
   line-height: 18px;
 }
+
 
 @media all and (max-width: 833px) {
   .section__page-container {
