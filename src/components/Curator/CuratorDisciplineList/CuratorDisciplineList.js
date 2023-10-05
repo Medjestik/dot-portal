@@ -12,8 +12,9 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
 
   const navigate = useNavigate();
 
-  const [semesterOptions, setSemesterOptions] = React.useState([{ name: 'Не выбран', id: 'empty', },]);
-  const [currentSemesterOption, setCurrentSemesterOption] = React.useState(semesterOptions[0]);
+  const [semesterOptions, setSemesterOptions] = React.useState([]);
+  const [currentSemesterOption, setCurrentSemesterOption] = React.useState({});
+  const [currentDetailOption, setCurrentDetailOption] = React.useState({});
   
   const [disciplines, setDisciplines] = React.useState([]);
   const [filteredDisciplines, setFilteredDisciplines] = React.useState([]);
@@ -51,7 +52,9 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
     setCurrentSemesterOption(option);
     if (option.id === 'empty') {
       setFilteredDisciplines(searchedDisciplines);
+      setCurrentDetailOption(semesterOptions[semesterOptions.length - 1]);
     } else {
+      setCurrentDetailOption(option);
       setFilteredDisciplines(searchedDisciplines.filter((elem) => (elem.semester_id === option.id)));
     }
   }
@@ -88,7 +91,9 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
       })
       .disc; // получаем конечный массив
 
-      setSemesterOptions([semesterOptions[0], ...uniqSemesters]);
+      setSemesterOptions([{ name: 'Не выбран', id: 'empty', }, ...uniqSemesters]);
+      setCurrentDetailOption(uniqSemesters[uniqSemesters.length - 1]);
+      setCurrentSemesterOption({ name: 'Не выбран', id: 'empty', });
       setDisciplines(res);
       setFilteredDisciplines(res);
       setSearchedDisciplines(res);
@@ -106,6 +111,8 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
     return (() => {
       setSemesterOptions([]);
       setDisciplines([]);
+      setCurrentSemesterOption({});
+      setCurrentDetailOption({});
     })
     // eslint-disable-next-line
   }, []);
@@ -126,11 +133,13 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
         <span className='section__header-caption'>Выберите семестр:</span>
         <PopupSelect filterType='byId' options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
       </div>
-      <div className='section__header-item'>
+      <div className='section__header-item section__header-item_type_content'>
         <span className='section__header-caption section__header-caption_margin_bottom'></span>
         <button 
-        className={`section__header-btn section__header-btn_type_full ${currentSemesterOption.id !== 'empty' ? '' : 'section__header-btn_type_block'}`} type='button' onClick={() => openViewSemesterDetailPopup()}>
-          Развернутая ведомость
+        className={`section__header-btn section__header-btn_type_small section__header-btn_type_table`} 
+        type='button'
+        onClick={() => openViewSemesterDetailPopup()}
+        >
         </button>
       </div>
     </div>
@@ -209,7 +218,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
         onClose={closePopup}
         groupId={groupInfo.id}
         semesterOptions={semesterOptions.filter((elem) => elem.id !== 'empty')}
-        currentSemesterId={currentSemesterOption.id}
+        currentSemesterId={currentDetailOption.id}
         role={role}
       />
     }
