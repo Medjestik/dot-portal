@@ -76,8 +76,24 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
                     <div className='table__column table__column_type_count'>
                       <p className='table__text'>{i + 1}</p>
                     </div>
-                    <div className='table__column table__column_type_name' onClick={() => onOpenStudent(item)}>
-                      <p className='table__text table__text_type_header table__text_type_active'>{item.student.fullname}</p>
+                    <div className='table__column table__column_direction_row table__column_type_name'>
+                      <p className='table__text table__text_type_header table__text_type_active' onClick={() => onOpenStudent(item)}>{item.student.fullname}</p>
+                      {
+                        item.student.is_sub &&
+                        <div className='table__cell-badge-list table__cell-badge-list_position_left'>
+                          <div className='table__cell-badge-item'>
+                            <span className='table__cell-badge table__cell-badge_color_orange'>Переводник</span>
+                          </div>
+                        </div>
+                      }
+                      {
+                        item.student.is_och &&
+                        <div className='table__cell-badge-list table__cell-badge-list_position_left'>
+                          <div className='table__cell-badge-item'>
+                            <span className='table__cell-badge table__cell-badge_color_blue'>Очник</span>
+                          </div>
+                        </div>
+                      }
                     </div>
                     <div className='table__column table__column_type_small'>
                       <p className='table__text'>{item.learning.content_time}</p>

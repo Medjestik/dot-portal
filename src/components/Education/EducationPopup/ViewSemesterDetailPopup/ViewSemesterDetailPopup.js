@@ -1,5 +1,4 @@
 import React from 'react';
-import Popup from '../../../Popup/Popup.js';
 import { useNavigate } from 'react-router-dom';
 import * as curatorApi from '../../../../utils/curatorApi.js';
 import TableHorizontal from '../../../Table/TableHorizontal/TableHorizontal.js';
@@ -23,9 +22,27 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
 
   const [isShowFullWidth, setIsShowFullWidth] = React.useState(false);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    onClose();
+
+  function generateMenuLink(student, activities) {
+    let link = '';
+
+    if (activities.type === 'practice') {
+      link = 'https://edu.emiit.ru/' + role + '/group/' + groupId + '/practice/' + activities.id + '/info';
+    } else if (activities.type === 'course') {
+      const courseId = activities.id.slice(0, -3); 
+      link = 'https://edu.emiit.ru/' + role + '/discipline/' + courseId + '/student/' + student.id;
+    } else {
+      link = 'https://edu.emiit.ru/' + role + '/discipline/' + activities.id + '/student/' + student.id;
+    }
+
+    return (
+      <a 
+      className='table-horizontal__cell-menu-icon table-horizontal__cell-menu-icon_type_detail' 
+      target='_blank' 
+      rel='noreferrer' 
+      href={link}>
+      </a>
+    )
   }
 
   function generateElemLink(elem) {
@@ -74,17 +91,6 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
 
   function getStudentMark(student, activities) { 
     const studentMark = currentData.results.find((item) => item.student_id === student.id && item.activity_id === activities.id);
-
-    /*let link = '';
-
-    if (activities.type === 'practice') {
-      link = 'https://edu.emiit.ru/' + role + '/group/' + groupId + '/practice/' + activities.id + '/info';
-    } else if (activities.type === 'course') {
-      const courseId = activities.id.slice(0, -3); 
-      link = 'https://edu.emiit.ru/' + role + '/discipline/' + courseId + '/student/' + student.id;
-    } else {
-      link = 'https://edu.emiit.ru/' + role + '/discipline/' + activities.id + '/student/' + student.id;
-    }*/
 
     if (studentMark) {
       if (studentMark.mark.name === 'Нет оценки') {
@@ -157,106 +163,133 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
   }, [isOpen]);
 
   return (
-    <Popup
-      isOpen={isOpen}
-      onSubmit={handleSubmit}
-      formWidth={isShowFullWidth ? '100' : '1440'}
-      formName={'view-semester-detail-popup'}
-    >
-      {
-      isLoadingInfo 
-      ?
-      <PreloaderPopup />
-      :
-      <>
+    <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
+      <div className='scroll popup__container'>
+        <div className={`popup__form popup__form_width_${isShowFullWidth ? '100' : '1440'} popup__form_height_min`} >
+        {
+        isLoadingInfo 
+        ?
+        <PreloaderPopup />
+        :
+        <>
+          <h2 className='popup__title popup__title_margin_bottom'>Развернутая ведомость</h2>
 
-        <h2 className='popup__title popup__title_margin_bottom'>Развернутая ведомость</h2>
-
-        <div className='section__header'>
-          <div className='section__header-item'>
-            <span className='section__header-caption'>Выберите семестр:</span>
-            <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
-          </div>
-          <div className='section__header-item section__header-item_type_content'>
-            <span className='section__header-caption section__header-caption_margin_bottom'></span>
-            <button 
-            className={`section__header-btn section__header-btn_type_small section__header-btn_type_import`} 
-            type='button'
-            >
-            </button>
-          </div>
-          <div className='section__header-item section__header-item_type_content'>
-            <span className='section__header-caption section__header-caption_margin_bottom'></span>
-            <button 
-            className={`section__header-btn section__header-btn_type_small section__header-btn_type_${isShowFullWidth ? 'collapse' : 'expand'}`} 
-            type='button'
-            onClick={() => setIsShowFullWidth(!isShowFullWidth)}
-            >
-            </button>
-          </div>
-          <div className='section__header-item section__header-item_type_content'>
-            <span className='section__header-caption section__header-caption_margin_bottom'></span>
-            <button 
-            className={`section__header-btn section__header-btn_type_small section__header-btn_type_reload`} 
-            type='button'
-            onClick={() => getSemesterDetail(currentSemesterOption.id)}
-            >
-            </button>
-          </div>
-          <div className='section__header-item section__header-item_type_content'>
-            <span className='section__header-caption section__header-caption_margin_bottom'></span>
-            <button 
-            className={`section__header-btn section__header-btn_type_fix`} 
-            type='button' 
-            onClick={() => onClose()}
-            >
-              Назад
-            </button>
-          </div>
-        </div>
-
-        <TableHorizontal>
-          <div className='table-horizontal__header' style={Object.assign({}, tableStyle)}>
-            <div className='table-horizontal__main-row' ref={tableWidthRef}>
-              <div className='table-horizontal__column table-horizontal__column_type_header table-horizontal__column_type_name table-horizontal__column_type_main'>
-                <p className='table-horizontal__text table-horizontal__text_weight_bold'>ФИО / Дисциплина</p>
-              </div>
-              {
-                currentData.activities.map((elem, i) => (
-                  <div key={i} className='table-horizontal__column table-horizontal__column_type_header table-horizontal__column_type_text'>
-                    {generateElemLink(elem)}
-                    <p className='table-horizontal__text'>{elem.lector}</p>
-                  </div>
-                ))
-              }
+          <div className='section__header'>
+            <div className='section__header-item'>
+              <span className='section__header-caption'>Выберите семестр:</span>
+              <PopupSelect options={semesterOptions} currentOption={currentSemesterOption} onChooseOption={filterBySemester} />
+            </div>
+            <div className='section__header-item section__header-item_type_content'>
+              <span className='section__header-caption section__header-caption_margin_bottom'></span>
+              <button 
+              className={`section__header-btn section__header-btn_type_small section__header-btn_type_import`} 
+              type='button'
+              >
+              </button>
+            </div>
+            <div className='section__header-item section__header-item_type_content'>
+              <span className='section__header-caption section__header-caption_margin_bottom'></span>
+              <button 
+              className={`section__header-btn section__header-btn_type_small section__header-btn_type_${isShowFullWidth ? 'collapse' : 'expand'}`} 
+              type='button'
+              onClick={() => setIsShowFullWidth(!isShowFullWidth)}
+              >
+              </button>
+            </div>
+            <div className='section__header-item section__header-item_type_content'>
+              <span className='section__header-caption section__header-caption_margin_bottom'></span>
+              <button 
+              className={`section__header-btn section__header-btn_type_small section__header-btn_type_reload`} 
+              type='button'
+              onClick={() => getSemesterDetail(currentSemesterOption.id)}
+              >
+              </button>
+            </div>
+            <div className='section__header-item section__header-item_type_content'>
+              <span className='section__header-caption section__header-caption_margin_bottom'></span>
+              <button 
+              className={`section__header-btn section__header-btn_type_fix`} 
+              type='button' 
+              onClick={() => onClose()}
+              >
+                Назад
+              </button>
             </div>
           </div>
 
-          <ul className='table-horizontal__main' style={Object.assign({}, tableStyle)}>
-            {
-              currentData.students.map((student, i) => (
-                <li className='table-horizontal__row' key={i}>
-                  <div className='table-horizontal__main-row'>
-                    <div className='table-horizontal__column table-horizontal__column_type_name'>
-                      <p className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_active'>{student.fullname}</p>
+          <TableHorizontal>
+            <div className='table-horizontal__header' style={Object.assign({}, tableStyle)}>
+              <div className='table-horizontal__main-row' ref={tableWidthRef}>
+                <div className='table-horizontal__column table-horizontal__column_type_header table-horizontal__column_type_name table-horizontal__column_type_main'>
+                  <p className='table-horizontal__text table-horizontal__text_weight_bold'>ФИО / Дисциплина</p>
+                </div>
+                {
+                  currentData.activities.map((elem, i) => (
+                    <div key={i} className='table-horizontal__column table-horizontal__column_type_header table-horizontal__column_type_text'>
+                      {generateElemLink(elem)}
+                      <p className='table-horizontal__text'>{elem.lector}</p>
                     </div>
-                    {
-                      currentData.activities.map((activities, i) => (
-                        <div className='table-horizontal__column table-horizontal__column_type_text' key={i}>
-                          {getStudentMark(student, activities)}
-                        </div>
-                      ))
-                    }
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
+                  ))
+                }
+              </div>
+            </div>
 
-        </TableHorizontal>
-      </>
-      }
-    </Popup>
+            <ul className='table-horizontal__main' style={Object.assign({}, tableStyle)}>
+              {
+                currentData.students.map((student, i) => (
+                  <li className='table-horizontal__row' key={i}>
+                    <div className='table-horizontal__main-row'>
+                      <div className={`table-horizontal__column table-horizontal_display_row table-horizontal__column_type_name`}>
+                        {
+                        student.avatar
+                        ?
+                        <img className='popup__author-img popup__author-img_size_40' src={student.avatar} alt='аватар'></img>
+                        :
+                        <div className='popup__author-img popup__author-img_size_40'></div>
+                        }
+                        <div className='table-horizontal__cell-container'>
+                          <p className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_active'>{student.fullname}</p>
+                          {
+                            student.is_sub &&
+                            <div className='table-horizontal__cell-badge-list table-horizontal__cell-badge-list_position_bottom'>
+                              <div className='table-horizontal__cell-badge-item'>
+                                <span className='table-horizontal__cell-badge table-horizontal__cell-badge_color_orange'>Переводник</span>
+                              </div>
+                            </div>
+                          }
+                          {
+                            student.is_och &&
+                            <div className='table-horizontal__cell-badge-list table-horizontal__cell-badge-list_position_bottom'>
+                              <div className='table-horizontal__cell-badge-item'>
+                                <span className='table-horizontal__cell-badge table-horizontal__cell-badge_color_blue'>Очник</span>
+                              </div>
+                            </div>
+                          }
+                        </div>
+                      </div>
+                      {
+                        currentData.activities.map((activities, i) => (
+                          <div className='table-horizontal__column table-horizontal_display_row table-horizontal__column_type_text' key={i}>
+                            {getStudentMark(student, activities)}
+                            <div className='table-horizontal__cell-menu'>
+                              <div className='table-horizontal__cell-menu-item'>
+                                {generateMenuLink(student, activities)}
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </li>
+                ))
+              }
+            </ul>
+          </TableHorizontal>
+        </>
+        }
+        </div>
+      </div>
+    </div>
   )
 }
 

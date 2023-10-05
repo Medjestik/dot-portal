@@ -491,7 +491,7 @@
 .popup__item-title {
   margin: 0px;
   font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
@@ -564,8 +564,9 @@
   transition: all .3s ease-in-out;
 }
 .popup__author-title_font_small {
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: normal;
 }
 .popup__author-title_type_active:hover {
   cursor: pointer;
