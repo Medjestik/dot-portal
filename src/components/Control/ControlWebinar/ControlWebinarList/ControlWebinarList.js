@@ -2,6 +2,7 @@ import React from 'react';
 import './ControlWebinarList.css';
 import { useNavigate } from 'react-router-dom';
 import Table from '../../../Table/Table.js';
+import TableCard from '../../../Table/TableCard/TableCard.js';
 import * as webinarApi from '../../../../utils/webinarApi.js';
 import Preloader from '../../../Preloader/Preloader.js';
 import ConfirmRemovePopup from '../../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
@@ -281,12 +282,15 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
   return (
     <div className='control-webinar-list'>
 
-      <div className='section__header'>   
-        <div className='section__header-item'>
-          <span className='section__header-caption section__header-caption_margin_bottom'></span>
-          <button className='section__header-btn section__header-btn_type_full' type='button' onClick={() => addWebinar({ action: 'new' })}>Создать вебинар</button>
-        </div>
-        <div className='section__header-item'>
+      { 
+      isLoadingWebinar
+      ?
+      <Preloader />
+      :
+      <>
+
+      <div className={`section__header ${windowWidth <= 833 ? 'section__header_direction_column' : ''}`}>
+        <div className={`section__header-item ${windowWidth <= 833 ? 'section__header-item_margin_top' : ''}`}>
           <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по названию:</span>
           <div className={`search search_type_large`}>
             <input
@@ -302,7 +306,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
             </input>
           </div>
         </div>
-        <div className='section__header-item'>
+        <div className={`section__header-item ${windowWidth <= 833 ? 'section__header-item_margin_top' : ''}`}>
           <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по преподавателю:</span>
           <div className={`search search_type_large`}>
             <input
@@ -318,7 +322,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
             </input>
           </div>
         </div>
-        <div className='section__header-item'>
+        <div className={`section__header-item ${windowWidth <= 833 ? 'section__header-item_margin_top' : ''}`}>
           <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по дате:</span>
           <div className='popup__input-field popup__input-field_margin_top'>
             <input 
@@ -339,95 +343,165 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
             {dateError.text}
           </span>
         </div>
-      </div>
-
-      { 
-      isLoadingWebinar
-      ?
-      <Preloader />
-      :
-      <Table>
-        <div ref={containerHeightRef} className='table__container'>
-          <div ref={tableHeaderHeightRef} className='table__header'>
-            <div className='table__main-column'>
-              <div className='table__column table__column_type_header table__column_type_count'>
-                <p className='table__text table__text_type_header'>№</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_date'>
-                <p className='table__text table__text_type_header'>Дата</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_name'>
-                <p className='table__text table__text_type_header'>Наименование</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_teacher'>
-                <p className='table__text table__text_type_header'>Спикер</p>
-              </div>
-              <div className='table__column table__column_type_header table__column_type_status'>
-                <p className='table__text table__text_type_header'>Статус</p>
-              </div>
-            </div>
-            <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-              <div className='btn btn_type_edit btn_type_edit_status_active'></div> 
-              <div className='btn btn_type_copy btn_type_copy_status_active'></div> 
-              <div className='btn btn_type_download btn_type_download_status_active table__btn'></div> 
-            </div>
+        {
+          windowWidth <= 833 
+          ?
+          <div className='section__header-item section__header-item_margin_top'>
+            <button 
+            className='section__header-btn section__header-btn_type_full'
+            type='button'
+            onClick={() => addWebinar({ action: 'new' })}
+            >
+              Создать вебинар
+            </button>
           </div>
+          :
+          <div className='section__header-item section__header-item_type_content'>
+            <span className='section__header-caption section__header-caption_margin_bottom'></span>
+            <button 
+            className={`section__header-btn section__header-btn_type_small section__header-btn_type_add`} 
+            type='button'
+            onClick={() => addWebinar({ action: 'new' })}
+            >
+            </button>
+          </div>
+        }
+      </div>
+      {
+        windowWidth <= 833
+        ?
+        <TableCard>
           {
             filteredWebinars.length < 1 
             ?
             <p className='table__caption_type_empty'>По заданным параметрам вебинаров не найдено.</p>
             :
-            <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_webinar scroll'>
-              {
-                filteredWebinars.map((item, i) => (
-                  <li className='table__row' key={item.id}>
-                    <div className='table__main-column'>
-                      <div className='table__column table__column_type_count'>
-                        <p className='table__text'>{i + 1}</p>
-                      </div>
-                      <div className='table__column table__column_type_date'>
-                        <p className='table__text'>{item.date}</p>
-                        <p className='table__text'>{item.time}</p>
-                      </div>
-                      <div className='table__column table__column_type_name'>
-                        <a className='table__text table__text_weight_bold table__text_type_active' href={item.status === 'completed' ? item.record_link : item.link} target='_blank' rel='noreferrer'>{item.name}</a>
-                      </div>
-                      <div className='table__column table__column_type_teacher'>
-                        <p className='table__text'>{item.key_speaker}</p>
-                      </div>
-                      <div className='table__column table__column_type_status' onClick={() => openStatusWebinarPopup(item)}>
-                        {renderStatus(item.status)}
-                      </div>
-                    </div>
-                    <div className='table__column table__column_type_btn'>
-                      <button 
-                        className='btn btn_type_edit btn_type_edit_status_active' 
-                        type='button'
-                        onClick={() => openEditWebinarItem(item)}
-                      >  
-                      </button>
-                      <button 
-                        className='btn btn_type_copy btn_type_copy_status_active' 
-                        type='button'
-                        onClick={() => addWebinar({ ...item, action: 'copy' })}
-                      >  
-                      </button> 
-                      <button 
-                        className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
-                        type='button' 
-                        onClick={() => openRemoveWebinarPopup(item)}
-                      > 
-                      </button>
-                    </div>
-                  </li>
-                ))
-              }
-            </ul>
+            <>
+            {
+              filteredWebinars.map((item, i) => (
+                <li className='table-card__item' key={i}>
+                  <div onClick={() => openStatusWebinarPopup(item)}>
+                    {renderStatus(item.status)}
+                  </div>
+                  
+                  <div className='table-card__title'>
+                    <a 
+                    className='table-card__text table-card__text_weight_bold table-card__text_type_active table-card__title' 
+                    href={item.status === 'completed' ? item.record_link : item.link} 
+                    target='_blank' rel='noreferrer'>
+                      {item.name}
+                    </a>
+                  </div>
+
+                  <p className='table-card__text table-card__subtitle'>{item.key_speaker}</p>
+
+                  <div className='table-card__info'>
+                    <ul className='table-card__info-list'>
+                      <li className='table-card__info-item'>
+                        <p className='data__text'><span className='data__text_font_bold'>Дата:</span>{item.date || ''}</p>
+                      </li>
+                      <li className='table-card__info-item'>
+                        <p className='data__text'><span className='data__text_font_bold'>Время:</span>{item.time || ''}</p>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className='table-card__menu'>
+                    <button className='table-card__menu-button table-card__menu-button_type_edit' type='button' onClick={() => openEditWebinarItem(item)}></button>
+                    <button className='table-card__menu-button table-card__menu-button_type_remove' type='button' onClick={() => openRemoveWebinarPopup(item)}></button>
+                  </div>
+                </li>
+              ))
+            }
+            </>
           }
-        </div>
-      </Table>
+        </TableCard>
+        :
+        <Table>
+          <div ref={containerHeightRef} className='table__container'>
+            <div ref={tableHeaderHeightRef} className='table__header'>
+              <div className='table__main-column'>
+                <div className='table__column table__column_type_header table__column_type_count'>
+                  <p className='table__text table__text_type_header'>№</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_date'>
+                  <p className='table__text table__text_type_header'>Дата</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_name'>
+                  <p className='table__text table__text_type_header'>Наименование</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_teacher'>
+                  <p className='table__text table__text_type_header'>Спикер</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_status'>
+                  <p className='table__text table__text_type_header'>Статус</p>
+                </div>
+              </div>
+              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                <div className='btn btn_type_edit btn_type_edit_status_active'></div> 
+                <div className='btn btn_type_copy btn_type_copy_status_active'></div> 
+                <div className='btn btn_type_download btn_type_download_status_active table__btn'></div> 
+              </div>
+            </div>
+            {
+              filteredWebinars.length < 1 
+              ?
+              <p className='table__caption_type_empty'>По заданным параметрам вебинаров не найдено.</p>
+              :
+              <ul style={Object.assign({}, tableStyle)} className='table__main table__main_type_webinar scroll'>
+                {
+                  filteredWebinars.map((item, i) => (
+                    <li className='table__row' key={item.id}>
+                      <div className='table__main-column'>
+                        <div className='table__column table__column_type_count'>
+                          <p className='table__text'>{i + 1}</p>
+                        </div>
+                        <div className='table__column table__column_type_date'>
+                          <p className='table__text'>{item.date}</p>
+                          <p className='table__text'>{item.time}</p>
+                        </div>
+                        <div className='table__column table__column_type_name'>
+                          <a className='table__text table__text_weight_bold table__text_type_active' href={item.status === 'completed' ? item.record_link : item.link} target='_blank' rel='noreferrer'>{item.name}</a>
+                        </div>
+                        <div className='table__column table__column_type_teacher'>
+                          <p className='table__text'>{item.key_speaker}</p>
+                        </div>
+                        <div className='table__column table__column_type_status' onClick={() => openStatusWebinarPopup(item)}>
+                          {renderStatus(item.status)}
+                        </div>
+                      </div>
+                      <div className='table__column table__column_type_btn'>
+                        <button 
+                          className='btn btn_type_edit btn_type_edit_status_active' 
+                          type='button'
+                          onClick={() => openEditWebinarItem(item)}
+                        >  
+                        </button>
+                        <button 
+                          className='btn btn_type_copy btn_type_copy_status_active' 
+                          type='button'
+                          onClick={() => addWebinar({ ...item, action: 'copy' })}
+                        >  
+                        </button> 
+                        <button 
+                          className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
+                          type='button' 
+                          onClick={() => openRemoveWebinarPopup(item)}
+                        > 
+                        </button>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ul>
+            }
+          </div>
+        </Table>
       }
 
+      </>
+      }
+      
       {       
         isOpenStatusWebinar &&
         <StatusWebinarPopup

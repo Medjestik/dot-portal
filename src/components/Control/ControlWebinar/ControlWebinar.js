@@ -26,6 +26,17 @@ function ControlWebinar({ windowWidth, onLogout, semesterInfo }) {
     },
   ]
 
+  const mobileTabs = [
+    {
+      title: 'Список',
+      link: '/control/webinar/list'
+    },
+    {
+      title: 'По дисциплинам',
+      link: '/control/webinar/discipline'
+    },
+  ]
+
   function handleOpenAddWebinar(action) {
     setWebinarAction(action);
     navigate('/control/webinar/add');
@@ -38,7 +49,7 @@ function ControlWebinar({ windowWidth, onLogout, semesterInfo }) {
         <SemesterHeaderBtnBack onBack={() => navigate('/control')} isPerformFunction={true} />
       </SemesterHeader>
 
-      <SectionTabs type='small' tabs={tabs} > 
+      <SectionTabs type='small' tabs={windowWidth <= 833 ? mobileTabs : tabs} > 
 
         <Routes>
 

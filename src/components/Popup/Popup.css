@@ -673,6 +673,9 @@
     margin: 8px 0px 0px 0px;
     padding: 7px 12px 7px 12px;
   }
+  .popup__input-field_margin_top {
+    margin: 0px;
+  }
   .popup__input-caption {
     font-size: 12px;
     line-height: 16px;
