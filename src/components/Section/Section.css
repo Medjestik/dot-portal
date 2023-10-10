@@ -264,4 +264,12 @@
   .section__header-item_margin_top {
     margin: 8px 0px 0px 0px;
   }
+  .section__header-item:last-of-type {
+    margin: 8px 0px 0px 0px;
+  }
+  .section__header-btn {
+    padding: 8px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }

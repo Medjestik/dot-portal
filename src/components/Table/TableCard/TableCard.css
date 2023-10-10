@@ -35,6 +35,9 @@
 .table-card__text_color_grey {
   color: var(--accent-grey-color);
 }
+.table-card__text_color_orange {
+  color: var(--accent-orange-color);
+}
 .table-card__text_type_cut {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -116,6 +119,7 @@
 }
 .table-card__menu-button {
   margin: 0px 0px 0px 8px;
+  padding: 0px;
   flex-shrink: 0;
   position: relative;
   width: 20px;

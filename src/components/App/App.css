@@ -1,3 +1,15 @@
+input[type='date']
+{
+    display: block;
+  
+    /* Solution 1 */
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    min-height: 1.2em; 
+  
+    /* Solution 2 */
+    /* min-width: 96%; */
+}
 .page {
   --background-color: #E5E5E5;
   --main-grey-color: #F1F3F5;
@@ -953,38 +965,49 @@ input[type=number] {
     padding: 60px 0px 16px 0px;
   }
   .btn_type_download {
-    width: 32px;
-    height: 32px;
+    width: 20px;
+    height: 20px;
   }
   .btn_type_download::after {
-    top: 8px;
-    left: 8px;
-    background-size: 16px;
-    width: 16px;
-    height: 16px;
+    top: 4px;
+    left: 4px;
+    background-size: 12px;
+    width: 12px;
+    height: 12px;
+  }
+  .btn_type_create {
+    width: 20px;
+    height: 20px;
+  }
+  .btn_type_create::after {
+    top: 4px;
+    left: 4px;
+    background-size: 12px;
+    width: 12px;
+    height: 12px;
   }
   .btn_type_upload {
-    width: 32px;
-    height: 32px;
+    width: 20px;
+    height: 20px;
   }
   .btn_type_upload::after {
-    top: 8px;
-    left: 8px;
-    background-size: 16px;
-    width: 16px;
-    height: 16px;
+    top: 4%;
+    left: 4px;
+    background-size: 12px;
+    width: 12px;
+    height: 12px;
   }
   .btn_type_cancel {
     margin: 0px;
-    width: 32px;
-    height: 32px;
+    width: 20px;
+    height: 20px;
   }
   .btn_type_cancel::after {
-    top: 8px;
-    left: 8px;
-    background-size: 16px;
-    width: 16px;
-    height: 16px;
+    top: 4px;
+    left: 4px;
+    background-size: 12px;
+    width: 12px;
+    height: 12px;
   }
   .btn_type_large {
     flex-grow: 2;

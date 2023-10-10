@@ -5,12 +5,10 @@ import * as webinarApi from '../../../../utils/webinarApi.js';
 import Table from '../../../Table/Table.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
 
-function UserWebinarPopup({ isOpen, onClose, onSave, currentUsers }) {
+function UserWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentUsers }) {
 
   const [isBlockSearchButton, setIsBlockSearchButton] = React.useState(true);
   const [isLoadingPageSearch, setIsLoadingSearch] = React.useState(false);
-
-  console.log(currentUsers);
 
   const roleOptions = [
     { name: 'Ведущий', id: 'moderator', },
@@ -134,7 +132,7 @@ function UserWebinarPopup({ isOpen, onClose, onSave, currentUsers }) {
             value={searchText}
             onChange={handleChangeSearchText}
             name='user-webinar-popup-search-text' 
-            placeholder='Введите имя участника..'
+            placeholder='Имя участника..'
             autoComplete='off'
             minLength={1}
             required 
@@ -165,7 +163,7 @@ function UserWebinarPopup({ isOpen, onClose, onSave, currentUsers }) {
                   <p className='table__text table__text_type_header'>ФИО</p>
                 </div>
               </div>
-              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header table__column_type_btn-header-with-scroll'>
                 <div className='btn btn_type_create btn_type_create_status_active table__btn'></div> 
               </div>
             </div>
@@ -224,7 +222,7 @@ function UserWebinarPopup({ isOpen, onClose, onSave, currentUsers }) {
             {
               selectedUsers.length > 0
               ?
-              <ul className='table__main table__main_height_smallest scroll'>
+              <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
                 {
                   [...selectedUsers].reverse().map((item, i) => (
                     <li className='table__row' key={i}>

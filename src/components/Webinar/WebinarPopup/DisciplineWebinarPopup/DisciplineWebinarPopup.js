@@ -5,7 +5,7 @@ import * as webinarApi from '../../../../utils/webinarApi.js';
 import Table from '../../../Table/Table.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
 
-function DisciplineWebinarPopup({ isOpen, onClose, onSave, currentDisciplines, semesterInfo }) {
+function DisciplineWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentDisciplines, semesterInfo }) {
 
   const [isBlockSearchButton, setIsBlockSearchButton] = React.useState(true);
   const [isLoadingSearch, setIsLoadingSearch] = React.useState(false);
@@ -130,7 +130,7 @@ function DisciplineWebinarPopup({ isOpen, onClose, onSave, currentDisciplines, s
             value={searchText}
             onChange={handleChangeSearchText}
             name='discipline-webinar-popup-search-text' 
-            placeholder='Введите название дисциплины..'
+            placeholder='Название дисциплины..'
             autoComplete='off'
             minLength={1}
             required 
@@ -154,14 +154,17 @@ function DisciplineWebinarPopup({ isOpen, onClose, onSave, currentDisciplines, s
           <div className='table__container table__container_margin_top'>
             <div className='table__header'>
               <div className='table__main-column'>
-                <div className='table__column table__column_type_header table__column_type_large'>
-                  <p className='table__text table__text_type_header'>Группа</p>
-                </div>
+                {
+                  windowWidth > 833 &&
+                  <div className='table__column table__column_type_header table__column_type_large'>
+                    <p className='table__text table__text_type_header'>Группа</p>
+                  </div>
+                }
                 <div className='table__column table__column_type_header table__column_type_name'>
-                  <p className='table__text table__text_type_header'>Дисциплина</p>
+                  <p className='table__text table__text_type_header'>{windowWidth > 833 ? 'Дисциплина' : 'Наименование'}</p>
                 </div>
               </div>
-              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header table__column_type_btn-header-with-scroll'>
                 <div className='btn btn_type_create btn_type_create_status_active table__btn'></div> 
               </div>
             </div>
@@ -173,12 +176,23 @@ function DisciplineWebinarPopup({ isOpen, onClose, onSave, currentDisciplines, s
                   searchedDisciplines.map((item, i) => (
                     <li className='table__row' key={i}>
                       <div className='table__main-column'>
-                        <div className='table__column table__column_type_large'>
-                          <p className='table__text'>{item.group_name || ''}</p>
-                        </div>
-                        <div className='table__column table__column_type_name'>
-                          <p className='table__text'>{item.activity_name || ''}</p>
-                        </div>
+                        {
+                          windowWidth > 833 
+                          ?
+                          <>
+                          <div className='table__column table__column_type_large'>
+                            <p className='table__text'>{item.group_name || ''}</p>
+                          </div>
+                          <div className='table__column table__column_type_name'>
+                            <p className='table__text'>{item.activity_name || ''}</p>
+                          </div>
+                          </>
+                          :
+                          <div className='table__column table__column_type_name'>
+                            <p className='table__text table__text_type_empty'>{item.group_name || ''}</p>
+                            <p className='table__text'>{item.activity_name || ''}</p>
+                          </div>
+                        }
                       </div>
                       <div className='table__column table__column_type_btn'>
                         <button 
@@ -205,11 +219,14 @@ function DisciplineWebinarPopup({ isOpen, onClose, onSave, currentDisciplines, s
           <div className='table__container table__container_margin_top'>
             <div className='table__header'>
               <div className='table__main-column'>
-                <div className='table__column table__column_type_header table__column_type_large'>
-                  <p className='table__text table__text_type_header'>Группа</p>
-                </div>
+                {
+                  windowWidth > 833 &&
+                  <div className='table__column table__column_type_header table__column_type_large'>
+                    <p className='table__text table__text_type_header'>Группа</p>
+                  </div>
+                }
                 <div className='table__column table__column_type_header table__column_type_name'>
-                  <p className='table__text table__text_type_header'>Дисциплина</p>
+                  <p className='table__text table__text_type_header'>{windowWidth > 833 ? 'Дисциплина' : 'Наименование'}</p>
                 </div>
               </div>
               <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
@@ -219,17 +236,28 @@ function DisciplineWebinarPopup({ isOpen, onClose, onSave, currentDisciplines, s
             {
               selectedDisciplines.length > 0
               ?
-              <ul className='table__main table__main_height_smallest scroll'>
+              <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
                 {
                   [...selectedDisciplines].reverse().map((item, i) => (
                     <li className='table__row' key={i}>
                       <div className='table__main-column'>
-                        <div className='table__column table__column_type_large'>
-                          <p className='table__text'>{item.group_name || ''}</p>
-                        </div>
-                        <div className='table__column table__column_type_name'>
-                          <p className='table__text'>{item.activity_name || ''}</p>
-                        </div>
+                        {
+                          windowWidth > 833 
+                          ?
+                          <>
+                          <div className='table__column table__column_type_large'>
+                            <p className='table__text'>{item.group_name || ''}</p>
+                          </div>
+                          <div className='table__column table__column_type_name'>
+                            <p className='table__text'>{item.activity_name || ''}</p>
+                          </div>
+                          </>
+                          :
+                          <div className='table__column table__column_type_name'>
+                            <p className='table__text table__text_type_empty'>{item.group_name || ''}</p>
+                            <p className='table__text'>{item.activity_name || ''}</p>
+                          </div>
+                        }
                       </div>
                       <div className='table__column table__column_type_btn'>
                         <button 

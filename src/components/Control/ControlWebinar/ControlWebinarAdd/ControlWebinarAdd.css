@@ -20,9 +20,9 @@
 .webinar-add__subtitle {
   color: var(--main-black-color);
   font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
   line-height: 20px;
+  font-style: normal;
+  font-weight: bold;
   margin: 0px;
 }
 .webinar-add__section-row {
@@ -52,4 +52,24 @@
   width: 100%;
   display: flex;
   align-items: center;
+}
+
+@media all and (max-width: 833px) {
+  .webinar-add__title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .webinar-add__section-row {
+    margin: 0px;
+    flex-direction: column;
+  }
+  .webinar-add__section-column {
+    margin: 0px;
+  }
+  .webinar-add__section-header {
+    margin: 20px 0px 0px 0px;
+  }
+  .webinar-add__section-header-mobile {
+    margin: 8px 0px 0px 0px;
+  }
 }

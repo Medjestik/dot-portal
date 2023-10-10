@@ -4,7 +4,7 @@ import './GroupWebinarPopup.css';
 import * as webinarApi from '../../../../utils/webinarApi.js';
 import Table from '../../../Table/Table.js';
 
-function GroupWebinarPopup({ isOpen, onClose, onSave, currentGroups }) {
+function GroupWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentGroups }) {
 
   const [isBlockSearchButton, setIsBlockSearchButton] = React.useState(true);
   const [isLoadingPageSearch, setIsLoadingSearch] = React.useState(false);
@@ -113,7 +113,7 @@ function GroupWebinarPopup({ isOpen, onClose, onSave, currentGroups }) {
             value={searchText}
             onChange={handleChangeSearchText}
             name='group-webinar-popup-search-text' 
-            placeholder='Введите наименование группы..'
+            placeholder='Наименование группы..'
             autoComplete='off'
             minLength={1}
             required 
@@ -137,14 +137,17 @@ function GroupWebinarPopup({ isOpen, onClose, onSave, currentGroups }) {
           <div className='table__container table__container_margin_top'>
             <div className='table__header'>
               <div className='table__main-column'>
-                <div className='table__column table__column_type_header table__column_type_large'>
-                  <p className='table__text table__text_type_header'>Код</p>
-                </div>
+                {
+                  windowWidth > 833 &&
+                  <div className='table__column table__column_type_header table__column_type_large'>
+                    <p className='table__text table__text_type_header'>Код</p>
+                  </div>
+                }
                 <div className='table__column table__column_type_header table__column_type_name'>
                   <p className='table__text table__text_type_header'>Наименование</p>
                 </div>
               </div>
-              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header table__column_type_btn-header-with-scroll'>
                 <div className='btn btn_type_create btn_type_create_status_active table__btn'></div> 
               </div>
             </div>
@@ -156,9 +159,12 @@ function GroupWebinarPopup({ isOpen, onClose, onSave, currentGroups }) {
                   searchedGroups.map((item, i) => (
                     <li className='table__row' key={i}>
                       <div className='table__main-column'>
-                        <div className='table__column table__column_type_large'>
-                          <p className='table__text'>{item.code}</p>
-                        </div>
+                        {
+                          windowWidth > 833 &&
+                          <div className='table__column table__column_type_large'>
+                            <p className='table__text'>{item.code}</p>
+                          </div>
+                        }
                         <div className='table__column table__column_type_name'>
                           <p className='table__text'>{item.name}</p>
                         </div>
@@ -189,9 +195,12 @@ function GroupWebinarPopup({ isOpen, onClose, onSave, currentGroups }) {
           <div className='table__container table__container_margin_top'>
             <div className='table__header'>
               <div className='table__main-column'>
-                <div className='table__column table__column_type_header table__column_type_large'>
-                  <p className='table__text table__text_type_header'>Код</p>
-                </div>
+                {
+                  windowWidth > 833 &&
+                  <div className='table__column table__column_type_header table__column_type_large'>
+                    <p className='table__text table__text_type_header'>Код</p>
+                  </div>
+                }
                 <div className='table__column table__column_type_header table__column_type_name'>
                   <p className='table__text table__text_type_header'>Наименование</p>
                 </div>
@@ -203,14 +212,17 @@ function GroupWebinarPopup({ isOpen, onClose, onSave, currentGroups }) {
             {
               selectedGroups.length > 0
               ?
-              <ul className='table__main table__main_height_smallest scroll'>
+              <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
                 {
                   [...selectedGroups].reverse().map((item, i) => (
                     <li className='table__row' key={i}>
                       <div className='table__main-column'>
+                      {
+                        windowWidth > 833 &&
                         <div className='table__column table__column_type_large'>
                           <p className='table__text'>{item.code}</p>
                         </div>
+                      }
                         <div className='table__column table__column_type_name'>
                           <p className='table__text'>{item.name}</p>
                         </div>
@@ -239,6 +251,7 @@ function GroupWebinarPopup({ isOpen, onClose, onSave, currentGroups }) {
         <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Назад</button>
         <button className={`popup__btn-save`} type='button' onClick={() => handleSave()}>Сохранить</button>
       </div>
+      
     </Popup>
   )
 }

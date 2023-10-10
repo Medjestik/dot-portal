@@ -126,7 +126,7 @@
   display: flex;
   align-items: center;
   margin: auto 0px 0px 0px;
-  padding: 24px 0px 0px 0px;
+  padding: 24px 0px 8px 0px;
 }
 .popup__btn-back {
   margin: auto 0px 0px 0px;
@@ -689,7 +689,7 @@
     line-height: 16px;
   }
   .popup__btn-container {
-    padding: 16px 0px 0px 0px;
+    padding: 16px 0px 8px 0px;
   }
   .popup__textarea {
     min-height: 80px;
@@ -735,5 +735,26 @@
   .popup__author-text {
     font-size: 12px;
     line-height: 16px;
+  }
+  .popup__field_margin_top {
+    margin: 0px;
+  }
+  .popup__search-button {
+    margin: 0px 0px 0px 6px;
+    padding: 1px 8px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  .popup__btn-cancel {
+    padding: 8px;
+    line-height: 16px;
+}
+  .popup__btn-save {
+    padding: 8px;
+    line-height: 16px;
+  }
+  .popup__field-container_type_mobile {
+    margin: 0px;
+    flex-direction: column;
   }
 }

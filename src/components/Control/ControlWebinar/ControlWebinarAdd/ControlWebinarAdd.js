@@ -263,7 +263,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
                   <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
                 </div>
               </div>
-              <ul className='table__main table__main_height_small scroll'>
+              <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
               {
               currentGroups.length > 0
               ?
@@ -314,7 +314,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
                   <div className='btn btn_type_download btn_type_download_status_active table__btn'></div> 
                 </div>
               </div>
-                <ul className='table__main table__main_height_small scroll'>
+                <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
                 {
                 currentUsers.length > 0
                 ?
@@ -384,7 +384,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
                   <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
                 </div>
               </div>
-              <ul className='table__main table__main_height_small scroll'>
+              <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
               {
               currentDisciplines.length > 0
               ?
@@ -430,21 +430,24 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
                   <div className='table__column table__column_type_header table__column_type_count'>
                     <p className='table__text table__text_type_header'>№</p>
                   </div>
-                  <div className='table__column table__column_type_header table__column_type_large'>
+                  <div className={`table__column table__column_type_header ${windowWidth > 833 ? 'table__column_type_large' : 'table__column_type_full'}`}>
                     <p className='table__text table__text_type_header'>Дата</p>
                   </div>
                   <div className='table__column table__column_type_header table__column_type_medium'>
                     <p className='table__text table__text_type_header'>Время</p>
                   </div>
-                  <div className='table__column table__column_type_header table__column_type_large'>
-                    <p className='table__text table__text_type_header'>Длительность</p>
-                  </div>
+                  {
+                    windowWidth > 833 &&
+                    <div className='table__column table__column_type_header table__column_type_large'>
+                      <p className='table__text table__text_type_header'>Длительность</p>
+                    </div>
+                  }
                 </div>
                 <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
                   <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
                 </div>
               </div>
-              <ul className='table__main table__main_height_small scroll'>
+              <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
               {
               currentDates.length > 0
               ?
@@ -456,15 +459,18 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
                         <div className='table__column table__column_type_count'>
                           <p className='table__text'>{i + 1}</p>
                         </div>
-                        <div className='table__column table__column_type_large'>
+                        <div className={`table__column ${windowWidth > 833 ? 'table__column_type_large' : 'table__column_type_full'}`}>
                           <p className='table__text'>{item.date}</p>
                         </div>
                         <div className='table__column table__column_type_medium'>
                           <p className='table__text'>{item.time}</p>
                         </div>
-                        <div className='table__column table__column_type_large'>
-                          <p className='table__text'>{item.duration}</p>
-                        </div>
+                        {
+                          windowWidth > 833 &&
+                          <div className='table__column table__column_type_large'>
+                            <p className='table__text'>{item.duration}</p>
+                          </div>
+                        }
                       </div>
                       <div className='table__column table__column_type_btn'>
                         <button className='btn btn_type_cancel btn_type_cancel_status_active table__btn' onClick={() => handleRemoveDate(item)}></button>
@@ -513,6 +519,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
       {
         isOpenWebinarGroupPopup &&
         <GroupWebinarPopup
+          windowWidth={windowWidth}
           isOpen={isOpenWebinarGroupPopup}
           onClose={closePopup}
           onSave={handleChangeGroup}
@@ -523,6 +530,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
       {
         isOpenWebinarUserPopup &&
         <UserWebinarPopup
+          windowWidth={windowWidth}
           isOpen={isOpenWebinarUserPopup}
           onClose={closePopup}
           onSave={handleChangeUser}
@@ -533,6 +541,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
       {
         isOpenWebinarDisciplinePopup &&
         <DisciplineWebinarPopup
+          windowWidth={windowWidth}
           isOpen={isOpenWebinarDisciplinePopup}
           onClose={closePopup}
           onSave={handleChangeDiscipline}
@@ -544,6 +553,7 @@ function ControlWebinarAdd({ windowWidth, semesterInfo, webinarAction }) {
       {
         isOpenWebinarDatePopup &&
         <DateWebinarPopup
+          windowWidth={windowWidth}
           isOpen={isOpenWebinarDatePopup}
           onClose={closePopup}
           onSave={handleAddDate}

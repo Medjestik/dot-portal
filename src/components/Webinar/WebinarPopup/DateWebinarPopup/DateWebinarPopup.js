@@ -4,8 +4,9 @@ import './DateWebinarPopup.css';
 import * as webinarApi from '../../../../utils/webinarApi.js';
 import InputMask from 'react-input-mask';
 import Table from '../../../Table/Table.js';
+import TableCard from '../../../Table/TableCard/TableCard.js';
 
-function DateWebinarPopup({ isOpen, onClose, onSave, currentGroups, currentUsers, currentData }) {
+function DateWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentGroups, currentUsers, currentData }) {
 
   const [isLoadingSearch, setIsLoadingSearch] = React.useState(false);
   const [isBlockSearchButton, setIsBlockSearchButton] = React.useState(true);
@@ -176,7 +177,7 @@ function DateWebinarPopup({ isOpen, onClose, onSave, currentGroups, currentUsers
         </span>
       </div>
 
-      <div className='popup__field-container'>
+      <div className={`popup__field-container ${windowWidth <= 833 && 'popup__field-container_type_mobile'}`}>
 
         <label className='popup__field popup__field_type_row'>
           <h4 className='popup__input-caption'>Время начала:</h4>
@@ -223,54 +224,99 @@ function DateWebinarPopup({ isOpen, onClose, onSave, currentGroups, currentUsers
 
       <div className='popup__field'>
         <h4 className='popup__input-caption popup__input-caption_weight_bold'>Вебинары по указанной дате:</h4>
-        <Table>
-          <div className='table__container table__container_margin_top'>
-            <div className='table__header'>
-              <div className='table__main-column table__main-column_type_empty'>
-                <div className='table__column table__column_type_header table__column_type_small'>
-                  <p className='table__text table__text_type_header'>Время</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_name'>
-                  <p className='table__text table__text_type_header'>Наименование</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_full'>
-                  <p className='table__text table__text_type_header'>Группа</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_full'>
-                  <p className='table__text table__text_type_header'>Ведущий</p>
+        {
+          windowWidth > 833
+          ?
+          <Table>
+            <div className='table__container table__container_margin_top'>
+              <div className='table__header'>
+                <div className='table__main-column table__main-column_type_empty'>
+                  <div className='table__column table__column_type_header table__column_type_small'>
+                    <p className='table__text table__text_type_header'>Время</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_name'>
+                    <p className='table__text table__text_type_header'>Наименование</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_full'>
+                    <p className='table__text table__text_type_header'>Группа</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_full'>
+                    <p className='table__text table__text_type_header'>Ведущий</p>
+                  </div>
                 </div>
               </div>
+              {
+                searchedWebinars.length > 0
+                ?
+                <ul className='table__main table__main_height_large scroll'>
+                  {
+                    searchedWebinars.map((item, i) => (
+                      <li className='table__row' key={i}>
+                        <div className={`table__main-column ${(currentGroups.map(element => element.id).some(el => item.groups.map(element => element.id).includes(el))) || (currentUsers.map(element => element.id).some(el => item.moderators.map(element => element.id).includes(el))) ? 'table__main-column_type_block' : ''}`}>
+                          <div className='table__column table__column_type_small'>
+                            <p className='table__text'>{item.time}</p>
+                          </div>
+                          <div className='table__column table__column_type_name'>
+                            <p className='table__text'>{item.name}</p>
+                          </div>
+                          <div className='table__column table__column_type_full'>
+                            <p className='table__text'>{item.groups.map((elem) => elem.name).join(', ')}</p>
+                          </div>
+                          <div className='table__column table__column_type_full'>
+                            <p className='table__text'>{item.moderators.map((elem) => elem.name).join(', ')}</p>
+                          </div>
+                        </div>
+                      </li>
+                    ))
+                  }
+                </ul>
+                :
+                <p className='table__caption_type_empty'>Список пока пуст.</p>
+              }
             </div>
+          </Table>
+          :
+          <TableCard>
             {
-              searchedWebinars.length > 0
+              searchedWebinars.length <= 0
               ?
-              <ul className='table__main table__main_height_large scroll'>
-                {
-                  searchedWebinars.map((item, i) => (
-                    <li className='table__row' key={i}>
-                      <div className={`table__main-column ${(currentGroups.map(element => element.id).some(el => item.groups.map(element => element.id).includes(el))) || (currentUsers.map(element => element.id).some(el => item.moderators.map(element => element.id).includes(el))) ? 'table__main-column_type_block' : ''}`}>
-                        <div className='table__column table__column_type_small'>
-                          <p className='table__text'>{item.time}</p>
-                        </div>
-                        <div className='table__column table__column_type_name'>
-                          <p className='table__text'>{item.name}</p>
-                        </div>
-                        <div className='table__column table__column_type_full'>
-                          <p className='table__text'>{item.groups.map((elem) => elem.name).join(', ')}</p>
-                        </div>
-                        <div className='table__column table__column_type_full'>
-                          <p className='table__text'>{item.moderators.map((elem) => elem.name).join(', ')}</p>
-                        </div>
-                      </div>
-                    </li>
-                  ))
-                }
-              </ul>
-              :
               <p className='table__caption_type_empty'>Список пока пуст.</p>
-            }
-          </div>
-        </Table>
+              :
+              searchedWebinars.map((item, i) => (
+              <li className='table-card__item' key={i}>
+              
+                <p className={`table-card__text table-card__text_weight_bold table-card__title ${(currentGroups.map(element => element.id).some(el => item.groups.map(element => element.id).includes(el))) || (currentUsers.map(element => element.id).some(el => item.moderators.map(element => element.id).includes(el))) ? 'table-card__text_color_orange' : ''}`}>
+                  {item.name}
+                </p>
+
+                <p className='table-card__text table-card__subtitle'>{item.moderators.map((elem) => elem.name).join(', ')}</p>
+
+                <div className='table-card__info'>
+                  <ul className='table-card__info-list'>
+                    <li className='table-card__info-item'>
+                      <p className='data__text'><span className='data__text_font_bold'>Время:</span>{item.time || ''}</p>
+                    </li>
+                  </ul>
+                </div>
+                <div className='table-card__info'>
+                  <ul className='table-card__info-list'>
+                    <li className='table-card__info-item'>
+                      {
+                        item.groups.length > 0
+                        ?
+                          <p className='data__text'><span className='data__text_font_bold'>Группа:</span>{item.groups.map((elem) => elem.name).join(', ')}</p>
+                        :
+                          <p className='data__text'><span className='data__text_font_bold'>Группа:</span> </p>
+                      }
+                      
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              
+            ))}
+          </TableCard>
+        }
       </div>
 
       <div className='popup__btn-container'>

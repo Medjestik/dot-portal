@@ -290,7 +290,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
           <div className='webinar-add__section-column'>
 
             <div className='webinar-add__section-item'>
-              <div className='webinar-add__section-header'>
+              <div className='webinar-add__section-header webinar-add__section-header-mobile'>
                 <h4 className='webinar-add__subtitle'>Дата проведения:</h4>
                 <button className='btn_type_add' type='button' onClick={openWebinarDatePopup}></button>
               </div>
@@ -315,7 +315,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
             </div>
 
             <div className='webinar-add__section-item'>
-              <div className='webinar-add__section-header'>
+              <div className='webinar-add__section-header webinar-add__section-header-mobile'>
                 <h4 className='webinar-add__subtitle'>Время начала:</h4>
               </div>
               <div className='popup__input-field'>
@@ -337,7 +337,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
             </div>
 
             <div className='webinar-add__section-item'>
-              <div className='webinar-add__section-header'>
+              <div className='webinar-add__section-header webinar-add__section-header-mobile'>
                 <h4 className='webinar-add__subtitle'>Продолжительность (в минутах):</h4>
               </div>
               <div className='popup__input-field'>
@@ -363,12 +363,12 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
 
           <div className='webinar-add__section-column'>
             <div className='webinar-add__section-item'>
-              <div className='webinar-add__section-header'>
+              <div className='webinar-add__section-header webinar-add__section-header-mobile'>
                 <h4 className='webinar-add__subtitle'>Статус:</h4>
               </div>
               <PopupSelect options={statusOptions} currentOption={currentStatusOption} onChooseOption={changeStatus} />
             </div>
-            <div className='webinar-add__section-header'>
+            <div className='webinar-add__section-header webinar-add__section-header-mobile'>
               <h4 className='webinar-add__subtitle'>Комментарий:</h4>
             </div>
             <textarea 
@@ -387,7 +387,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
         <div className='webinar-add__section-row'>
 
           <div className='webinar-add__section-column'>
-            <div className='webinar-add__section-header'>
+            <div className='webinar-add__section-header webinar-add__section-header-mobile'>
               <h4 className='webinar-add__subtitle'>Группы:</h4>
               <button className='btn_type_add' type='button' onClick={openWebinarGroupPopup}></button>
             </div>
@@ -406,7 +406,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                     <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
                   </div>
                 </div>
-                <ul className='table__main table__main_height_small scroll'>
+                <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
                 {
                 currentGroups.length > 0
                 ?
@@ -438,7 +438,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
           </div>
 
           <div className='webinar-add__section-column'>
-            <div className='webinar-add__section-header'>
+            <div className='webinar-add__section-header webinar-add__section-header-mobile'>
               <h4 className='webinar-add__subtitle'>Участники:</h4>
               <button className='btn_type_add' type='button' onClick={openWebinarUserPopup}></button>
             </div>
@@ -457,7 +457,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                     <div className='btn btn_type_download btn_type_download_status_active table__btn'></div> 
                   </div>
                 </div>
-                  <ul className='table__main table__main_height_small scroll'>
+                  <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
                   {
                   currentUsers.length > 0
                   ?
@@ -508,7 +508,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
           </div>
 
           <div className='webinar-add__section-column'>
-            <div className='webinar-add__section-header'>
+            <div className='webinar-add__section-header webinar-add__section-header-mobile'>
               <h4 className='webinar-add__subtitle'>Дисциплины:</h4>
               <button className='btn_type_add' type='button' onClick={openWebinarDisciplinePopup}></button>
             </div>
@@ -527,7 +527,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                     <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
                   </div>
                 </div>
-                <ul className='table__main table__main_height_small scroll'>
+                <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
                 {
                 currentDisciplines.length > 0
                 ?
@@ -574,6 +574,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
       {
         isOpenWebinarGroupPopup &&
         <GroupWebinarPopup
+          windowWidth={windowWidth}
           isOpen={isOpenWebinarGroupPopup}
           onClose={closePopup}
           onSave={handleChangeGroup}
@@ -584,6 +585,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
       {
         isOpenWebinarUserPopup &&
         <UserWebinarPopup
+          windowWidth={windowWidth}
           isOpen={isOpenWebinarUserPopup}
           onClose={closePopup}
           onSave={handleChangeUser}
@@ -594,6 +596,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
       {
         isOpenWebinarDisciplinePopup &&
         <DisciplineWebinarPopup
+          windowWidth={windowWidth}
           isOpen={isOpenWebinarDisciplinePopup}
           onClose={closePopup}
           onSave={handleChangeDiscipline}
@@ -605,6 +608,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
       {
         isOpenWebinarDatePopup &&
         <DateWebinarPopup
+          windowWidth={windowWidth}
           isOpen={isOpenWebinarDatePopup}
           onClose={closePopup}
           onSave={handleEditDate}
