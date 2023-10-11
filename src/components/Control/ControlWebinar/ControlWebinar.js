@@ -17,7 +17,7 @@ function ControlWebinar({ windowWidth, onLogout, semesterInfo }) {
 
   const tabs = [
     {
-      title: 'Список вебинаров',
+      title: 'Расписание вебинаров',
       link: '/control/webinar/list'
     },
     {

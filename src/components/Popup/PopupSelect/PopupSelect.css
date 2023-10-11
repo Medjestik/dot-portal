@@ -1,18 +1,29 @@
 .select-popup {
-  margin: 8px 0px 0px 0px;
+  margin: 4px 0px 0px 0px;
   min-width: 164px;
   min-height: 40px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px;
+  padding: 8px 16px 8px 16px;
+  border: 2px solid var(--background-color);
   box-sizing: border-box;
   background: var(--main-grey-color);
   border-radius: var(--border-radius);
+  transition: all .3s ease-in-out;
 }
 .select-popup_status_open {
   border-radius: 8px 8px 0px 0px;
+}
+.select-popup:hover {
+  border: 2px solid var(--accent-grey-color);
+}
+.select-popup_status_open {
+  border: 2px solid var(--accent-blue-color);
+}
+.select-popup_status_open:hover {
+  border: 2px solid var(--accent-blue-color);
 }
 .select-popup:hover {
   cursor: pointer;
@@ -23,11 +34,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 8px 8px 20px;
   box-sizing: border-box;
 }
 .select-popup__text {
-  margin: 0px 20px 0px 0px;
+  margin: 0px 22px 0px 0px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -36,11 +46,11 @@
 }
 .select-popup__arrow {
   margin: 0px;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   background-image: url('../../../images/arrow.svg');
   background-position: center;
-  background-size: 24px;
+  background-size: 18px;
   background-repeat: no-repeat;
   transform: rotate(0deg);
   transition: all .3s ease-in-out;
@@ -50,12 +60,12 @@
 }
 .select-popup__options-container {
   width: 100%;
-  margin: 0px;
+  margin: -2px 0px 0px 0px;
   background: var(--main-grey-color);
   border-radius: 0px 0px 8px 8px;
   display: none;
   position: absolute;
-  top: 40px;
+  top: 38px;
   left: 0px;
   transition: all .3s ease-in-out;
   z-index: 100;
@@ -94,7 +104,6 @@
 }
 @media all and (max-width: 833px) {
   .select-popup {
-    margin: 8px 0px 0px 0px;
     min-width: 140px;
     min-height: 32px;
   }

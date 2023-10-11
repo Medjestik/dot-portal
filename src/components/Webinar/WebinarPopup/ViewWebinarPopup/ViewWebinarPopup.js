@@ -147,7 +147,7 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
         <div className='popup__row'>
           <h6 className='popup__row-title'>Примечание:</h6>
         </div>
-        <p className='popup__textarea popup__textarea_height_small scroll-inside'>{currentWebinar.description || ''}</p>
+        <p className='popup__textarea popup__textarea_type_block popup__textarea_height_small scroll-inside'>{currentWebinar.description || ''}</p>
 
         {
           currentWebinar.files.length < 1 

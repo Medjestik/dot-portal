@@ -42,9 +42,9 @@ function StudentViewAdvertisementPopup({ isOpen, onClose, currentAdvertisement, 
       </div>
 
       <ul className='data__list data__list_margin_top'>
-        <dli className='data__item'>
+        <li className='data__item'>
           <textarea defaultValue={currentAdvertisement.text} id='student-view-advertisement-text' name='student-view-advertisement-text' disabled className='data__area data__area_height_medium scroll-inside'></textarea>
-        </dli>
+        </li>
       </ul>
       
       <div className='popup__btn_margin_top'></div>

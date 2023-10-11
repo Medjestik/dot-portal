@@ -309,7 +309,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
                 <div className='table__column table__column_type_header table__column_type_name'>
                   <p className='table__text table__text_type_header'>Наименование</p>
                 </div>
-                <div className='table__column table__column_type_header table__column_type_medium'>
+                <div className='table__column table__column_type_header table__column_type_large'>
                   <p className='table__text table__text_type_header'>Группа</p>
                 </div>
                 <div className='table__column table__column_type_header table__column_type_teacher'>
@@ -340,7 +340,7 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
                         <div className='table__column table__column_type_name' onClick={() => openViewWebinarPopup(item)}>
                           <p className='table__text table__text_type_active table__text_type_header'>{item.name}</p>
                         </div>
-                        <div className='table__column table__column_type_medium'>
+                        <div className='table__column table__column_type_large'>
                           {
                             item.groups.length > 0
                             ?

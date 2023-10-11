@@ -109,7 +109,7 @@ function PersonAreaDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoa
         <h4 className='popup__input-caption'>Дата рождения:</h4>
         <div className='popup__input-field'>
           <input 
-          className='popup__input'
+          className='popup__input popup__input_type_date'
           type='date'
           id='person-area-date'
           value={date}

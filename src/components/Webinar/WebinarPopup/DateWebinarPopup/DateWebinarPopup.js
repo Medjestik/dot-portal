@@ -151,7 +151,7 @@ function DateWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentGroups,
           <div className='popup__field popup__field_margin_top'>
             <div className='popup__input-field popup__input-field_margin_top'>
             <input 
-              className='popup__input'
+              className='popup__input popup__input_type_date'
               type='date'
               id='add-webinar-date'
               value={date}

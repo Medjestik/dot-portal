@@ -93,7 +93,7 @@ function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, is
         <h4 className='popup__input-caption'>Укажите дату начала практики:</h4>
         <div className='popup__input-field'>
           <input 
-          className='popup__input'
+          className='popup__input popup__input_type_date'
           type='date'
           id='edit-practice-start-date'
           value={startDate}
@@ -112,7 +112,7 @@ function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, is
         <h4 className='popup__input-caption'>Укажите дату окончания практики:</h4>
         <div className='popup__input-field'>
           <input 
-          className='popup__input'
+          className='popup__input popup__input_type_date'
           type='date'
           id='edit-practice-end-date'
           value={endDate}

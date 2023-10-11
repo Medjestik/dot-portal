@@ -152,13 +152,13 @@
 .popup__btn-cancel {
   margin: 0px 12px 0px 0px;
   width: 100%;
-  padding: 11px;
+  padding: 9px;
   background: inherit;
-  border: 1px solid var(--slider-color);
+  border: 2px solid var(--background-color);
   border-radius: var(--border-radius);
-  color: var(--main-black-color);
+  color: var(--accent-grey-color);
   font-style: normal;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 14px;
   line-height: 18px;
   transition: all .3s ease-in-out;
@@ -169,7 +169,7 @@
   user-select: auto;
   pointer-events: all;
   opacity: .8;
-  border: 1px solid var(--accent-blue-color);
+  border: 2px solid var(--accent-grey-color);
   color: var(--main-black-color);
 }
 .popup__btn-save {
@@ -213,7 +213,8 @@
 }
 .popup__upload-text-container {
   margin: 0px 12px 0px 0px;
-  padding: 11px 16px;
+  padding: 9px 16px 9px 16px;
+  border: 2px solid var(--background-color);
   box-sizing: border-box;
   background: var(--main-grey-color);
   border-radius: var(--border-radius);
@@ -266,7 +267,7 @@
 }
 .popup__search-button {
   margin: 0px 0px 0px 8px;
-  padding: 12px 48px 12px 48px;
+  padding: 11px 48px 11px 48px;
   box-sizing: border-box;
   background: var(--gradient-blue-color);
   border: none;
@@ -308,9 +309,9 @@
 .popup__input-field {
   margin: 12px 0px 0px 0px;
   width: 100%;
-  padding: 10px 16px 10px 16px;
+  padding: 0px;
   box-sizing: border-box;
-  background: #F1F3F5;
+  background: var(--main-grey-color);
   border-radius: var(--border-radius);
   position: relative;
   display: flex;
@@ -325,16 +326,32 @@
   width: 100%;
   outline: none;
   border: none;
-  background: #F1F3F5;
+  padding: 9px 16px 9px 16px;
+  border: 2px solid var(--background-color);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  background: var(--main-grey-color);
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 18px;
-  letter-spacing: 1.2px;
   color: var(--main-black-color);
+  transition: all .3s ease-in-out;
+}
+.popup__input:hover {
+  border: 2px solid var(--accent-grey-color);
+}
+.popup__input:active {
+  border: 2px solid var(--accent-blue-color);
+}
+.popup__input:focus {
+  border: 2px solid var(--accent-blue-color);
+}
+.popup__input_type_date {
+  padding: 8px 16px 8px 16px;
 }
 .popup__input_with_icon {
-  margin: 0px 16px 0px 0px;
+  padding: 9px 32px 9px 16px;
 }
 .popup__input::placeholder {
   font-style: normal;
@@ -344,9 +361,11 @@
   color: var(--accent-grey-color);
 }
 .popup__input-icon {
-  margin: 0px;
   width: 16px;
   height: 16px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }
 .popup__input-icon:hover {
   cursor: pointer;
@@ -395,21 +414,33 @@
   resize: none;
   width: 100%;
   min-height: 160px;
-  padding: 11px 16px;
+  padding: 9px 16px 9px 16px;
+  border: 2px solid var(--background-color);
   margin: 8px 0px 0px 0px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 18px;
-  letter-spacing: 1.2px;
   color: var(--title-color);
   box-sizing: border-box;
-  border: none;
   outline: none;
   background: var(--main-grey-color);
   border-radius: var(--border-radius);
   transition: all .3s ease-in-out;
   overflow-y: auto;
+}
+.popup__textarea:hover {
+  border: 2px solid var(--accent-grey-color);
+}
+.popup__textarea:active {
+  border: 2px solid var(--accent-blue-color);
+}
+.popup__textarea:focus {
+  border: 2px solid var(--accent-blue-color);
+}
+.popup__textarea_type_block {
+  user-select: none;
+  pointer-events: none;
 }
 .popup__textarea::placeholder {
   font-style: normal;
@@ -636,7 +667,6 @@
   cursor: pointer;
 }
 
-
 @media all and (max-width: 833px) {
   .popup__container {
     margin: 4vh auto 0px;
@@ -666,12 +696,14 @@
   .popup__form_width_1440 {
     width: 100%;
   }
+  .popup__upload-text-container {
+    padding: 6px 12px 6px 12px;
+  }
   .popup__field {
     margin: 12px 0px 0px 0px;
   }
   .popup__input-field {
     margin: 8px 0px 0px 0px;
-    padding: 7px 12px 7px 12px;
   }
   .popup__input-field_margin_top {
     margin: 0px;
@@ -681,8 +713,21 @@
     line-height: 16px;
   }
   .popup__input {
+    padding: 6px 12px 6px 12px;
     font-size: 12px;
     line-height: 16px;
+  }
+  .popup__input_type_date {
+    padding: 5px 12px 5px 12px;
+  }
+  .popup__input_with_icon {
+    padding: 6px 26px 6px 12px;
+  }
+  .popup__input-icon {
+    width: 14px;
+    height: 14px;
+    top: 9px;
+    right: 9px;
   }
   .popup__input::placeholder {
     font-size: 12px;
@@ -693,10 +738,9 @@
   }
   .popup__textarea {
     min-height: 80px;
-    padding: 8px 12px;
+    padding: 6px 12px;
     font-size: 12px;
     line-height: 16px;
-    letter-spacing: 1px;
   }
   .popup__textarea::placeholder {
     font-size: 12px;
@@ -741,12 +785,12 @@
   }
   .popup__search-button {
     margin: 0px 0px 0px 6px;
-    padding: 1px 8px;
+    padding: 1px 12px;
     font-size: 12px;
     line-height: 14px;
   }
   .popup__btn-cancel {
-    padding: 8px;
+    padding: 6px;
     line-height: 16px;
 }
   .popup__btn-save {

@@ -291,7 +291,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
 
       <div className={`section__header ${windowWidth <= 833 ? 'section__header_direction_column' : ''}`}>
         <div className={`section__header-item ${windowWidth <= 833 ? 'section__header-item_margin_top' : ''}`}>
-          <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по названию:</span>
+          <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по наименованию:</span>
           <div className={`search search_type_large`}>
             <input
             className='search__input'
@@ -326,7 +326,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
           <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по дате:</span>
           <div className='popup__input-field popup__input-field_margin_top'>
             <input 
-              className='popup__input'
+              className='popup__input popup__input_type_date'
               type='date'
               id='add-webinar-date'
               value={date}

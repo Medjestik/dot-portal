@@ -289,5 +289,7 @@
   }
   .table__caption_type_empty {
     margin: 8px 0px 0px 0px;
+    font-size: 12px;
+    line-height: 14px;
   }
 }

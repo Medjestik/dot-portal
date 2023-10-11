@@ -95,7 +95,7 @@ function EditDisciplineFromWebinarPopup({ isOpen, onClose, currentData, onChange
           <h4 className='popup__input-caption'>Укажите дату начала:</h4>
           <div className='popup__input-field'>
             <input 
-            className='popup__input'
+            className='popup__input popup__input_type_date'
             type='date'
             id='edit-discipline-from-webinar-start-date'
             value={startDate}
@@ -114,7 +114,7 @@ function EditDisciplineFromWebinarPopup({ isOpen, onClose, currentData, onChange
           <h4 className='popup__input-caption'>Укажите дату окончания:</h4>
           <div className='popup__input-field'>
             <input 
-            className='popup__input'
+            className='popup__input popup__input_type_date'
             type='date'
             id='edit-discipline-from-webinar-end-date'
             value={endDate}

@@ -29,8 +29,8 @@ function PopupSelect({ filterType, options, currentOption, onChooseOption }) {
   }, []);
 
   return (
-    <div ref={selectRef} className={`select-popup ${isOpenSelectOptions ? 'select-popup_status_open' : ''}`}>
-      <div className='select-popup__main' onClick={openSelectOptions}>
+    <div ref={selectRef} className={`select-popup ${isOpenSelectOptions ? 'select-popup_status_open' : ''}`} onClick={openSelectOptions}>
+      <div className='select-popup__main'>
         <p className='select-popup__text'>{filterType === 'byElem' ? currentOption : currentOption.name}</p>
         <div className={`select-popup__arrow ${isOpenSelectOptions ? 'select-popup__arrow_status_open' : ''}`}></div>
       </div>

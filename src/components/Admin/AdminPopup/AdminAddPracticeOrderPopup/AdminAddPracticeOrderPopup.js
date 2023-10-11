@@ -127,7 +127,7 @@ function AdminAddPracticeOrderPopup({ isOpen, onClose, onAdd, isLoadingRequest, 
         <h4 className='popup__input-caption'>Укажите дату приказа:</h4>
         <div className='popup__input-field'>
           <input 
-          className='popup__input'
+          className='popup__input popup__input_type_date'
           type='date'
           id='add-practice-order-date'
           value={date}
