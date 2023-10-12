@@ -106,9 +106,7 @@
   .select-popup {
     min-width: 140px;
     min-height: 32px;
-  }
-  .select-popup__main {
-    padding: 4px 8px 4px 12px;
+    padding: 6px 11px;
   }
   .select-popup__text {
     margin: 0px 12px 0px 0px;
@@ -121,7 +119,7 @@
     background-size: 16px;
   }
   .select-popup__options-container {
-    top: 32px;
+    top: 30px;
   }
   .select-popup__options-item {
     margin: 0px 12px;

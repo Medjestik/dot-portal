@@ -348,6 +348,8 @@
   border: 2px solid var(--accent-blue-color);
 }
 .popup__input_type_date {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   padding: 8px 16px 8px 16px;
 }
 .popup__input_with_icon {
