@@ -721,6 +721,8 @@
   }
   .popup__input_type_date {
     padding: 5px 12px 5px 12px;
+    min-height: 32px;
+    text-align: left;
   }
   .popup__input_with_icon {
     padding: 6px 26px 6px 12px;
