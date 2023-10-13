@@ -50,6 +50,7 @@ function AddAdvertisementPopup({ isOpen, onClose, onAdd, isLoadingRequest, isSho
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'education-add-advertisement-popup'}

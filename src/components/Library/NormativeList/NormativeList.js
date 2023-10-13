@@ -40,7 +40,7 @@ function NormativeList({ windowWidth }) {
           normativeDocuments.map((item, i) => (
             <li className='library__item' key={i}>
               <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
-                <div className='btn btn_type_download btn_type_download_status_active'></div>
+                <div className='btn-icon btn-icon_color_accent-blue btn-icon_type_download'></div>
               </a>
               <div className='library__item-info'>
                 <p className='library__item-name'>{item.name}</p>
@@ -62,7 +62,7 @@ function NormativeList({ windowWidth }) {
               </div>
             </div>
             <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-              <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
+              <button className='btn-icon'></button> 
             </div>
           </div>
           <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
@@ -78,9 +78,7 @@ function NormativeList({ windowWidth }) {
                     </div>
                   </div>
                   <div className='table__column table__column_type_btn'>
-                    <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
-                      <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
-                    </a>
+                    <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel="noreferrer"> </a>
                   </div>
                 </li>
               ))

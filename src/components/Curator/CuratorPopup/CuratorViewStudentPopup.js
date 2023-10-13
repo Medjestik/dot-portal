@@ -11,6 +11,7 @@ function CuratorViewStudentPopup({ isOpen, onClose, currentStudent }) {
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'large'}
     formName={'curator-view-student-popup'}

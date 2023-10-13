@@ -10,7 +10,8 @@ function PersonDeclarationInfoPopup({ isOpen, onClose }) {
 
   return (
     <Popup 
-      isOpen={isOpen} 
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-declaration-info-popup'}

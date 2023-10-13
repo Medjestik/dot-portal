@@ -11,6 +11,7 @@ function PersonDocumentInfoPopup({ isOpen, onClose }) {
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-document-info-popup'}

@@ -290,6 +290,18 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
       <>
 
       <div className={`section__header ${windowWidth <= 833 ? 'section__header_direction_column' : ''}`}>
+        {
+          windowWidth <= 833 
+          ?
+          <div className='section__header-item section__header-item_margin_top'>
+            <button className='section__header-btn section__header-btn_type_full' type='button' onClick={() => addWebinar({ action: 'new' })}>Создать вебинар</button>
+          </div>
+          :
+          <div className='section__header-item section__header-item_type_content'>
+            <span className='section__header-caption section__header-caption_margin_bottom'></span>
+            <button className='section__header-btn section__header-btn_type_full' type='button'onClick={() => addWebinar({ action: 'new' })}>Создать вебинар</button>
+          </div>
+        }
         <div className={`section__header-item ${windowWidth <= 833 ? 'section__header-item_margin_top' : ''}`}>
           <span className='section__header-caption section__header-caption_margin_bottom'>Поиск по наименованию:</span>
           <div className={`search search_type_large`}>
@@ -343,29 +355,6 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
             {dateError.text}
           </span>
         </div>
-        {
-          windowWidth <= 833 
-          ?
-          <div className='section__header-item section__header-item_margin_top'>
-            <button 
-            className='section__header-btn section__header-btn_type_full'
-            type='button'
-            onClick={() => addWebinar({ action: 'new' })}
-            >
-              Создать вебинар
-            </button>
-          </div>
-          :
-          <div className='section__header-item section__header-item_type_content'>
-            <span className='section__header-caption section__header-caption_margin_bottom'></span>
-            <button 
-            className={`section__header-btn section__header-btn_type_small section__header-btn_type_add`} 
-            type='button'
-            onClick={() => addWebinar({ action: 'new' })}
-            >
-            </button>
-          </div>
-        }
       </div>
       {
         windowWidth <= 833
@@ -407,8 +396,8 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
                   </div>
 
                   <div className='table-card__menu'>
-                    <button className='table-card__menu-button table-card__menu-button_type_edit' type='button' onClick={() => openEditWebinarItem(item)}></button>
-                    <button className='table-card__menu-button table-card__menu-button_type_remove' type='button' onClick={() => openRemoveWebinarPopup(item)}></button>
+                    <button className='icon icon_size_18 icon_type_edit' type='button' onClick={() => openEditWebinarItem(item)}></button>
+                    <button className='icon icon_size_18 icon_type_remove icon_margin_left' type='button' onClick={() => openRemoveWebinarPopup(item)}></button>
                   </div>
                 </li>
               ))
@@ -438,9 +427,9 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
                 </div>
               </div>
               <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                <div className='btn btn_type_edit btn_type_edit_status_active'></div> 
-                <div className='btn btn_type_copy btn_type_copy_status_active'></div> 
-                <div className='btn btn_type_download btn_type_download_status_active table__btn'></div> 
+                <div className='btn-icon'></div>
+                <div className='btn-icon btn-icon_margin_left'></div>
+                <div className='btn-icon btn-icon_margin_left'></div>
               </div>
             </div>
             {
@@ -471,24 +460,9 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
                         </div>
                       </div>
                       <div className='table__column table__column_type_btn'>
-                        <button 
-                          className='btn btn_type_edit btn_type_edit_status_active' 
-                          type='button'
-                          onClick={() => openEditWebinarItem(item)}
-                        >  
-                        </button>
-                        <button 
-                          className='btn btn_type_copy btn_type_copy_status_active' 
-                          type='button'
-                          onClick={() => addWebinar({ ...item, action: 'copy' })}
-                        >  
-                        </button> 
-                        <button 
-                          className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
-                          type='button' 
-                          onClick={() => openRemoveWebinarPopup(item)}
-                        > 
-                        </button>
+                        <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button'onClick={() => openEditWebinarItem(item)}></button>
+                        <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-blue btn-icon_type_copy' type='button' onClick={() => addWebinar({ ...item, action: 'copy' })}></button> 
+                        <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_cancel' type='button' onClick={() => openRemoveWebinarPopup(item)}></button>
                       </div>
                     </li>
                   ))

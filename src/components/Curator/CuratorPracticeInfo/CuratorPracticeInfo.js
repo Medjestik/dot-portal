@@ -48,8 +48,8 @@ function CuratorPracticeInfo({ windowWidth, practice, onDelete }) {
               </div>
             </div>
             <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-              <div className='btn btn_type_download btn_type_download_status_active'></div>
-              <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
+              <div className='btn-icon'></div>
+              <div className='btn-icon btn-icon_margin_left'></div>
             </div>
           </div>
           <ul className='table__main scroll'>
@@ -72,13 +72,8 @@ function CuratorPracticeInfo({ windowWidth, practice, onDelete }) {
                 </div>
               </div>
               <div className='table__column table__column_type_btn'>
-                <a className='btn btn_type_download btn_type_download_status_active' href={file.link} target='_blank' rel='noreferrer'> </a>
-                <button 
-                className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
-                type='button' 
-                onClick={(() => onDelete(file))}
-                >
-                </button>
+                <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={file.link} target='_blank' rel='noreferrer'> </a>
+                <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_remove' type='button' onClick={(() => onDelete(file))}></button>
               </div>
             </li>
             ))

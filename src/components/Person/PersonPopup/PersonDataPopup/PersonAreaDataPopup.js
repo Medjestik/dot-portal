@@ -99,6 +99,7 @@ function PersonAreaDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoa
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'person-area-change-data-popup'}

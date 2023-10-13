@@ -109,7 +109,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
                         </div>
                       </div>
                       <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                        <div className='btn btn_type_download btn_type_download_status_active'></div>
+                        <div className='btn-icon'></div>
                       </div>
                     </div>
                     <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
@@ -132,7 +132,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
                               </div>
                             </div>
                             <div className='table__column table__column_type_btn'>
-                              <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
+                              <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel='noreferrer'> </a>
                             </div>
                           </li>
                         ))
@@ -161,9 +161,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
                             </li>
                           </ul>
                         </div>
-                        <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
-                          <div className='btn btn_type_download btn_type_download_status_active discipline-list__btn'></div>
-                        </a>
+                        <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel='noreferrer'> </a>
                       </li>
                     ))
                   }

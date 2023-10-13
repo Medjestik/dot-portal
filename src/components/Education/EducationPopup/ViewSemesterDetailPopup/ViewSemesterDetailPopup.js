@@ -4,6 +4,7 @@ import * as curatorApi from '../../../../utils/curatorApi.js';
 import TableHorizontal from '../../../Table/TableHorizontal/TableHorizontal.js';
 import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
+import useOnClickOutside from '../../../../hooks/useOnClickOutside.js';
 
 function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId, role }) {
 
@@ -17,6 +18,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
   const [currentData, setCurrentData] = React.useState({});
 
   const tableWidthRef = React.createRef();
+  const popupRef = React.createRef();
 
   const [tableWidth, setTableWidth] = React.useState(0);
 
@@ -37,7 +39,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
 
     return (
       <a 
-      className='table-horizontal__cell-menu-icon table-horizontal__cell-menu-icon_type_detail' 
+      className='icon icon_size_14 icon_type_search' 
       target='_blank' 
       rel='noreferrer' 
       href={link}>
@@ -145,6 +147,8 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
     width: tableWidth,
   };
 
+  useOnClickOutside(popupRef, onClose);
+
   React.useEffect(() => {
     if (!isLoadingInfo) {
       setTableWidth(tableWidthRef.current.scrollWidth);
@@ -165,7 +169,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
   return (
     <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
       <div className='scroll popup__container'>
-        <div className={`popup__form popup__form_width_${isShowFullWidth ? '100' : '1440'} popup__form_height_min`} >
+        <div ref={popupRef} className={`popup__form popup__form_width_${isShowFullWidth ? '100' : '1440'} popup__form_height_min`} >
         {
         isLoadingInfo 
         ?
@@ -181,39 +185,19 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
             </div>
             <div className='section__header-item section__header-item_type_content'>
               <span className='section__header-caption section__header-caption_margin_bottom'></span>
-              <button 
-              className={`section__header-btn section__header-btn_type_small section__header-btn_type_import`} 
-              type='button'
-              >
-              </button>
+              <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_file-export' type='button'></button>
             </div>
             <div className='section__header-item section__header-item_type_content'>
               <span className='section__header-caption section__header-caption_margin_bottom'></span>
-              <button 
-              className={`section__header-btn section__header-btn_type_small section__header-btn_type_${isShowFullWidth ? 'collapse' : 'expand'}`} 
-              type='button'
-              onClick={() => setIsShowFullWidth(!isShowFullWidth)}
-              >
-              </button>
+              <button className={`btn-icon btn-icon_color_accent-blue btn-icon_type_${isShowFullWidth ? 'collapse' : 'expand'}`} type='button' onClick={() => setIsShowFullWidth(!isShowFullWidth)}></button>
             </div>
             <div className='section__header-item section__header-item_type_content'>
               <span className='section__header-caption section__header-caption_margin_bottom'></span>
-              <button 
-              className={`section__header-btn section__header-btn_type_small section__header-btn_type_reload`} 
-              type='button'
-              onClick={() => getSemesterDetail(currentSemesterOption.id)}
-              >
-              </button>
+              <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_refresh' type='button' onClick={() => getSemesterDetail(currentSemesterOption.id)}></button>
             </div>
             <div className='section__header-item section__header-item_type_content'>
               <span className='section__header-caption section__header-caption_margin_bottom'></span>
-              <button 
-              className={`section__header-btn section__header-btn_type_fix`} 
-              type='button' 
-              onClick={() => onClose()}
-              >
-                Назад
-              </button>
+              <button className='section__header-btn section__header-btn_type_fix' type='button' onClick={() => onClose()}>Назад</button>
             </div>
           </div>
 

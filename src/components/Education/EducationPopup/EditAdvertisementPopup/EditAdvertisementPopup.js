@@ -78,6 +78,7 @@ function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisementId, onEdi
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'education-edit-advertisement-popup'}

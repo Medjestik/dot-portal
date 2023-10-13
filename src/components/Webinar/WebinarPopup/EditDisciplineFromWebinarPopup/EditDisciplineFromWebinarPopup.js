@@ -79,6 +79,7 @@ function EditDisciplineFromWebinarPopup({ isOpen, onClose, currentData, onChange
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'admin-edit-discipline-from-webinar-popup'}

@@ -12,6 +12,7 @@ function ConfirmActionPopup({ isOpen, onClose, popupName, onConfirm, data, actio
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'small'}
     formName={popupName}

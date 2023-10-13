@@ -95,11 +95,7 @@ function DisciplineUserTeacher({ windowWidth, disciplineInfo }) {
                     </li>
                   </ul>
                 </div>
-                <button 
-                  className={`${item.type === 'advertisement' ? 'btn_type_advertisement' : 'btn_type_comment'}`} 
-                  type='button' 
-                  onClick={(() => openPopup(item))}>
-                </button>
+                <button className={`btn-icon btn-icon_color_accent-blue ${item.type === 'advertisement' ? 'btn-icon_type_users' : 'btn-icon_type_comment'}`} type='button' onClick={(() => openPopup(item))}></button>
               </li>
             ))
           }

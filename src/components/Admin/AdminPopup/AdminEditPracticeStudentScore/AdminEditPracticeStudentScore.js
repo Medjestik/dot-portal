@@ -43,9 +43,10 @@ function AdminEditPracticeStudentScore({ isOpen, onClose, practice, currentStude
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
-      formName={'admin-edit-practice-popup'}
+      formName={'admin-edit-practice-score-popup'}
     >
         <h2 className='popup__title'>Назначение студенту</h2>
         <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Студент: </span>{currentStudent.student.name}</p>
@@ -77,7 +78,7 @@ function AdminEditPracticeStudentScore({ isOpen, onClose, practice, currentStude
                 [...currentStudent.files].reverse().map((elem, i) => (
                 <li key={i} className='popup__item'>
                     <div className='popup__item-container'>
-                    <a className='btn btn_type_download btn_type_download_status_active btn_margin_zero' target='_blank' rel='noreferrer' href={elem.link}> </a>
+                    <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' target='_blank' rel='noreferrer' href={elem.link}> </a>
                     <div className='popup__item-info'>
                         <h4 className='popup__item-title'>{elem.name}</h4>
                         <p className='popup__item-text popup__item-text_size_small'><span className='popup__item-text_weight_bold'>Дата загрузки: </span>{elem.date}</p>

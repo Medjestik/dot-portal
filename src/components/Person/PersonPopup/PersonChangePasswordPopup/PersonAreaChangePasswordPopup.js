@@ -74,6 +74,7 @@ function PersonAreaChangePasswordPopup({ isOpen, onClose, onChangePassword, isLo
   return (
     <Popup 
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-area-change-password-popup'}

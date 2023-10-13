@@ -319,8 +319,8 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
               </div>
             </div>
             <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-              <div className='btn btn_type_create btn_type_create_status_active'></div> 
-              <div className='btn btn_type_create btn_type_create_status_active table__btn'></div> 
+              <div className='btn-icon'></div> 
+              <div className='btn-icon btn-icon_margin_left'></div> 
             </div>
           </div>
           {
@@ -364,18 +364,8 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
                       </div>
                     </div>
                     <div className='table__column table__column_type_btn'>
-                      <button 
-                        className='btn btn_type_create btn_type_create_status_active' 
-                        type='button' 
-                        onClick={() => addWebinar({ ...item, action: 'discipline' })}
-                      >
-                      </button>
-                      <button 
-                        className='btn btn_type_edit btn_type_edit_status_active table__btn' 
-                        type='button'
-                        onClick={() => openDisciplineFromWebinarPopup(item)}
-                      >  
-                      </button> 
+                      <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_create' type='button' onClick={() => addWebinar({ ...item, action: 'discipline' })}></button>
+                      <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => openDisciplineFromWebinarPopup(item)}></button> 
                     </div>
                   </li>
                 ))

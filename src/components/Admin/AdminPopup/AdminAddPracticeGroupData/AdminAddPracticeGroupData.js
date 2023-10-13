@@ -88,6 +88,7 @@ function AdminAddPracticeGroupData({ isOpen, onClose, practice, onAddPlace, onAd
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'admin-edit-practice-popup'}

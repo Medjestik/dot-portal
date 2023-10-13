@@ -292,7 +292,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
             <div className='webinar-add__section-item'>
               <div className='webinar-add__section-header webinar-add__section-header-mobile'>
                 <h4 className='webinar-add__subtitle'>Дата проведения:</h4>
-                <button className='btn_type_add' type='button' onClick={openWebinarDatePopup}></button>
+                <button className='btn-add-round' type='button' onClick={openWebinarDatePopup}></button>
               </div>
               <div className='popup__input-field'>
                 <input 
@@ -389,7 +389,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
           <div className='webinar-add__section-column'>
             <div className='webinar-add__section-header webinar-add__section-header-mobile'>
               <h4 className='webinar-add__subtitle'>Группы:</h4>
-              <button className='btn_type_add' type='button' onClick={openWebinarGroupPopup}></button>
+              <button className='btn-add-round' type='button' onClick={openWebinarGroupPopup}></button>
             </div>
             <Table>
               <div className='table__container table__container_margin_top'>
@@ -403,7 +403,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                     </div>
                   </div>
                   <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                    <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
+                    <div className='btn-icon'></div> 
                   </div>
                 </div>
                 <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
@@ -423,7 +423,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                           </div>
                         </div>
                         <div className='table__column table__column_type_btn'>
-                          <button className='btn btn_type_cancel btn_type_cancel_status_active table__btn' onClick={() => handleUnSelectGroup(item)}></button>
+                          <button className='btn-icon btn-icon_color_accent-orange btn-icon_type_cancel' onClick={() => handleUnSelectGroup(item)}></button>
                         </div>
                       </li>
                     ))
@@ -440,7 +440,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
           <div className='webinar-add__section-column'>
             <div className='webinar-add__section-header webinar-add__section-header-mobile'>
               <h4 className='webinar-add__subtitle'>Участники:</h4>
-              <button className='btn_type_add' type='button' onClick={openWebinarUserPopup}></button>
+              <button className='btn-add-round' type='button' onClick={openWebinarUserPopup}></button>
             </div>
             <Table>
               <div className='table__container table__container_margin_top'>
@@ -454,7 +454,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                     </div>
                   </div>
                   <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                    <div className='btn btn_type_download btn_type_download_status_active table__btn'></div> 
+                    <div className='btn-icon'></div> 
                   </div>
                 </div>
                   <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
@@ -488,12 +488,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                           </div>
                         </div>
                         <div className='table__column table__column_type_btn'>
-                          <button 
-                          className='btn btn_type_cancel btn_type_cancel_status_active table__btn'
-                          type='button' 
-                          onClick={() => handleUnSelectUser(item)}
-                          >
-                          </button>
+                          <button className='btn-icon btn-icon_color_accent-orange btn-icon_type_cancel' type='button' onClick={() => handleUnSelectUser(item)}></button>
                         </div>
                       </li>
                     ))
@@ -510,7 +505,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
           <div className='webinar-add__section-column'>
             <div className='webinar-add__section-header webinar-add__section-header-mobile'>
               <h4 className='webinar-add__subtitle'>Дисциплины:</h4>
-              <button className='btn_type_add' type='button' onClick={openWebinarDisciplinePopup}></button>
+              <button className='btn-add-round' type='button' onClick={openWebinarDisciplinePopup}></button>
             </div>
             <Table>
               <div className='table__container table__container_margin_top'>
@@ -524,7 +519,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                     </div>
                   </div>
                   <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                    <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
+                    <div className='btn-icon'></div> 
                   </div>
                 </div>
                 <ul className={`table__main ${windowWidth > 833 ? 'table__main_height_small scroll' : ''}`}>
@@ -544,7 +539,7 @@ function ControlWebinarEdit({ windowWidth, semesterInfo }) {
                           </div>
                         </div>
                         <div className='table__column table__column_type_btn'>
-                          <button className='btn btn_type_cancel btn_type_cancel_status_active table__btn' onClick={() => handleUnSelectDiscipline(item)}></button>
+                          <button className='btn-icon btn-icon_color_accent-orange btn-icon_type_cancel' onClick={() => handleUnSelectDiscipline(item)}></button>
                         </div>
                       </li>
                     ))

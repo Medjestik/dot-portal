@@ -13,6 +13,7 @@ function StudentViewAdvertisementPopup({ isOpen, onClose, currentAdvertisement, 
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'medium'}
     formName={'education-student-view-advertisement-popup'}

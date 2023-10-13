@@ -113,7 +113,7 @@ function DisciplineTeacherStudent({ windowWidth, disciplineInfo, getStudent, cur
                   [...currentStudent.files].reverse().map((elem, i) => (
                     <li key={i} className='popup__item popup__item_type_scroll'>
                       <div className='popup__item-container'>
-                      <a className='btn btn_type_download btn_type_download_status_active btn_margin_zero' target='_blank' rel='noreferrer' href={elem.link}> </a>
+                      <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' target='_blank' rel='noreferrer' href={elem.link}> </a>
                         <div className='popup__item-info'>
                           <h4 className='popup__item-title'>{elem.name}</h4>
                           <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Дата загрузки: </span>{elem.date}</p>
@@ -127,7 +127,7 @@ function DisciplineTeacherStudent({ windowWidth, disciplineInfo, getStudent, cur
             <li className='discipline-teacher__student-section'>
               <div className='section__header-title-container'>
                 <h5 className='section__header-title'>Комментарии ({currentStudent.comments.length})</h5>
-                <button className='btn_type_add' type='button' onClick={() => onAddComment()}></button>
+                <button className='btn-add-round btn-add-round_margin_auto' type='button' onClick={() => onAddComment()}></button>
               </div>
 
               <ul className='discipline-teacher__student-section-list scroll' style={Object.assign({}, listStyle)}>

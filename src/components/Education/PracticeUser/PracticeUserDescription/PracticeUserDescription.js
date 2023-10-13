@@ -49,9 +49,7 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
                       </li>
                     </ul>
                   </div>
-                  <a className='btn_type_link' href={item.link} target='_blank' rel="noreferrer">
-                    <div className='btn btn_type_download btn_type_download_status_active discipline-list__btn'></div>
-                  </a>
+                  <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel='noreferrer'> </a>
                 </li>
               ))
             }

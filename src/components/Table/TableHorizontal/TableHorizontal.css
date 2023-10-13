@@ -99,22 +99,6 @@
 .table-horizontal__row:hover .table-horizontal__column_type_name {
   background-color: var(--background-color);
 }
-.table-horizontal__cell-menu-icon {
-  width: 14px;
-  height: 14px;
-  transition: all .3s ease-in-out;
-}
-.table-horizontal__cell-menu-icon:hover {
-  cursor: pointer;
-  opacity: .7;
-}
-.table-horizontal__cell-menu-icon_type_detail  {
-  background-image: url('../../../images/table/view.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-   
-}
 .table-horizontal__cell-badge-list {
   position: relative;
   flex-shrink: 0;

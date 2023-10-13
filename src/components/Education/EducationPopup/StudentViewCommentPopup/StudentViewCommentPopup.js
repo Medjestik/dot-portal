@@ -12,6 +12,7 @@ function StudentViewCommentPopup({ isOpen, onClose, currentAdvertisement, isLoad
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'medium'}
     formName={'education-student-view-comment-popup'}
@@ -23,7 +24,7 @@ function StudentViewCommentPopup({ isOpen, onClose, currentAdvertisement, isLoad
       :
       <>
 
-      <h2 className='popup__title popup__title_margin_bottom'>Комментарий преподавателя</h2>
+      <h2 className='popup__title popup__title_margin_bottom'>Комментарий для студента</h2>
 
       <div className='popup__author'>
         {

@@ -13,6 +13,7 @@ function TeacherViewTestsPopup({ isOpen, onClose, currentStudent, }) {
   return (
     <Popup 
       isOpen={isOpen} 
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'education-teacher-view-tests-popup'}

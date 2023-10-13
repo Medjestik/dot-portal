@@ -146,13 +146,7 @@ function PersonRating({ windowWidth, scores }) {
       <div ref={heightRef} className='person-rating__container'>
         <div className='person-rating__stars-container'>
           <div className='person-rating__section-discipline'>
-            <PersonRatingSelect 
-              id='discipline' 
-              options={discipline} 
-              placeholder={'Выберите дисциплину'} 
-              icon={disciplineIcon} 
-              onSelect={handleChangeDisciplineSelect} 
-            />
+            <PersonRatingSelect id='discipline' options={discipline} placeholder={'Выберите дисциплину'} icon={disciplineIcon} onSelect={handleChangeDisciplineSelect} />
             <div className='person-rating__star-container'>
               <StarRating onChange={handleChangeDisciplineStarsRating} />
             </div>
@@ -174,20 +168,11 @@ function PersonRating({ windowWidth, scores }) {
               >
               </textarea>
               <div className='person-rating__form-separator'></div>
-              <button 
-              className={`btn_type_upload person-rating__button ${isBlockDisciplineFeedbackForm ? '' : 'btn_type_upload_status_active'}`} 
-              type='submit'>
-              </button>
+              <button className={`btn-icon btn-icon_type_upload ${isBlockDisciplineFeedbackForm ? 'btn-icon_status_block' : 'btn-icon_color_accent-blue'}`} type='button'></button>
             </form>
           </div>
           <div className='person-rating__section-teacher'>
-            <PersonRatingSelect 
-            id='teacher' 
-            options={teachers} 
-            placeholder={'Выберите преподавателя'} 
-            icon={teacherIcon}
-            onSelect={handleChangeTeacherSelect} 
-            />
+            <PersonRatingSelect id='teacher' options={teachers} placeholder={'Выберите преподавателя'} icon={teacherIcon} onSelect={handleChangeTeacherSelect} />
             <div className='person-rating__star-container'>
               <StarRating onChange={handleChangeTeacherStarsRating} />
             </div>
@@ -209,10 +194,7 @@ function PersonRating({ windowWidth, scores }) {
               >
               </textarea>
               <div className='person-rating__form-separator'></div>
-              <button 
-              className={`btn_type_upload person-rating__button ${isBlockTeacherFeedbackForm ? '' : 'btn_type_upload_status_active'}`} 
-              type='submit'>
-              </button>
+              <button className={`btn-icon btn-icon_type_upload ${isBlockTeacherFeedbackForm ? 'btn-icon_status_block' : 'btn-icon_color_accent-blue'}`} type='button'></button>
             </form>
           </div>
 

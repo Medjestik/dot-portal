@@ -139,6 +139,7 @@ function DateWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentGroups,
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'full'}
       formName={'add-date-webinar-popup'}

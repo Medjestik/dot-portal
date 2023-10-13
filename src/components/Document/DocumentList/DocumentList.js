@@ -45,9 +45,9 @@ function DocumentList() {
           </div>
         </div>
         <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-          <button className='btn btn_type_download btn_type_download_status_active'></button> 
-          <button className='btn btn_type_download btn_type_download_status_active'></button> 
-          <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
+          <div className='btn-icon'></div> 
+          <div className='btn-icon btn-icon_margin_left'></div> 
+          <div className='btn-icon btn-icon_margin_left'></div> 
         </div>
       </div>
       <ul className='table__main table__main_type_webinar scroll'>
@@ -69,9 +69,9 @@ function DocumentList() {
                 </div>
               </div>
               <div className='table__column table__column_type_btn'>
-                <button className='btn btn_type_upload'></button>
-                <button className='btn btn_type_download btn_type_download_status_active'></button>
-                <button className='btn btn_type_cancel btn_type_cancel_status_active table__btn'></button>
+                <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_upload'></button>
+                <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-blue btn-icon_type_download'></button>
+                <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_remove'></button>
               </div>
             </li>
           ))

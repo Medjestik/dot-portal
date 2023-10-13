@@ -40,6 +40,7 @@ function NotificationPopup({ isOpen, onClose, notification, isLoading }) {
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'medium'}
     formName={'person-area-notification-popup'}

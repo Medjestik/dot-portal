@@ -90,7 +90,7 @@ function PersonDiploma({ windowWidth }) {
               <div className='upload-form__icon'></div>
             </label>
             <input onChange={handleChangeDiploma} id='person-diploma-upload' className='upload-form__input' type="file" />
-            <button className={`btn btn_type_save person-diploma__upload-btn ${contentFile.file !== null ? 'btn_type_save_status_active' : ''}`}></button>
+            <button className={`btn-icon btn-icon_type_upload ${contentFile.file !== null ? 'btn-icon_color_accent-blue' : 'btn-icon_status_block'}`}></button>
           </form>
           <ul className='person-diploma__upload-date-list'>
             <li className='person-diploma__upload-date-item'>
@@ -109,19 +109,19 @@ function PersonDiploma({ windowWidth }) {
           <div className='person-diploma__download'>
             <ul className='scroll-inside person-diploma__download-list'>
               <li className='person-diploma__download-item'>
-                <button className='btn btn_type_download btn_type_download_status_active person-diploma__download-btn'></button>
+                <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_download'></button>
                 <div className='person-diploma__download-text-container'>
                   <p className='person-diploma__download-text'>Методические материалы Методические материалы Методические материалы Методические материалы</p>
                 </div>
               </li>
               <li className='person-diploma__download-item'>
-                <button className='btn btn_type_download btn_type_download_status_active person-diploma__download-btn'></button>
+                <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_download'></button>
                 <div className='person-diploma__download-text-container'>
                   <p className='person-diploma__download-text'>Методические материалы</p>
                 </div>
               </li>
               <li className='person-diploma__download-item'>
-                <button className='btn btn_type_download btn_type_download_status_active person-diploma__download-btn'></button>
+                <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_download'></button>
                 <div className='person-diploma__download-text-container'>
                   <p className='person-diploma__download-text'>Методические материалы</p>
                 </div>

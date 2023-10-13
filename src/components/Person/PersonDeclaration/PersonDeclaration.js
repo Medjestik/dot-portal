@@ -36,10 +36,8 @@ function PersonDeclaration({ windowWidth, userDeclaration, declarationTemplate }
 
   function renderDeclarationItem(item, i) {
     return (
-      <li 
-      key={i} 
-      className={`person-document__download-item ${item.status === 'active' ? 'person-document__download-item_status_active' : ''}`}>
-        <button className={`btn_type_download ${item.status === 'active' ? 'btn_type_download_status_active' : ''}`} type='button'></button>
+      <li key={i} className={`person-document__download-item ${item.status === 'active' ? 'person-document__download-item_status_active' : ''}`}>
+        <button className={`btn-icon btn-icon_type_download ${item.status === 'active' ? 'btn-icon_color_accent-blue' : 'btn-icon_status_block'}`} type='button'></button>
         <p className='person-document__download-text'>{item.name}</p>
       </li>
     )
@@ -106,13 +104,9 @@ function PersonDeclaration({ windowWidth, userDeclaration, declarationTemplate }
                       :
                       <div className='person-declaration__template-field person-declaration__template-field_type_empty'>Подгрузите чек</div>
                     }
-                    <button className='btn_type_upload btn_type_upload_status_active' type='button'></button>
-                    <button className={`btn_type_download ${item.upload ? 'btn_type_download_status_active' : ''}`} type='button'></button>
-                    <button 
-                    className={`btn_type_cancel ${item.upload ? 'btn_type_cancel_status_active' : ''}`} 
-                    type='button' 
-                    onClick={() => openConfirmRemovePopup(item)}>
-                    </button>
+                    <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_upload' type='button'></button>
+                    <button className={`btn-icon btn-icon_type_download ${item.upload ? 'btn-icon_color_accent-blue' : 'btn-icon_status_block'}`} type='button'></button>
+                    <button className={`btn-icon btn-icon_type_remove ${item.upload ? 'btn-icon_color_accent-orange' : 'btn-icon_status_block'}`} type='button' onClick={() => openConfirmRemovePopup(item)}></button>
                   </li>
                 ))
               }

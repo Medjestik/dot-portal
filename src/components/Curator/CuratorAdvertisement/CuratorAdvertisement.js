@@ -188,8 +188,8 @@ function CuratorAdvertisement({ windowWidth, groupInfo }) {
             </div>
           </div>
           <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-            <div className='btn btn_type_download btn_type_download_status_active'></div>
-            <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
+            <div className='btn-icon'></div>
+            <div className='btn-icon btn-icon_margin_left'></div>
           </div>
         </div>
         <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
@@ -215,18 +215,9 @@ function CuratorAdvertisement({ windowWidth, groupInfo }) {
                   </div>
                 </div>
                 <div className='table__column table__column_type_btn'>
-                  <button 
-                  className='btn btn_type_advertisement btn_margin_right' 
-                  type='button'
-                  onClick={() => openEditAdvertisementPopup(item)} 
-                  >
+                  <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => openEditAdvertisementPopup(item)}>
                 </button> 
-                  <button 
-                  className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
-                  type='button' 
-                  onClick={() => openRemoveAdvertisementPopup(item)} 
-                  >
-                  </button>
+                  <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_remove' type='button' onClick={() => openRemoveAdvertisementPopup(item)}></button>
                 </div>
               </li>
             ))

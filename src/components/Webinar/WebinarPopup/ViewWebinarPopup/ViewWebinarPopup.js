@@ -77,6 +77,7 @@ function ViewWebinarPopup({ isOpen, onClose, currentWebinarId }) {
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'large'}
     formName={'student-view-webinar-popup'}

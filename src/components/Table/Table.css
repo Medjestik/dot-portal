@@ -292,4 +292,10 @@
     font-size: 12px;
     line-height: 14px;
   }
+  .table__column {
+    padding: 12px 0px;
+  }
+  .table__column_type_btn {
+    padding: 0px;
+  }
 }

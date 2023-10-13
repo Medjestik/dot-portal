@@ -250,7 +250,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
               <div className='discipline-info__materials'>
                 <div className='discipline-info__section-header'>
                   <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
-                  <button className='btn_type_add' type='button' onClick={() => openAddMaterialPopup()}></button>
+                  <button className='btn-add-round' type='button' onClick={() => openAddMaterialPopup()}></button>
                 </div>
                 <div className='discipline-info__materials-table'>
                   <Table>
@@ -268,8 +268,8 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
                           </div>
                         </div>
                         <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                          <div className='btn btn_type_download btn_type_download_status_active'></div>
-                          <div className='btn btn_type_download btn_type_download_status_active table__btn'></div>
+                          <div className='btn-icon'></div>
+                          <div className='btn-icon btn-icon_margin_left'></div>
                         </div>
                       </div>
                       <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
@@ -292,13 +292,8 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
                                 </div>
                               </div>
                               <div className='table__column table__column_type_btn'>
-                                <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
-                                <button 
-                                className='btn btn_type_cancel btn_type_cancel_status_active table__btn' 
-                                type='button' 
-                                onClick={(() => openRemoveMaterialPopup(item))}
-                                >
-                                </button>
+                                <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel='noreferrer'> </a>
+                                <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_remove' type='button' onClick={(() => openRemoveMaterialPopup(item))}></button>
                               </div>
                             </li>
                           ))
@@ -314,7 +309,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
               <div className='discipline-info__advertisement'>
                 <div className='discipline-info__section-header'>
                   <h4 className='discipline-info__section-title'>Объявления</h4>
-                  <button className='btn_type_add' type='button' onClick={() => openAddAdvertisementPopup()}></button>
+                  <button className='btn-add-round' type='button' onClick={() => openAddAdvertisementPopup()}></button>
                 </div>
                 <ul style={Object.assign({}, advertisementStyle)} className='discipline-info__advertisement-list scroll'>
                   {
@@ -323,7 +318,20 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
                     <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
                     :
                     advertisement.map((elem) => ({...elem, type: 'advertisement'})).map((elem, i) => (
-                      <EducationAdvertisement key={i} advertisement={elem} onOpen={openEditAdvertisementPopup} />
+                      <li key={elem.id} className='discipline-info__advertisement-item'>
+                        <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={(() => openEditAdvertisementPopup(elem))}></button>
+                        <div className='discipline-info__advertisement-info'>
+                          <h5 className='discipline-info__advertisement-title'>{elem.title}</h5>
+                          <p className='discipline-info__teacher-text'>
+                            <span className='discipline-info__teacher-text_weight_bold'>Автор: </span>
+                            {elem.author}
+                          </p>
+                          <p className='discipline-info__teacher-text'>
+                            <span className='discipline-info__teacher-text_weight_bold'>Дата публикации: </span>
+                            {elem.date}
+                          </p>
+                        </div>
+                      </li>
                     ))
                   }
                 </ul>

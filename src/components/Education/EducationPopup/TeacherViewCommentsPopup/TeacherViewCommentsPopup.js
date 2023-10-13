@@ -29,6 +29,7 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'medium'}
     formName={'education-teacher-view-comments-popup'}

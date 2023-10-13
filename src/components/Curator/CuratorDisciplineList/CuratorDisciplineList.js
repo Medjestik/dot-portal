@@ -135,12 +135,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
       </div>
       <div className='section__header-item section__header-item_type_content'>
         <span className='section__header-caption section__header-caption_margin_bottom'></span>
-        <button 
-        className={`section__header-btn section__header-btn_type_small section__header-btn_type_table`} 
-        type='button'
-        onClick={() => openViewSemesterDetailPopup()}
-        >
-        </button>
+        <button className='section__header-btn section__header-btn_type_fix' type='button' onClick={() => openViewSemesterDetailPopup()}>Ведомость</button>
       </div>
     </div>
 

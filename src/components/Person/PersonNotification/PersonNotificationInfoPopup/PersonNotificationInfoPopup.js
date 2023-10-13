@@ -11,6 +11,7 @@ function PersonNotificationInfoPopup({ isOpen, onClose }) {
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-notification-info-popup'}

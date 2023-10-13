@@ -10,7 +10,8 @@ function PersonAchievementInfoPopup({ isOpen, onClose }) {
 
   return (
     <Popup 
-      isOpen={isOpen} 
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-achievement-info-popup'}

@@ -114,6 +114,7 @@ function UserDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoadingRe
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'user-change-data-popup'}

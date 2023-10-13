@@ -111,6 +111,7 @@ function UserWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentUsers }
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'full'}
       formName={'user-webinar-popup'}
@@ -164,7 +165,7 @@ function UserWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentUsers }
                 </div>
               </div>
               <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header table__column_type_btn-header-with-scroll'>
-                <div className='btn btn_type_create btn_type_create_status_active table__btn'></div> 
+                <div className='btn-icon'></div> 
               </div>
             </div>
             {
@@ -183,12 +184,7 @@ function UserWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentUsers }
                         </div>
                       </div>
                       <div className='table__column table__column_type_btn'>
-                        <button 
-                        className='btn btn_type_create btn_type_create_status_active table__btn' 
-                        type='button' 
-                        onClick={() => handleSelectUser(item)}
-                        >
-                        </button>
+                        <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_create' type='button' onClick={() => handleSelectUser(item)}></button>
                       </div>
                     </li>
                   ))
@@ -216,7 +212,7 @@ function UserWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentUsers }
                 </div>
               </div>
               <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                <div className='btn btn_type_download btn_type_download_status_active table__btn'></div> 
+                <div className='btn-icon'></div> 
               </div>
             </div>
             {
@@ -249,12 +245,7 @@ function UserWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentUsers }
                         </div>
                       </div>
                       <div className='table__column table__column_type_btn'>
-                        <button 
-                        className='btn btn_type_cancel btn_type_cancel_status_active table__btn'
-                        type='button' 
-                        onClick={() => handleUnSelectUser(item)}
-                        >
-                        </button>
+                        <button className='btn-icon btn-icon_color_accent-orange btn-icon_type_cancel' type='button' onClick={() => handleUnSelectUser(item)}></button>
                       </div>
                     </li>
                   ))

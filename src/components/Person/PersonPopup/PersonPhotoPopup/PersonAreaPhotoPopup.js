@@ -54,6 +54,7 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser, onChangePhoto, isL
   return (
     <Popup 
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-area-photo-popup'}
@@ -64,12 +65,9 @@ function PersonAreaPhotoPopup({ isOpen, onClose, currentUser, onChangePhoto, isL
         <div className='popup__upload-text-container'>
           <p className='popup__upload-text'>{fileName.isShow ? fileName.name : ''}</p>
         </div>
-        <label htmlFor='person-area-photo-upload' 
-        className='btn btn_type_upload btn_type_upload_status_active'
-        >
-        </label>
+        <label htmlFor='person-area-photo-upload' className='btn-icon btn-icon_type_upload btn-icon_color_accent-blue'></label>
         <input onChange={handleChangePhoto} id='person-area-photo-upload' name='person-area-photo-upload' className='popup__upload-input' type="file" />
-        <button className={`btn btn_type_cancel popup__btn-upload-cancel ${currentUser.avatar ? 'btn_type_cancel_status_active' : ''}`} type='button' onClick={removeUploadFile}></button>
+        <button className='btn-icon btn-icon_type_cancel btn-icon_color_accent-orange btn-icon_margin_left' type='button' onClick={removeUploadFile}></button>
       </div>
       <span className={`popup__input-error ${isShowWrongType && 'popup__input-error_status_show'}`}>Неверный формат файла</span>
       <div className='popup__btn-container'>

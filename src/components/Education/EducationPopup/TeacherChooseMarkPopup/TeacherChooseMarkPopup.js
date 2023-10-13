@@ -45,6 +45,7 @@ function TeacherChooseMarkPopup({ isOpen, onClose, currentStudent, disciplineInf
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'education-teacher-choose-mark-popup'}

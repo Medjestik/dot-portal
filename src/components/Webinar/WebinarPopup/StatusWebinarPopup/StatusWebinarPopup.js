@@ -66,6 +66,7 @@ function StatusWebinarPopup({ isOpen, onClose, webinarId, onConfirm, isLoadingRe
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'medium'}
     formName={'control-status-webinar-popup'}

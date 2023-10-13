@@ -72,6 +72,7 @@ function UploadFilePopup({ isOpen, onClose, popupName, onAdd, isLoadingRequest, 
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={popupName}

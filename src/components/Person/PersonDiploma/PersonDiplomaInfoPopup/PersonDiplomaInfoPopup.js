@@ -11,6 +11,7 @@ function PersonDiplomaInfoPopup({ isOpen, onClose }) {
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-diploma-info-popup'}

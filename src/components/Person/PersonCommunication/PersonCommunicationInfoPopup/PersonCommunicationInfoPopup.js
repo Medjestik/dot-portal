@@ -11,6 +11,7 @@ function PersonCommunicationInfoPopup({ isOpen, onClose }) {
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-communication-info-popup'}

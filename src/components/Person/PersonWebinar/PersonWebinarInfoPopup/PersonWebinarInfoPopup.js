@@ -14,6 +14,7 @@
        
 
         isOpen={isOpen}
+        onClose={onClose}
         onSubmit={handleSubmit}
         formWidth={'small'}
         formName={'person-webinar-info-popup'}

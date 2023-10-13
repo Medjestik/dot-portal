@@ -16,8 +16,6 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
     }
   }, [windowWidth, containerHeightRef, tableHeaderHeightRef, taskHeightRef]);
 
-
-
   const taskStyle = {
     height: taskHeight - 36,
   };
@@ -104,7 +102,6 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
 
     </div>
   
-
     {
       windowWidth >= 833 &&
       <div className='discipline-info__section discipline-info__materials'>
@@ -127,7 +124,7 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
                   </div>
                 </div>
                 <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                  <div className='btn btn_type_download btn_type_download_status_active'></div>
+                  <div className='btn-icon'></div>
                 </div>
               </div>
               <ul className='table__main table__main_scroll_auto'>
@@ -150,7 +147,7 @@ function PracticeUserInfo({ windowWidth, practiceInfo }) {
                         </div>
                       </div>
                       <div className='table__column table__column_type_btn'>
-                        <a className='btn btn_type_download btn_type_download_status_active' href={item.link} target='_blank' rel='noreferrer'> </a>
+                        <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel='noreferrer'> </a>
                       </div>
                     </li>
                   ))

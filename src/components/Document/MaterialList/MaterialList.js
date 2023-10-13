@@ -43,7 +43,7 @@ function MaterialList() {
           </div>
         </div>
         <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-          <button className='btn btn_type_download btn_type_download_status_active table__btn'></button> 
+          <button className='btn-icon'></button> 
         </div>
       </div>
       <ul className='table__main table__main_type_webinar scroll'>
@@ -62,7 +62,7 @@ function MaterialList() {
                 </div>
               </div>
               <div className='table__column table__column_type_btn'>
-                <button className='btn btn_type_download btn_type_download_status_active table__btn'></button>
+                <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' type='button'></button>
               </div>
             </li>
           ))

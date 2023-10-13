@@ -11,6 +11,7 @@ function PersonRatingInfoPopup({ isOpen, onClose }) {
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'small'}
       formName={'person-rating-info-popup'}

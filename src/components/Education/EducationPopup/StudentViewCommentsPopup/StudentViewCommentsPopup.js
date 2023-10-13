@@ -12,6 +12,7 @@ function StudentViewCommentsPopup({ isOpen, onClose, comments, }) {
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'medium'}
     formName={'education-student-view-comments-popup'}

@@ -96,6 +96,7 @@ function AdminAddPracticeOrderPopup({ isOpen, onClose, onAdd, isLoadingRequest, 
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'admin-add-practice-order-popup'}

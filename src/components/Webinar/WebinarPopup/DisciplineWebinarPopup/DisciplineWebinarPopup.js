@@ -109,6 +109,7 @@ function DisciplineWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentD
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'full'}
       formName={'discipline-webinar-popup'}
@@ -165,7 +166,7 @@ function DisciplineWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentD
                 </div>
               </div>
               <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header table__column_type_btn-header-with-scroll'>
-                <div className='btn btn_type_create btn_type_create_status_active table__btn'></div> 
+                <div className='btn-icon'></div> 
               </div>
             </div>
             {
@@ -195,12 +196,7 @@ function DisciplineWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentD
                         }
                       </div>
                       <div className='table__column table__column_type_btn'>
-                        <button 
-                        className='btn btn_type_create btn_type_create_status_active table__btn' 
-                        type='button' 
-                        onClick={() => handleSelectDiscipline(item)}
-                        >
-                        </button>
+                        <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_create' type='button' onClick={() => handleSelectDiscipline(item)}></button>
                       </div>
                     </li>
                   ))
@@ -230,7 +226,7 @@ function DisciplineWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentD
                 </div>
               </div>
               <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                <div className='btn btn_type_download btn_type_download_status_active table__btn'></div> 
+                <div className='btn-icon'></div> 
               </div>
             </div>
             {
@@ -260,12 +256,7 @@ function DisciplineWebinarPopup({ windowWidth, isOpen, onClose, onSave, currentD
                         }
                       </div>
                       <div className='table__column table__column_type_btn'>
-                        <button 
-                        className='btn btn_type_cancel btn_type_cancel_status_active table__btn'
-                        type='button' 
-                        onClick={() => handleUnSelectDiscipline(item)}
-                        >
-                        </button>
+                        <button className='btn-icon btn-icon_color_accent-orange btn-icon_type_cancel' type='button' onClick={() => handleUnSelectDiscipline(item)}></button>
                       </div>
                     </li>
                   ))

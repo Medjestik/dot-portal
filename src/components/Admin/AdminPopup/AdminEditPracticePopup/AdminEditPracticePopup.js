@@ -61,6 +61,7 @@ function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, is
   return (
     <Popup
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
       formName={'admin-edit-practice-popup'}

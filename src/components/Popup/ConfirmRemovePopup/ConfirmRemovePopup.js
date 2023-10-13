@@ -12,6 +12,7 @@ function ConfirmRemovePopup({ isOpen, onClose, popupName, onConfirm, data, isLoa
   return (
     <Popup
     isOpen={isOpen}
+    onClose={onClose}
     onSubmit={handleSubmit}
     formWidth={'small'}
     formName={popupName}

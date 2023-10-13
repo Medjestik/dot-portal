@@ -1,22 +1,25 @@
 import React from 'react';
 import './Popup.css';
+import useOnClickOutside from '../../hooks/useOnClickOutside.js';
 
-function Popup({ isOpen, onSubmit, formWidth, formName, children }) {
+function Popup({ isOpen, onClose, onSubmit, formWidth, formName, children }) {
 
-  const height = React.createRef();
+  const formRef = React.createRef();
   const [formHeight, setFormHeight] = React.useState(false);
 
   React.useEffect(() => {
-    if (height.current.clientHeight < 420) {
+    if (formRef.current.clientHeight < 420) {
       setFormHeight(true);
     }
-  }, [height]);
+  }, [formRef]);
+
+  useOnClickOutside(formRef, onClose);
 
   return (
     <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
       <div className='scroll popup__container'>
         <form
-          ref={height}
+          ref={formRef}
           className={`popup__form popup__form_width_${formWidth} ${formHeight ? 'popup__form_height_min' : ''}`}
           name={formName}
           action='#'
