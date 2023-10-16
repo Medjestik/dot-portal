@@ -72,11 +72,11 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
   }
 
   function closePopup() {
+    setIsShowRequestError({ isShow: false, text: '', });
     setIsOpenTeacherAddAdvertisement(false);
     setIsOpenTeacherEditAdvertisement(false);
     setIsOpenTeacherAddMaterial(false);
     setIsOpenTeacherRemoveMaterial(false);
-    setIsShowRequestError({ isShow: false, text: '', })
   }
 
   function disciplineInfoRequest(disciplineId) {
@@ -98,6 +98,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
   }
 
   function addMaterial(data) {
+    setIsShowRequestError({ isShow: false, text: '', });
     setIsLoadingRequest(true);
     const token = localStorage.getItem('token');
     educationApi.uploadDisciplineMaterial({
@@ -110,6 +111,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
       closePopup();
     })
     .catch((err) => {
+      setIsShowRequestError({ isShow: true, text: 'К сожалению, произошла ошибка', });
       console.error(err);
     })
     .finally(() => {  
@@ -118,6 +120,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
   }
 
   function removeMaterial(data) {
+    setIsShowRequestError({ isShow: false, text: '', });
     setIsLoadingRequest(true);
     const token = localStorage.getItem('token');
     educationApi.removeDisciplineMaterial({
@@ -127,16 +130,19 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
     .then(() => {
       const filteredMaterials = materials.filter((elem) => data.id !== elem.id);
       setMaterials(filteredMaterials);
+      closePopup();
     })
     .catch((err) => {
+      setIsShowRequestError({ isShow: true, text: 'К сожалению, произошла ошибка', });
       console.error(err);
     })
-    .finally(() => {  
+    .finally(() => {
       setIsLoadingRequest(false);
     });
   }
 
   function addAdvertisement(data) {
+    setIsShowRequestError({ isShow: false, text: '', });
     setIsLoadingRequest(true);
     const token = localStorage.getItem('token');
     educationApi.teacherAddAdvertisement({
@@ -149,6 +155,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
       closePopup();
     })
     .catch((err) => {
+      setIsShowRequestError({ isShow: true, text: 'К сожалению, произошла ошибка', });
       console.error(err);
     })
     .finally(() => {  
@@ -157,6 +164,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
   }
 
   function editAdvertisement(data) {
+    setIsShowRequestError({ isShow: false, text: '', });
     setIsLoadingRequest(true);
     const token = localStorage.getItem('token');
     educationApi.editAdvertisement({
@@ -169,6 +177,7 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
       closePopup();
     })
     .catch((err) => {
+      setIsShowRequestError({ isShow: true, text: 'К сожалению, произошла ошибка', });
       console.error(err);
     })
     .finally(() => {  

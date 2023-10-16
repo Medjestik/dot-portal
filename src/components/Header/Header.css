@@ -52,10 +52,6 @@
   width: 100%;
   border-radius: var(--border-radius);
 }
-.header__nav-link_type_active {
-  user-select: none;
-  pointer-events: none;
-}
 .header__nav-link_type_logout {
   margin: auto 0px 0px 0px;
   outline: none;
@@ -89,6 +85,9 @@
   background: var(--main-grey-color);
 }
 .header__nav-link_type_active .header__nav-link-icon {
+  background: var(--gradient-blue-color);
+}
+.header__nav-link_type_active:hover .header__nav-link-icon {
   background: var(--gradient-blue-color);
 }
 .header__nav-link-icon_type_person {
