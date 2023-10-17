@@ -80,7 +80,7 @@ function CourseItem({ windowWidth, onChangeUserData }) {
   };
 
   function updateMaterial() {
-    //disciplineMaterialRequest(courseId);
+    disciplineMaterialRequest(courseId);
   }
 
   React.useEffect(() => {

@@ -80,9 +80,9 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
   }
 
   React.useEffect(() => {
-    if (currentUser.access_role === 'user') {
-      window.addEventListener('focus', updateMaterial);
-    }
+
+    window.addEventListener('focus', updateMaterial);
+    
     return () => {
       window.removeEventListener('focus', updateMaterial);
     }
