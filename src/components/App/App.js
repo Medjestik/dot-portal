@@ -157,6 +157,12 @@ function App() {
   }
 
   React.useEffect(() => {
+    if (pathname === '/webinar.html') {
+      window.location.replace('https://pruffme.com/landing/u2634840/7293109547827556476');
+    }
+  }, [pathname]);
+
+  React.useEffect(() => {
     tokenCheck();
 
     return(() => {
@@ -200,6 +206,7 @@ function App() {
           <div></div>
           :
           <Routes>
+
             <Route exact path='/' element={
               <HomePage 
                 onLogin={handleLogin}
