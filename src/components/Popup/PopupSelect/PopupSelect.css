@@ -13,9 +13,6 @@
   border-radius: var(--border-radius);
   transition: all .3s ease-in-out;
 }
-.select-popup_status_open {
-  border-radius: 8px 8px 0px 0px;
-}
 .select-popup:hover {
   border: 2px solid var(--accent-grey-color);
 }
@@ -43,6 +40,10 @@
   font-size: 14px;
   line-height: 18px;
   color: var(--main-black-color);
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
 }
 .select-popup__arrow {
   margin: 0px;
@@ -60,9 +61,9 @@
 }
 .select-popup__options-container {
   width: 100%;
-  margin: -2px 0px 0px 0px;
+  margin: 8px 0px 0px 0px;
   background: var(--main-grey-color);
-  border-radius: 0px 0px 8px 8px;
+  border-radius: 8px 8px 8px 8px;
   display: none;
   position: absolute;
   top: 38px;
