@@ -2,7 +2,7 @@ import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 
-function StudentViewCommentPopup({ isOpen, onClose, currentAdvertisement, isLoading }) {
+function StudentViewCommentPopup({ isOpen, onClose, currentComment, isLoading }) {
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -28,19 +28,26 @@ function StudentViewCommentPopup({ isOpen, onClose, currentAdvertisement, isLoad
 
       <div className='popup__author'>
         {
-        currentAdvertisement.author_avatar_link
+        currentComment.author_avatar_link
         ?
-        <img className='popup__author-img popup__author-img_size_small' src={currentAdvertisement.author_avatar_link} alt='аватар'></img>
+        <img className='popup__author-img popup__author-img_size_small' src={currentComment.author_avatar_link} alt='аватар'></img>
         :
         <div className='popup__author-img popup__author-img_size_small'></div>
         }
         <div className='popup__author-info'>
-          <h4 className='popup__author-title'>{currentAdvertisement.author}</h4>
-          <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Дата публикации: </span>{currentAdvertisement.date}</p>
+          <h4 className='popup__author-title'>{currentComment.author}</h4>
+          <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Дата публикации: </span>{currentComment.date}</p>
         </div>
       </div>
 
-      <p className='popup__textarea popup__textarea_height_medium scroll-inside'>{currentAdvertisement.text}</p>
+      <textarea 
+        className='popup__textarea popup__textarea_height_medium scroll-inside'
+        defaultValue={currentComment.text}
+        id='student-view-comment-text' 
+        name='student-view-comment-text' 
+        disabled
+      >
+      </textarea>
 
       <div className='popup__btn_margin_top'></div>
       

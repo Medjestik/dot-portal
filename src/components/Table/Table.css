@@ -164,6 +164,10 @@
   width: 180px;
   flex-shrink: 0;
 }
+.table__column_type_author {
+  width: 224px;
+  flex-shrink: 0;
+}
 .table__column_type_text {
   width: 100%;
   flex-shrink: 1;
@@ -203,7 +207,14 @@
 }
 .table__column_type_full {
   width: 100%;
-  flex-shrink: 1;;
+  flex-shrink: 1;
+}
+.table__column_display_flex {
+  display: flex;
+  align-items: center;
+}
+.table__column_padding_0 {
+  padding: 0px;
 }
 .table__text {
   margin: 0px;

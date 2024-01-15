@@ -175,16 +175,16 @@ function CuratorAdvertisement({ windowWidth, groupInfo }) {
         <div ref={tableHeaderHeightRef} className='table__header'>
           <div className='table__main-column'>
             <div className='table__column table__column_type_header table__column_type_count'>
-              <p className='table__text table__text_type_header'>№</p>
+              <p className='table__text table__text_type_header'></p>
             </div>
-            <div className='table__column table__column_type_header table__column_type_date'>
-              <p className='table__text table__text_type_header'>Дата</p>
+            <div className='table__column table__column_type_header table__column_type_teacher'>
+              <p className='table__text table__text_type_header'>Автор</p>
             </div>
             <div className='table__column table__column_type_header table__column_type_name'>
               <p className='table__text table__text_type_header'>Заголовок</p>
             </div>
-            <div className='table__column table__column_type_header table__column_type_teacher'>
-              <p className='table__text table__text_type_header'>Автор</p>
+            <div className='table__column table__column_type_header table__column_type_date'>
+              <p className='table__text table__text_type_header'>Дата</p>
             </div>
           </div>
           <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
@@ -201,18 +201,25 @@ function CuratorAdvertisement({ windowWidth, groupInfo }) {
             searchedAdvertisements.map((item, i) => (
               <li className='table__row' key={i}>
                 <div className='table__main-column'>
-                  <div className='table__column table__column_type_count'>
-                    <p className='table__text'>{i + 1}</p>
-                  </div>
-                  <div className='table__column table__column_type_date'>
-                    <p className='table__text'>{item.date}</p>
-                  </div>
-                  <div className='table__column table__column_type_name'>
-                    <p className='table__text table__text_type_header'>{item.title}</p>
+                  <div className='table__column table__column_type_count table__column_display_flex table__column_padding_0'>
+                    {
+                    item.authorImg
+                    ?
+                      <img className='popup__author-img popup__author-img_size_40' src={item.authorImg} alt='аватар'></img>
+                      :
+                      <div className='popup__author-img popup__author-img_size_40'></div>
+                    }
                   </div>
                   <div className='table__column table__column_type_teacher'>
                     <p className='table__text'>{item.author}</p>
                   </div>
+                  <div className='table__column table__column_type_name'>
+                    <p className='table__text table__text_type_header'>{item.title}</p>
+                  </div>
+                  <div className='table__column table__column_type_date'>
+                    <p className='table__text'>{item.date}</p>
+                  </div>
+
                 </div>
                 <div className='table__column table__column_type_btn'>
                   <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => openEditAdvertisementPopup(item)}>

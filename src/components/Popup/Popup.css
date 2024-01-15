@@ -619,6 +619,9 @@
 .popup__author-text_weight_bold {
   font-weight: bold;
 }
+.popup__author-text_margin-left_12 {
+  margin-left: 12px;
+}
 .popup__author-text_font_small  {
   margin: 4px 0px 0px 0px;
   font-size: 12px;

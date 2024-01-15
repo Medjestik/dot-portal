@@ -33,7 +33,6 @@ function UploadFilePopup({ isOpen, onClose, popupName, onAdd, isLoadingRequest, 
   function handleChangeFile(e) {
     setFileName({ isShow: false, name: '' });
     if (e.target.files.length > 0) {
-
       let file = e.target.files[0];
       if(file.size > 10485760) {
         setFileError({ text: 'Размер файла превышает 10 MB', isShow: true });

@@ -224,6 +224,7 @@ input[type=number] {
   opacity: .8;
   box-shadow: 0px 8px 12px -8px rgba(213, 102, 0, 0.9);
 }
+
 .btn-icon_type_create::after  {
   background-image: url('../../images/icons/main-white/plus.svg');
   background-position: center;
@@ -300,6 +301,16 @@ input[type=number] {
 }
 .btn-icon_type_users::after {
   background-image: url('../../images/icons/main-white/users.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.btn-icon_type_announcement::after {
+  background-image: url('../../images/icons/main-white/announcement.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.btn-icon_type_comment::after {
+  background-image: url('../../images/icons/main-white/comment.svg');
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -403,9 +414,14 @@ input[type=number] {
   padding: 0px;
   font-style: normal;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 16px;
   color: var(--accent-blue-color);
+  transition: all .3s ease-in-out;
+}
+.btn-more:hover {
+  cursor: pointer;
+  opacity: .7;
 }
 .btn-more_type_show::after {
   content: '';
@@ -434,6 +450,9 @@ input[type=number] {
 }  
 .btn-more_margin_top {
   margin: 16px auto 0px;
+}
+.btn-more_margin_left {
+  margin: 16px auto 0px 0px;
 }
 .upload-form {
   width: 100%;

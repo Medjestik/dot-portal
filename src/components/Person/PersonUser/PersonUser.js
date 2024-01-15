@@ -7,9 +7,11 @@ import PersonAreaMobile from '../PersonArea/PersonAreaMobile/PersonAreaMobile.js
 import PersonData from '../PersonData/PersonData.js';
 import PersonAdministration from '../PersonAdministration/PersonAdministration.js';
 import PersonEducation from '../PersonEducation/PersonEducation.js';
+import PersonAnnouncement from '../PersonAnnouncement/PersonAnnouncement.js';
 import PersonNotification from '../PersonNotification/PersonNotification.js';
 import PersonCommunication from '../PersonCommunication/PersonCommunication.js';
 import PersonWebinar from '../PersonWebinar/PersonWebinar.js';
+import StudentViewAdvertisementPopup from '../../Education/EducationPopup/StudentViewAdvertisementPopup/StudentViewAdvertisementPopup.js';
 
 function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, countNewNotification, openNotificationPopup }) {
 
@@ -87,6 +89,10 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
   const [personWebinarsPlanned, setPersonWebinarsPlanned] = React.useState([]);
   const [personWebinarsCompleted, setPersonWebinarsCompleted] = React.useState([]);
 
+  const [personAdvertisements, setPersonAdvertisements] = React.useState([]);
+  const [currentAdvertisement, setCurrentAdvertisement] = React.useState({});
+  const [isOpenViewAdvertisementPopup, setIsOpenViewAdvertisementPopup] = React.useState(false);
+
   const [isLoadingPage, setIsLoadingPage] = React.useState(true);
   const [isLoadingSocialRequest, setIsLoadingSocialRequest] = React.useState({ isShow: false, type: '' });
 
@@ -125,8 +131,9 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       personApi.getStudentSocial({ token: token, userId: id }),
       personApi.getPersonWebinarPlanned({ token: token, }),
       personApi.getPersonWebinarCompleted({ token: token, }),
+      personApi.getPersonAnnouncement({ token: token, }),
     ])
-    .then(([studentData, studentEducationInfo, studentSocial, studentWebinarsPlanned, studentWebinarsCompleted]) => {
+    .then(([studentData, studentEducationInfo, studentSocial, studentWebinarsPlanned, studentWebinarsCompleted, studentAdvertisements]) => {
       //console.log('StudentData', studentData);
       //console.log('StudentEducationInfo', studentEducationInfo);
       //console.log('StudentSocial', studentSocial);
@@ -136,6 +143,7 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       setStudentSocial(studentSocial);
       setPersonWebinarsPlanned(studentWebinarsPlanned);
       setPersonWebinarsCompleted(studentWebinarsCompleted);
+      setPersonAdvertisements(studentAdvertisements);
     })
     .catch((err) => {
         console.error(err);
@@ -143,6 +151,15 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
     .finally(() => {
       setIsLoadingPage(false);
     });
+  }
+
+  function openPopup(data) {
+    setCurrentAdvertisement(data);
+    setIsOpenViewAdvertisementPopup(true);
+  }
+
+  function closePopup() {
+    setIsOpenViewAdvertisementPopup(false);
   }
   
   React.useEffect(() => {
@@ -155,6 +172,8 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       setStudentSocial({});
       setPersonWebinarsPlanned([]);
       setPersonWebinarsCompleted([]);
+      setPersonAdvertisements([]);
+      setCurrentAdvertisement({});
       setIsLoadingSocialRequest({ isShow: false, type: '' }); 
     }
   // eslint-disable-next-line
@@ -227,6 +246,12 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
             personWebinarsCompleted={personWebinarsCompleted}
           />
 
+          <PersonAnnouncement 
+            windowWidth={windowWidth} 
+            userAnnouncement={personAdvertisements} 
+            onOpen={openPopup} 
+          />
+
           <PersonNotification 
             windowWidth={windowWidth} 
             userNotifications={userNotifications} 
@@ -241,6 +266,15 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
             onChange={handleChangeSocialLink}
             isLoading={isLoadingSocialRequest}
           />
+
+          {
+            isOpenViewAdvertisementPopup &&
+            <StudentViewAdvertisementPopup 
+              isOpen={isOpenViewAdvertisementPopup}
+              onClose={closePopup}
+              currentAdvertisementId={currentAdvertisement.id}
+            />
+          }
 
           {
             /*

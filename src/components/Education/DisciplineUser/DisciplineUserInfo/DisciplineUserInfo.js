@@ -237,13 +237,13 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
       }
 
     </DisciplineInfo>
+
     {
       isOpenViewAdvertisementPopup &&
       <StudentViewAdvertisementPopup 
         isOpen={isOpenViewAdvertisementPopup}
         onClose={closePopup}
-        currentAdvertisement={currentData}
-        isLoading={false}
+        currentAdvertisementId={currentData.id}
       />
     }
 
@@ -252,7 +252,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
       <StudentViewCommentPopup
         isOpen={isOpenViewCommentPopup}
         onClose={closePopup}
-        currentAdvertisement={currentData}
+        currentComment={currentData}
         isLoading={false}
       />
     }

@@ -64,7 +64,7 @@ export const curatorAddAdvertisement = ({ token, groupId, advertisement }) => {
       'Content-Type': 'application/json',
       'Authorization': `Basic ${token}`,
     },
-    body: JSON.stringify({ title: advertisement.title, text: advertisement.text, })
+    body: JSON.stringify({ title: advertisement.title, text: advertisement.text, files: advertisement.files, })
   })
   .then(res => handleResponse(res))
 };

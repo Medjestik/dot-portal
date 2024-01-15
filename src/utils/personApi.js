@@ -145,3 +145,14 @@ export const getPersonWebinarCompleted = ({ token }) => {
   .then(res => handleResponse(res))
 };
 
+export const getPersonAnnouncement = ({ token }) => {
+  return fetch(`${API_URL}/education/action/my_announcements`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
