@@ -49,7 +49,6 @@
 }
 .person-webinar__nav-item_type_active:hover {
   cursor: default;
-
 }
 .person-webinar__nav-item-icon {
   margin: 0px;
@@ -109,6 +108,9 @@
   border-radius: var(--border-radius);
   box-sizing: border-box;
   background: var(--main-grey-color);
+}
+.person-webinar__card_type_empty {
+  margin: 0px 10px 0px 22px;
 }
 .person-webinar__nav-container {
   height: 320px;
@@ -206,6 +208,9 @@
   }
   .person-webinar__card {
     margin: 0px 1px 0px 1px;
+  }
+  .person-webinar__card_type_empty {
+    margin: 20px 0px 0px 0px;
   }
   .person-webinar__nav-link {
     display: none;

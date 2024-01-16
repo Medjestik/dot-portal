@@ -149,10 +149,10 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
               </Carousel>
             </div>
             :
-            <p className={`table__text table__text_type_empty table__text_margin_${windowWidth > 833 ? 'left' : 'top'}`}>{currentWebinarStatus === 'planned' ? 'Ближайшие вебинары пока не назначены.' : 'Записи последних вебинаров не найдены.'}</p>
-
+            <div className='person-webinar__card person-webinar__card_type_empty'>
+              <p className={`table__text table__text_type_empty table__text_margin_${windowWidth > 833 ? 'left' : 'top'}`}>{currentWebinarStatus === 'planned' ? 'Ближайшие вебинары пока не назначены' : 'Записи последних вебинаров не найдены'}</p>
+            </div>
           }
-
         </div>
       </div>
     </Accordion>

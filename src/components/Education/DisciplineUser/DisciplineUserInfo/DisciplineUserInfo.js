@@ -223,7 +223,7 @@ function DisciplineUserInfo({ windowWidth, disciplineInfo }) {
           </div>
           <ul style={Object.assign({}, advertisementStyle)} className='discipline-info__advertisement-list scroll'>
             {
-              disciplineInfo.announces.length < 1 
+              (disciplineInfo.announces.length < 1) &&  (disciplineInfo.comments.length < 1)
               ?
               <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
               :
