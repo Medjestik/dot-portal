@@ -16,7 +16,6 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
 
   const heightRef = React.createRef();
   const sliderRef = React.createRef();
-  const sliderEmptyRef = React.createRef();
 
   const [webinars, setWebinars] = React.useState(personWebinarsPlanned.length > 0 ? personWebinarsPlanned : personWebinarsCompleted);
   const [currentWebinarStatus, setCurrentWebinarStatus] = React.useState(personWebinarsPlanned.length > 0 ? 'planned' : 'completed');
@@ -26,14 +25,9 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
   const [isOpenViewWebinarPopup, setIsOpenViewWebinarPopup] = React.useState(false);
 
   function handleChangeWebinarStatus(status) {
+    sliderRef.current.goTo(0);
     setCurrentWebinarStatus(status);
-    if (status === 'planned') {
-      personWebinarsPlanned.length > 0 ? sliderRef.current.goTo(0) : sliderEmptyRef.current.goTo(0);
-      setWebinars(personWebinarsPlanned);
-    } else {
-      personWebinarsCompleted.length > 0 ? sliderRef.current.goTo(0) : sliderEmptyRef.current.goTo(0);
-      setWebinars(personWebinarsCompleted);
-    }
+    setWebinars(status === 'planned' ? personWebinarsPlanned : personWebinarsCompleted);
   }
 
   function handleOpenWebinarView(webinar) {
@@ -95,7 +89,7 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
       setCountCards(1);
     }
 
-  }, [windowWidth])
+  }, [windowWidth]);
 
   React.useEffect(() => {
     setSectionHeight(heightRef.current.clientHeight);
@@ -128,42 +122,36 @@ function PersonWebinar({ windowWidth, personWebinarsPlanned, personWebinarsCompl
             </div>
             <span className='person-webinar__nav-link' onClick={() => navigate('/webinars')}>Просмотреть все</span>
           </div>
-          {
-            webinars.length > 0
-            ?
-            <div className='person-webinar__slider'>
-              <Carousel showArrows={false} itemsToShow={countCards} ref={sliderRef}>
-                {
-                  webinars.map((elem, i) => (
-                    <div key={`${elem.id} + id${i}`} className='person-webinar__card'>
-                      {renderStatus(elem.status)}
-                      <h4 className='table-card__text table-card__text_weight_bold table-card__text_type_cut table-card__title'>{elem.name}</h4>
-                      <ul className='data__list data__list_margin_top'>
-                        <li className='data__item'>
-                          <p className='data__text'><span className='data__text_font_bold'>Спикер:</span> {elem.speakers[0]}</p>
-                        </li>
-                        <li className='data__item'>
-                          <p className='data__text'><span className='data__text_font_bold'>Дата:</span> {elem.date}, {elem.time}</p>
-                        </li>
-                        <li className='data__item'>
-                          <p className='data__text'><span className='data__text_font_bold'>Группа:</span> {elem.groups.length > 2 ? elem.groups[0].name + ' (и еще ' + (elem.groups.length - 1) + ')' : elem.groups.map((elem) => elem.name).join(', ')}</p>
-                        </li>
-                      </ul>
-                      <button className='person-webinar__card-button' type='button' onClick={() => handleOpenWebinarView(elem)}>Подробнее</button>
-                    </div>
-                  ))
-                }
-              </Carousel>
-            </div>
-            :
-            <div className='person-webinar__slider'>
-            <Carousel showArrows={false} pagination={false} itemsToShow={1} ref={sliderEmptyRef}>
+          <div className='person-webinar__slider'>
+            <Carousel showArrows={false} itemsToShow={countCards} ref={sliderRef}>
+              {
+              webinars.length > 0
+              ?
+              webinars.map((elem, i) => (
+                <div key={`${elem.id} + id${i}`} className='person-webinar__card'>
+                  {renderStatus(elem.status)}
+                  <h4 className='table-card__text table-card__text_weight_bold table-card__text_type_cut table-card__title'>{elem.name}</h4>
+                  <ul className='data__list data__list_margin_top'>
+                    <li className='data__item'>
+                      <p className='data__text'><span className='data__text_font_bold'>Спикер:</span> {elem.speakers[0]}</p>
+                    </li>
+                    <li className='data__item'>
+                      <p className='data__text'><span className='data__text_font_bold'>Дата:</span> {elem.date}, {elem.time}</p>
+                    </li>
+                    <li className='data__item'>
+                      <p className='data__text'><span className='data__text_font_bold'>Группа:</span> {elem.groups.length > 2 ? elem.groups[0].name + ' (и еще ' + (elem.groups.length - 1) + ')' : elem.groups.map((elem) => elem.name).join(', ')}</p>
+                    </li>
+                  </ul>
+                  <button className='person-webinar__card-button' type='button' onClick={() => handleOpenWebinarView(elem)}>Подробнее</button>
+                </div>
+              ))
+              :
               <div className='person-webinar__card'>
                 <p className={`table__text table__text_type_empty table__text_margin_${windowWidth > 833 ? 'left' : 'top'}`}>{currentWebinarStatus === 'planned' ? 'Ближайшие вебинары пока не назначены' : 'Записи последних вебинаров не найдены'}</p>
               </div>
+              }
             </Carousel>
           </div>
-          }
         </div>
       </div>
     </Accordion>
