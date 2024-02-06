@@ -52,7 +52,7 @@ function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, is
     setDescription(currentData.description || '');
     setType(currentData.type || {});
     setStartDate(currentData.start_date || '');
-    setStartDate(currentData.end_date || '');
+    setEndDate(currentData.end_date || '');
     setIsVisible(currentData.opened || false);
 
     setIsBlockSubmitButton(false);

@@ -29,7 +29,7 @@ function CuratorPracticeScore({ windowWidth, practice, onEdit }) {
               <p className='table__text table__text_type_header'>№</p>
             </div>
             <div className='table__column table__column_type_header table__column_type_name'>
-              <p className='table__text table__text_type_header'>Студент</p>
+              <p className='table__text table__text_type_header'>Студент / Руководитель</p>
             </div>
             <div className='table__column table__column_type_header table__column_type_small'>
               <p className='table__text table__text_type_header'>Файлы</p>
@@ -58,7 +58,8 @@ function CuratorPracticeScore({ windowWidth, practice, onEdit }) {
                 <p className='table__text'>{i + 1}</p>
               </div>
               <div className='table__column table__column_type_name'>
-                <p className='table__text table__text_type_header'>{item.student.name}</p>
+                <p className='table__text table__text_type_header'>{item.student.name} /</p>
+                <p className='table__text'>{item.uni_boss.name}</p>
               </div>
               <div className='table__column table__column_type_small'>
                 <p className='table__text'>{item.files.length} шт.</p>
