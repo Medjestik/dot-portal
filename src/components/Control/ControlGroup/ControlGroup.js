@@ -1,6 +1,6 @@
 import React from 'react';
 import './ControlGroup.css';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SemesterHeader from '../../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import ControlGroupActive from './ControlGroupActive/ControlGroupActive.js';
@@ -9,13 +9,11 @@ import CuratorGroup from '../../Curator/CuratorGroup/CuratorGroup.js';
  
 function ControlGroup({ windowWidth, onLogout }) {
 
-  const navigate = useNavigate();
-
   return (
     <div className='control-group'>
 
       <SemesterHeader onLogout={onLogout}>
-        <SemesterHeaderBtnBack onBack={() => navigate('/control')} isPerformFunction={true} />
+        <SemesterHeaderBtnBack onBack={() => {}} isPerformFunction={false} />
       </SemesterHeader>
 
       <Routes>
