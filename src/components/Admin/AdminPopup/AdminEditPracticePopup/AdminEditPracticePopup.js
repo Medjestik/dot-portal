@@ -3,15 +3,17 @@ import Popup from '../../../Popup/Popup.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
 
 function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, isLoadingRequest, isShowRequestError }) {
- 
-    const [name, setName] = React.useState(currentData.name || '');
-    const [description, setDescription] = React.useState(currentData.description || '');
-    const [type, setType] = React.useState(currentData.type || {});
-    const [startDate, setStartDate] = React.useState(currentData.start_date || '');
-    const [endDate, setEndDate] = React.useState(currentData.end_date || '');
-    const [isVisible, setIsVisible] = React.useState(currentData.opened);
 
-    const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(false);
+  console.log(currentData);
+ 
+  const [name, setName] = React.useState(currentData.name || '');
+  const [description, setDescription] = React.useState(currentData.description || '');
+  const [type, setType] = React.useState(currentData.type || '');
+  const [startDate, setStartDate] = React.useState(currentData.start_date || '');
+  const [endDate, setEndDate] = React.useState(currentData.end_date || '');
+  const [isVisible, setIsVisible] = React.useState(currentData.opened);
+
+  const [isBlockSubmitButton, setIsBlockSubmitButton] = React.useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -50,7 +52,7 @@ function AdminEditPracticePopup({ isOpen, onClose, currentData, onChangeData, is
   React.useEffect(() => {
     setName(currentData.name || '');
     setDescription(currentData.description || '');
-    setType(currentData.type || {});
+    setType(currentData.type || '');
     setStartDate(currentData.start_date || '');
     setEndDate(currentData.end_date || '');
     setIsVisible(currentData.opened || false);
