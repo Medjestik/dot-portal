@@ -16,6 +16,7 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
 
   React.useEffect(() => {
     if (windowWidth >= 833) {
+      console.log(containerHeightRef.current.clientHeight);
       setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
     }
   }, [windowWidth, containerHeightRef, tableHeaderHeightRef]);

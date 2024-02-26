@@ -4,6 +4,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  flex-grow: 2;
 }
 .table__title {
   margin: 0px 0px 12px 0px;
@@ -21,6 +22,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  flex-grow: 2;
 }
 .table__container_margin_top {
   margin: 12px 0px 0px 0px;
