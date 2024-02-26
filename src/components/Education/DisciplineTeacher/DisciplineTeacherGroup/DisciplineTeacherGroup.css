@@ -1,3 +1,10 @@
 .discipline-teacher-group {
   margin: 24px 0px 0px;
+  flex-grow: 2;
+}
+
+@media all and (max-width: 833px) {
+  .discipline-teacher-group {
+    margin: 0px;
+  }
 }

@@ -120,13 +120,13 @@ function SemesterTeacher({ windowWidth, semesterInfo, onLogout }) {
             <Routes>
               <Route exact path='/disciplines'
               element={
-                <DisciplineTeacherTable disciplines={disciplines} openDiscipline={openDiscipline} />
+                <DisciplineTeacherTable windowWidth={windowWidth} disciplines={disciplines} openDiscipline={openDiscipline} />
               }
               />
 
               <Route exact path='/practices'
               element={
-                <PracticeTeacherTable practice={practice} openDiscipline={openPractice} />
+                <PracticeTeacherTable windowWidth={windowWidth} practice={practice} openDiscipline={openPractice} />
               }
               />
             </Routes>

@@ -9,8 +9,8 @@
   list-style-type: none;
 }
 .table-card__item {
-  padding: 0px 0px 28px 0px;
-  margin: 0px 0px 28px 0px;
+  padding: 0px 0px 20px 0px;
+  margin: 0px 0px 20px 0px;
   border-bottom: 1px solid var(--slider-color);
   box-sizing: border-box;
   position: relative;
@@ -64,6 +64,7 @@
   margin: 20px 0px 0px 0px;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 .table-card__info-list {
   width: 100%;
@@ -97,7 +98,7 @@
   content: '';
   position: absolute;
   right: -16px;
-  top: 2px;
+  top: 1px;
   background-image: url('../../../images/arrow-blue.svg');
   background-position: center;
   background-repeat: no-repeat;

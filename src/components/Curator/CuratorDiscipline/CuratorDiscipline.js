@@ -16,6 +16,7 @@ import TeacherViewTestsPopup from '../../Education/EducationPopup/TeacherViewTes
 import TeacherViewCommentsPopup from '../../Education/EducationPopup/TeacherViewCommentsPopup/TeacherViewCommentsPopup.js';
 import TeacherAddCommentPopup from '../../Education/EducationPopup/TeacherAddCommentPopup/TeacherAddCommentPopup.js';
 import TeacherEditCommentPopup from '../../Education/EducationPopup/TeacherEditCommentPopup/TeacherEditCommentPopup.js';
+import ViewStudentPopup from '../../Education/EducationPopup/ViewStudentPopup/ViewStudentPopup.js';
 
 function CuratorDiscipline({ windowWidth, role }) {
 
@@ -41,6 +42,7 @@ function CuratorDiscipline({ windowWidth, role }) {
   const [isOpenTeacherViewComments, setIsOpenTeacherViewComments] = React.useState(false);
   const [isOpenTeacherAddComment, setIsOpenTeacherAddComment] = React.useState(false);
   const [isOpenTeacherEditComment, setIsOpenTeacherEditComment] = React.useState(false);
+  const [isOpenViewStudent, setIsOpenViewStudent] = React.useState(false);
 
   const sections = [
     { title: 'Список студентов', id: 1, link: '/group' },
@@ -205,6 +207,11 @@ function CuratorDiscipline({ windowWidth, role }) {
     setIsOpenTeacherEditComment(true);
   }
 
+  function openViewStudentPopup(student) {
+    setCurrentStudent(student);
+    setIsOpenViewStudent(true);
+  }
+
   function closeCommentPopup() {
     setIsOpenTeacherAddComment(false);
     setIsOpenTeacherEditComment(false);
@@ -215,6 +222,7 @@ function CuratorDiscipline({ windowWidth, role }) {
     setIsOpenTeacherViewFiles(false);
     setIsOpenTeacherViewTests(false);
     setIsOpenTeacherViewComments(false);
+    setIsOpenViewStudent(false);
     setIsShowRequestError({ isShow: false, text: '', })
   }
 
@@ -227,26 +235,31 @@ function CuratorDiscipline({ windowWidth, role }) {
               <p className='section__header-caption section__header-caption_margin_bottom'>Выберите раздел:</p>
               <SectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
             </div>
-            <div className='section__header-item section__header-item_type_content'>
-              <p className='section__header-caption section__header-caption_margin_bottom'>Группа:</p>
-              <div className='discipline-teacher__header-group'>{groupInfo.name}</div>
-            </div>
-            <div className='section__header-item section__header-item_type_content'>
-              <p className='section__header-caption section__header-caption_margin_bottom'>Преподаватель:</p>
-              <div className='popup__author'>
-                {
-                teacherInfo.avatar
-                ?
-                <img className='popup__author-img popup__author-img_size_40' src={teacherInfo.avatar} alt='аватар'></img>
-                :
-                <div className='popup__author-img popup__author-img_size_40'></div>
-                }
-                <div className='popup__author-info'>
-                  <h4 className='popup__author-title popup__author-title_font_small popup__author-title_font_inline'>{teacherInfo.name}</h4>
-                  <p className='popup__author-text popup__author-text_font_small'><span className='popup__author-text_weight_bold'>Почта: </span>{teacherInfo.email}</p>
+            {
+              windowWidth > 833 &&
+              <>
+              <div className='section__header-item section__header-item_type_content'>
+                <p className='section__header-caption section__header-caption_margin_bottom'>Группа:</p>
+                <div className='discipline-teacher__header-group'>{groupInfo.name}</div>
+              </div>
+              <div className='section__header-item section__header-item_type_content'>
+                <p className='section__header-caption section__header-caption_margin_bottom'>Преподаватель:</p>
+                <div className='popup__author'>
+                  {
+                  teacherInfo.avatar
+                  ?
+                  <img className='popup__author-img popup__author-img_size_40' src={teacherInfo.avatar} alt='аватар'></img>
+                  :
+                  <div className='popup__author-img popup__author-img_size_40'></div>
+                  }
+                  <div className='popup__author-info'>
+                    <h4 className='popup__author-title popup__author-title_font_small popup__author-title_font_inline'>{teacherInfo.name}</h4>
+                    <p className='popup__author-text popup__author-text_font_small'><span className='popup__author-text_weight_bold'>Почта: </span>{teacherInfo.email}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+              </>
+            }
           </div>
         </div>
         {children}
@@ -301,6 +314,7 @@ function CuratorDiscipline({ windowWidth, role }) {
                 onViewFiles={openViewFilesPopup}
                 onViewTests={openViewTestsPopup}
                 onViewComments={openViewCommentsPopup}
+                onViewStudent={openViewStudentPopup}
               /> 
             )
           }
@@ -408,6 +422,15 @@ function CuratorDiscipline({ windowWidth, role }) {
           currentComment={currentComment}
           isLoadingRequest={isLoadingRequest}
           isShowRequestError={isShowRequestError}
+        />
+      }
+
+      {
+        isOpenViewStudent &&
+        <ViewStudentPopup 
+          isOpen={isOpenViewStudent}
+          onClose={closeTeacherPopup}
+          currentStudent={currentStudent}
         />
       }
 

@@ -3,7 +3,7 @@ import Popup from '../../../Popup/Popup.js';
 import './TeacherViewCommentsPopup.css';
 import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 
-function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment, currentStudent, }) {
+function TeacherViewCommentsPopup({ windowWidth, isOpen, onClose, onAddComment, onEditComment, currentStudent, }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -65,7 +65,7 @@ function TeacherViewCommentsPopup({ isOpen, onClose, onAddComment, onEditComment
       
       <div className='popup__btn-container'>
         <button className='popup__btn-cancel' type='button' onClick={() => onClose()}>Назад</button>
-        <button className='popup__btn-save' type='button' onClick={() => onAddComment()}>Новый комментарий</button>
+        <button className='popup__btn-save' type='button' onClick={() => onAddComment()}>{windowWidth > 833 ? 'Новый комментарий' : 'Создать'}</button>
       </div>
     </Popup>
   )

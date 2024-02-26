@@ -8,6 +8,7 @@ import EducationAdvertisement from '../../EducationAdvertisement/EducationAdvert
 import AddAdvertisementPopup from '../../EducationPopup/AddAdvertisementPopup/AddAdvertisementPopup';
 import EditAdvertisementPopup from '../../EducationPopup/EditAdvertisementPopup/EditAdvertisementPopup.js';
 import Table from '../../../Table/Table.js';
+import TableList from '../../../Table/TableList/TableList.js';
 import UploadFilePopup from '../../../Popup/UploadFilePopup/UploadFilePopup.js';
 import ConfirmRemovePopup from '../../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 
@@ -205,149 +206,244 @@ function DisciplineTeacherInfo({ windowWidth, disciplineId }) {
         <Preloader />
         :
         <DisciplineInfo type='teacher'>
-          <div className='discipline-info__chart'>
-            <ul className='discipline-info__chart-list'>
-              <li className='discipline-info__chart-item'>
-                <span className='discipline-info__chart-caption'>
-                  Всего студентов:
-                </span>
-                <EducationChart 
-                totalValue={disciplineStat.total}
-                value={disciplineStat.total}
-                label={disciplineStat.total}
-                color='#1153FC'
-                />
+          {
+            windowWidth > 833 
+            ?
+            <div className='discipline-info__chart'>
+              <ul className='discipline-info__chart-list'>
+                <li className='discipline-info__chart-item'>
+                  <span className='discipline-info__chart-caption'>
+                    Всего студентов:
+                  </span>
+                  <EducationChart 
+                  totalValue={disciplineStat.total}
+                  value={disciplineStat.total}
+                  label={disciplineStat.total}
+                  color='#1153FC'
+                  />
+                </li>
+                <li className='discipline-info__chart-item'>
+                  <span className='discipline-info__chart-caption'>
+                    Получили оценку:
+                  </span>
+                  <EducationChart 
+                  totalValue={disciplineStat.total}
+                  value={disciplineStat.passed}
+                  label={disciplineStat.passed} 
+                  color='#1153FC'
+                  />
+                </li>
+                <li className='discipline-info__chart-item'>
+                  <span className='discipline-info__chart-caption'>
+                    Не аттестованы:
+                  </span>
+                  <EducationChart 
+                  totalValue={disciplineStat.total}
+                  value={disciplineStat.unpassed}
+                  label={disciplineStat.unpassed} 
+                  color='#FF7B02'
+                  />
+                </li>
+                <li className='discipline-info__chart-item'>
+                  <span className='discipline-info__chart-caption'>
+                    Без оценки:
+                  </span>
+                  <EducationChart 
+                  totalValue={disciplineStat.total}
+                  value={disciplineStat.noData}
+                  label={disciplineStat.noData} 
+                  color='#D9D9D9'
+                  />
+                </li>
+              </ul>
+            </div>
+            :
+            <ul className='data__list data__list_margin_top'>
+              <li className='data__item'>
+                <p className='data__text'><span className='data__text_font_bold'>Всего студентов:</span>{disciplineStat.total || ''}</p>
               </li>
-              <li className='discipline-info__chart-item'>
-                <span className='discipline-info__chart-caption'>
-                  Получили оценку:
-                </span>
-                <EducationChart 
-                totalValue={disciplineStat.total}
-                value={disciplineStat.passed}
-                label={disciplineStat.passed} 
-                color='#1153FC'
-                />
+              <li className='data__item'>
+                <p className='data__text'><span className='data__text_font_bold'>Получили оценку:</span>{disciplineStat.passed || ''}</p>
               </li>
-              <li className='discipline-info__chart-item'>
-                <span className='discipline-info__chart-caption'>
-                  Не аттестованы:
-                </span>
-                <EducationChart 
-                totalValue={disciplineStat.total}
-                value={disciplineStat.unpassed}
-                label={disciplineStat.unpassed} 
-                color='#FF7B02'
-                />
+              <li className='data__item'>
+                <p className='data__text'><span className='data__text_font_bold'>Не аттестованы:</span>{disciplineStat.unpassed || ''}</p>
               </li>
-              <li className='discipline-info__chart-item'>
-                <span className='discipline-info__chart-caption'>
-                  Без оценки:
-                </span>
-                <EducationChart 
-                totalValue={disciplineStat.total}
-                value={disciplineStat.noData}
-                label={disciplineStat.noData} 
-                color='#D9D9D9'
-                />
+              <li className='data__item'>
+                <p className='data__text'><span className='data__text_font_bold'>Без оценки:</span>{disciplineStat.noData || ''}</p>
               </li>
             </ul>
-          </div>
+          }
 
-          <div className='discipline-info'>
-            <div className='discipline-info__column'>
-              <div className='discipline-info__materials'>
-                <div className='discipline-info__section-header'>
-                  <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
-                  <button className='btn-add-round' type='button' onClick={() => openAddMaterialPopup()}></button>
-                </div>
-                <div className='discipline-info__materials-table'>
-                  <Table>
-                    <div ref={containerHeightRef} className='table__container'>
-                      <div ref={tableHeaderHeightRef} className='table__header'>
-                        <div className='table__main-column'>
-                          <div className='table__column table__column_type_header table__column_type_count'>
-                            <p className='table__text table__text_type_header'>№</p>
+          {
+            windowWidth > 833
+            ?
+            <>
+            <div className='discipline-info'>
+              <div className='discipline-info__column'>
+                <div className='discipline-info__materials'>
+                  <div className='discipline-info__section-header'>
+                    <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
+                    <button className='btn-add-round' type='button' onClick={() => openAddMaterialPopup()}></button>
+                  </div>
+                  <div className='discipline-info__materials-table'>
+                    <Table>
+                      <div ref={containerHeightRef} className='table__container'>
+                        <div ref={tableHeaderHeightRef} className='table__header'>
+                          <div className='table__main-column'>
+                            <div className='table__column table__column_type_header table__column_type_count'>
+                              <p className='table__text table__text_type_header'>№</p>
+                            </div>
+                            <div className="table__column table__column_type_header table__column_type_date">
+                              <p className="table__text table__text_type_header">Дата</p>
+                            </div>
+                            <div className='table__column table__column_type_header table__column_type_name'>
+                              <p className='table__text table__text_type_header'>Наименование</p>
+                            </div>
                           </div>
-                          <div className="table__column table__column_type_header table__column_type_date">
-                            <p className="table__text table__text_type_header">Дата</p>
-                          </div>
-                          <div className='table__column table__column_type_header table__column_type_name'>
-                            <p className='table__text table__text_type_header'>Наименование</p>
+                          <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                            <div className='btn-icon'></div>
+                            <div className='btn-icon btn-icon_margin_left'></div>
                           </div>
                         </div>
-                        <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                          <div className='btn-icon'></div>
-                          <div className='btn-icon btn-icon_margin_left'></div>
-                        </div>
+                        <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+                          {
+                            materials.length < 1 
+                            ?
+                            <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
+                            :
+                            materials.map((item, i) => (
+                              <li className='table__row' key={i}>
+                                <div className='table__main-column'>
+                                  <div className='table__column table__column_type_count'>
+                                    <p className='table__text'>{i + 1}</p>
+                                  </div>
+                                  <div className="table__column table__column_type_date">
+                                    <p className="table__text">{item.date}</p>
+                                  </div>
+                                  <div className='table__column table__column_type_name'>
+                                    <p className='table__text'>{item.title}</p>
+                                  </div>
+                                </div>
+                                <div className='table__column table__column_type_btn'>
+                                  <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel='noreferrer'> </a>
+                                  <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_remove' type='button' onClick={(() => openRemoveMaterialPopup(item))}></button>
+                                </div>
+                              </li>
+                            ))
+                          }
+                        </ul>
                       </div>
-                      <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
-                        {
-                          materials.length < 1 
-                          ?
-                          <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
-                          :
-                          materials.map((item, i) => (
-                            <li className='table__row' key={i}>
-                              <div className='table__main-column'>
-                                <div className='table__column table__column_type_count'>
-                                  <p className='table__text'>{i + 1}</p>
-                                </div>
-                                <div className="table__column table__column_type_date">
-                                  <p className="table__text">{item.date}</p>
-                                </div>
-                                <div className='table__column table__column_type_name'>
-                                  <p className='table__text'>{item.title}</p>
-                                </div>
-                              </div>
-                              <div className='table__column table__column_type_btn'>
-                                <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel='noreferrer'> </a>
-                                <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_remove' type='button' onClick={(() => openRemoveMaterialPopup(item))}></button>
-                              </div>
-                            </li>
-                          ))
-                        }
-                      </ul>
-                    </div>
-                  </Table>
+                    </Table>
+                  </div>
+                </div>
+              </div>
+
+              <div className='discipline-info__column'>             
+                <div className='discipline-info__advertisement'>
+                  <div className='discipline-info__section-header'>
+                    <h4 className='discipline-info__section-title'>Объявления</h4>
+                    <button className='btn-add-round' type='button' onClick={() => openAddAdvertisementPopup()}></button>
+                  </div>
+                  <ul style={Object.assign({}, advertisementStyle)} className='discipline-info__advertisement-list scroll'>
+                    {
+                      advertisement.length < 1 
+                      ?
+                      <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
+                      :
+                      advertisement.map((elem) => ({...elem, type: 'advertisement'})).map((elem, i) => (
+                        <li key={elem.id} className='discipline-info__advertisement-item'>
+                          <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={(() => openEditAdvertisementPopup(elem))}></button>
+                          <div className='discipline-info__advertisement-info'>
+                            <h5 className='discipline-info__advertisement-title'>{elem.title}</h5>
+                            <p className='discipline-info__teacher-text'>
+                              <span className='discipline-info__teacher-text_weight_bold'>Автор: </span>
+                              {elem.author}
+                            </p>
+                            <p className='discipline-info__teacher-text'>
+                              <span className='discipline-info__teacher-text_weight_bold'>Дата публикации: </span>
+                              {elem.date}
+                            </p>
+                          </div>
+                        </li>
+                      ))
+                    }
+                  </ul>
                 </div>
               </div>
             </div>
-
-            <div className='discipline-info__column'>             
-              <div className='discipline-info__advertisement'>
-                <div className='discipline-info__section-header'>
-                  <h4 className='discipline-info__section-title'>Объявления</h4>
-                  <button className='btn-add-round' type='button' onClick={() => openAddAdvertisementPopup()}></button>
-                </div>
-                <ul style={Object.assign({}, advertisementStyle)} className='discipline-info__advertisement-list scroll'>
-                  {
-                    advertisement.length < 1 
-                    ?
-                    <p className='table__caption_type_empty'>Объявления отстутствуют.</p>
-                    :
-                    advertisement.map((elem) => ({...elem, type: 'advertisement'})).map((elem, i) => (
-                      <li key={elem.id} className='discipline-info__advertisement-item'>
-                        <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={(() => openEditAdvertisementPopup(elem))}></button>
-                        <div className='discipline-info__advertisement-info'>
-                          <h5 className='discipline-info__advertisement-title'>{elem.title}</h5>
-                          <p className='discipline-info__teacher-text'>
-                            <span className='discipline-info__teacher-text_weight_bold'>Автор: </span>
-                            {elem.author}
-                          </p>
-                          <p className='discipline-info__teacher-text'>
-                            <span className='discipline-info__teacher-text_weight_bold'>Дата публикации: </span>
-                            {elem.date}
-                          </p>
-                        </div>
-                      </li>
-                    ))
-                  }
-                </ul>
+            </>
+            :
+            <>
+            <div className='discipline-info__section discipline-info__materials'>
+              <div className='discipline-info__section-header'>
+                <h4 className='discipline-info__section-title'>Дополнительные материалы</h4>
+                <button className='btn-add-round' type='button' onClick={() => openAddMaterialPopup()}></button>
               </div>
+              {
+                materials.length < 1 
+                ?
+                <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
+                :
+                <TableList>
+                {
+                  materials.map((item, i) => (
+                    <li className='table-list__item' key={i}>
+                      <span className='table-list__count'>{i + 1}.</span>
+                      <div className='table-list__info'>
+                        <h6 className='table-list__info-title'>{item.title || ''}</h6>
+                        <ul className='table-list__info-list'>
+                          <li className='table-list__info-item'>
+                            <p className='table-list__info-text'><span className='table-list__info-text_font_bold'>Дата загрузки:</span>{item.date || ''}</p>
+                          </li>
+                        </ul>
+                      </div>
+                      <a className='btn-icon btn-icon_color_accent-blue btn-icon_type_download' href={item.link} target='_blank' rel='noreferrer'> </a>
+                      <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_remove' type='button' onClick={(() => openRemoveMaterialPopup(item))}></button>
+                    </li>
+                  ))
+                }
+                </TableList>
+              }
             </div>
+            <div className='discipline-info__section discipline-info__advertisement'>
+              <div className='discipline-info__section-header'>
+                <h4 className='discipline-info__section-title'>Объявления</h4>
+                <button className='btn-add-round' type='button' onClick={() => openAddAdvertisementPopup()}></button>
+              </div>
+              {
+                advertisement.length < 1 
+                ?
+                <p className='table__caption_type_empty'>Дополнительные материалы пока не загружены.</p>
+                :
+                <TableList>
+                {
+                  advertisement.map((item, i) => (
+                    <li className='table-list__item' key={i}>
+                      <span className='table-list__count'>{i + 1}.</span>
+                      <div className='table-list__info'>
+                        <h6 className='table-list__info-title'>{item.title || ''}</h6>
+                        <ul className='table-list__info-list'>
+                          <li className='table-list__info-item'>
+                            <p className='table-list__info-text'><span className='table-list__info-text_font_bold'>Автор:</span>{item.author || ''}</p>
+                          </li>
+                        </ul>
+                        <ul className='table-list__info-list'>
+                          <li className='table-list__info-item'>
+                            <p className='table-list__info-text'><span className='table-list__info-text_font_bold'>Дата публикации:</span>{item.date || ''}</p>
+                          </li>
+                        </ul>
+                      </div>
+                      <button className={`btn-icon btn-icon_type_edit btn-icon_color_accent-blue`} type='button' onClick={(() => openEditAdvertisementPopup(item))}></button>
+                    </li>
+                  ))
+                }
+              </TableList>
+              }
+            </div>
+            </>
+          }
 
-          </div>
+
 
         </DisciplineInfo>
       }

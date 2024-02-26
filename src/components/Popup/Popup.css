@@ -757,6 +757,14 @@
   .popup__btn-back {
     padding: 8px;
   }
+  .popup__row {
+    margin: 12px 0px 0px 0px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .popup__row-item {
+    margin: 0px 0px 12px 0px;
+  }
   .popup__row-title {
     font-size: 12px;
     line-height: 16px;

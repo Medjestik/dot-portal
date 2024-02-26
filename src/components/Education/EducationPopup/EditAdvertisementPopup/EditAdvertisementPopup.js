@@ -90,7 +90,7 @@ function EditAdvertisementPopup({ isOpen, onClose, currentAdvertisementId, onEdi
   }
 
   function handleRemoveTask(file) {
-    const newFiles = fileList.filter((elem) => elem.fileName !== file.fileName);
+    const newFiles = fileList.filter((elem) => elem.id !== file.id);
     setFileList(newFiles);
   }
 
