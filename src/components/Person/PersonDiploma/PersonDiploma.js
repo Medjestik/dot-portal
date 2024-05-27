@@ -1,11 +1,12 @@
 import React from 'react';
 import './PersonDiploma.css';
 import Accordion from '../../Accordion/Accordion.js';
-import searchIcon from '../../../images/search.svg';
+import { PieChart } from 'react-minimal-pie-chart';
 import diplomaIcon from '../../../images/accordion/accordion-diploma.svg';
 import PersonDiplomaInfoPopup from './PersonDiplomaInfoPopup/PersonDiplomaInfoPopup.js';
+import GetBase64File from '../../../custom/GetBase64File.js';
 
-function PersonDiploma({ windowWidth }) {
+function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
 
   const [fileName, setFileName] = React.useState({ isShow: false, name: '', });
   const [isShowWrongType, setIsShowWrongType] = React.useState(false);
@@ -25,26 +26,61 @@ function PersonDiploma({ windowWidth }) {
   function closeInfoPopup() {
     setIsOpenInfoPopup(false);
   }
+
+  function onSubmit() {
+    onUpload({ file: contentFile.file, fileName: fileName.name });
+  }
+
+  function renderStatus(works) {
+    if (works.length < 1) {
+      return 'Работа не загружена';
+    }
+    const lastWork = works[works.length - 1];
+    if (!lastWork.percent) {
+      return 'Работа находится на проверке';
+    }
+    if (lastWork.percent && lastWork.pass) {
+      return 'Работа проверена, вы успешно прошли проверку';
+    }
+    if (lastWork.percent && !lastWork.pass) {
+      return 'Проверка не пройдена, работу необходимо исправить';
+    }
+    return 'Работа не загружена';
+  }
+
+  React.useEffect(() => {
+    if (isLoadingDiploma === 'loading') {
+      setFileName({ isShow: true, name: 'Загрузка..', });
+      cleanForm();
+    } else if (isLoadingDiploma === 'success') {
+      setFileName({ isShow: true, name: 'Работа успешно загружена!', });
+    } else if (isLoadingDiploma === 'error') {
+      setFileName({ isShow: true, name: 'К сожалению, произошла ошибка!', });
+    }
+  }, [isLoadingDiploma]);
   
   React.useEffect(() => {
     setIsOpenInfoPopup(false);
   },[]);
 
+  function cleanForm() {
+    setContentFile({ file: null, });
+  }
+
   function handleChangeDiploma(e) {
     setIsShowWrongType(false);
     setFileName({ isShow: false, name: '' });
     if (e.target.files.length > 0) {
-      if (e.target.files[0].name.match(/.(docx|doc|pdf)$/i)) {
-        setContentFile({ file: e.target.files[0] });
-        setFileName({ isShow: true, name: e.target.files[0].name });
-      } else {
-        setFileName({ isShow: false, name: e.target.files[0].name });
-        setIsShowWrongType(true);
-        setContentFile({ file: null, });
-      }
-      formRef.current.reset();
-    } else {
-      setContentFile({ file: null, });
+      let file = e.target.files[0];
+      GetBase64File(file)
+      .then(result => {
+        file['base64'] = result;
+        setFileName({ isShow: true, name: file.name });
+        setContentFile({ file: file.base64 });
+      })
+      .catch(err => {
+        console.log(err);
+      });
     }
   }
 
@@ -56,78 +92,136 @@ function PersonDiploma({ windowWidth }) {
     <>
     <Accordion icon={diplomaIcon} name='Выпускная квалификационная работа' height={sectionHeight} openInfoPopup={openInfoPopup}>
       <div ref={heightRef} className='person-diploma__container'>
-        <div className='person-diploma__info'>
-          <div className='person-diploma__theme'>
-            <div className='person-diploma__theme-container'>
-              <p className='scroll-inside person-diploma__theme-text'>Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы Тема выпускной квалификационной работы</p>
-            </div>
-            <div className='person-diploma__plagiarism'>
-              <img className='person-diploma__plagiarism-img' src={searchIcon} alt='иконка'></img>
-              <span className='person-diploma__plagiarism-count'>100%</span>
+        <div className='person-diploma__column'>
+          <div className='field'>
+            <div className='field__item'>
+              <h5 className='field__title'>Тема выпускной квалификационной работы</h5>
+              <div className='field__row'>
+                <div className='field__row-text-container'>
+                  <p className='field__row-textarea scroll-inside'>..</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className='person-diploma__director'>
-            <div className='person-diploma__director-img'></div>
-            <div className='person-diploma__director-info'>
-              <h4 className='person-diploma__director-name'>Иванова Елена Алексеевна</h4>
-              <div className='person-diploma__director-info-line'>
-                <p className='person-diploma__director-text'>Руководитель</p>
-                <span className='person-diploma__director-phone'>+7 (000) 000-00-00</span>
-              </div>
-              <div className='person-diploma__director-info-line'>
-                <p className='person-diploma__director-text'>Доцент</p>
-                <span className='person-diploma__director-mail'>0000000000000@000000.ru</span>
+          <div className='field field_mt_20'>
+            <div className='field__item'>
+              <h5 className='field__title'>Дата предзащиты</h5>
+              <div className='field__row'>
+                <div className='field__row-text-container'>
+                  <p className='field__row-text'>..</p>
+                </div>
               </div>
             </div>
-
+            <div className='field__item'>
+              <h5 className='field__title'>Дата защиты</h5>
+              <div className='field__row'>
+                <div className='field__row-text-container'>
+                  <p className='field__row-text'>..</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='field field_mt_20'>
+            <div className='field__item'>
+              <h5 className='field__title'>Научный руководитель</h5>
+              <div className='field__row'>
+                <div className='field__row-text-container'>
+                  <p className='field__row-text'>..</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className='person-diploma__upload'>
-          <h5 className='person-diploma__upload-title'>Подгрузить ВКР на антиплагиат</h5>
-          <form className='upload-form' ref={formRef} name='person-diploma-upload-file' id='person-diploma-upload-file'>
-            <label htmlFor='person-diploma-upload' className='upload-form__field'>
-              <p className='upload-form__text'>{fileName.isShow ? fileName.name : ''}</p>
-              <div className='upload-form__icon'></div>
-            </label>
-            <input onChange={handleChangeDiploma} id='person-diploma-upload' className='upload-form__input' type="file" />
-            <button className={`btn-icon btn-icon_type_upload ${contentFile.file !== null ? 'btn-icon_color_accent-blue' : 'btn-icon_status_block'}`}></button>
-          </form>
-          <ul className='person-diploma__upload-date-list'>
-            <li className='person-diploma__upload-date-item'>
-              <h5 className='person-diploma__upload-title'>Дата предзащиты</h5>
-              <div className='person-diploma__upload-date-container'>
-                <span className='person-diploma__upload-date-text'>00.00.00 00:00</span>
-              </div>
-            </li>
-            <li className='person-diploma__upload-date-item'>
-              <h5 className='person-diploma__upload-title'>Дата защиты</h5>
-              <div className='person-diploma__upload-date-container'>
-                <span className='person-diploma__upload-date-text'>00.00.00 00:00</span>
-              </div>
-            </li>
-          </ul>
-          <div className='person-diploma__download'>
-            <ul className='scroll-inside person-diploma__download-list'>
-              <li className='person-diploma__download-item'>
-                <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_download'></button>
-                <div className='person-diploma__download-text-container'>
-                  <p className='person-diploma__download-text'>Методические материалы Методические материалы Методические материалы Методические материалы</p>
-                </div>
-              </li>
-              <li className='person-diploma__download-item'>
-                <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_download'></button>
-                <div className='person-diploma__download-text-container'>
-                  <p className='person-diploma__download-text'>Методические материалы</p>
-                </div>
-              </li>
-              <li className='person-diploma__download-item'>
-                <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_download'></button>
-                <div className='person-diploma__download-text-container'>
-                  <p className='person-diploma__download-text'>Методические материалы</p>
-                </div>
-              </li>
-            </ul>
+
+        <div className='person-diploma__column'>
+
+          <div className='field'>
+            <div className='field__item'>
+              <h5 className='field__title'>Подгрузить ВКР на антиплагиат</h5>
+                <form className='field__row' ref={formRef} name='person-diploma-upload-file' id='person-diploma-upload-file'>
+                  <label htmlFor='person-diploma-upload' className='upload-form__field'>
+                    <p className='upload-form__text'>{fileName.isShow ? fileName.name : ''}</p>
+                    <div className='upload-form__icon'></div>
+                  </label>
+                  <input onChange={handleChangeDiploma} id='person-diploma-upload' className='upload-form__input' type="file" />
+                  <button 
+                    className={`btn-icon btn-icon_type_upload btn-icon_margin_left ${contentFile.file !== null ? 'btn-icon_color_accent-blue' : 'btn-icon_status_block'}`}
+                    type='button'
+                    onClick={onSubmit}
+                  >
+                  </button>
+                </form>
+            </div>
           </div>
+          <div className='field field_mt_20'>
+            <div className='field__item'>
+              <h5 className='field__title'>Статус проверки</h5>
+              <div className='field__row'>
+                <div className='field__row-text-container'>
+                  <p className='field__row-text'>{renderStatus(works)}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {
+            works.length > 0 
+            &&
+            <div className='field field_mt_20'>
+              <div className='field__item'>
+                <h5 className='field__title'>Загруженные работы</h5>
+                {
+                  works.length > 0 ?
+                  <ul className='person-diploma__works scroll'>
+                    {
+                    [...works].reverse().map((elem, i) => (
+                      <li key={i} className='person-diploma__works-item'>
+                        <div className='popup__item-container'>
+                          <div className='test-chart'>
+                            <PieChart
+                              data={[{ value: elem.percent || 0, color: elem.pass ? '#1153FC' : '#FF7B02' }]}
+                              totalValue={100}
+                              lineWidth={18}
+                              paddingAngle={2}
+                              rounded
+                              background='#D9D9D9'
+                              label={({ dataEntry }) => dataEntry.value + '%'}
+                              labelStyle={{
+                                fontSize: '24px',
+                                fontFamily: 'Roboto',
+                                fontWeight: 'bold',
+                                fill: elem.pass ? '#1153FC' : '#FF7B02',
+                              }}
+                              labelPosition={0}
+                            />
+                          </div>
+                          <div className='popup__item-info'>
+                            <h4 className='popup__item-title'>{elem.file_name}</h4>
+                            <p className='popup__item-text'><span className='popup__item-text_weight_bold'>Дата загрузки: </span>{elem.load_date}</p>
+                            {
+                              elem.percent
+                              ?
+                              <p className='popup__item-text'>
+                                <span className='popup__item-text_weight_bold'>Ссылка на отчет: </span>
+                                <a className='popup__row-text popup__text_type_link' href={elem.report_link} target='_blank' rel='noreferrer'>Перейти</a>
+                              </p>
+                              :
+                              <div className='status status_mb_8'>
+                                <span className='status__icon status__icon_type_canceled'></span>
+                                <p className='status__text'>Работа находится на проверке</p>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                      </li>
+                    ))
+                    }
+                  </ul>
+                  :
+                  <div></div>
+                }
+              </div>
+            </div>
+          }
         </div>
       </div>
     </Accordion>

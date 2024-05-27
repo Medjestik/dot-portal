@@ -185,3 +185,28 @@ export const editPracticeStudentScore = ({ token, practiceId, studentId, paramet
   })
   .then(res => handleResponse(res))
 };
+
+export const getDiplomaReports = ({ token, year }) => {
+  return fetch(`${API_URL}/admin/action/vkr_uploads/year/${year}`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const checkDiplomaReports = ({ token, workId, data }) => {
+  return fetch(`${API_URL}/admin/action/rate_vkr/vkr_id/${workId}`, {  
+      method: 'PATCH',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      },
+      body: JSON.stringify({ data })
+  })
+  .then(res => handleResponse(res))
+};

@@ -8,6 +8,7 @@ import ControlNavigate from './ControlNavigate/ControlNavigate.js';
 import ControlWebinar from './ControlWebinar/ControlWebinar.js';
 import ControlGroup from './ControlGroup/ControlGroup.js';
 import CuratorDiscipline from '../Curator/CuratorDiscipline/CuratorDiscipline.js';
+import ControlDiploma from './ControlDiploma/ControlDiploma.js';
 
 function Control({ windowWidth, onLogout, semesterInfo }) {
 
@@ -38,6 +39,12 @@ function Control({ windowWidth, onLogout, semesterInfo }) {
 
         <Route exact path='/group/*' element={
             <ControlGroup windowWidth={windowWidth} onLogout={onLogout} />
+          }
+        >
+        </Route>
+
+        <Route exact path='/diploma/*' element={
+            <ControlDiploma windowWidth={windowWidth} onLogout={onLogout} />
           }
         >
         </Route>

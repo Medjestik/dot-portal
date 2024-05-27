@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0599bc16.css",
-    "main.js": "/static/js/main.0ecb3ab1.js",
+    "main.css": "/static/css/main.33297a0c.css",
+    "main.js": "/static/js/main.92782e67.js",
     "static/js/787.1955ab40.chunk.js": "/static/js/787.1955ab40.chunk.js",
     "static/media/homepage-background.jpg": "/static/media/homepage-background.6ebabe323b86ec3dbd90.jpg",
     "static/media/Robotomediumitalic.ttf": "/static/media/Robotomediumitalic.35abcf5eb54b0c398e52.ttf",
@@ -53,8 +53,10 @@
     "static/media/remove.svg": "/static/media/remove.713add748a7723ff9b71.svg",
     "static/media/place.svg": "/static/media/place.9127c6bcbde170da30ec.svg",
     "static/media/add.svg": "/static/media/add.3f494a08cfc44747e90d.svg",
+    "static/media/journal.svg": "/static/media/journal.f7164f8181c568ffaa46169849f2cf52.svg",
     "static/media/accordion-announcement.svg": "/static/media/accordion-announcement.1b6d148a1763703b23610e91e9d14005.svg",
     "static/media/upload.svg": "/static/media/upload.c2da51bc4a47e6eee4cd.svg",
+    "static/media/discipline.svg": "/static/media/discipline.c5e1b7a178e352711053f459ac3ff32d.svg",
     "static/media/download.svg": "/static/media/download.fa22a6fbcbd504b9cd4b.svg",
     "static/media/notification-color.svg": "/static/media/notification-color.9500648d2971ae4b58a5.svg",
     "static/media/notification.svg": "/static/media/notification.d792fe00b70fe8b2979c4e041c103572.svg",
@@ -81,6 +83,7 @@
     "static/media/library-white.svg": "/static/media/library-white.35b8392f22f7b7d9e09c.svg",
     "static/media/accordion-administration.svg": "/static/media/accordion-administration.ac635129940c16d02d6108a7742ebc59.svg",
     "static/media/library.svg": "/static/media/library.0ac35a62dc0647e8d3da89b880dfd350.svg",
+    "static/media/accordion-diploma.svg": "/static/media/accordion-diploma.551471bf2ccaa3f292c4b65931fa18ab.svg",
     "static/media/open.svg": "/static/media/open.281e397191c23b487738.svg",
     "static/media/photo-white.svg": "/static/media/photo-white.9429fee1a4811f64cec3.svg",
     "static/media/instagram.svg": "/static/media/instagram.99a3c9ddf3ea1ed07521ebc0872f2468.svg",
@@ -129,12 +132,12 @@
     "static/media/arrow.svg": "/static/media/arrow.55a4ec4915bbcdabc744.svg",
     "static/media/arrow-white.svg": "/static/media/arrow-white.9817492cc56038ef8ec6.svg",
     "static/media/arrow-blue.svg": "/static/media/arrow-blue.d97550c6523356d4c133.svg",
-    "main.0599bc16.css.map": "/static/css/main.0599bc16.css.map",
-    "main.0ecb3ab1.js.map": "/static/js/main.0ecb3ab1.js.map",
+    "main.33297a0c.css.map": "/static/css/main.33297a0c.css.map",
+    "main.92782e67.js.map": "/static/js/main.92782e67.js.map",
     "787.1955ab40.chunk.js.map": "/static/js/787.1955ab40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0599bc16.css",
-    "static/js/main.0ecb3ab1.js"
+    "static/css/main.33297a0c.css",
+    "static/js/main.92782e67.js"
   ]
 }

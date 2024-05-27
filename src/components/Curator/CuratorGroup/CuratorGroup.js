@@ -24,11 +24,11 @@ function CuratorGroup({ windowWidth, role }) {
   const [currentSection, setCurrentSection] = React.useState({});
 
   const sections = [
-    { title: 'Список студентов', id: 1, link: '/list' },
-    { title: 'Объявления', id: 2, link: '/advertisement' },
-    { title: 'Дисциплины', id: 3, link: '/disciplines' },
-    { title: 'Практика', id: 4, link: '/practice' },
-    { title: 'ВКР', id: 5, link: '/diploma' },
+    { title: 'Список студентов', id: 1, link: '/list', key: 'list', },
+    { title: 'Объявления', id: 2, link: '/advertisement', key: 'advertisement', },
+    { title: 'Дисциплины', id: 3, link: '/disciplines', key: 'disciplines', },
+    { title: 'Практика', id: 4, link: '/practice', key: 'practice', },
+    { title: 'Выпускные работы', id: 5, link: '/diploma/check', key: 'diploma', },
   ];
 
   function chooseSection(option) {
@@ -58,14 +58,14 @@ function CuratorGroup({ windowWidth, role }) {
   React.useEffect(() => {
     groupRequest();
     return (() => {
-
+      setGroupInfo([]);
     })
     // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
     sections.forEach((section) => {
-      if (location.pathname.includes(section.link)) {
+      if (location.pathname.includes(section.key)) {
         setCurrentSection(section);
       }
     });
@@ -120,7 +120,7 @@ function CuratorGroup({ windowWidth, role }) {
           />
           }
         />
-        <Route exact path={`practice`}
+        <Route exact path={`practice/*`}
           element={
           <CuratorPracticeList
             windowWidth={windowWidth} 
@@ -129,10 +129,11 @@ function CuratorGroup({ windowWidth, role }) {
           />
           }
         />
-        <Route exact path={`diploma`}
+        <Route exact path={`diploma/*`}
           element={
           <CuratorDiploma
             windowWidth={windowWidth} 
+            groupInfo={groupInfo}
           />
           }
         />
@@ -142,4 +143,4 @@ function CuratorGroup({ windowWidth, role }) {
   );
 }
 
-export default CuratorGroup;  
+export default CuratorGroup;

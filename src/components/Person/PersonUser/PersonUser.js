@@ -11,7 +11,9 @@ import PersonAnnouncement from '../PersonAnnouncement/PersonAnnouncement.js';
 import PersonNotification from '../PersonNotification/PersonNotification.js';
 import PersonCommunication from '../PersonCommunication/PersonCommunication.js';
 import PersonWebinar from '../PersonWebinar/PersonWebinar.js';
+import PersonDiploma from '../PersonDiploma/PersonDiploma.js';
 import StudentViewAdvertisementPopup from '../../Education/EducationPopup/StudentViewAdvertisementPopup/StudentViewAdvertisementPopup.js';
+import { upload } from '@testing-library/user-event/dist/upload.js';
 
 function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, countNewNotification, openNotificationPopup }) {
 
@@ -86,6 +88,7 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
   const [studentData, setStudentData] = React.useState({});
   const [studentEducationInfo, setStudentEducationInfo] = React.useState({});
   const [studentSocial, setStudentSocial] = React.useState({});
+  const [studentDiploma, setStudentDiploma] = React.useState({});
   const [personWebinarsPlanned, setPersonWebinarsPlanned] = React.useState([]);
   const [personWebinarsCompleted, setPersonWebinarsCompleted] = React.useState([]);
 
@@ -95,6 +98,8 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
 
   const [isLoadingPage, setIsLoadingPage] = React.useState(true);
   const [isLoadingSocialRequest, setIsLoadingSocialRequest] = React.useState({ isShow: false, type: '' });
+
+  const [isLoadingDiploma, setIsLoadingDiploma] = React.useState('initial');
 
   function handleChangeSocialLink(link, type) {
     const userId = currentUser.id;
@@ -122,6 +127,21 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       });
   }
 
+  function handleUploadDiploma(work) {
+    const token = localStorage.getItem('token');
+    setIsLoadingDiploma('loading');
+    const data = { work: work, vkr_id: studentDiploma.vkr_id };
+    personApi.uploadDiploma({ token, data })
+      .then((res) => {
+        setStudentDiploma({ ...studentDiploma, uploads: [...studentDiploma.uploads, res] });
+        setIsLoadingDiploma('success');
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoadingDiploma('error');
+      });
+  }
+
   function getData(id) {
     setIsLoadingPage(true);
     const token = localStorage.getItem('token');
@@ -132,18 +152,17 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       personApi.getPersonWebinarPlanned({ token: token, }),
       personApi.getPersonWebinarCompleted({ token: token, }),
       personApi.getPersonAnnouncement({ token: token, }),
+      personApi.getStudentDiploma({ token: token, }),
     ])
-    .then(([studentData, studentEducationInfo, studentSocial, studentWebinarsPlanned, studentWebinarsCompleted, studentAdvertisements]) => {
-      //console.log('StudentData', studentData);
-      //console.log('StudentEducationInfo', studentEducationInfo);
-      //console.log('StudentSocial', studentSocial);
-      //console.log('StudentWebinars', studentWebinars);
+    .then(([studentData, studentEducationInfo, studentSocial, studentWebinarsPlanned, studentWebinarsCompleted, studentAdvertisements, studentDiploma]) => {
+      console.log('StudentWebinars', studentDiploma);
       setStudentData(studentData);
       setStudentEducationInfo(studentEducationInfo);
       setStudentSocial(studentSocial);
       setPersonWebinarsPlanned(studentWebinarsPlanned);
       setPersonWebinarsCompleted(studentWebinarsCompleted);
       setPersonAdvertisements(studentAdvertisements);
+      setStudentDiploma(studentDiploma);
     })
     .catch((err) => {
         console.error(err);
@@ -174,6 +193,7 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
       setPersonWebinarsCompleted([]);
       setPersonAdvertisements([]);
       setCurrentAdvertisement({});
+      setStudentDiploma({});
       setIsLoadingSocialRequest({ isShow: false, type: '' }); 
     }
   // eslint-disable-next-line
@@ -239,6 +259,17 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
             studentEducationInfo={studentEducationInfo} 
             windowWidth={windowWidth} 
           />
+
+          {
+            studentDiploma.view_load &&
+            <PersonDiploma
+              windowWidth={windowWidth}
+              works={studentDiploma.uploads}
+              onUpload={handleUploadDiploma}
+              isLoadingDiploma={isLoadingDiploma}
+            />
+          }
+
           
           <PersonWebinar 
             windowWidth={windowWidth}

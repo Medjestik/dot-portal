@@ -2,7 +2,7 @@ import React from 'react';
 import './Curator.css';
 import * as curatorApi from '../../utils/curatorApi.js';
 import Preloader from '../Preloader/Preloader.js';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import SectionTabs from '../Section/SectionTabs/SectionTabs.js';
@@ -110,4 +110,4 @@ function Curator({ windowWidth, onLogout }) {
   );
 }
 
-export default Curator; 
+export default Curator;

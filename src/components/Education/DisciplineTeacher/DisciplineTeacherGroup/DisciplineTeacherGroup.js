@@ -16,7 +16,6 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
 
   React.useEffect(() => {
     if (windowWidth >= 833) {
-      console.log(containerHeightRef.current.clientHeight);
       setTableHeight(containerHeightRef.current.clientHeight - tableHeaderHeightRef.current.clientHeight);
     }
   }, [windowWidth, containerHeightRef, tableHeaderHeightRef]);
@@ -193,32 +192,47 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
                 
                 <ul className='data__list data__list_margin_top'>
                   <li className='data__item'>
-                    <p className='data__text'><span className='data__text_font_bold'>Время изучения:</span>{item.learning.content_time || ''}</p>
+                    <p className='data__text'>
+                      <span className='data__text_font_bold'>Время изучения:</span>
+                      {item.learning.content_time || ''}
+                    </p>
                   </li>
                   <li className='data__item'>
-                    <p className='data__text' onClick={() => onViewTests(item)}><span className='data__text_font_bold'>Тестирование:</span>{item.learning.completed_tests_count}/{item.learning.total_tests_count}</p>
+                    <p className='data__text'>
+                      <span className='data__text_font_bold'>Тестирование:</span>
+                      <span className='data__text_font_active' onClick={() => onViewTests(item)}>{item.learning.completed_tests_count}/{item.learning.total_tests_count}</span>
+                    </p>
                   </li>
                   <li className='data__item'>
-                    <p className='data__text' onClick={() => onViewFiles(item)}><span className='data__text_font_bold'>Файлы:</span>{item.files.length} шт.</p>
+                    <p className='data__text'>
+                      <span className='data__text_font_bold'>Файлы:</span>
+                      {
+                        item.files.length > 0
+                        ?
+                        <span className='data__text_font_active' onClick={() => onViewFiles(item)}>{item.files.length} шт.</span>
+                        :
+                        <span className=''>{item.files.length} шт.</span>
+                      }
+                    </p>
                   </li>
                   {
                     disciplineInfo.course_work &&
                     <li className='data__item'>
-                      <p className='data__text' onClick={() => onChooseMark(item)}><span className='data__text_font_bold'>Курсовая работа:</span>{item.course_mark && renderCardMark(item.course_mark.name || '')}</p>
+                      <p className='data__text'>
+                        <span className='data__text_font_bold'>Курсовая работа:</span>
+                        <span className='data__text_font_active' onClick={() => onChooseMark(item)}>{item.course_mark && renderCardMark(item.course_mark.name || '')}</span>
+                      </p>
                     </li>
                   }
                   <li className='data__item'>
-                    <p className='data__text' onClick={() => onChooseMark(item)}><span className='data__text_font_bold'>Оценка по дисциплине:</span>{item.mark && renderCardMark(item.mark.name || '')}</p>
+                    <p className='data__text'>
+                      <span className='data__text_font_bold'>Оценка по дисциплине:</span>
+                      <span className='data__text_font_active' onClick={() => onChooseMark(item)}>{item.mark && renderCardMark(item.mark.name || '')}</span>
+                    </p>
                   </li>
                 </ul>
 
-                {
-                  item.comments.length < 1 
-                  ?
-                    <p className='table-card__text table-card__link table-card__link_type_empty'>Комментарии отсутствуют</p>
-                  :
-                    <p className='table-card__text table-card__link table-card__link_type_active' onClick={() => onViewComments(item)}>Комментарии</p>
-                }
+                <p className='table-card__text table-card__link table-card__link_type_active' onClick={() => onViewComments(item)}>Комментарии</p>
               </li>
               ))
             }

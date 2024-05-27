@@ -585,6 +585,9 @@ input[type=number] {
 .checkbox_margin_top {
   margin: 12px 0px 0px 0px;
 }
+.checkbox_margin_top-20 {
+  margin: 20px 0px 0px 0px;
+}
 .checkbox input {
   display: none;
 }
@@ -708,11 +711,15 @@ input[type=number] {
   display: flex;
   align-items: center;
 }
+.status_mb_8 {
+  margin-top: 8px;
+}
 .status__icon {
-  margin: 0px 12px 0px 0px;
+  margin: 0px 8px 0px 0px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 .status__icon_type_completed {
   background: var(--slider-color);
@@ -722,6 +729,15 @@ input[type=number] {
 }
 .status__icon_type_planned {
   background: var(--accent-blue-color);
+}
+.status__text {
+  margin: 2px 0px 0px 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+  text-decoration: none;
 }
 .data__list {
   margin: 0px;
@@ -804,6 +820,66 @@ input[type=number] {
 }
 .separate_type_empty {
   margin: 12px 0px;
+}
+
+.field {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.field_mt_20 {
+  margin-top: 20px;
+}
+.field__item {
+  margin: 0px 12px 0px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.field__item:last-of-type {
+  margin: 0px;
+}
+.field__title {
+  margin: 0px 0px 8px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.field__row {
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.field__row-text-container {
+  margin: 0px;
+  padding: 11px 16px;
+  box-sizing: border-box;
+  width: 100%;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+}
+.field__row-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
+.field__row-textarea {
+  margin: 0px;
+  padding-right: 20px;
+  height: 88px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+  overflow-y: auto;
 }
 
 @media all and (max-width: 1439px) {

@@ -18,7 +18,8 @@ function PersonDiplomaInfoPopup({ isOpen, onClose }) {
     >
       <h2 className='popup__title'>ВКР</h2>
       <p className='popup__subtitle'>Просмотр темы выпускной квалификационной работы, ФИО дипломного руководителя, загрузка работы на антиплагиат.</p>
-      <p className='popup__text'><span className='popup__text-accent'>Информация о ВКР</span> доступна с 7-8 семестрах обучения и обновляется в режиме реального времени в зависимости от внесенных изменений.</p>
+      <p className='popup__text'><span className='popup__text-accent'>Загрузите работу и дождитесь проверки.</span></p>
+      <p className='popup__text'>Если у вас возникают вопросы по проверке работы, вы можете обратиться к вашему куратору.</p>
       <button className='popup__btn-back' type='submit'>Назад</button>
     </Popup>
     )

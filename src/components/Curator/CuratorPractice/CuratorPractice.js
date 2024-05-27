@@ -502,115 +502,115 @@ function CuratorPractice({ windowWidth, role }) {
     {            
     isDataPopupOpen &&
     <AdminEditPracticePopup
-        isOpen={isDataPopupOpen}
-        onClose={closePopups}
-        currentData={practice}
-        onChangeData={handleChangeData}
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isDataPopupOpen}
+      onClose={closePopups}
+      currentData={practice}
+      onChangeData={handleChangeData}
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 
     {            
     isAddOrderPopupOpen &&
     <AdminAddPracticeOrderPopup
-        isOpen={isAddOrderPopupOpen}
-        onClose={closePopups}
-        onAdd={handleAddOrder}
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isAddOrderPopupOpen}
+      onClose={closePopups}
+      onAdd={handleAddOrder}
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 
     {            
     isAddFilePopupOpen &&
     <UploadFilePopup
-        isOpen={isAddFilePopupOpen}
-        onClose={closePopups}
-        popupName='admin-practice-add-file'
-        onAdd={handleAddFile}
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isAddFilePopupOpen}
+      onClose={closePopups}
+      popupName='admin-practice-add-file'
+      onAdd={handleAddFile}
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 
     {            
     isDeleteFilePopupOpen &&
     <ConfirmRemovePopup
-        isOpen={isDeleteFilePopupOpen}
-        onClose={closePopups}
-        popupName='admin-practice-delete-file'
-        onConfirm={handleDeleteFile}
-        data={currentFile}
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isDeleteFilePopupOpen}
+      onClose={closePopups}
+      popupName='admin-practice-delete-file'
+      onConfirm={handleDeleteFile}
+      data={currentFile}
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 
     {            
     isDeleteOrderPopupOpen &&
     <ConfirmRemovePopup
-        isOpen={isDeleteOrderPopupOpen}
-        onClose={closePopups}
-        popupName='admin-practice-delete-order'
-        onConfirm={handleDeleteOrder}
-        data={currentOrder}
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isDeleteOrderPopupOpen}
+      onClose={closePopups}
+      popupName='admin-practice-delete-order'
+      onConfirm={handleDeleteOrder}
+      data={currentOrder}
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 
     {            
     isAssignOrderPopupOpen &&
     <ConfirmActionPopup
-        isOpen={isAssignOrderPopupOpen}
-        onClose={closePopups}
-        popupName='admin-practice-assign-order'
-        onConfirm={handleAssignOrder}
-        data={currentOrder}
-        actionText='Вы действительно хотите установить данный приказ для всех пустых значений?'
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isAssignOrderPopupOpen}
+      onClose={closePopups}
+      popupName='admin-practice-assign-order'
+      onConfirm={handleAssignOrder}
+      data={currentOrder}
+      actionText='Вы действительно хотите установить данный приказ для всех пустых значений?'
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 
     {            
     isAddGroupDataPopupOpen &&
     <AdminAddPracticeGroupData
-        isOpen={isAddGroupDataPopupOpen}
-        onClose={closePopups}
-        practice={practice}
-        onAddPlace={handleAddGroupDataPlace}
-        onAddManager={handleAddGroupDataManager}
-        onAddTask={handleAddGroupDataTask}
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isAddGroupDataPopupOpen}
+      onClose={closePopups}
+      practice={practice}
+      onAddPlace={handleAddGroupDataPlace}
+      onAddManager={handleAddGroupDataManager}
+      onAddTask={handleAddGroupDataTask}
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 
     {            
     isEditStudentDataPopupOpen &&
     <AdminEditPracticeStudentData
-        isOpen={isEditStudentDataPopupOpen}
-        onClose={closePopups}
-        practice={practice}
-        currentStudent={currentStudent}
-        onEdit={handleEditStudentData}
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isEditStudentDataPopupOpen}
+      onClose={closePopups}
+      practice={practice}
+      currentStudent={currentStudent}
+      onEdit={handleEditStudentData}
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 
     {            
     isEditStudentScorePopupOpen &&
     <AdminEditPracticeStudentScore
-        isOpen={isEditStudentScorePopupOpen}
-        onClose={closePopups}
-        practice={practice}
-        currentStudent={currentStudent}
-        onEdit={handleEditStudentScore}
-        isLoadingRequest={isLoadingRequest}
-        isShowRequestError={isShowRequestError}
+      isOpen={isEditStudentScorePopupOpen}
+      onClose={closePopups}
+      practice={practice}
+      currentStudent={currentStudent}
+      onEdit={handleEditStudentScore}
+      isLoadingRequest={isLoadingRequest}
+      isShowRequestError={isShowRequestError}
     />
     }
 

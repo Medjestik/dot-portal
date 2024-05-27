@@ -156,3 +156,28 @@ export const getPersonAnnouncement = ({ token }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const getStudentDiploma = ({ token }) => {
+  return fetch(`${API_URL}/education/action/vkr_info`, { 
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const uploadDiploma = ({ token, data }) => {
+  return fetch(`${API_URL}/education/action/vkr_load`, { 
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ data })
+  })
+  .then(res => handleResponse(res))
+};

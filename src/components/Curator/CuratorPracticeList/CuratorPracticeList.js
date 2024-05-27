@@ -55,7 +55,6 @@ function CuratorPracticeList({ windowWidth, groupInfo, openPractice }) {
     <Preloader />
     :
     <>
-
     <Table>
       <div ref={containerHeightRef} className='table__container'>
         <div ref={tableHeaderHeightRef} className='table__header'>
@@ -116,7 +115,6 @@ function CuratorPracticeList({ windowWidth, groupInfo, openPractice }) {
         }
       </div>
     </Table>
-
     </>
   );
 }

@@ -3,219 +3,35 @@
   display: flex;
   width: 100%;
 }
-.person-diploma__info {
-  max-width: 484px;
-  margin: 0px 32px 0px 0px;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-}
-.person-diploma__theme {
-  margin: 0px;
-  display: flex;
-  width: 100%;
-}
-.person-diploma__theme-container {
-  width: 100%;
+.person-diploma__column {
   margin: 0px 20px 0px 0px;
-  padding: 16px 24px;
-  border-radius: var(--border-radius);
-  box-sizing: border-box;
-  background: var(--main-grey-color);
-}
-.person-diploma__theme-text {
-  margin: 0px 0px 0px 0px;
-  padding-right: 20px;
-  height: 88px;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--main-black-color);
-  overflow-y: auto;
-}
-.person-diploma__plagiarism {
-  width: 120px;
-  height: 120px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--gradient-blue-color);
-  border-radius: var(--border-radius);
-}
-.person-diploma__plagiarism-img {
-  margin: 0px;
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  object-position: center;
-}
-.person-diploma__plagiarism-count {
-  margin: 8px 0px 0px 0px;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 26px;
-  line-height: 30px;
-  text-align: center;
-  color: var(--main-white-color);
-}
-.person-diploma__director {
-  width: 100%;
-  margin: 20px 0px 0px 0px;
-  display: flex;
-}
-.person-diploma__director-img {
-  margin: 0px 20px 0px 0px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: var(--main-grey-color);
-  flex-shrink: 0;
-}
-.person-diploma__director-info {
-  margin: 0px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
-.person-diploma__director-name {
+.person-diploma__column:last-of-type {
   margin: 0px;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 22px;
-  line-height: 26px;
-  color: var(--main-black-color);
+}
+.person-diploma__works {
+  margin: 0px;
+  padding: 0px 8px 0px 0px;
   width: 100%;
-}
-.person-diploma__director-info-line {
-  margin: 20px 0px 0px 0px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-.person-diploma__director-text {
-  margin: 0px 20px 0px 0px;
-  max-width: 120px;
-  width: 100%;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--main-black-color);
-}
-.person-diploma__director-phone {
-  margin: 0px;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--main-black-color);
-}
-.person-diploma__director-mail {
-  margin: 0px;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--main-black-color);
-}
-.person-diploma__upload {
-  margin: 0px;
-  width: 100%;
-}
-.person-diploma__upload-title {
-  margin: 0px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--main-black-color);
-  width: 100%;
-}
-.person-diploma__upload-date-list {
-  display: flex;
-  align-items: center;
-  margin: 20px 0px 0px 0px;
-  padding: 0px;
-  list-style-type: none;
-  width: 100%;
-}
-.person-diploma__upload-date-item {
-  margin: 0px 20px 0px 0px;
-  width: 100%;
-}
-.person-diploma__upload-date-item:last-of-type {
-  margin: 0px;
-}
-.person-diploma__upload-date-container {
-  margin: 11px 0px 0px 0px;
-  padding: 11px 16px;
-  background: var(--main-grey-color);
-  border-radius: var(--border-radius);
-}
-.person-diploma__upload-date-text {
-  margin: 0px;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--main-black-color);
-}
-.person-diploma__upload-btn {
-  margin: 0px;
-}
-.person-diploma__download {
-  margin: 20px 0px 0px 0px;
-  width: 100%;
-  background: var(--main-grey-color);
-  border-radius: var(--border-radius);
-  padding: 20px 24px;
-  box-sizing: border-box;
-}
-.person-diploma__download-list {
-  margin: 0px;
-  padding: 0px;
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  max-height: 40px;
-  border-radius: var(--border-radius);
-}
-.person-diploma__download-item {
-  display: flex;
-  align-items: center;
-  margin: 0px 0px 10px 0px
-}
-.person-diploma__download-item:last-of-type {
-  display: flex;
-  align-items: center;
-  margin: 0px
-}
-.person-diploma__download-text-container {
-  margin: 0px 20px 0px 0px;
-  width: 100%;
-  background: var(--main-white-color);
-  border-radius: 8px;
-  padding: 11px 16px;
   box-sizing: border-box;
 }
-.person-diploma__download-text {
-  margin: 0px;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-  color: var(--main-black-color);  
-  -webkit-line-clamp: 1;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  user-select: none;
-  pointer-events: none;
+.person-diploma__works-item {
+  margin: 0px 0px 20px 0px;
+  width: 100%;
+  padding: 11px 16px;
+  background: var(--main-grey-color);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+}
+
+@media all and (max-width: 833px) {
+  .person-diploma__container {
+    flex-direction: column;
+  }
 }

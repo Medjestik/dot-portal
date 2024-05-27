@@ -1,7 +1,6 @@
 import React from 'react';
 import './Webinar.css';
 import * as webinarApi from '../../utils/webinarApi.js';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import Preloader from '../Preloader/Preloader.js';
 import Section from '../Section/Section.js';
 import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
@@ -21,8 +20,6 @@ function Webinar({ windowWidth, semesterOptions, onLogout }) {
     { name: 'Отменен', id: 'canceled', },
     { name: 'Завершен', id: 'completed', },
   ]
-
-  const currentUser = React.useContext(CurrentUserContext);
 
   const containerHeightRef = React.createRef();
   const tableHeaderHeightRef = React.createRef();
