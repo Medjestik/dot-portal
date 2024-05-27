@@ -92,46 +92,53 @@ function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
     <>
     <Accordion icon={diplomaIcon} name='Выпускная квалификационная работа' height={sectionHeight} openInfoPopup={openInfoPopup}>
       <div ref={heightRef} className='person-diploma__container'>
-        <div className='person-diploma__column'>
-          <div className='field'>
-            <div className='field__item'>
-              <h5 className='field__title'>Тема выпускной квалификационной работы</h5>
-              <div className='field__row'>
-                <div className='field__row-text-container'>
-                  <p className='field__row-textarea scroll-inside'>..</p>
+
+        {
+          /*
+
+          <div className='person-diploma__column'>
+            <div className='field'>
+              <div className='field__item'>
+                <h5 className='field__title'>Тема выпускной квалификационной работы</h5>
+                <div className='field__row'>
+                  <div className='field__row-text-container'>
+                    <p className='field__row-textarea scroll-inside'>..</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='field field_mt_20'>
+              <div className='field__item'>
+                <h5 className='field__title'>Дата предзащиты</h5>
+                <div className='field__row'>
+                  <div className='field__row-text-container'>
+                    <p className='field__row-text'>..</p>
+                  </div>
+                </div>
+              </div>
+              <div className='field__item'>
+                <h5 className='field__title'>Дата защиты</h5>
+                <div className='field__row'>
+                  <div className='field__row-text-container'>
+                    <p className='field__row-text'>..</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='field field_mt_20'>
+              <div className='field__item'>
+                <h5 className='field__title'>Научный руководитель</h5>
+                <div className='field__row'>
+                  <div className='field__row-text-container'>
+                    <p className='field__row-text'>..</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className='field field_mt_20'>
-            <div className='field__item'>
-              <h5 className='field__title'>Дата предзащиты</h5>
-              <div className='field__row'>
-                <div className='field__row-text-container'>
-                  <p className='field__row-text'>..</p>
-                </div>
-              </div>
-            </div>
-            <div className='field__item'>
-              <h5 className='field__title'>Дата защиты</h5>
-              <div className='field__row'>
-                <div className='field__row-text-container'>
-                  <p className='field__row-text'>..</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='field field_mt_20'>
-            <div className='field__item'>
-              <h5 className='field__title'>Научный руководитель</h5>
-              <div className='field__row'>
-                <div className='field__row-text-container'>
-                  <p className='field__row-text'>..</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+          */
+        }
 
         <div className='person-diploma__column'>
 
