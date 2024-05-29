@@ -262,10 +262,10 @@ function Person({ windowWidth, onChangeUserPhoto, onChangeUserData }) {
           {
             isNotificationPopupOpen &&
             <NotificationPopup
-            isOpen={isNotificationPopupOpen}
-            onClose={handleCloseNotificationPopup}
-            notification={currentNotification}
-            isLoading={isLoadingNotificationData}
+              isOpen={isNotificationPopupOpen}
+              onClose={handleCloseNotificationPopup}
+              notification={currentNotification}
+              isLoading={isLoadingNotificationData}
             />
           }
         </div>

@@ -881,6 +881,13 @@ input[type=number] {
   color: var(--main-black-color);
   overflow-y: auto;
 }
+.text-cut {
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 @media all and (max-width: 1439px) {
   .container {

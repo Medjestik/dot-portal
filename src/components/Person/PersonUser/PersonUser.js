@@ -13,7 +13,6 @@ import PersonCommunication from '../PersonCommunication/PersonCommunication.js';
 import PersonWebinar from '../PersonWebinar/PersonWebinar.js';
 import PersonDiploma from '../PersonDiploma/PersonDiploma.js';
 import StudentViewAdvertisementPopup from '../../Education/EducationPopup/StudentViewAdvertisementPopup/StudentViewAdvertisementPopup.js';
-import { upload } from '@testing-library/user-event/dist/upload.js';
 
 function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswordPopup, openDataPopup, userNotifications, currentNotification, countNewNotification, openNotificationPopup }) {
 
@@ -261,10 +260,10 @@ function PersonUser({ windowWidth, currentUser, openPhotoPopup, openChangePasswo
           />
 
           {
-            studentDiploma.view_load &&
+            studentDiploma.view_vkr &&
             <PersonDiploma
               windowWidth={windowWidth}
-              works={studentDiploma.uploads}
+              diploma={studentDiploma}
               onUpload={handleUploadDiploma}
               isLoadingDiploma={isLoadingDiploma}
             />

@@ -1,25 +1,12 @@
 import React from 'react';
 import Table from '../../../Table/Table';
-import CuratorViewReportsPopup from '../../CuratorPopup/CuratorViewReportsPopup/CuratorViewReportsPopup';
 
-function CuratorDiplomaCheck({ windowWidth, diploma }) {
-
-  const [isShowViewReportsPopup, setIsShowViewReportsPopup] = React.useState(false);
-  const [currentStudent, setCurrentStudent] = React.useState({});
+function CuratorDiplomaCheck({ windowWidth, diploma, onUpload, onShowReport }) {
 
   const containerHeightRef = React.createRef();
   const tableHeaderHeightRef = React.createRef();
 
   const [tableHeight, setTableHeight] = React.useState(0);
-
-  function showReports(item) {
-    setCurrentStudent(item);
-    setIsShowViewReportsPopup(true);
-  }
-
-  function closePopup() {
-    setIsShowViewReportsPopup(false);
-  }
 
   React.useEffect(() => {
     if (windowWidth >= 833) {
@@ -50,10 +37,24 @@ function CuratorDiplomaCheck({ windowWidth, diploma }) {
         :
         <>
           <div className='table__column table__column_type_large'>
-            <a className='table__text table__text_type_active' href={bestAttempt.report_link} target='_blanc' rel='noreferrer'>{bestAttempt.percent}% (отчет)</a>
+            {
+              bestAttempt.report_link.length > 0
+              ?
+              <a className='table__text table__text_type_active' href={bestAttempt.report_link} target='_blanc' rel='noreferrer'>{bestAttempt.percent}% (отчет)</a>
+              :
+              <p className='table__text table__text_type_empty'>0%</p>
+            }
+            
           </div>
           <div className='table__column table__column_type_status'>
-            <p className='table__text table__text_color_orange'>Не пройден</p>
+            {
+              bestAttempt.percent 
+              ?
+              <p className='table__text table__text_color_orange'>Не пройден</p>
+              :
+              <p className='table__text table__text_color_blue'>На проверке</p>
+            }
+            
           </div>
         </>
       )
@@ -107,10 +108,10 @@ function CuratorDiplomaCheck({ windowWidth, diploma }) {
                     <p className='table__text'>{i + 1}</p>
                   </div>
                   <div className='table__column table__column_type_name'>
-                    <p className='table__text table__text_type_header'>{item.name}</p>
+                    <p className='table__text table__text_type_header table__text_type_active' onClick={() => onUpload(item)}>{item.name}</p>
                   </div>
                   <div className='table__column table__column_type_small'>
-                    <p className='table__text table__text_type_active' onClick={() => showReports(item)}>{item.uploads.length} шт.</p>
+                    <p className='table__text table__text_type_active' onClick={() => onShowReport(item)}>{item.uploads.length} шт.</p>
                   </div>
                   {
                     renderBestAttempt(item)
@@ -125,15 +126,6 @@ function CuratorDiplomaCheck({ windowWidth, diploma }) {
         }
       </div>
     </Table>
-    
-    {
-      isShowViewReportsPopup &&
-      <CuratorViewReportsPopup 
-        isOpen={isShowViewReportsPopup} 
-        onClose={closePopup} 
-        currentStudent={currentStudent}
-      />
-    }
     </>
   )
 }

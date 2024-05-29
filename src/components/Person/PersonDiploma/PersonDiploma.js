@@ -6,7 +6,7 @@ import diplomaIcon from '../../../images/accordion/accordion-diploma.svg';
 import PersonDiplomaInfoPopup from './PersonDiplomaInfoPopup/PersonDiplomaInfoPopup.js';
 import GetBase64File from '../../../custom/GetBase64File.js';
 
-function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
+function PersonDiploma({ windowWidth, diploma, onUpload, isLoadingDiploma }) {
 
   const [fileName, setFileName] = React.useState({ isShow: false, name: '', });
   const [isShowWrongType, setIsShowWrongType] = React.useState(false);
@@ -94,8 +94,6 @@ function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
       <div ref={heightRef} className='person-diploma__container'>
 
         {
-          /*
-
           <div className='person-diploma__column'>
             <div className='field'>
               <div className='field__item'>
@@ -112,7 +110,7 @@ function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
                 <h5 className='field__title'>Дата предзащиты</h5>
                 <div className='field__row'>
                   <div className='field__row-text-container'>
-                    <p className='field__row-text'>..</p>
+                    <p className='field__row-text'>{diploma.predefence_date || '..'}</p>
                   </div>
                 </div>
               </div>
@@ -120,7 +118,7 @@ function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
                 <h5 className='field__title'>Дата защиты</h5>
                 <div className='field__row'>
                   <div className='field__row-text-container'>
-                    <p className='field__row-text'>..</p>
+                  <p className='field__row-text'>{diploma.defence_date || '..'}</p>
                   </div>
                 </div>
               </div>
@@ -136,12 +134,13 @@ function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
               </div>
             </div>
           </div>
-
-          */
         }
 
-        <div className='person-diploma__column'>
 
+          <div className='person-diploma__column'>
+
+          {
+          diploma.view_load &&
           <div className='field'>
             <div className='field__item'>
               <h5 className='field__title'>Подгрузить ВКР на антиплагиат</h5>
@@ -160,27 +159,28 @@ function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
                 </form>
             </div>
           </div>
+          }
           <div className='field field_mt_20'>
             <div className='field__item'>
               <h5 className='field__title'>Статус проверки</h5>
               <div className='field__row'>
                 <div className='field__row-text-container'>
-                  <p className='field__row-text'>{renderStatus(works)}</p>
+                  <p className='field__row-text'>{renderStatus(diploma.uploads)}</p>
                 </div>
               </div>
             </div>
           </div>
           {
-            works.length > 0 
+            diploma.uploads.length > 0 
             &&
             <div className='field field_mt_20'>
               <div className='field__item'>
                 <h5 className='field__title'>Загруженные работы</h5>
                 {
-                  works.length > 0 ?
+                  diploma.uploads.length > 0 ?
                   <ul className='person-diploma__works scroll'>
                     {
-                    [...works].reverse().map((elem, i) => (
+                    [...diploma.uploads].reverse().map((elem, i) => (
                       <li key={i} className='person-diploma__works-item'>
                         <div className='popup__item-container'>
                           <div className='test-chart'>
@@ -230,6 +230,7 @@ function PersonDiploma({ windowWidth, works, onUpload, isLoadingDiploma }) {
             </div>
           }
         </div>
+
       </div>
     </Accordion>
     {

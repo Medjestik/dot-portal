@@ -129,3 +129,29 @@ export const getGroupDiploma = ({ token, groupId }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const editDiplomaSettings = ({ token, diplomaId, data }) => {
+  return fetch(`${API_URL}/curators/action/update_vkr_parameters/vkr_id/${diplomaId}`, {  
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ data: data })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const addDiplomaFile = ({ token, data }) => {
+  return fetch(`${API_URL}/curators/action/curator_vkr_load`, {  
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ data: data })
+  })
+  .then(res => handleResponse(res))
+};
