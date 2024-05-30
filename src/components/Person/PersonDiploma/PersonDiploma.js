@@ -5,6 +5,7 @@ import { PieChart } from 'react-minimal-pie-chart';
 import diplomaIcon from '../../../images/accordion/accordion-diploma.svg';
 import PersonDiplomaInfoPopup from './PersonDiplomaInfoPopup/PersonDiplomaInfoPopup.js';
 import GetBase64File from '../../../custom/GetBase64File.js';
+import { convertDate } from '../../../shared/convertDate.js';
 
 function PersonDiploma({ windowWidth, diploma, onUpload, isLoadingDiploma }) {
 
@@ -110,7 +111,7 @@ function PersonDiploma({ windowWidth, diploma, onUpload, isLoadingDiploma }) {
                 <h5 className='field__title'>Дата предзащиты</h5>
                 <div className='field__row'>
                   <div className='field__row-text-container'>
-                    <p className='field__row-text'>{diploma.predefence_date || '..'}</p>
+                    <p className='field__row-text'>{convertDate(diploma.predefence_date) || '..'}</p>
                   </div>
                 </div>
               </div>
@@ -118,7 +119,7 @@ function PersonDiploma({ windowWidth, diploma, onUpload, isLoadingDiploma }) {
                 <h5 className='field__title'>Дата защиты</h5>
                 <div className='field__row'>
                   <div className='field__row-text-container'>
-                  <p className='field__row-text'>{diploma.defence_date || '..'}</p>
+                  <p className='field__row-text'>{convertDate(diploma.defence_date) || '..'}</p>
                   </div>
                 </div>
               </div>
