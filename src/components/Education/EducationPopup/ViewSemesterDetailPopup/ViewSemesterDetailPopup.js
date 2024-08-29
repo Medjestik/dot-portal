@@ -1,29 +1,32 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as curatorApi from '../../../../utils/curatorApi.js';
+import * as adminApi from '../../../../utils/admin.js';
 import TableHorizontal from '../../../Table/TableHorizontal/TableHorizontal.js';
 import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
-import useOnClickOutside from '../../../../hooks/useOnClickOutside.js';
+import AdminSetMarkPopup from '../AdminSetMarkPopup/AdminSetMarkPopup.js';
 
 function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId, role }) {
 
   const navigate = useNavigate();
 
+  const [isOpenSetMarkPopup, setIsOpenSetMarkPopup] = React.useState(false);
+
   const [isLoadingInfo, setIsLoadingInfo] = React.useState(true);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
+  const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '', });
 
   const [currentSemesterOption, setCurrentSemesterOption] = React.useState(semesterOptions.find((elem) => currentSemesterId === elem.id));
 
   const [currentData, setCurrentData] = React.useState({});
+  const [currentStudent, setCurrentStudent] = React.useState({});
+  const [currentDiscipline, setCurrentDiscipline] = React.useState({});
 
   const tableWidthRef = React.createRef();
-  const popupRef = React.createRef();
 
   const [tableWidth, setTableWidth] = React.useState(0);
-
   const [isShowFullWidth, setIsShowFullWidth] = React.useState(false);
-
 
   function generateMenuLink(student, activities) {
     let link = '';
@@ -85,7 +88,6 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
     }
   }
 
-
   function filterBySemester(option) {
     setCurrentSemesterOption(option);
     getSemesterDetail(option.id);
@@ -98,6 +100,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
       if (studentMark.mark.name === 'Нет оценки') {
         return (
           <p 
+          onClick={() => openSetMarkPopup(activities, student, studentMark)}
           className='table-horizontal__text table-horizontal__text_type_active table-horizontal__text_type_empty'
           >
             {studentMark.mark.name}
@@ -106,6 +109,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
       } else if (studentMark.mark.name === 'Не аттестован') {
         return (
           <p 
+          onClick={() => openSetMarkPopup(activities, student, studentMark)}
           className='table-horizontal__text table-horizontal__text_type_active table-horizontal__text_type_error'
           >
             {studentMark.mark.name}
@@ -114,6 +118,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
       } else {
         return (
           <p 
+          onClick={() => openSetMarkPopup(activities, student, studentMark)}
           className='table-horizontal__text table-horizontal__text_type_active'
           >
             {studentMark.mark.name}
@@ -143,11 +148,49 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
     });
   }
 
+  function openSetMarkPopup(discipline, student, mark) {
+    setCurrentDiscipline({ ...discipline });
+    setCurrentStudent({ student, mark: mark.mark });
+    setIsOpenSetMarkPopup(true);
+  }
+
+  function closeMarkPopup() {
+    setIsOpenSetMarkPopup(false);
+  }
+
+  function handleSetMark(mark) {
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+    adminApi.setMark({ 
+      token, 
+      activity_id: currentDiscipline.id, 
+      student_id: currentStudent.student.id, 
+      type: currentDiscipline.type, 
+      mark_id: mark.mark.id, 
+      comment: mark.text  
+    })
+    .then((res) => {
+      const newResults = currentData.results.map((result) => {
+        if (result.activity_id === res.activity_id && result.student_id === res.student_id) {
+          console.log(result);
+          return res;
+        }
+        return result;
+      })
+      setCurrentData({ ...currentData, results: newResults });
+      closeMarkPopup();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      setIsLoadingRequest(false);
+    });
+  }
+
   const tableStyle = {
     width: tableWidth,
   };
-
-  useOnClickOutside(popupRef, onClose);
 
   React.useEffect(() => {
     if (!isLoadingInfo) {
@@ -167,9 +210,10 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
   }, [isOpen]);
 
   return (
+    <>
     <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
       <div className='scroll popup__container'>
-        <div ref={popupRef} className={`popup__form popup__form_width_${isShowFullWidth ? '100' : '1440'} popup__form_height_min`} >
+        <div className={`popup__form popup__form_width_${isShowFullWidth ? '100' : '1440'} popup__form_height_min`} >
         {
         isLoadingInfo 
         ?
@@ -274,6 +318,20 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
         </div>
       </div>
     </div>
+
+    {
+      isOpenSetMarkPopup &&
+      <AdminSetMarkPopup 
+        isOpen={isOpenSetMarkPopup}
+        onClose={closeMarkPopup}
+        currentStudent={currentStudent}
+        disciplineInfo={currentDiscipline}
+        setMark={handleSetMark}
+        isLoadingRequest={isLoadingRequest}
+        isShowRequestError={isShowRequestError}
+      />
+    }
+    </>
   )
 }
 

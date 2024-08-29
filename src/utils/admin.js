@@ -210,3 +210,18 @@ export const checkDiplomaReports = ({ token, workId, data }) => {
   })
   .then(res => handleResponse(res))
 };
+
+
+export const setMark = ({ token, activity_id, student_id, type, mark_id, comment }) => {
+  console.log(student_id);
+  return fetch(`${API_URL}/curators/action/expanded_report_update_mark/`, { 
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ activity_id, student_id, mark_id, type, comment })
+  })
+  .then(res => handleResponse(res))
+};
