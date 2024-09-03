@@ -229,7 +229,13 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
             </div>
             <div className='section__header-item section__header-item_type_content'>
               <span className='section__header-caption section__header-caption_margin_bottom'></span>
-              <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_file-export' type='button'></button>
+              <a 
+              href={`https://course.emiit.ru/view_print_form_true.html?print_form_id=7390360828329790778&semester_id=${currentSemesterOption.id}`} 
+              className='btn-icon btn-icon_color_accent-blue btn-icon_type_file-export' 
+              target='_blank'
+              rel='noreferrer'
+              >
+              </a>
             </div>
             <div className='section__header-item section__header-item_type_content'>
               <span className='section__header-caption section__header-caption_margin_bottom'></span>
