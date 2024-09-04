@@ -49,7 +49,7 @@ function DisciplineMaterials({ windowWidth, disciplineId }) {
     const data = atob(token);
     const dataArray = data.split(':');
 
-    const url = 'https://' + dataArray[0] + ':' + dataArray[1] + '@course.emiit.ru/view_doc.html?mode=part_start&course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
+    const url = 'https://' + dataArray[0] + ':' + encodeURIComponent(dataArray[1]) + '@course.emiit.ru/view_doc.html?mode=part_start&course_id=' + materials.course_id + '&object_id=' + materials.object_id + '&sid=' + materials.sid + '&part_code=' + item.code;
 
     /*let formData = new FormData();
     formData.append('user_login', dataArray[0]);
