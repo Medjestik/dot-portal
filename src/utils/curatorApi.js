@@ -155,3 +155,15 @@ export const addDiplomaFile = ({ token, data }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const getGroupWebinar = ({ token, groupId }) => {
+  return fetch(`${API_URL}/webinars/action/group_webinars/group_id/${groupId}`, {  
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};

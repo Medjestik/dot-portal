@@ -11,6 +11,7 @@ import CuratorDisciplineList from '../CuratorDisciplineList/CuratorDisciplineLis
 import CuratorPractice from '../CuratorPractice/CuratorPractice.js';
 import CuratorPracticeList from '../CuratorPracticeList/CuratorPracticeList.js';
 import CuratorDiploma from '../CuratorDiploma/CuratorDiploma.js';
+import CuratorWebinar from '../CuratorWebinar/CuratorWebinar.js';
 
 function CuratorGroup({ windowWidth, role }) {
 
@@ -29,6 +30,7 @@ function CuratorGroup({ windowWidth, role }) {
     { title: 'Дисциплины', id: 3, link: '/disciplines', key: 'disciplines', },
     { title: 'Практика', id: 4, link: '/practice', key: 'practice', },
     { title: 'Выпускные работы', id: 5, link: '/diploma/check', key: 'diploma', },
+    { title: 'Вебинары', id: 6, link: '/webinar', key: 'webinar', },
   ];
 
   function chooseSection(option) {
@@ -132,6 +134,14 @@ function CuratorGroup({ windowWidth, role }) {
         <Route exact path={`diploma/*`}
           element={
           <CuratorDiploma
+            windowWidth={windowWidth} 
+            groupInfo={groupInfo}
+          />
+          }
+        />
+        <Route exact path={`webinar`}
+          element={
+          <CuratorWebinar
             windowWidth={windowWidth} 
             groupInfo={groupInfo}
           />
