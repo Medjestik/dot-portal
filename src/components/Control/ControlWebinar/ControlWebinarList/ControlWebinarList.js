@@ -111,9 +111,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
       searchText: webinarDate,
     })
     .then((res) => {
-      console.log(res);
       if (res.length > 0) {
-        //setWebinars([]);
         setFilteredWebinars(res);
       } else {
         setDateError({ text: 'Вебинары не найдены, измените запрос', isShow: true });
@@ -206,6 +204,7 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
     if (e.target.value.length > 0) {
       if (e.target.checkValidity()) {
         setDateError({ text: '', isShow: false });
+        localStorage.setItem('webinarSearchDate', e.target.value);
         handleSearchByDate(e.target.value);
         setSearchNameText('');
         localStorage.setItem('webinarSearchNameText', '');
@@ -215,7 +214,11 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
         setDateError({ text: 'Укажите корректную дату', isShow: true });
       }
     } else {
+      localStorage.removeItem('webinarSearchDate');
       setDateError({ text: '', isShow: false });
+      setSearchNameText(localStorage.getItem('webinarSearchNameText') || '');
+      setSearchTeacherText(localStorage.getItem('webinarSearchTeacherText') || '');
+      webinarRequest(localStorage.getItem('webinarSearchNameText') || '', localStorage.getItem('webinarSearchTeacherText') || '');
     }
   }
 
@@ -264,10 +267,19 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
   }, [searchTeacherText]);
 
   React.useEffect(() => {
-    setSearchNameText(localStorage.getItem('webinarSearchNameText') || '');
-    setSearchTeacherText(localStorage.getItem('webinarSearchTeacherText') || '');
-    setDate('');
-    webinarRequest(localStorage.getItem('webinarSearchNameText') || '', localStorage.getItem('webinarSearchTeacherText') || '');
+    const currentDate = localStorage.getItem('webinarSearchDate');
+    if (currentDate !== null) {
+      setSearchNameText('');
+      setSearchTeacherText('');
+      setDate(currentDate);
+      handleSearchByDate(currentDate);
+    } else {
+      setSearchNameText(localStorage.getItem('webinarSearchNameText') || '');
+      setSearchTeacherText(localStorage.getItem('webinarSearchTeacherText') || '');
+      setDate('');
+      webinarRequest(localStorage.getItem('webinarSearchNameText') || '', localStorage.getItem('webinarSearchTeacherText') || '');
+    }
+ 
 
     return(() => {
       setDate('');
