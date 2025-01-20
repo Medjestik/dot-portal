@@ -228,6 +228,9 @@
   text-decoration: none;
   transition: all .3s ease-in-out;
 }
+.table__text_align_center {
+  text-align: center;
+}
 .table__text_weight_bold {
   font-weight: bold;
 }

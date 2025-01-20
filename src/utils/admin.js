@@ -213,7 +213,6 @@ export const checkDiplomaReports = ({ token, workId, data }) => {
 
 
 export const setMark = ({ token, activity_id, student_id, type, mark_id, comment }) => {
-  console.log(student_id);
   return fetch(`${API_URL}/curators/action/expanded_report_update_mark/`, { 
     method: 'PATCH',
     headers: {
@@ -222,6 +221,116 @@ export const setMark = ({ token, activity_id, student_id, type, mark_id, comment
       'Authorization': `Basic ${token}`,
     },
     body: JSON.stringify({ activity_id, student_id, mark_id, type, comment })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getSemesters = ({ token }) => {
+  return fetch(`${API_URL}/admin_semesters/action/get_semesters`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getSemesterItems = ({ token, semester }) => {
+  return fetch(`${API_URL}/admin_semesters/action/get_semester_disciplines?semester_id=${semester}`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getSemesterData = ({ token, semester }) => {
+  return fetch(`${API_URL}/admin_semesters/action/get_ych_semester?ych_semester_id=${semester}`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getSemesterGroups = ({ token, semester }) => {
+  return fetch(`${API_URL}/admin_semesters/action/get_semester_groups?semester_id=${semester}`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const addSemesterItem = ({ token, data }) => {
+  return fetch(`${API_URL}/admin_semesters/action/add_discipline`, { 
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify(
+      { 
+        ych_sem: data.ych_sem,
+        name: data.name,
+        control: data.control,
+        course_id: data.course_id,
+        start_date: data.start_date,
+        end_date: data.end_date,
+        lector: data.lector,
+        vedomost_lector: data.vedomost_lector,
+      }
+    )
+  })
+  .then(res => handleResponse(res))
+};
+
+export const editSemesterItem = ({ token, data }) => {
+  return fetch(`${API_URL}/admin_semesters/action/update_discipline`, { 
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify(
+      { 
+        id: data.id,
+        name: data.name,
+        control: data.control,
+        course_id: data.course_id,
+        start_date: data.start_date,
+        end_date: data.end_date,
+        lector: data.lector,
+        vedomost_lector: data.vedomost_lector,
+      }
+    )
+  })
+  .then(res => handleResponse(res))
+};
+
+export const removeSemesterItem = ({ token, id }) => {
+  return fetch(`${API_URL}/admin_semesters/action/delete_discipline`, { 
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ id }
+    )
   })
   .then(res => handleResponse(res))
 };

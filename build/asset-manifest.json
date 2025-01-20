@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.90282ebe.css",
-    "main.js": "/static/js/main.a13a8ca2.js",
+    "main.css": "/static/css/main.924bd3b1.css",
+    "main.js": "/static/js/main.a3eac90e.js",
     "static/js/787.1955ab40.chunk.js": "/static/js/787.1955ab40.chunk.js",
     "static/media/homepage-background.jpg": "/static/media/homepage-background.6ebabe323b86ec3dbd90.jpg",
     "static/media/Robotomediumitalic.ttf": "/static/media/Robotomediumitalic.35abcf5eb54b0c398e52.ttf",
@@ -105,6 +105,7 @@
     "static/media/rating-white.svg": "/static/media/rating-white.1e4a7ec30eda44685b8b.svg",
     "static/media/accordion-notification.svg": "/static/media/accordion-notification.001f9dd0f87ecee971af87f358c786aa.svg",
     "static/media/accordion-education.svg": "/static/media/accordion-education.c259051843420342c76e1b7bdc057fd1.svg",
+    "static/media/accordion-semester.svg": "/static/media/accordion-semester.f496d7f857650787b65933270fa865cd.svg",
     "static/media/logout.svg": "/static/media/logout.5bb6d65e73cbf3239f1a.svg",
     "static/media/success.svg": "/static/media/success.be108611961f6781c80f.svg",
     "static/media/table.svg": "/static/media/table.6d9cc20faaa4b40b097b.svg",
@@ -132,12 +133,12 @@
     "static/media/arrow.svg": "/static/media/arrow.55a4ec4915bbcdabc744.svg",
     "static/media/arrow-white.svg": "/static/media/arrow-white.9817492cc56038ef8ec6.svg",
     "static/media/arrow-blue.svg": "/static/media/arrow-blue.d97550c6523356d4c133.svg",
-    "main.90282ebe.css.map": "/static/css/main.90282ebe.css.map",
-    "main.a13a8ca2.js.map": "/static/js/main.a13a8ca2.js.map",
+    "main.924bd3b1.css.map": "/static/css/main.924bd3b1.css.map",
+    "main.a3eac90e.js.map": "/static/js/main.a3eac90e.js.map",
     "787.1955ab40.chunk.js.map": "/static/js/787.1955ab40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.90282ebe.css",
-    "static/js/main.a13a8ca2.js"
+    "static/css/main.924bd3b1.css",
+    "static/js/main.a3eac90e.js"
   ]
 }

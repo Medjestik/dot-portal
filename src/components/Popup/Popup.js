@@ -2,7 +2,7 @@ import React from 'react';
 import './Popup.css';
 import useOnClickOutside from '../../hooks/useOnClickOutside.js';
 
-function Popup({ isOpen, onClose, onSubmit, formWidth, formName, children }) {
+function Popup({ isOpen, onClose, onSubmit, formWidth, formName, onClickOutside = true, children }) {
 
   const formRef = React.createRef();
   const [formHeight, setFormHeight] = React.useState(false);
@@ -13,7 +13,7 @@ function Popup({ isOpen, onClose, onSubmit, formWidth, formName, children }) {
     }
   }, [formRef]);
 
-  useOnClickOutside(formRef, onClose);
+  useOnClickOutside(formRef, onClickOutside ? onClose : undefined);
 
   return (
     <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>

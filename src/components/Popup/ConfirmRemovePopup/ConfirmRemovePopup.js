@@ -11,11 +11,11 @@ function ConfirmRemovePopup({ isOpen, onClose, popupName, onConfirm, data, isLoa
 
   return (
     <Popup
-    isOpen={isOpen}
-    onClose={onClose}
-    onSubmit={handleSubmit}
-    formWidth={'small'}
-    formName={popupName}
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      formWidth={'small'}
+      formName={popupName}
     >
       <h2 className='popup__title'>Подтверждение удаления</h2>
       <p className='popup__subtitle'>Вы действительно хотите отправить запрос на&nbsp;удаление?</p>
