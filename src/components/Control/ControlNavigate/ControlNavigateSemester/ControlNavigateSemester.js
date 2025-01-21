@@ -21,7 +21,7 @@ function ControlNavigateSemester({ windowWidth }) {
         <div className={`control-navigate__column ${windowWidth > 833 && 'control-navigate__column_margin_right'}`}>
           <h3 className='control-navigate__column-title'>Выберите раздел:</h3>
           <ul className='control-navigate__column-list'>
-            <li className='control-navigate__column-item' onClick={() => navigate('/control/sem/list')}>Создать новый</li>
+            <li className='control-navigate__column-item' onClick={() => navigate('/control/sem/groups/bak')}>Создать новый</li>
             <li className='control-navigate__column-item' onClick={() => navigate('/control/sem/list')}>Список семестров</li>
           </ul>
         </div>

@@ -280,7 +280,6 @@ function ControlWebinarList({ windowWidth, addWebinar }) {
       webinarRequest(localStorage.getItem('webinarSearchNameText') || '', localStorage.getItem('webinarSearchTeacherText') || '');
     }
  
-
     return(() => {
       setDate('');
       setDateError({ text: '', isShow: false });

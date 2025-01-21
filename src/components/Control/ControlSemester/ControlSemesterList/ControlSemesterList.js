@@ -41,7 +41,7 @@ function ControlSemesterList({ windowWidth }) {
   function handleSetSemester(option) {
     setCurrentSemesterOption(option);
     setSearchText('');
-    dataRequest(option.name);
+    dataRequest(option.id);
   }
 
   function initialRequest() {
@@ -108,14 +108,14 @@ function ControlSemesterList({ windowWidth }) {
     setIsOpenRemovePopup(false);
   }
 
-  function dataRequest() {
+  function dataRequest(id) {
     setIsLoadingData(true);
     const token = localStorage.getItem('token');
-    adminApi.getSemesterItems({ token: token, semester: currentSemesterOption.id })
+    adminApi.getSemesterItems({ token: token, semester: id })
     .then((res) => {
       console.log('SemesterItems', res);
-      setItems(items);
-      setFilteredItems(items);
+      setItems(res);
+      setFilteredItems(res);
     })
     .catch((err) => {
       console.error(err);
@@ -209,6 +209,7 @@ function ControlSemesterList({ windowWidth }) {
     setSemesters([]);
     setCurrentSemesterOption({});
     setCurrentItem({});
+    setGroups([]);
     setTutors([]);
     setCourses([]);
     setControlForms([]);
@@ -288,81 +289,81 @@ function ControlSemesterList({ windowWidth }) {
           <Preloader />
           :
           <Table>
-          <div ref={containerHeightRef} className='table__container'>
-            <div ref={tableHeaderHeightRef} className='table__header'>
-              <div className='table__main-column'>
-                <div className='table__column table__column_type_header table__column_type_count'>
-                  <p className='table__text table__text_type_header'>№</p>
+            <div ref={containerHeightRef} className='table__container'>
+              <div ref={tableHeaderHeightRef} className='table__header'>
+                <div className='table__main-column'>
+                  <div className='table__column table__column_type_header table__column_type_count'>
+                    <p className='table__text table__text_type_header'>№</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_name'>
+                    <p className='table__text table__text_type_header'>Дисциплина</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_teacher'>
+                    <p className='table__text table__text_type_header'>Преподаватель</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_large'>
+                    <p className='table__text table__text_type_header'>Группа</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_date'>
+                    <p className='table__text table__text_type_header'>Период</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_medium'>
+                    <p className='table__text table__text_type_header'>Контроль</p>
+                  </div>
                 </div>
-                <div className='table__column table__column_type_header table__column_type_name'>
-                  <p className='table__text table__text_type_header'>Дисциплина</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_teacher'>
-                  <p className='table__text table__text_type_header'>Преподаватель</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_large'>
-                  <p className='table__text table__text_type_header'>Группа</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_date'>
-                  <p className='table__text table__text_type_header'>Период</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_medium'>
-                  <p className='table__text table__text_type_header'>Контроль</p>
+                <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                  <div className='btn-icon'></div>
                 </div>
               </div>
-              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                <div className='btn-icon'></div>
-              </div>
-            </div>
-            {
-              filteredItems.length > 0 
-              ?
-              <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
               {
-                filteredItems.map((item, i) => (
-                  <li className='table__row' key={i}>
-                    <div className='table__main-column'>
-                      <div className='table__column table__column_type_count'>
-                        <p className='table__text'>{i + 1}</p>
+                filteredItems.length > 0 
+                ?
+                <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+                {
+                  filteredItems.map((item, i) => (
+                    <li className='table__row' key={i}>
+                      <div className='table__main-column'>
+                        <div className='table__column table__column_type_count'>
+                          <p className='table__text'>{i + 1}</p>
+                        </div>
+                        <div className='table__column table__column_type_name'>
+                          <p className='table__text table__text_type_header'>{item.name || ''}</p>
+                          <p className='table__text'>({item.course?.name || ''})</p>
+                        </div>
+                        <div className='table__column table__column_type_teacher'>
+                          {
+                            item.lector?.fullname === item.vedomost_lector?.fullname
+                            ?
+                            <p className='table__text'>{item.lector?.fullname || ''}</p>
+                            :
+                            <>
+                            <p className='table__text'>{item.lector?.fullname || ''} /</p>
+                            <p className='table__text'>{item.vedomost_lector?.fullname || ''}</p>
+                            </>
+                          }
+                        </div>
+                        <div className='table__column table__column_type_large'>
+                          <p className='table__text'>{item.group?.name || ''}</p>
+                        </div>
+                        <div className='table__column table__column_type_date'>
+                          <p className='table__text'>{item.start_date || 0} {item.end_date || 0}</p>
+                        </div>
+                        <div className='table__column table__column_type_medium'>
+                          <p className='table__text'>{item.control?.name || 0}</p>
+                        </div>
                       </div>
-                      <div className='table__column table__column_type_name'>
-                        <p className='table__text table__text_type_header'>{item.name || ''}</p>
-                        <p className='table__text'>({item.course?.name || ''})</p>
+                      <div className='table__column table__column_type_btn'>
+                        <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => openEditPopup(item)}></button>
                       </div>
-                      <div className='table__column table__column_type_teacher'>
-                        {
-                          item.lector?.fullname === item.vedomost_lector?.fullname
-                          ?
-                          <p className='table__text'>{item.lector?.fullname || ''}</p>
-                          :
-                          <>
-                          <p className='table__text'>{item.lector?.fullname || ''} /</p>
-                          <p className='table__text'>{item.vedomost_lector?.fullname || ''}</p>
-                          </>
-                        }
-                      </div>
-                      <div className='table__column table__column_type_large'>
-                        <p className='table__text'>{item.group?.name || ''}</p>
-                      </div>
-                      <div className='table__column table__column_type_date'>
-                        <p className='table__text'>{item.start_date || 0} {item.end_date || 0}</p>
-                      </div>
-                      <div className='table__column table__column_type_medium'>
-                        <p className='table__text'>{item.control?.name || 0}</p>
-                      </div>
-                    </div>
-                    <div className='table__column table__column_type_btn'>
-                      <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => openEditPopup(item)}></button>
-                    </div>
-                  </li>
-                ))
+                    </li>
+                  ))
+                }
+                </ul>
+                :
+                <div className='table__caption_type_empty'>По заданным параметрам ничего не найдено!</div>
               }
-              </ul>
-              :
-              <div className='table__caption_type_empty'>По заданным параметрам ничего не найдено!</div>
-            }
-          </div>
-        </Table>
+            </div>
+          </Table>
         }
         </>
       }

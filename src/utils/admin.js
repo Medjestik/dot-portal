@@ -334,3 +334,40 @@ export const removeSemesterItem = ({ token, id }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const getLearningGroups = ({ token }) => {
+  return fetch(`${API_URL}/admin_semesters/action/get_learning_groups?completed=false`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getLearningGroupSemesters = ({ token, id }) => {
+  return fetch(`${API_URL}/admin_semesters/action/get_ych_semesters?group_id=${id}`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const getSemesterPlanData = ({ token, groupId, semesterNumber, semesterId }) => {
+  return fetch(`${API_URL}/admin_semesters/action/get_plan_semester?group_id=${groupId}&number=${semesterNumber}&semester_id=${semesterId}`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
