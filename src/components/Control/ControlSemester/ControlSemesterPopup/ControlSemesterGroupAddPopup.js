@@ -4,6 +4,7 @@ import Preloader from '../../../Preloader/Preloader.js';
 import Popup from '../../../Popup/Popup.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
 import Table from '../../../Table/Table.js';
+import TableSelect from '../../../Table/TableSelect/TableSelect.js';
 
 const emptySemester = { name: 'Выберите календарный семестр..', id: 'placeholder' };
 const emptyCount = { name: 'Выберите номер семестра..', id: 'placeholder' };
@@ -21,13 +22,16 @@ const countOptions = [
   { name: '10 семестр', id: 10 },
 ]
 
-function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onSubmit, isLoadingRequest, isShowRequestError }) {
+function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, courses, tutors, groupId, onSubmit, isLoadingRequest, isShowRequestError }) {
   
   const [data, setData] = React.useState({});
+  const [currentItem, setCurrentItem] = React.useState({});
 
   const [currentSemester, setCurrentSemester] = React.useState(emptySemester);
   const [currentCount, setCurrentCount] = React.useState(emptyCount);
 
+  const [isOpenChangeCourse, setIsOpenChangeCourse] = React.useState(false);
+  const [isOpenChangeTutor, setIsOpenChangeTutor] = React.useState(false);
   const [isShowSemesterData, setIsShowSemesterData] = React.useState(false);
   const [isLoadingData, setIsLoadingData] = React.useState(false);
 
@@ -35,18 +39,25 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onS
 
   function handleSubmit(e) {
     e.preventDefault();
-    /* const data = {
-      name: name,
-      ych_sem: currentGroup.ych_sem,
-      control: currentControlForm.id,
-      course_id: currentCourse.id,
-      start_date: formatDateFromInput(startDate),
-      end_date: formatDateFromInput(endDate),
-      lector: currentTutor.id,
-      vedomost_lector: currentTutorVed.id,
-    }
-    onSubmit(data);
-    */
+    const requestData = {
+      group_id: groupId,
+      semester_id: currentSemester.id,
+      semester_number: currentCount.id,
+      disciplines: data
+        .filter((item) => item.type === 'discipline' && item.active)
+        .map((item) => ({
+          name: item.name,
+          course: item.course ? item.course.id : null,
+          control: item.control,
+          lector: item.lector ? item.lector.id: null,
+          start_date: item.startDate,
+          end_date: item.endDate,
+        })),
+      practics: data
+        .filter((item) => item.type === 'practics' && item.active)
+        .map((item) => ({ name: item.name })),
+    };
+    onSubmit(requestData);
   }
 
   function dataRequest() {
@@ -60,10 +71,45 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onS
     })
     .then((res) => {
       console.log('SemesterData', res);
-      setData(res);
+      let arr = [];
+      if (res) {
+        const disciplines = res.discs.map((elem) => {
+          return { 
+            name: elem.name, 
+            startDate: res.dates.start_date,
+            endDate: res.dates.end_date,
+            course: elem.course,
+            lector: null,
+            control: elem.control,
+            choose: elem.choose,
+            active: elem.choose ? (elem.chosen ? true : false) : true,
+            type: 'discipline'
+          };
+        });
+    
+        const practics = res.practics.map((elem) => {
+          return { 
+            name: elem.name, 
+            startDate: res.dates.start_date,
+            endDate: res.dates.end_date,
+            course: null,
+            lector: null,
+            choose: false,
+            active: true,
+            type: 'practics'
+          };
+        });
+    
+        arr = [...disciplines, ...practics];
+      }
+      setData(arr);
       setIsShowSemesterData(true);
+      setIsBlockSubmitButton(false);
     })
     .catch((err) => {
+      setData([]);
+      setIsShowSemesterData(true);
+      setIsBlockSubmitButton(true);
       console.error(err);
     })
     .finally(() => {  
@@ -80,7 +126,50 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onS
   }
 
   function handleChangeActive(item) {
-    console.log(item);
+    setData((prevData) =>
+      prevData.map((elem) =>
+        elem.name === item.name
+          ? { ...elem, active: !elem.active }
+          : elem
+      )
+    );
+  }
+
+  function openChangeCourseSelect(item) {
+    setCurrentItem(item);
+    setIsOpenChangeCourse(true);
+  }
+
+  function openChangeTutorSelect(item) {
+    setCurrentItem(item);
+    setIsOpenChangeTutor(true);
+  }
+
+  function handleSaveCourse(course) {
+    setData((prevData) =>
+      prevData.map((elem) =>
+        elem.name === currentItem.name
+          ? { ...elem, course: course }
+          : elem
+      )
+    );
+    closeSelect();
+  }
+
+  function handleSaveTutor(tutor) {
+    setData((prevData) =>
+      prevData.map((elem) =>
+        elem.name === currentItem.name
+          ? { ...elem, lector: tutor }
+          : elem
+      )
+    );
+    closeSelect();
+  }
+
+  function closeSelect() {
+    setIsOpenChangeCourse(false);
+    setIsOpenChangeTutor(false);
   }
 
   React.useEffect(() => {
@@ -93,6 +182,7 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onS
   React.useEffect(() => {
     return(() => {
       setData({});
+      setCurrentItem({});
       setCurrentSemester({});
       setCurrentCount({});
     })
@@ -132,8 +222,8 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onS
           <Table>
           <div className='table__container'>
             <div className='table__header'>
-              <div className='table__main-column table__main-column_type_empty'>
-                <div className='table__column table__column_type_header table__column_type_count'>
+              <div className='table__main-column'>
+                <div className='table__column table__column_type_header table__column_type_checkbox'>
                   <p className='table__text table__text_type_header'></p>
                 </div>
                 <div className='table__column table__column_type_header table__column_type_date'>
@@ -151,23 +241,23 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onS
               </div>
             </div>
             {
-              data.discs?.length < 1 
+              data.length < 1 
               ?
               <p className='table__caption_type_empty'>По заданным параметрам ничего не найдено.</p>
               :
-              <ul className='table__main scroll'>
+              <ul className='table__main table__main_scroll_auto'>
                 {
-                  data.discs?.map((item, i) => (
-                    <li className={`table__row ${item.webinar_ready && 'table__row_type_complete'}`} key={i}>
+                  data.map((item, i) => (
+                    <li className={`table__row ${item.active && 'table__row_type_complete'}`} key={i}>
                       <div className='table__main-column'>
-                        <div className='table__column table__column_type_count'>
+                        <div className='table__column table__column_type_checkbox'>
                           <label className='checkbox checkbox_width_small'>
                             <input 
                               name={`webinar-discipline-complete-${item.id}`}
                               type='checkbox'
                               id={`webinar-discipline-complete-${item.id}`}
-                              value={item.webinar_ready}
-                              defaultChecked={item.webinar_ready}
+                              value={item.active}
+                              defaultChecked={item.active}
                               onChange={() => handleChangeActive(item)}
                               >
                             </input>
@@ -175,17 +265,33 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onS
                           </label>
                         </div>
                         <div className='table__column table__column_type_date'>
-                          <p className='table__text'>{data.dates.start_date} - {data.dates.end_date}</p>
+                          <p className='table__text'>{item.startDate} - {item.endDate}</p>
                         </div>
                         <div className='table__column table__column_type_full'>
-                          <p className='table__text table__text_type_header'>{item.name}</p>
+                          <p className={`table__text ${item.choose ? '' : 'table__text_type_header'}`}>{item.name}</p>
                         </div>
-                        <div className='table__column table__column_type_teacher'>
-                          <p className='table__text'>Не определен</p>
-                        </div>
-                        <div className='table__column table__column_type_full'>
-                          <p className='table__text'>{item.course || 'Не определен'}</p>
-                        </div>
+                        {
+                          item.type === 'discipline'
+                          ?
+                          <>
+                          <div className='table__column table__column_type_teacher'>
+                            <p className={`table__text ${item.lector ? '' : 'table__text_type_empty'} table__text_type_active`} onClick={() => openChangeTutorSelect(item)}>{item.lector ? item.lector.name : 'Не определен'}</p>
+                          </div>
+                          <div className='table__column table__column_type_full'>
+                            <p className={`table__text ${item.course ? '' : 'table__text_type_empty'} table__text_type_active`} onClick={() => openChangeCourseSelect(item)}>{item.course ? item.course.name : 'Не определен'}</p>
+                          </div>
+                          </>
+                          :
+                          <>
+                          <div className='table__column table__column_type_teacher'>
+                              <p className={`table__text`}></p>
+                            </div>
+                            <div className='table__column table__column_type_full'>
+                              <p className={`table__text`}></p>
+                            </div>
+                          </>
+                        }
+
                       </div>
                     </li>
                   ))
@@ -208,6 +314,29 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, groupId, onS
         }
       </div>
       <span className={`popup__input-error ${isShowRequestError.isShow && 'popup__input-error_status_show'}`}>{isShowRequestError.text}</span>
+
+      {
+        isOpenChangeCourse &&
+        <TableSelect 
+          isOpen={isOpenChangeCourse}
+          onClose={closeSelect}
+          title={'Выбрать электронный курс'}
+          onSave={handleSaveCourse}
+          options={courses}
+          currentOption={currentItem.course ? currentItem.course : { id: 'placeholder', name: 'Выберите курс..' }}
+        />
+      }
+      {
+        isOpenChangeTutor &&
+        <TableSelect 
+          isOpen={isOpenChangeTutor}
+          onClose={closeSelect}
+          title={'Выбрать преподавателя'}
+          onSave={handleSaveTutor}
+          options={tutors}
+          currentOption={currentItem.lector ? currentItem.lector : { id: 'placeholder', name: 'Выберите преподавателя..' }}
+        />
+      }
     </Popup>
   )
 }

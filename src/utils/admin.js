@@ -371,3 +371,16 @@ export const getSemesterPlanData = ({ token, groupId, semesterNumber, semesterId
   .then(res => handleResponse(res))
 };
 
+export const createGroupSemester = ({ token, data }) => {
+  return fetch(`${API_URL}/admin_semesters/action/create_ych_sem/`, {  
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      },
+      body: JSON.stringify({ group_id: data.group_id, semester_id: data.semester_id, semester_number: data.semester_number, disciplines: data.disciplines, practics: data.practics })
+  })
+  .then(res => handleResponse(res))
+};
+

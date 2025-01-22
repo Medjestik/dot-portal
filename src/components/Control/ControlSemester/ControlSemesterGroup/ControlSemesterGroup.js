@@ -18,8 +18,8 @@ function ControlSemesterGroup({ windowWidth }) {
   const [items, setItems] = React.useState([]);
   const [currentItem, setCurrentItem] = React.useState({});
   const [semesters, setSemesters] = React.useState([]);
-    const [tutors, setTutors] = React.useState([]);
-    const [courses, setCourses] = React.useState([]);
+  const [tutors, setTutors] = React.useState([]);
+  const [courses, setCourses] = React.useState([]);
 
   const [isOpenAddPopup, setIsOpenAddPopup] = React.useState(false);
   const [isOpenEditPopup, setIsOpenEditPopup] = React.useState(false);
@@ -52,17 +52,16 @@ function ControlSemesterGroup({ windowWidth }) {
     })
   }
 
-  function handleAddSemesterGroup(data) {
+  function handleCreateSemesterGroup(data) {
     setIsLoadingRequest(true);
     const token = localStorage.getItem('token');
     console.log(data);
-    /* adminApi.addSemesterItem({
+    adminApi.createGroupSemester({
       token: token,
       data: data,
     })
     .then((res) => {
-      setItems((prevItems) => [res, ...prevItems]);
-      setFilteredItems((prevFilteredItems) => [res, ...prevFilteredItems]);
+      setItems([...items, res]);
       closePopup();
     })
     .catch((err) => {
@@ -72,7 +71,6 @@ function ControlSemesterGroup({ windowWidth }) {
     .finally(() => {  
       setIsLoadingRequest(false);
     });
-    */
   }
 
   function openAddPopup() {
@@ -184,8 +182,10 @@ function ControlSemesterGroup({ windowWidth }) {
           isOpen={isOpenAddPopup}
           onClose={closePopup}
           semesters={semesters}
+          courses={courses}
+          tutors={tutors}
           groupId={groupId}
-          onSubmit={handleAddSemesterGroup}
+          onSubmit={handleCreateSemesterGroup}
           isLoadingRequest={isLoadingRequest}
           isShowRequestError={isShowRequestError}
         />

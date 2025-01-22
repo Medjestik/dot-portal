@@ -154,6 +154,12 @@
   width: 40px;
   flex-shrink: 0;
 }
+.table__column_type_checkbox {
+  width: 40px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
 .table__column_type_date {
   width: 88px;
   flex-shrink: 0;
