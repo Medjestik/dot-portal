@@ -49,14 +49,14 @@ function ControlSemesterGroups({ windowWidth }) {
   }, []);
 
   // Фильтруем группы по вкладкам
-  const bakGroups = groups.filter((group) => group.level === 'бакалавриат');
-  const magGroups = groups.filter((group) => group.level === 'магистратура');
+  const bakGroups = groups.filter((group) => group.level === 'бакалавриат' && group.och === 'false');
+  const magGroups = groups.filter((group) => group.level === 'магистратура' && group.och === 'false');
   const pcGroups = groups.filter((group) => group.level === 'переподготовка');
   const otherGroups = groups.filter(
     (group) =>
-      group.level !== 'бакалавриат' &&
-      group.level !== 'магистратура' &&
-      group.level !== 'переподготовка'
+      !bakGroups.includes(group) &&
+      !magGroups.includes(group) &&
+      !pcGroups.includes(group)
   );
 
   return (
