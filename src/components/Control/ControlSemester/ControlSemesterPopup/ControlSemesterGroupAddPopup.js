@@ -78,7 +78,7 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, courses, tut
             name: elem.name, 
             startDate: res.dates.start_date,
             endDate: res.dates.end_date,
-            course: elem.course,
+            course: elem.course ? courses.find((course) => course.id === elem.course) : null,
             lector: null,
             control: elem.control,
             choose: elem.choose,
