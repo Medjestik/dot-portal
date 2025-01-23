@@ -66,7 +66,6 @@ function ControlWebinarDiscipline({ windowWidth, semesterInfo, addWebinar }) {
       data: itemData,
     })
     .then((res) => {
-      console.log(res);
       const newStatus = { ...item, webinar_ready: !item.webinar_ready };
       const indexWebinars = webinars.indexOf(webinars.find((elem) => (elem.id === item.id)));
       const indexFilteredWebinars = filteredWebinars.indexOf(filteredWebinars.find((elem) => (elem.id === item.id)));

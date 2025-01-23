@@ -4,6 +4,7 @@ import ControlNavigateWebinar from './ControlNavigateWebinar/ControlNavigateWebi
 import ControlNavigateGroup from './ControlNavigateGroup/ControlNavigateGroup.js';
 import ControlNavigateDiploma from './ControlNavigateDiploma/ControlNavigateDiploma.js';
 import ControlNavigateSemester from './ControlNavigateSemester/ControlNavigateSemester.js';
+import ControlNavigateReport from './ControlNavigateReport/ControlNavigateReport.js';
 
 function ControlNavigate({ windowWidth }) {
 
@@ -17,6 +18,8 @@ function ControlNavigate({ windowWidth }) {
       <ControlNavigateDiploma windowWidth={windowWidth} />
 
       <ControlNavigateSemester windowWidth={windowWidth} />
+
+      <ControlNavigateReport windowWidth={windowWidth} />
 
     </div>
   );

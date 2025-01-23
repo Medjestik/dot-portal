@@ -118,6 +118,7 @@
   font-size: 14px;
   line-height: 18px;
   text-decoration: none;
+  text-align: center;
   flex-shrink: 0;
   transition: all .3s ease-in-out;
 }
@@ -139,6 +140,12 @@
   box-shadow: none;
   user-select: none;
   pointer-events: none;
+}
+.section__header-btn_margin_top-4 {
+  margin: 4px 0px 0px 0px;
+}
+.section__header-btn_margin_top-8 {
+  margin: 8px 0px 0px 0px;
 }
 .section__header-title-container {
   width: 100%;

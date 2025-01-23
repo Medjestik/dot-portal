@@ -10,6 +10,7 @@ import ControlGroup from './ControlGroup/ControlGroup.js';
 import CuratorDiscipline from '../Curator/CuratorDiscipline/CuratorDiscipline.js';
 import ControlDiploma from './ControlDiploma/ControlDiploma.js';
 import ControlSemester from './ControlSemester/ControlSemester.js';
+import ControlReport from './ControlReport/ControlReport.js';
 
 function Control({ windowWidth, onLogout, semesterInfo }) {
 
@@ -29,32 +30,32 @@ function Control({ windowWidth, onLogout, semesterInfo }) {
           <ControlNavigate windowWidth={windowWidth} />
           </>
           }
-        >
-        </Route>
+        />
 
         <Route exact path='/webinar/*' element={
             <ControlWebinar windowWidth={windowWidth} onLogout={onLogout} semesterInfo={semesterInfo} />
           }
-        >
-        </Route>
+        />
 
         <Route exact path='/group/*' element={
             <ControlGroup windowWidth={windowWidth} onLogout={onLogout} />
           }
-        >
-        </Route>
+        />
 
         <Route exact path='/diploma/*' element={
             <ControlDiploma windowWidth={windowWidth} onLogout={onLogout} />
           }
-        >
-        </Route>
+        />
 
         <Route exact path='/sem/*' element={
             <ControlSemester windowWidth={windowWidth} onLogout={onLogout} />
           }
-        >
-        </Route>
+        />
+
+        <Route exact path='/report/*' element={
+            <ControlReport windowWidth={windowWidth} onLogout={onLogout} />
+          }
+        />
 
         <Route path='/discipline/:disciplineId/*' element={
             <>

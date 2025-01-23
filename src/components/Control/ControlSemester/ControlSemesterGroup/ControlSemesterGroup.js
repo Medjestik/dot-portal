@@ -121,59 +121,59 @@ function ControlSemesterGroup({ windowWidth }) {
           </div>
         </div>
         <Table>
-            <div ref={containerHeightRef} className='table__container'>
-              <div ref={tableHeaderHeightRef} className='table__header'>
-                <div className='table__main-column'>
-                  <div className='table__column table__column_type_header table__column_type_count'>
-                    <p className='table__text table__text_type_header'>№</p>
-                  </div>
-                  <div className='table__column table__column_type_header table__column_type_name'>
-                    <p className='table__text table__text_type_header'>Наименование</p>
-                  </div>
-                  <div className='table__column table__column_type_header table__column_type_medium'>
-                    <p className='table__text table__text_type_header table__text_align_center'>Дисциплины</p>
-                  </div>
-                  <div className='table__column table__column_type_header table__column_type_medium'>
-                    <p className='table__text table__text_type_header table__text_align_center'>Практики</p>
-                  </div>
+          <div ref={containerHeightRef} className='table__container'>
+            <div ref={tableHeaderHeightRef} className='table__header'>
+              <div className='table__main-column'>
+                <div className='table__column table__column_type_header table__column_type_count'>
+                  <p className='table__text table__text_type_header'>№</p>
                 </div>
-                <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-                  <div className='btn-icon'></div>
+                <div className='table__column table__column_type_header table__column_type_name'>
+                  <p className='table__text table__text_type_header'>Наименование</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_medium'>
+                  <p className='table__text table__text_type_header table__text_align_center'>Дисциплины</p>
+                </div>
+                <div className='table__column table__column_type_header table__column_type_medium'>
+                  <p className='table__text table__text_type_header table__text_align_center'>Практики</p>
                 </div>
               </div>
-              {
-                items.length > 0 
-                ?
-                <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
-                {
-                  items.map((item, i) => (
-                    <li className='table__row' key={i}>
-                      <div className='table__main-column'>
-                        <div className='table__column table__column_type_count'>
-                          <p className='table__text'>{item.sem_num || ''}</p>
-                        </div>
-                        <div className='table__column table__column_type_name'>
-                          <p className='table__text table__text_type_header'>{item.ych_sem_name || ''}</p>
-                        </div>
-                        <div className='table__column table__column_type_medium'>
-                          <p className='table__text table__text_align_center'>{item.disciplines_count || 0}</p>
-                        </div>
-                        <div className='table__column table__column_type_medium'>
-                          <p className='table__text table__text_align_center'>{item.practics_count || 0}</p>
-                        </div>
-                      </div>
-                      <div className='table__column table__column_type_btn'>
-                        <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => {}}></button>
-                      </div>
-                    </li>
-                  ))
-                }
-                </ul>
-                :
-                <div className='table__caption_type_empty'>По заданным параметрам ничего не найдено!</div>
-              }
+              <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
+                <div className='btn-icon'></div>
+              </div>
             </div>
-          </Table>
+            {
+              items.length > 0 
+              ?
+              <ul style={Object.assign({}, tableStyle)} className='table__main scroll'>
+              {
+                items.map((item, i) => (
+                  <li className='table__row' key={i}>
+                    <div className='table__main-column'>
+                      <div className='table__column table__column_type_count'>
+                        <p className='table__text'>{item.sem_num || ''}</p>
+                      </div>
+                      <div className='table__column table__column_type_name'>
+                        <p className='table__text table__text_type_header'>{item.ych_sem_name || ''}</p>
+                      </div>
+                      <div className='table__column table__column_type_medium'>
+                        <p className='table__text table__text_align_center'>{item.disciplines_count || 0}</p>
+                      </div>
+                      <div className='table__column table__column_type_medium'>
+                        <p className='table__text table__text_align_center'>{item.practics_count || 0}</p>
+                      </div>
+                    </div>
+                    <div className='table__column table__column_type_btn'>
+                      <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => {}}></button>
+                    </div>
+                  </li>
+                ))
+              }
+              </ul>
+              :
+              <div className='table__caption_type_empty'>По заданным параметрам ничего не найдено!</div>
+            }
+          </div>
+        </Table>
         </>
       }
       {
