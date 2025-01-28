@@ -67,3 +67,15 @@ export const getCatalogControlForms = ({ token }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const getLastCreatedUsers = ({ token }) => {
+  return fetch(`${API_URL}/catalogs/action/get_last_dot_users?count=7`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};

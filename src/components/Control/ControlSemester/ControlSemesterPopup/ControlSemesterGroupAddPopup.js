@@ -24,7 +24,7 @@ const countOptions = [
 
 function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, courses, tutors, groupId, onSubmit, isLoadingRequest, isShowRequestError }) {
   
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState([]);
   const [currentItem, setCurrentItem] = React.useState({});
 
   const [currentSemester, setCurrentSemester] = React.useState(emptySemester);
@@ -220,86 +220,86 @@ function ControlSemesterGroupAddPopup({ isOpen, onClose, semesters, courses, tut
           <Preloader />
           :
           <Table>
-          <div className='table__container'>
-            <div className='table__header'>
-              <div className='table__main-column'>
-                <div className='table__column table__column_type_header table__column_type_checkbox'>
-                  <p className='table__text table__text_type_header'></p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_date'>
-                  <p className='table__text table__text_type_header'>Период</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_full'>
-                  <p className='table__text table__text_type_header'>Дисциплина</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_teacher'>
-                  <p className='table__text table__text_type_header'>Преподаватель</p>
-                </div>
-                <div className='table__column table__column_type_header table__column_type_full'>
-                  <p className='table__text table__text_type_header'>Электронный контент</p>
+            <div className='table__container'>
+              <div className='table__header'>
+                <div className='table__main-column'>
+                  <div className='table__column table__column_type_header table__column_type_checkbox'>
+                    <p className='table__text table__text_type_header'></p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_date'>
+                    <p className='table__text table__text_type_header'>Период</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_full'>
+                    <p className='table__text table__text_type_header'>Дисциплина</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_teacher'>
+                    <p className='table__text table__text_type_header'>Преподаватель</p>
+                  </div>
+                  <div className='table__column table__column_type_header table__column_type_full'>
+                    <p className='table__text table__text_type_header'>Электронный контент</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            {
-              data.length < 1 
-              ?
-              <p className='table__caption_type_empty'>По заданным параметрам ничего не найдено.</p>
-              :
-              <ul className='table__main table__main_scroll_auto'>
-                {
-                  data.map((item, i) => (
-                    <li className={`table__row ${item.active && 'table__row_type_complete'}`} key={i}>
-                      <div className='table__main-column'>
-                        <div className='table__column table__column_type_checkbox'>
-                          <label className='checkbox checkbox_width_small'>
-                            <input 
-                              name={`webinar-discipline-complete-${item.id}`}
-                              type='checkbox'
-                              id={`webinar-discipline-complete-${item.id}`}
-                              value={item.active}
-                              defaultChecked={item.active}
-                              onChange={() => handleChangeActive(item)}
-                              >
-                            </input>
-                            <span></span>
-                          </label>
-                        </div>
-                        <div className='table__column table__column_type_date'>
-                          <p className='table__text'>{item.startDate} - {item.endDate}</p>
-                        </div>
-                        <div className='table__column table__column_type_full'>
-                          <p className={`table__text ${item.choose ? '' : 'table__text_type_header'}`}>{item.name}</p>
-                        </div>
-                        {
-                          item.type === 'discipline'
-                          ?
-                          <>
-                          <div className='table__column table__column_type_teacher'>
-                            <p className={`table__text ${item.lector ? '' : 'table__text_type_empty'} table__text_type_active`} onClick={() => openChangeTutorSelect(item)}>{item.lector ? item.lector.name : 'Не определен'}</p>
+              {
+                data.length < 1 
+                ?
+                <p className='table__caption_type_empty'>По заданным параметрам ничего не найдено.</p>
+                :
+                <ul className='table__main table__main_scroll_auto'>
+                  {
+                    data.map((item, i) => (
+                      <li className={`table__row ${item.active && 'table__row_type_complete'}`} key={i}>
+                        <div className='table__main-column'>
+                          <div className='table__column table__column_type_checkbox'>
+                            <label className='checkbox checkbox_width_small'>
+                              <input 
+                                name={`webinar-discipline-complete-${item.id}`}
+                                type='checkbox'
+                                id={`webinar-discipline-complete-${item.id}`}
+                                value={item.active}
+                                defaultChecked={item.active}
+                                onChange={() => handleChangeActive(item)}
+                                >
+                              </input>
+                              <span></span>
+                            </label>
+                          </div>
+                          <div className='table__column table__column_type_date'>
+                            <p className='table__text'>{item.startDate} - {item.endDate}</p>
                           </div>
                           <div className='table__column table__column_type_full'>
-                            <p className={`table__text ${item.course ? '' : 'table__text_type_empty'} table__text_type_active`} onClick={() => openChangeCourseSelect(item)}>{item.course ? item.course.name : 'Не определен'}</p>
+                            <p className={`table__text ${item.choose ? '' : 'table__text_type_header'}`}>{item.name}</p>
                           </div>
-                          </>
-                          :
-                          <>
-                          <div className='table__column table__column_type_teacher'>
-                              <p className={`table__text`}></p>
+                          {
+                            item.type === 'discipline'
+                            ?
+                            <>
+                            <div className='table__column table__column_type_teacher'>
+                              <p className={`table__text ${item.lector ? '' : 'table__text_type_empty'} table__text_type_active`} onClick={() => openChangeTutorSelect(item)}>{item.lector ? item.lector.name : 'Не определен'}</p>
                             </div>
                             <div className='table__column table__column_type_full'>
-                              <p className={`table__text`}></p>
+                              <p className={`table__text ${item.course ? '' : 'table__text_type_empty'} table__text_type_active`} onClick={() => openChangeCourseSelect(item)}>{item.course ? item.course.name : 'Не определен'}</p>
                             </div>
-                          </>
-                        }
+                            </>
+                            :
+                            <>
+                            <div className='table__column table__column_type_teacher'>
+                                <p className={`table__text`}></p>
+                              </div>
+                              <div className='table__column table__column_type_full'>
+                                <p className={`table__text`}></p>
+                              </div>
+                            </>
+                          }
 
-                      </div>
-                    </li>
-                  ))
-                }
-              </ul>
-            }
-          </div>
-        </Table>
+                        </div>
+                      </li>
+                    ))
+                  }
+                </ul>
+              }
+            </div>
+          </Table>
         }
         </>
       }

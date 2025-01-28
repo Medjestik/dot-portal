@@ -194,7 +194,7 @@
 .popup__btn-save {
   margin: 0px;
   width: 100%;
-  padding: 11px;
+  padding: 11px 22px;
   background: var(--gradient-blue-color);
   border: none;
   border-radius: var(--border-radius);
@@ -203,6 +203,8 @@
   font-weight: bold;
   font-size: 14px;
   line-height: 18px;
+  text-decoration: none;
+  text-align: center;
   transition: all .3s ease-in-out;
 }
 .popup__btn-save:hover  {
@@ -224,6 +226,9 @@
 }
 .popup__btn-save_margin_auto {
   margin: auto 0px 0px 0px;
+}
+.popup__btn-save_width_fix {
+  width: fit-content;
 }
 .popup__upload-section {
   display: flex;
@@ -653,6 +658,12 @@
   width: 100%;
   display: flex;
   align-items: center;
+}
+.popup__row_gap {
+  gap: 16px;
+}
+.popup__row_margin_top {
+  margin: 0;
 }
 .popup__row-item {
   margin: 0px 12px 0px 0px;

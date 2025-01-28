@@ -384,3 +384,39 @@ export const createGroupSemester = ({ token, data }) => {
   .then(res => handleResponse(res))
 };
 
+export const createDotStudent = ({ token, data }) => {
+  return fetch(`${API_URL}/admin/action/create_dot_student/`, {  
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      },
+      body: JSON.stringify({ 
+        group_id: data.group_id, 
+        firstname: data.firstname, 
+        lastname: data.lastname, 
+        middlename: data.middlename, 
+        email: data.email,
+        phone: data.phone,
+        login: data.login,
+        transfer: data.transfer,
+        transfer_doc: data.transfer_doc,
+        sem_num: data.sem_num,
+      })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const fixStatistic = ({ token, user_id, disciplines }) => {
+  return fetch(`${API_URL}/admin/action/fix_student_disciplines`, {  
+      method: 'PATCH',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      },
+      body: JSON.stringify({ user_id, disciplines })
+  })
+  .then(res => handleResponse(res))
+};

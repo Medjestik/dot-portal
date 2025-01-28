@@ -6,12 +6,14 @@ import TableHorizontal from '../../../Table/TableHorizontal/TableHorizontal.js';
 import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
 import AdminSetMarkPopup from '../AdminSetMarkPopup/AdminSetMarkPopup.js';
+import AdminFixStatisticPopup from '../AdminFixStatisticPopup/AdminFixStatisticPopup.js';
 
 function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId, role }) {
 
   const navigate = useNavigate();
 
   const [isOpenSetMarkPopup, setIsOpenSetMarkPopup] = React.useState(false);
+  const [isOpenFixStatisticPopup, setIsOpenFixStatisticPopup] = React.useState(false);
 
   const [isLoadingInfo, setIsLoadingInfo] = React.useState(true);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
@@ -42,7 +44,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
 
     return (
       <a 
-      className='icon icon_size_14 icon_type_search' 
+      className='icon icon_size_18 icon_type_search' 
       target='_blank' 
       rel='noreferrer' 
       href={link}>
@@ -154,8 +156,15 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
     setIsOpenSetMarkPopup(true);
   }
 
-  function closeMarkPopup() {
+  function openFixStatisticPopup(student) {
+    // setCurrentDiscipline({ ...discipline });
+    setCurrentStudent(student);
+    setIsOpenFixStatisticPopup(true);
+  }
+
+  function closePopup() {
     setIsOpenSetMarkPopup(false);
+    setIsOpenFixStatisticPopup(false);
   }
 
   function handleSetMark(mark) {
@@ -178,7 +187,27 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
         return result;
       })
       setCurrentData({ ...currentData, results: newResults });
-      closeMarkPopup();
+      closePopup();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      setIsLoadingRequest(false);
+    });
+  }
+
+  function handleFixStatistic(student, disciplines) {
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+    adminApi.fixStatistic({ 
+      token, 
+      user_id: student.id,
+      disciplines: disciplines
+    })
+    .then((res) => {
+      console.log(res);
+      closePopup();
     })
     .catch((err) => {
       console.log(err);
@@ -204,6 +233,8 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
 
     return(() => {
       setCurrentData({});
+      setCurrentStudent({});
+      setCurrentDiscipline({});
     })
 
   // eslint-disable-next-line
@@ -300,6 +331,12 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
                             </div>
                           }
                         </div>
+                        <div className='table-horizontal__cell-menu'>
+                          <div className='table-horizontal__cell-menu-item'>
+                            <button className='icon icon_size_18 icon_type_settings' type='button' onClick={() => openFixStatisticPopup(student)} />
+                          </div>
+                        </div>
+
                       </div>
                       {
                         currentData.activities.map((activities, i) => (
@@ -329,10 +366,23 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
       isOpenSetMarkPopup &&
       <AdminSetMarkPopup 
         isOpen={isOpenSetMarkPopup}
-        onClose={closeMarkPopup}
+        onClose={closePopup}
         currentStudent={currentStudent}
         disciplineInfo={currentDiscipline}
         setMark={handleSetMark}
+        isLoadingRequest={isLoadingRequest}
+        isShowRequestError={isShowRequestError}
+      />
+    }
+
+    {
+      isOpenFixStatisticPopup &&
+      <AdminFixStatisticPopup 
+        isOpen={isOpenFixStatisticPopup}
+        onClose={closePopup}
+        currentStudent={currentStudent}
+        disciplines={currentData.activities.filter((elem) => elem.type === 'discipline')}
+        onFix={handleFixStatistic}
         isLoadingRequest={isLoadingRequest}
         isShowRequestError={isShowRequestError}
       />

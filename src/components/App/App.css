@@ -129,6 +129,18 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+.icon_type_gear {
+  background-image: url('../../images/icons/accent-blue/gear.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.icon_type_settings {
+  background-image: url('../../images/icons/accent-blue/settings.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 .scroll::-webkit-scrollbar {
   width: 12px;
   height: 12px;

@@ -11,6 +11,7 @@ import CuratorDiscipline from '../Curator/CuratorDiscipline/CuratorDiscipline.js
 import ControlDiploma from './ControlDiploma/ControlDiploma.js';
 import ControlSemester from './ControlSemester/ControlSemester.js';
 import ControlReport from './ControlReport/ControlReport.js';
+import ControlUser from './ControlUser/ControlUser.js';
 
 function Control({ windowWidth, onLogout, semesterInfo }) {
 
@@ -32,13 +33,18 @@ function Control({ windowWidth, onLogout, semesterInfo }) {
           }
         />
 
-        <Route exact path='/webinar/*' element={
-            <ControlWebinar windowWidth={windowWidth} onLogout={onLogout} semesterInfo={semesterInfo} />
+        <Route exact path='/user/*' element={
+            <ControlUser windowWidth={windowWidth} onLogout={onLogout} />
           }
         />
 
         <Route exact path='/group/*' element={
             <ControlGroup windowWidth={windowWidth} onLogout={onLogout} />
+          }
+        />
+
+        <Route exact path='/webinar/*' element={
+            <ControlWebinar windowWidth={windowWidth} onLogout={onLogout} semesterInfo={semesterInfo} />
           }
         />
 

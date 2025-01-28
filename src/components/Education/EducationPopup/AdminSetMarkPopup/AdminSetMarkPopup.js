@@ -43,7 +43,7 @@ function AdminSetMarkPopup({ isOpen, onClose, currentStudent, disciplineInfo, se
       onClose={onClose}
       onSubmit={handleSubmit}
       formWidth={'medium'}
-      formName={'education-teacher-choose-mark-popup'}
+      formName={'admin-set-mark-popup'}
     >
       <h2 className='popup__title'>Выберите оценку и введите комментарий</h2>
       <p className='popup__author-text'><span className='popup__author-text_weight_bold'>Студент: </span>{currentStudent.student.fullname}</p>
