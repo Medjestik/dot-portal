@@ -420,3 +420,16 @@ export const fixStatistic = ({ token, user_id, disciplines }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const dropTestAttempts = ({ token, code, active_learning_id }) => {
+  return fetch(`${API_URL}/admin/action/drop_test_attempts`, {  
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      },
+      body: JSON.stringify({ code, active_learning_id })
+  })
+  .then(res => handleResponse(res))
+};

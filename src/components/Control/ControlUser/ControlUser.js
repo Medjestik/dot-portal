@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import SemesterHeader from '../../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
 import ControlUserAdd from './ControlUserAdd/ControlUserAdd.js';
+import ControlUserTest from './ControlUserTest/ControlUserTest.js';
  
 function ControlUser({ windowWidth, onLogout }) {
 
@@ -18,6 +19,11 @@ function ControlUser({ windowWidth, onLogout }) {
 
         <Route exact path='/add' element={
             <ControlUserAdd windowWidth={windowWidth} />
+          }
+        />
+
+        <Route exact path='/test' element={
+            <ControlUserTest windowWidth={windowWidth} />
           }
         />
 

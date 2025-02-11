@@ -1,7 +1,7 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
 import * as webinarApi from '../../../../utils/webinarApi.js';
-import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
+import SelectSearch from '../../../SelectSearch/SelectSearch.js';
 import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js';
 import ConvertDate from '../../../Date/ConvertDate.js';
 
@@ -133,14 +133,14 @@ function EditDisciplineFromWebinarPopup({ isOpen, onClose, currentData, onChange
         {
           <div className='popup__field'>
             <h4 className='popup__input-caption'>Преподаватель основной:</h4>
-            <PopupSelect filterType='byId' options={teachers} currentOption={currentMainTeacher} onChooseOption={handleChangeMainTeacher} />
+            <SelectSearch options={teachers} currentOption={currentMainTeacher} onChooseOption={handleChangeMainTeacher} />
           </div>
         }
 
         {
           <div className='popup__field'>
             <h4 className='popup__input-caption'>Преподаватель в ведомости:</h4>
-            <PopupSelect filterType='byId' options={teachers} currentOption={currentOfficialTeacher} onChooseOption={handleChangeOfficialTeacher} />
+            <SelectSearch options={teachers} currentOption={currentOfficialTeacher} onChooseOption={handleChangeOfficialTeacher} />
           </div>
         }
 

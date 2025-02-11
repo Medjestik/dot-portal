@@ -21,6 +21,7 @@ function ControlNavigateUser({ windowWidth }) {
           <h3 className='control-navigate__column-title'>Выберите раздел:</h3>
           <ul className='control-navigate__column-list'>
             <li className='control-navigate__column-item' onClick={() => navigate('/control/user/add')}>Создать студента ДОТ</li>
+            <li className='control-navigate__column-item' onClick={() => navigate('/control/user/test')}>Тестирование студента</li>
           </ul>
         </div>
         {

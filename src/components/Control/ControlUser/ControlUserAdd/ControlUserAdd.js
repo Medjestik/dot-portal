@@ -211,7 +211,7 @@ function ControlUserAdd({ windowWidth }) {
                   value={firstName}
                   onChange={handleChangeFirstName}
                   name='control-user-add-first-name' 
-                  placeholder='Введите фамилию...'
+                  placeholder='Введите имя...'
                   autoComplete='off'
                   required 
                   />
@@ -230,7 +230,7 @@ function ControlUserAdd({ windowWidth }) {
                   value={middleName}
                   onChange={handleChangeMiddleName}
                   name='control-user-add-middle-name' 
-                  placeholder='Введите фамилию...'
+                  placeholder='Введите отчество...'
                   autoComplete='off'
                   required 
                   />

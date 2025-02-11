@@ -1,6 +1,6 @@
 import React from 'react';
 import Popup from '../../../Popup/Popup.js';
-import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
+import SelectSearch from '../../../SelectSearch/SelectSearch.js';
 
 function AdminEditPracticeStudentData({ isOpen, onClose, practice, currentStudent, onEdit, isLoadingRequest, isShowRequestError }) {
  
@@ -72,7 +72,7 @@ function AdminEditPracticeStudentData({ isOpen, onClose, practice, currentStuden
 
         <div className='popup__field'>
             <h4 className='popup__input-caption'>Выберите руководителя по практике:</h4>
-            <PopupSelect filterType='byId' options={practice.tutors} currentOption={manager} onChooseOption={handleChangeManager} />
+            <SelectSearch filterType='byId' options={practice.tutors} currentOption={manager} onChooseOption={handleChangeManager} />
         </div>
 
         <div className='popup__field'>

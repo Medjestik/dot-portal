@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.61b1a05c.css",
-    "main.js": "/static/js/main.dcaf71ca.js",
+    "main.css": "/static/css/main.58da553d.css",
+    "main.js": "/static/js/main.af20b4a4.js",
     "static/js/787.1955ab40.chunk.js": "/static/js/787.1955ab40.chunk.js",
     "static/media/homepage-background.jpg": "/static/media/homepage-background.6ebabe323b86ec3dbd90.jpg",
     "static/media/Robotomediumitalic.ttf": "/static/media/Robotomediumitalic.35abcf5eb54b0c398e52.ttf",
@@ -62,6 +62,7 @@
     "static/media/download.svg": "/static/media/download.fa22a6fbcbd504b9cd4b.svg",
     "static/media/notification-color.svg": "/static/media/notification-color.9500648d2971ae4b58a5.svg",
     "static/media/notification.svg": "/static/media/notification.d792fe00b70fe8b2979c4e041c103572.svg",
+    "index.html": "/index.html",
     "static/media/calendar-color.svg": "/static/media/calendar-color.1ff1de87faa602503314.svg",
     "static/media/calendar.svg": "/static/media/calendar.1a3aba1489a9ee480e55.svg",
     "static/media/accordion-group.svg": "/static/media/accordion-group.022b491e6b565d65a5a9bf5513a581cb.svg",
@@ -95,7 +96,6 @@
     "static/media/accordion-communication.svg": "/static/media/accordion-communication.03c35404cb6011e121c754fb972c1f0c.svg",
     "static/media/home-color.svg": "/static/media/home-color.231e0b379fd631b1234f.svg",
     "static/media/home.svg": "/static/media/home.a8f6698c0310de5a5189.svg",
-    "index.html": "/index.html",
     "static/media/education.svg": "/static/media/education.9eef265272ff4dc7cc0193275da029d0.svg",
     "static/media/accordion-data.svg": "/static/media/accordion-data.650c9ee55eb4dc9514ced448f896a065.svg",
     "static/media/password-hide-color.svg": "/static/media/password-hide-color.fc56a60e78838c6b83c5.svg",
@@ -137,12 +137,12 @@
     "static/media/arrow.svg": "/static/media/arrow.55a4ec4915bbcdabc744.svg",
     "static/media/arrow-white.svg": "/static/media/arrow-white.9817492cc56038ef8ec6.svg",
     "static/media/arrow-blue.svg": "/static/media/arrow-blue.d97550c6523356d4c133.svg",
-    "main.61b1a05c.css.map": "/static/css/main.61b1a05c.css.map",
-    "main.dcaf71ca.js.map": "/static/js/main.dcaf71ca.js.map",
+    "main.58da553d.css.map": "/static/css/main.58da553d.css.map",
+    "main.af20b4a4.js.map": "/static/js/main.af20b4a4.js.map",
     "787.1955ab40.chunk.js.map": "/static/js/787.1955ab40.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.61b1a05c.css",
-    "static/js/main.dcaf71ca.js"
+    "static/css/main.58da553d.css",
+    "static/js/main.af20b4a4.js"
   ]
 }

@@ -44,6 +44,18 @@ export const getUserCourses = ({ token, userId }) => {
   .then(res => handleResponse(res))
 };
 
+export const getUserTestData = ({ token, id }) => {
+  return fetch(`${API_URL}/reports/action/get_user_tests?active_learning_id=${id}`, {  
+      method: 'GET',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      }
+  })
+  .then(res => handleResponse(res))
+};
+
 export const getUserCourseData = ({ token, userId, courseId }) => {
   return fetch(`${API_URL}/reports/action/universal_user_report?user_id=${userId}&course_id=${courseId}`, {  
       method: 'GET',

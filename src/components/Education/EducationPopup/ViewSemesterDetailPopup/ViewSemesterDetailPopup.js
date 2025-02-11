@@ -7,8 +7,11 @@ import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js'
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
 import AdminSetMarkPopup from '../AdminSetMarkPopup/AdminSetMarkPopup.js';
 import AdminFixStatisticPopup from '../AdminFixStatisticPopup/AdminFixStatisticPopup.js';
+import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 
 function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId, role }) {
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   const navigate = useNavigate();
 
@@ -331,12 +334,14 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
                             </div>
                           }
                         </div>
-                        <div className='table-horizontal__cell-menu'>
-                          <div className='table-horizontal__cell-menu-item'>
-                            <button className='icon icon_size_18 icon_type_settings' type='button' onClick={() => openFixStatisticPopup(student)} />
+                        {
+                          currentUser.id === '5785052195706776320' &&
+                          <div className='table-horizontal__cell-menu'>
+                            <div className='table-horizontal__cell-menu-item'>
+                              <button className='icon icon_size_18 icon_type_settings' type='button' onClick={() => openFixStatisticPopup(student)} />
+                            </div>
                           </div>
-                        </div>
-
+                        }
                       </div>
                       {
                         currentData.activities.map((activities, i) => (
