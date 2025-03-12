@@ -1,6 +1,6 @@
 import React from 'react';
 import './CuratorDisciplineList.css';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as curatorApi from '../../../utils/curatorApi.js';
 import Preloader from '../../Preloader/Preloader.js';
 import Table from '../../Table/Table.js';
@@ -9,8 +9,6 @@ import Search from '../../Search/Search.js';
 import ViewSemesterDetailPopup from '../../Education/EducationPopup/ViewSemesterDetailPopup/ViewSemesterDetailPopup.js';
 
 function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
-
-  const navigate = useNavigate();
 
   const [semesterOptions, setSemesterOptions] = React.useState([]);
   const [currentSemesterOption, setCurrentSemesterOption] = React.useState({});
@@ -57,10 +55,6 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
       setCurrentDetailOption(option);
       setFilteredDisciplines(searchedDisciplines.filter((elem) => (elem.semester_id === option.id)));
     }
-  }
-
-  function openDiscipline(id) {
-    navigate('/' + role + '/discipline/' + id + '/group')
   }
 
   function openViewSemesterDetailPopup() {
@@ -179,12 +173,7 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
                     <p className='table__text'>{item.start_date} - {item.end_date}</p>
                   </div>
                   <div className='table__column table__column_type_full'>
-                    <p 
-                    className='table__text table__text_type_header table__text_type_active'
-                    onClick={() => openDiscipline(item.id)} 
-                    >
-                      {item.name}
-                    </p>
+                    <Link className='table__text table__text_type_header table__text_type_active' to={`/${role}/discipline/${item.id}/group`}>{item.name}</Link>
                   </div>
                   <div className='table__column table__column_type_teacher'>
                     <p className='table__text'>{item.tutor}</p>
@@ -192,8 +181,9 @@ function CuratorDisciplineList({ windowWidth, groupInfo, role }) {
                   <div className='table__column table__column_type_small'>
                     <p className='table__text'>{item.control}</p>
                   </div>
-                  <div className='table__column table__column_type_small'>
-                    <p className='table__text'>{item.semestr}</p>
+                  <div className='table__column table__column_direction_row table__column_type_small'>
+                    <div className='table__icon_type_stats'></div>
+                    <p className='table__text table__text_color_blue'>{item.semestr}</p>
                   </div>
                 </div>
               </li>

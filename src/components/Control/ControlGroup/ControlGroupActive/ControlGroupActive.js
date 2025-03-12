@@ -1,91 +1,86 @@
 import React from 'react';
 import * as adminApi from '../../../../utils/admin.js';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SectionTabs from '../../../Section/SectionTabs/SectionTabs.js';
 import ControlGroupTable from '../ControlGroupTable/ControlGroupTable.js';
 import Preloader from '../../../Preloader/Preloader.js';
 
 function ControlGroupActive({ windowWidth }) {
 
-  const navigate = useNavigate();
-
   const tabs = [
-    {
-      title: 'Бакалавриат',
-      link: '/control/group/active/bac'
-    },
-    {
-      title: 'Магистратура',
-      link: '/control/group/active/mag'
-    },
-    {
-        title: 'Другое',
-        link: '/control/group/active/pp'
-      },
-  ]
+    { title: 'Бакалавриат', link: '/control/group/active/bak' },
+    { title: 'Магистратура', link: '/control/group/active/mag' },
+    { title: 'Переподготовка', link: '/control/group/active/pc' },
+    { title: 'Другое', link: '/control/group/active/other' },
+  ];
 
-  const [isLoadingGroups, setIsLoadingGroups] = React.useState(true);
+  const [isLoadingData, setIsLoadingData] = React.useState(false);
   const [groups, setGroups] = React.useState([]);
 
-  function handleOpenGroup(group) {
-    navigate('/control/group/' + group.id + '/list');
-  }
-
-  function groupsRequest() {
-    setIsLoadingGroups(true);
+  function dataRequest() {
+    setIsLoadingData(true);
     const token = localStorage.getItem('token');
-    adminApi.getActiveGroups({ token: token })
-    .then((res) => {
-      console.log('AdminGroups', res);
-      setGroups(res);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {  
-      setIsLoadingGroups(false);
-    });
+    adminApi.getLearningGroups({ token: token })
+      .then((res) => {
+        console.log('SemesterGroups', res);
+        setGroups(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoadingData(false);
+      });
   }
 
   React.useEffect(() => {
-    groupsRequest();
-  return (() => {
-    setGroups([]);
-  })
+    dataRequest();
+    return () => {
+      setGroups([]);
+    };
     // eslint-disable-next-line
   }, []);
 
+  // Фильтруем группы по вкладкам
+  const bakGroups = groups.filter((group) => group.level === 'бакалавриат' && group.och === 'false');
+  const magGroups = groups.filter((group) => group.level === 'магистратура' && group.och === 'false');
+  const pcGroups = groups.filter((group) => group.level === 'переподготовка');
+  const otherGroups = groups.filter(
+    (group) =>
+      !bakGroups.includes(group) &&
+      !magGroups.includes(group) &&
+      !pcGroups.includes(group)
+  );
+
   return (
-    isLoadingGroups 
-    ?
-    <Preloader /> 
-    :
-    <SectionTabs type='small' tabs={tabs} > 
-
-      <Routes>
-
-        <Route exact path='bac' element={ 
-            <ControlGroupTable windowWidth={windowWidth} groups={groups.bac} openGroup={handleOpenGroup} />
-          }
-        >
-        </Route>
-
-        <Route exact path='mag' element={ 
-            <ControlGroupTable windowWidth={windowWidth} groups={groups.mag} openGroup={handleOpenGroup} />
-          }
-        >
-        </Route>
-
-        <Route exact path='pp' element={ 
-            <ControlGroupTable windowWidth={windowWidth} groups={groups.pp} openGroup={handleOpenGroup} />
-          }
-        >
-        </Route>
- 
-      </Routes>
-
-    </SectionTabs>   
-
+    <SectionTabs type="small" tabs={tabs}>
+      {isLoadingData ? (
+        <Preloader />
+      ) : (
+        <Routes>
+          <Route
+            exact
+            path="/bak"
+            element={<ControlGroupTable windowWidth={windowWidth} groups={bakGroups} />}
+          />
+          <Route
+            exact
+            path="/mag"
+            element={<ControlGroupTable windowWidth={windowWidth} groups={magGroups} />}
+          />
+          <Route
+            exact
+            path="/pc"
+            element={<ControlGroupTable windowWidth={windowWidth} groups={pcGroups} />}
+          />
+          <Route
+            exact
+            path="/other"
+            element={<ControlGroupTable windowWidth={windowWidth} groups={otherGroups} />}
+          />
+        </Routes>
+      )}
+    </SectionTabs>  
   );
 }
 

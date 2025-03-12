@@ -1,12 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Accordion from '../../../Accordion/Accordion.js';
 import webinarIcon from '../../../../images/accordion/accordion-diploma.svg';
 
 function ControlNavigateDiploma({ windowWidth }) {
-
-  const navigate = useNavigate();
-
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const heightRef = React.createRef();
   
@@ -21,7 +18,9 @@ function ControlNavigateDiploma({ windowWidth }) {
         <div className={`control-navigate__column ${windowWidth > 833 && 'control-navigate__column_margin_right'}`}>
           <h3 className='control-navigate__column-title'>Выберите раздел:</h3>
           <ul className='control-navigate__column-list'>
-            <li className='control-navigate__column-item' onClick={() => navigate('/control/diploma/check')}>Проверка на антиплагиат</li>
+            <li className='control-navigate__column-item'>
+              <Link className='control-navigate__column-link' to='/control/diploma/check'>Проверка на антиплагиат</Link>
+            </li>
           </ul>
         </div>
         {

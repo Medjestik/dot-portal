@@ -342,6 +342,14 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
                             </div>
                           </div>
                         }
+                        {
+                          currentUser.id === '6108567935247540807' &&
+                          <div className='table-horizontal__cell-menu'>
+                            <div className='table-horizontal__cell-menu-item'>
+                              <button className='icon icon_size_18 icon_type_settings' type='button' onClick={() => openFixStatisticPopup(student)} />
+                            </div>
+                          </div>
+                        }
                       </div>
                       {
                         currentData.activities.map((activities, i) => (

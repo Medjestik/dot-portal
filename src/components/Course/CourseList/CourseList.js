@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CourseList.css';
 import Table from '../../Table/Table.js';
 import TableCard from '../../Table/TableCard/TableCard.js';
@@ -56,7 +57,7 @@ function CourseList({ windowWidth, courses, openCourse }) {
                         <p className='table__text'>{item.start_learning_date}</p>
                       </div>
                       <div className='table__column table__column_type_name' onClick={() => openCourse(item)}>
-                        <p className='table__text table__text_type_active table__text_type_header'>{item.name}</p>
+                        <Link className='table__text table__text_type_active table__text_type_header' to={`/courses/${item.id}`}>{item.name}</Link>
                       </div>
                     </div>
                   </li>

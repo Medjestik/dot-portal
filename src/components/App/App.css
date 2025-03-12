@@ -11,6 +11,13 @@
   --slider-color: #D9D9D9;
   --border-radius: 8px;
 
+  --green-color: #1F9254;
+  --green-light-color: #EBF9F1;
+  --yellow-color: #CD6200;
+  --yellow-light-color: #FEF2E5;
+  --red-color: #A30D11;
+  --red-light-color: #FBE7E8;
+
   color: var(--black-color);
   background-color: var(--main-grey-color);
   min-height: 100vh;

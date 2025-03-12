@@ -1,12 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Accordion from '../../../Accordion/Accordion.js';
 import groupIcon from '../../../../images/accordion/accordion-group.svg';
 
 function ControlNavigateGroup({ windowWidth }) {
-
-  const navigate = useNavigate();
-
   const [sectionHeight, setSectionHeight] = React.useState(0);
   const heightRef = React.createRef();
   
@@ -20,8 +17,12 @@ function ControlNavigateGroup({ windowWidth }) {
         <div className={`control-navigate__column ${windowWidth > 833 && 'control-navigate__column_margin_right'}`}>
           <h3 className='control-navigate__column-title'>Выберите раздел:</h3>
           <ul className='control-navigate__column-list'>
-            <li className='control-navigate__column-item' onClick={() => navigate('/control/group/active/bac')}>Текущие группы</li>
-            <li className='control-navigate__column-item' onClick={() => navigate('/control/group/completed/bac')}>Завершили обучение</li>
+            <li className='control-navigate__column-item'>
+              <Link className='control-navigate__column-link' to='/control/group/active/bak'>Текущие группы</Link>
+            </li>
+            <li className='control-navigate__column-item'>
+              <Link className='control-navigate__column-link' to='/control/group/completed/bac'>Завершили обучение</Link>
+            </li>
           </ul>
         </div>
         {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './ControlSemesterGroups.css';
 import * as adminApi from '../../../../utils/admin.js';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Preloader from '../../../Preloader/Preloader.js';
 import SectionTabs from '../../../Section/SectionTabs/SectionTabs';
 import ControlSemesterGroupsTable from './ControlSemesterGroupsTable';
@@ -14,9 +14,6 @@ const tabs = [
 ];
 
 function ControlSemesterGroups({ windowWidth }) {
-
-  const navigate = useNavigate();
-
   const [groups, setGroups] = React.useState([]);
   const [isLoadingData, setIsLoadingData] = React.useState(false);
 
@@ -34,10 +31,6 @@ function ControlSemesterGroups({ windowWidth }) {
       .finally(() => {
         setIsLoadingData(false);
       });
-  }
-
-  function openGroupSemesters(id) {
-    navigate(`/control/sem/group/${id}`);
   }
 
   React.useEffect(() => {
@@ -68,22 +61,22 @@ function ControlSemesterGroups({ windowWidth }) {
           <Route
             exact
             path="/bak"
-            element={<ControlSemesterGroupsTable windowWidth={windowWidth} groups={bakGroups} onOpen={openGroupSemesters} />}
+            element={<ControlSemesterGroupsTable windowWidth={windowWidth} groups={bakGroups} />}
           />
           <Route
             exact
             path="/mag"
-            element={<ControlSemesterGroupsTable windowWidth={windowWidth} groups={magGroups} onOpen={openGroupSemesters} />}
+            element={<ControlSemesterGroupsTable windowWidth={windowWidth} groups={magGroups} />}
           />
           <Route
             exact
             path="/pc"
-            element={<ControlSemesterGroupsTable windowWidth={windowWidth} groups={pcGroups} onOpen={openGroupSemesters} />}
+            element={<ControlSemesterGroupsTable windowWidth={windowWidth} groups={pcGroups} />}
           />
           <Route
             exact
             path="/other"
-            element={<ControlSemesterGroupsTable windowWidth={windowWidth} groups={otherGroups} onOpen={openGroupSemesters} />}
+            element={<ControlSemesterGroupsTable windowWidth={windowWidth} groups={otherGroups} />}
           />
         </Routes>
       )}

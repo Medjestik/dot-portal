@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Table from '../../../Table/Table.js';
 
-function ControlSemesterGroupsTable({ windowWidth, groups, onOpen }) {
+function ControlSemesterGroupsTable({ windowWidth, groups }) {
 
   const containerHeightRef = React.createRef();
   const tableHeaderHeightRef = React.createRef();
@@ -21,7 +22,7 @@ function ControlSemesterGroupsTable({ windowWidth, groups, onOpen }) {
     <Table>
       <div ref={containerHeightRef} className='table__container'>
         <div ref={tableHeaderHeightRef} className='table__header'>
-          <div className='table__main-column'>
+          <div className='table__main-column table__main-column_type_empty'>
             <div className='table__column table__column_type_header table__column_type_count'>
               <p className='table__text table__text_type_header'>№</p>
             </div>
@@ -32,11 +33,8 @@ function ControlSemesterGroupsTable({ windowWidth, groups, onOpen }) {
               <p className='table__text table__text_type_header'>Учебный план</p>
             </div>
             <div className='table__column table__column_type_header table__column_type_medium'>
-              <p className='table__text table__text_type_header table__text_align_center'>Семестры</p>
+              <p className='table__text table__text_type_header'>Семестры</p>
             </div>
-          </div>
-          <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
-            <div className='btn-icon'></div>
           </div>
         </div>
         {
@@ -51,17 +49,18 @@ function ControlSemesterGroupsTable({ windowWidth, groups, onOpen }) {
                     <p className='table__text'>{i + 1}</p>
                   </div>
                   <div className='table__column table__column_type_large'>
-                    <p className='table__text table__text_type_header'>{item.name || ''}</p>
+                    <Link className='table__text table__text_type_header table__text_type_active' to={`/control/sem/group/${item.id}`}>{item.name || ''}</Link>
                   </div>
                   <div className='table__column table__column_type_full'>
                     <p className='table__text'>{item.yp_name || ''}</p>
                   </div>
-                  <div className='table__column table__column_type_medium'>
-                    <p className='table__text table__text_align_center'>{item.ych_sem_count || ''}</p>
+                  <div className='table__column table__column_direction_row table__column_type_medium'>
+                    {
+                      item.ych_sem_count &&
+                      <div className='table__icon_type_stats'></div>
+                    }
+                    <p className='table__text table__text_color_blue'>{item.ych_sem_count || ''}</p>
                   </div>
-                </div>
-                <div className='table__column table__column_type_btn'>
-                  <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => onOpen(item.id)}></button>
                 </div>
               </li>
             ))

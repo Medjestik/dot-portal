@@ -126,9 +126,12 @@ function ControlUserTest({ windowWidth }) {
       code: data.code,
       active_learning_id: currentCourse.active_learning_id,
     })
-    .then((res) => {
-      // setItems((prevItems) => [res, ...prevItems]);
-      // setFilteredItems((prevFilteredItems) => [res, ...prevFilteredItems]);
+    .then(() => {
+      setData(prevData => {
+        return prevData.map(item => 
+          item.code === data.code ? { ...item, cur_attempt_num: 0, score: 0, state: 'Не начат' } : item
+        );
+      });
       closePopup();
     })
     .catch((err) => {
@@ -146,6 +149,7 @@ function ControlUserTest({ windowWidth }) {
   }
 
   function openDropTestAttempt(item) {
+    setIsShowRequestError({ isShow: false, text: '', });
     setCurrentItem(item);
     setIsOpenDropTestAttemptPopup(true);
   }

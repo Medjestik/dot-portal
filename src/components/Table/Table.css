@@ -239,6 +239,10 @@
   width: 124px;
   flex-shrink: 0;
 }
+.table__column_type_tag {
+  width: 160px;
+  flex-shrink: 0;
+}
 .table__column_type_full {
   width: 100%;
   flex-shrink: 1;
@@ -321,6 +325,45 @@
 }
 .table__btn {
   margin: 0px;
+}
+.table__icon_type_users {
+  margin: 0 8px 0 0;
+  width: 16px;
+  height: 16px;
+  background-image: url('../../images/icons/accent-blue/users.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.table__icon_type_stats {
+  margin: 0 8px 0 0;
+  width: 16px;
+  height: 16px;
+  background-image: url('../../images/icons/accent-blue/stats.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.table__tag {
+  margin: 0;
+  padding: 6px 14px;
+  box-sizing: border-box;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  width: fit-content;
+  color: var(--main-white-color);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+}
+.table__tag_color_green {
+  background-color: var(--green-light-color);
+  color: var(--green-color);
+}
+.table__tag_color_yellow {
+  background-color: var(--yellow-light-color);
+  color: var(--yellow-color);
 }
 @media all and (max-width: 833px) {
   .table__title {

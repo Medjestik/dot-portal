@@ -1,6 +1,6 @@
 import React from 'react';
 import './Course.css';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import * as courseApi from '../../utils/course.js';
 import Preloader from '../Preloader/Preloader.js';
 import Section from '../Section/Section.js';
@@ -11,16 +11,9 @@ import SemesterHeader from '../Education/SemesterHeader/SemesterHeader.js';
 import SemesterHeaderBtnBack from '../Education/SemesterHeader/SemesterHeaderBtnBack/SemesterHeaderBtnBack.js';
  
 function Course({ windowWidth, onLogout, onChangeUserData }) {
-
-  const navigate = useNavigate();
-
   const [isLoadingData, setIsLoadingData] = React.useState(true);
   const [courseList, setCourseList] = React.useState([]);
   const [filteredCourse, setFilteredCourse] = React.useState([]);
-
-  function handleOpenCourse(course) {
-    navigate('/courses/' + course.id);
-  }
 
   function handleSearch(data) {
     setFilteredCourse(data);
@@ -75,7 +68,7 @@ function Course({ windowWidth, onLogout, onChangeUserData }) {
                   <Search type='large' id='webinar' data={courseList} onSearch={handleSearch} />
                 </div>
               </div>
-              <CourseList windowWidth={windowWidth} courses={filteredCourse} openCourse={handleOpenCourse} />
+              <CourseList windowWidth={windowWidth} courses={filteredCourse} />
               </>
             }
           </Section>
