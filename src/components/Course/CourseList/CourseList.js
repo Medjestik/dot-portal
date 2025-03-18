@@ -4,7 +4,7 @@ import './CourseList.css';
 import Table from '../../Table/Table.js';
 import TableCard from '../../Table/TableCard/TableCard.js';
 
-function CourseList({ windowWidth, courses, openCourse }) {
+function CourseList({ windowWidth, courses }) {
 
   const containerHeightRef = React.createRef();
   const tableHeaderHeightRef = React.createRef();
@@ -56,7 +56,7 @@ function CourseList({ windowWidth, courses, openCourse }) {
                       <div className='table__column table__column_type_date'>
                         <p className='table__text'>{item.start_learning_date}</p>
                       </div>
-                      <div className='table__column table__column_type_name' onClick={() => openCourse(item)}>
+                      <div className='table__column table__column_type_name'>
                         <Link className='table__text table__text_type_active table__text_type_header' to={`/courses/${item.id}`}>{item.name}</Link>
                       </div>
                     </div>
@@ -78,10 +78,7 @@ function CourseList({ windowWidth, courses, openCourse }) {
         {
           courses.map((item, i) => (
             <li className='table-card__item' key={i}>
-              <p className='table-card__text table-card__text_weight_bold table-card__text_type_active table-card__title' 
-                onClick={() => openCourse(item)}>
-                {item.name}
-              </p>
+              <Link className='table__text table__text_type_active table__text_type_header' to={`/courses/${item.id}`}>{item.name}</Link>
               <p className='table-card__text table-card__subtitle'>{item.start_learning_date}</p>
             </li>
           ))
