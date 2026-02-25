@@ -408,6 +408,38 @@ export const createDotStudent = ({ token, data }) => {
   .then(res => handleResponse(res))
 };
 
+export const removeDotStudent = ({ token, data }) => {
+  return fetch(`${API_URL}/admin/action/dismiss_student/`, {  
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      },
+      body: JSON.stringify({ 
+        user_id: data.userId, 
+        dismiss_number: data.number, 
+        dismiss_reason: data.reason
+      })
+  })
+  .then(res => handleResponse(res))
+};
+
+export const renewDotStudent = ({ token, data }) => {
+  return fetch(`${API_URL}/admin/action/enroll_student/`, {  
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+      },
+      body: JSON.stringify({ 
+        user_id: data.userId, 
+      })
+  })
+  .then(res => handleResponse(res))
+};
+
 export const fixStatistic = ({ token, user_id, disciplines }) => {
   return fetch(`${API_URL}/admin/action/fix_student_disciplines`, {  
       method: 'PATCH',

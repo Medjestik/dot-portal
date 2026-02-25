@@ -21,6 +21,9 @@ function ControlNavigateUser({ windowWidth }) {
               <Link className='control-navigate__column-link' to='/control/user/add'>Создать студента ДОТ</Link>
             </li>
             <li className='control-navigate__column-item'>
+              <Link className='control-navigate__column-link' to='/control/user/remove'>Отчисление студента ДОТ</Link>
+            </li>
+            <li className='control-navigate__column-item'>
               <Link className='control-navigate__column-link' to='/control/user/test'>Тестирование студента</Link>
             </li>
           </ul>

@@ -458,7 +458,7 @@
   background-repeat: no-repeat;
 }
 .popup__input-error {
-  margin: 4px 0px 0px 0px;
+  margin: 8px 0px 0px 0px;
   min-height: 12px;
   font-style: normal;
   font-weight: normal;

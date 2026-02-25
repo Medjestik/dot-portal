@@ -125,7 +125,7 @@ function Login({ onLogin, requestError, onHideRequestError, isLoadingRequest }) 
             <button className={`popup__btn-save ${isBlockSubmitButton ? 'popup__btn-save_type_block' : ''}`} type='submit'>Войти</button>
           }
         </div>
-        <span className={`popup__input-error ${requestError && 'popup__input-error_status_show'}`}>К сожалению, произошла ошибка!</span>
+        <span className={`popup__input-error ${requestError && 'popup__input-error_status_show'}`}>К сожалению, произошла ошибка! Убедитесь, что у вас отключен VPN или другие сервисы, влияющие на сетевое соединение.</span>
         <span className={`popup__input-error ${isShowForgotPassword && 'popup__input-error_status_show'}`}>Обратитесь в техническую поддержку портала ief07@bk.ru</span>
 
       </form>

@@ -152,14 +152,14 @@ function ControlUserAdd({ windowWidth }) {
     })
   }
 
-    React.useEffect(() => {
-      if (firstName.length < 1 || lastName.length < 1 || login.length < 1 || currentGroup.id === 'placeholder') {
-        setIsBlockSubmitButton(true);
-      } else {
-        setIsBlockSubmitButton(false);
-      }
-    // eslint-disable-next-line
-    }, [firstName, lastName, login, currentGroup]);
+  React.useEffect(() => {
+    if (firstName.length < 1 || lastName.length < 1 || login.length < 1 || currentGroup.id === 'placeholder') {
+      setIsBlockSubmitButton(true);
+    } else {
+      setIsBlockSubmitButton(false);
+    }
+  // eslint-disable-next-line
+  }, [firstName, lastName, login, currentGroup]);
 
   React.useEffect(() => {
     dataRequest();
