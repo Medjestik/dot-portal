@@ -7,6 +7,7 @@ import Preloader from '../../Preloader/Preloader.js';
 import Section from '../../Section/Section.js';
 import CourseMaterials from '../CourseMaterials/CourseMaterials.js';
 import UserDataPopup from '../../Popup/UserDataPopup/UserDataPopup.js';
+import UserPDPopup from '../../Popup/UserPDPopup/UserPDPopup.js';
 
 function CourseItem({ windowWidth, onChangeUserData }) {
 
@@ -19,6 +20,7 @@ function CourseItem({ windowWidth, onChangeUserData }) {
   const [materials, setMaterials] = React.useState([]);
 
   const [isOpenDataPopup, setIsOpenDataPopup] = React.useState(false);
+  const [isOpenPDPopup, setIsOpenPDPopup] = React.useState(false);
 
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
   const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '' });
@@ -32,6 +34,11 @@ function CourseItem({ windowWidth, onChangeUserData }) {
       if (res.check_pk_data === 'true') {
         if (currentUser.birthDate.length < 1 || currentUser.snils.length < 1 || currentUser.phone.length < 1 || currentUser.email.length < 1 || currentUser.edu_level.length < 1 || currentUser.pers_data !== 'true') {
           setIsOpenDataPopup(true);
+        }
+      }
+      if (res.check_pd === 'true') {
+        if (currentUser.pers_data !== 'true') {
+          setIsOpenPDPopup(true);
         }
       }
       setMaterials(res);
@@ -64,6 +71,30 @@ function CourseItem({ windowWidth, onChangeUserData }) {
         setIsLoadingRequest(false);
       });
   }
+
+  function handleChangeUserPD(data) {
+    setIsShowRequestError({ isShow: false, text: '' });
+    setIsLoadingRequest(true);
+    const userId = currentUser.id;
+    const token = localStorage.getItem('token');
+
+    courseApi.changePD({ token, userId, data })
+      .then((res) => {
+        //console.log(res);
+        const newData = { ...currentUser, pers_data: data.pers_data };
+        onChangeUserData(newData);
+        setIsOpenPDPopup(false);
+      })
+      .catch((err) => {
+        console.log('tyt');
+        console.log(err);
+        setIsShowRequestError({ isShow: true, text: 'К сожалению, произошла ошибка!' })
+      })
+      .finally(() => {
+        setIsLoadingRequest(false);
+      });
+  }
+
 
   const handleOpenMaterial = async (item) => {
 
@@ -120,6 +151,17 @@ function CourseItem({ windowWidth, onChangeUserData }) {
             onClose={() => navigate('/courses')}
             currentUser={currentUser}
             onChangeData={handleChangeUserData}
+            isLoadingRequest={isLoadingRequest}
+            isShowRequestError={isShowRequestError}
+          />
+        }
+        {
+          isOpenPDPopup &&
+          <UserPDPopup
+            isOpen={isOpenPDPopup}
+            onClose={() => navigate('/courses')}
+            currentUser={currentUser}
+            onChangeData={handleChangeUserPD}
             isLoadingRequest={isLoadingRequest}
             isShowRequestError={isShowRequestError}
           />

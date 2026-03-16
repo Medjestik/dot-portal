@@ -44,3 +44,16 @@ export const changeData = ({ token, data }) => {
   })
   .then(res => handleResponse(res));
 };
+
+export const changePD = ({ token, data }) => {
+  return fetch(`${API_URL}/users/action/save_pd`, {
+    method: 'POST', 
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ data })
+  })
+  .then(res => handleResponse(res));
+};
