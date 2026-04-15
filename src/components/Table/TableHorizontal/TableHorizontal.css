@@ -111,6 +111,12 @@
 .table-horizontal__cell-badge-list_position_right {
   margin: 0px 0px 0px auto;
 }
+.table-horizontal__cell-badge-list_position_left {
+  margin: 0px 0px 0px 6px;
+  display: inline-flex;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
 .table-horizontal__cell-badge-item {
   margin: 0px;
 }

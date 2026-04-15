@@ -4,3 +4,15 @@
   height: 100%;
   margin: 0;
 }
+
+.control-user-remove__dismiss-reason-select {
+  width: 50%;
+  min-width: 320px;
+}
+
+@media all and (max-width: 833px) {
+  .control-user-remove__dismiss-reason-select {
+    width: 100%;
+    min-width: 0;
+  }
+}

@@ -19,8 +19,15 @@ function ControlUserRemove({ windowWidth }) {
 
   const [number, setNumber] = React.useState('');
   const [numberError, setNumberError] = React.useState({ isShow: false, text: '' });
-  const [reason, setReason] = React.useState('');
-  const [reasonError, setReasonError] = React.useState({ isShow: false, text: '' });
+
+  const [dismissReasons, setDismissReasons] = React.useState([]);
+  const [selectedDismissReason, setSelectedDismissReason] = React.useState({ name: 'Выберите причину..', id: 'placeholder' });
+  const [isLoadingDismissReasons, setIsLoadingDismissReasons] = React.useState(false);
+  const [dismissReasonsError, setDismissReasonsError] = React.useState({ isShow: false, text: '' });
+
+  const [isAnother, setIsAnother] = React.useState(false);
+  const [anotherReasonText, setAnotherReasonText] = React.useState('');
+  const [anotherReasonError, setAnotherReasonError] = React.useState({ isShow: false, text: '' });
 
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
   const [isShowRequestError, setIsShowRequestError] = React.useState({ isShow: false, text: '', });
@@ -44,12 +51,22 @@ function ControlUserRemove({ windowWidth }) {
     }
   }
 
-  function handleChangeReason(e) {
-    setReason(e.target.value);
+  function handleChooseDismissReason(option) {
+    setSelectedDismissReason(option);
+  }
+
+  function handleToggleAnother(e) {
+    const nextValue = e.target.checked;
+    setIsAnother(nextValue);
+    setAnotherReasonError({ text: '', isShow: false });
+  }
+
+  function handleChangeAnotherReasonText(e) {
+    setAnotherReasonText(e.target.value);
     if (e.target.checkValidity()) {
-      setReasonError({ text: '', isShow: false });
+      setAnotherReasonError({ text: '', isShow: false });
     } else {
-      setReasonError({ text: 'Поле не может быть пустым', isShow: true });
+      setAnotherReasonError({ text: 'Поле не может быть пустым', isShow: true });
     }
   }
 
@@ -61,7 +78,9 @@ function ControlUserRemove({ windowWidth }) {
     setIsShowUserForm(false);
     setIsShowRemoveUserPopup(false);
     setNumber('');
-    setReason('');
+    setSelectedDismissReason({ name: 'Выберите причину..', id: 'placeholder' });
+    setIsAnother(false);
+    setAnotherReasonText('');
   }
 
   function usersRequest() {
@@ -89,10 +108,15 @@ function ControlUserRemove({ windowWidth }) {
   }
 
   function handleSubmit() {
+    const reasonText = isAnother
+      ? anotherReasonText.trim()
+      : selectedDismissReason?.name;
+
     const data = {
       userId: currentUser.id,
       number: number,
-      reason: reason
+      reason: reasonText,
+      isAnother: isAnother,
     };
     setIsShowRequestError({ isShow: false, text: '' });
     setIsLoadingRequest(true);
@@ -133,13 +157,40 @@ function ControlUserRemove({ windowWidth }) {
   }
 
   React.useEffect(() => {
-    if (number.length < 1 || reason.length < 1) {
-      setIsBlockSubmitButton(true);
-    } else {
-      setIsBlockSubmitButton(false);
-    }
+    const isNumberValid = number.trim().length > 0;
+    const isReasonValid = isAnother
+      ? anotherReasonText.trim().length > 0
+      : (selectedDismissReason && selectedDismissReason.id !== 'placeholder' && String(selectedDismissReason.name || '').trim().length > 0);
+
+    setIsBlockSubmitButton(!(isNumberValid && isReasonValid));
   // eslint-disable-next-line
-  }, [number, reason]);
+  }, [number, isAnother, anotherReasonText, selectedDismissReason]);
+
+  React.useEffect(() => {
+    setIsLoadingDismissReasons(true);
+    setDismissReasonsError({ isShow: false, text: '' });
+    const token = localStorage.getItem('token');
+
+    catalogApi.getDismissReasons({ token })
+      .then((res) => {
+        const updatedReasons = (res || []).map((reason) => ({
+          ...reason,
+          name: reason.name,
+          id: reason.id,
+        }));
+        setDismissReasons(updatedReasons);
+        setSelectedDismissReason({ name: 'Выберите причину..', id: 'placeholder' });
+      })
+      .catch((err) => {
+        console.error(err);
+        setDismissReasons([]);
+        setDismissReasonsError({ isShow: true, text: 'Не удалось загрузить причины отчисления. Используйте «Другое».' });
+      })
+      .finally(() => {
+        setIsLoadingDismissReasons(false);
+      });
+    // eslint-disable-next-line
+  }, []);
 
   React.useEffect(() => {
   return (() => {
@@ -239,22 +290,66 @@ function ControlUserRemove({ windowWidth }) {
               </div>
               <div className='popup__field'>
                 <h4 className='popup__input-caption'>Причина отчисления</h4>
-                <div className='popup__input-field'>
-                  <input 
-                  className='popup__input'
-                  type='text'
-                  id='control-user-remove-reason'
-                  value={reason}
-                  onChange={handleChangeReason}
-                  name='control-user-remove-reason' 
-                  placeholder='Введите причину отчисления...'
-                  autoComplete='off'
-                  required 
-                  />
-                </div>
-                <span className={`popup__input-error ${reasonError.isShow ? 'popup__input-error_status_show' : ''}`}>
-                  {reasonError.text}
-                </span>
+                {
+                  isLoadingDismissReasons
+                  ?
+                  <Preloader />
+                  :
+                  <>
+                    {
+                      !isAnother &&
+                      <>
+                        <div className='popup__input-field'>
+                          <div className='control-user-remove__dismiss-reason-select'>
+                            <SelectSearch
+                              options={dismissReasons}
+                              currentOption={selectedDismissReason}
+                              onChooseOption={handleChooseDismissReason}
+                            />
+                          </div>
+                        </div>
+                        <span className={`popup__input-error ${dismissReasonsError.isShow ? 'popup__input-error_status_show' : ''}`}>
+                          {dismissReasonsError.text}
+                        </span>
+                      </>
+                    }
+
+                    <div className='popup__field popup__field_margin_top'>
+                      <label className='popup__checkbox'>
+                        <input
+                          className='popup__checkbox-input'
+                          type='checkbox'
+                          checked={isAnother}
+                          onChange={handleToggleAnother}
+                          name='control-user-remove-another'
+                        />
+                        <span className='popup__checkbox-caption'>Другое</span>
+                      </label>
+                    </div>
+
+                    {
+                      isAnother &&
+                      <div className='popup__field'>
+                        <div className='popup__input-field'>
+                          <input
+                            className='popup__input'
+                            type='text'
+                            id='control-user-remove-reason-another'
+                            value={anotherReasonText}
+                            onChange={handleChangeAnotherReasonText}
+                            name='control-user-remove-reason-another'
+                            placeholder='Введите причину отчисления...'
+                            autoComplete='off'
+                            required
+                          />
+                        </div>
+                        <span className={`popup__input-error ${anotherReasonError.isShow ? 'popup__input-error_status_show' : ''}`}>
+                          {anotherReasonError.text}
+                        </span>
+                      </div>
+                    }
+                  </>
+                }
               </div>
               <div className='popup__btn-container'>
                 {

@@ -1,0 +1,10 @@
+.curator-group-list__name {
+  display: inline;
+}
+
+.curator-group-list__corp {
+  display: inline-flex;
+  vertical-align: baseline;
+  margin-left: 6px;
+  white-space: nowrap;
+}

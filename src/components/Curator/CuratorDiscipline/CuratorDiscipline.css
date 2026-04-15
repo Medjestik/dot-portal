@@ -1,0 +1,28 @@
+.curator-discipline__filters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.curator-discipline__filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.curator-discipline__checkbox {
+  width: 16px;
+  height: 16px;
+}
+
+.curator-discipline__filter-text {
+  margin: 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}

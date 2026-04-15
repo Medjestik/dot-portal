@@ -36,6 +36,9 @@ function CuratorDiscipline({ windowWidth, role }) {
   const [disciplineInfo, setDisciplineInfo] = React.useState({});
   const [disciplineStudents, setDisciplineStudents] = React.useState([]);
 
+  const [onlyWithFiles, setOnlyWithFiles] = React.useState(false);
+  const [onlyNoMark, setOnlyNoMark] = React.useState(false);
+
   const [isOpenTeacherChooseMark, setIsOpenTeacherChooseMark] = React.useState(false);
   const [isOpenTeacherViewFiles, setIsOpenTeacherViewFiles] = React.useState(false);
   const [isOpenTeacherViewTests, setIsOpenTeacherViewTests] = React.useState(false);
@@ -53,6 +56,25 @@ function CuratorDiscipline({ windowWidth, role }) {
   const [currentSection, setCurrentSection] = React.useState({});
   const [currentStudent, setCurrentStudent] = React.useState({});
   const [currentComment, setCurrentComment] = React.useState({});
+
+  const filteredStudents = React.useMemo(() => {
+    return (disciplineStudents || []).filter((item) => {
+      if (onlyWithFiles) {
+        const filesCount = Array.isArray(item?.files) ? item.files.length : 0;
+        if (filesCount <= 0) return false;
+      }
+
+      if (onlyNoMark) {
+        const markName = item?.mark?.name;
+        const normalized = typeof markName === 'string' ? markName.trim() : '';
+        const isNoMark =
+          !normalized || normalized === 'Нет оценки' || normalized === 'Без оценки';
+        if (!isNoMark) return false;
+      }
+
+      return true;
+    });
+  }, [disciplineStudents, onlyWithFiles, onlyNoMark]);
 
   function chooseSection(option) {
     navigate('/' + role + '/discipline/' + disciplineId + option.link);
@@ -235,6 +257,26 @@ function CuratorDiscipline({ windowWidth, role }) {
               <p className='section__header-caption section__header-caption_margin_bottom'>Выберите раздел:</p>
               <SectionSelect sections={sections} currentSection={currentSection} onChooseSection={chooseSection} />
             </div>
+            <div className='section__header-item section__header-item_type_content curator-discipline__filters'>
+              <label className='curator-discipline__filter'>
+                <input
+                  className='curator-discipline__checkbox'
+                  type='checkbox'
+                  checked={onlyWithFiles}
+                  onChange={(e) => setOnlyWithFiles(e.target.checked)}
+                />
+                <span className='curator-discipline__filter-text'>Только с файлами</span>
+              </label>
+              <label className='curator-discipline__filter'>
+                <input
+                  className='curator-discipline__checkbox'
+                  type='checkbox'
+                  checked={onlyNoMark}
+                  onChange={(e) => setOnlyNoMark(e.target.checked)}
+                />
+                <span className='curator-discipline__filter-text'>Только без оценки</span>
+              </label>
+            </div>
             {
               windowWidth > 833 &&
               <>
@@ -308,7 +350,7 @@ function CuratorDiscipline({ windowWidth, role }) {
               <DisciplineTeacherGroup
                 windowWidth={windowWidth}
                 disciplineInfo={disciplineInfo}
-                disciplineStudents={disciplineStudents}
+                disciplineStudents={filteredStudents}
                 onOpenStudent={openStudent}
                 onChooseMark={openChooseMarkPopup}
                 onViewFiles={openViewFilesPopup}

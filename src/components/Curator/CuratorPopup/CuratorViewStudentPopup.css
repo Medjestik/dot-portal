@@ -1,0 +1,53 @@
+.curator-view-student-popup .popup__row {
+  margin: 12px 0px 0px 0px;
+}
+
+.curator-view-student-popup .popup__field {
+  margin: 10px 0px 0px 0px;
+}
+
+.curator-view-student-popup .popup__input-field {
+  margin: 8px 0px 0px 0px;
+}
+
+.curator-view-student-popup .popup__author-text {
+  margin: 4px 0px 0px 0px;
+}
+
+.curator-view-student-popup .popup__input-success {
+  margin: 8px 0px 0px 0px;
+  min-height: 12px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--accent-blue-color);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: all .3s ease-in-out;
+}
+
+.curator-view-student-popup .popup__input-success_status_show {
+  opacity: 1;
+}
+
+.curator-view-student-popup__notify-semester {
+  justify-content: flex-start;
+}
+
+.curator-view-student-popup__notify-semester-label {
+  margin: 0px 12px 0px 0px;
+  flex-shrink: 0;
+}
+
+.curator-view-student-popup__notify-select {
+  margin: 0px;
+}
+
+.curator-view-student-popup__hr {
+  margin: 16px 0px 0px 0px;
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--slider-color);
+}

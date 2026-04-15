@@ -79,3 +79,15 @@ export const getLastCreatedUsers = ({ token }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const getDismissReasons = ({ token }) => {
+  return fetch(`${API_URL}/catalogs/action/get_dissmiss_reasons`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};

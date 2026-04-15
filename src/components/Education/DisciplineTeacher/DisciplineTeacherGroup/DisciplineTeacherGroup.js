@@ -112,22 +112,29 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
                         <div className='table__column table__column_type_count'>
                           <p className='table__text'>{i + 1}</p>
                         </div>
-                        <div className='table__column table__column_direction_row table__column_type_name'>
+                        <div className='table__column table__column_type_name'>
                           <p className='table__text table__text_type_header table__text_type_active' onClick={() => onOpenStudent(item)}>{item.student.fullname}</p>
                           {
-                            item.student.is_sub &&
-                            <div className='table__cell-badge-list table__cell-badge-list_position_left'>
-                              <div className='table__cell-badge-item'>
-                                <span className='table__cell-badge table__cell-badge_color_orange'>Переводник</span>
-                              </div>
-                            </div>
-                          }
-                          {
-                            item.student.is_och &&
-                            <div className='table__cell-badge-list table__cell-badge-list_position_left'>
-                              <div className='table__cell-badge-item'>
-                                <span className='table__cell-badge table__cell-badge_color_blue'>Очник</span>
-                              </div>
+                            (item.student.is_sub || item.student.is_och || item.student.is_corp === true) &&
+                            <div className='table__cell-badge-list table__cell-badge-list_position_bottom'>
+                              {
+                                item.student.is_sub &&
+                                <div className='table__cell-badge-item'>
+                                  <span className='table__cell-badge table__cell-badge_color_orange'>Переводник</span>
+                                </div>
+                              }
+                              {
+                                item.student.is_och &&
+                                <div className='table__cell-badge-item'>
+                                  <span className='table__cell-badge table__cell-badge_color_blue'>Очник</span>
+                                </div>
+                              }
+                              {
+                                item.student.is_corp === true &&
+                                <div className='table__cell-badge-item'>
+                                  <span className='table__cell-badge table__cell-badge_color_blue'>Корп</span>
+                                </div>
+                              }
                             </div>
                           }
                         </div>
@@ -183,6 +190,10 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
                 {
                   item.student.is_och &&
                   <span className='table__cell-badge table__cell-badge_color_blue'>Очник</span>
+                }
+                {
+                  item.student.is_corp === true &&
+                  <span className='table__cell-badge table__cell-badge_color_blue'>Корп</span>
                 }
                 <p 
                   className='table-card__text table-card__text_weight_bold table-card__text_type_active table-card__title' 

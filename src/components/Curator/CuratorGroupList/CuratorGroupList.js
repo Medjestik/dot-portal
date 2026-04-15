@@ -4,6 +4,7 @@ import Preloader from '../../Preloader/Preloader.js';
 import Table from '../../Table/Table.js';
 import TableCard from '../../Table/TableCard/TableCard.js';
 import CuratorViewStudentPopup from '../CuratorPopup/CuratorViewStudentPopup.js';
+import './CuratorGroupList.css';
 
 function CuratorGroupList({ windowWidth, groupInfo }) {
 
@@ -22,6 +23,8 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
   const [currentStudent, setCurrentStudent] = React.useState({});
 
   const [isOpenViewStudentPopup, setIsOpenViewStudentPopup] = React.useState(false);
+  const [isSavingStudent, setIsSavingStudent] = React.useState(false);
+  const [isLoadingStudentInfo, setIsLoadingStudentInfo] = React.useState(false);
 
   function groupListRequest() {
     setIsLoadingList(true);
@@ -39,13 +42,37 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
     });
   }
 
-  function openViewStudentPopup(student) {
-    setCurrentStudent(student);
-    setIsOpenViewStudentPopup(true);
+  async function openViewStudentPopup(student) {
+    if (!student?.id) return;
+    if (isLoadingStudentInfo) return;
+
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+      setIsLoadingStudentInfo(true);
+      const detailed = await curatorApi.getStudentInfo({ token, studentId: student.id });
+      setCurrentStudent(detailed);
+      setIsOpenViewStudentPopup(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoadingStudentInfo(false);
+    }
   }
 
   function closePopup() {
     setIsOpenViewStudentPopup(false);
+  }
+
+  function handleStudentUpdated(updated) {
+    if (!updated?.id) return;
+    setGroupList((prev) =>
+      prev.map((s) => (String(s.id) === String(updated.id) ? { ...s, ...updated } : s))
+    );
+    setCurrentStudent((prev) =>
+      String(prev?.id) === String(updated.id) ? { ...prev, ...updated } : prev
+    );
   }
 
   React.useEffect(() => {
@@ -93,7 +120,7 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
             </div>
           </div>
           {
-            isLoadingList 
+            (isLoadingList || isLoadingStudentInfo)
             ?
             <Preloader />
             :
@@ -111,10 +138,16 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
                         </div>
                         <div className='table__column table__column_type_name'>
                           <p 
-                            className='table__text table__text_type_header table__text_type_active' 
+                            className='table__text table__text_type_header table__text_type_active curator-group-list__name' 
                             onClick={() => openViewStudentPopup(item)}
                           >
                             {item.fullname}
+                            {
+                              item.is_corp === true &&
+                              <span className='curator-group-list__corp'>
+                                <span className='table__cell-badge table__cell-badge_color_blue'>Корп</span>
+                              </span>
+                            }
                           </p>
                         </div>
                         <div className='table__column table__column_type_full'>
@@ -144,7 +177,7 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
       :
       <>
       {
-        isLoadingList
+        (isLoadingList || isLoadingStudentInfo)
         ?
         <Preloader />
         :
@@ -157,9 +190,15 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
             groupList.map((item, i) => (
               <li className='table-card__item' key={i}>
                 <p 
-                  className='table-card__text table-card__text_weight_bold table-card__text_type_active table-card__title' 
+                  className='table-card__text table-card__text_weight_bold table-card__text_type_active table-card__title curator-group-list__name' 
                   onClick={() => openViewStudentPopup(item)}>
                   {item.fullname}
+                  {
+                    item.is_corp === true &&
+                    <span className='curator-group-list__corp'>
+                      <span className='table__cell-badge table__cell-badge_color_blue'>Корп</span>
+                    </span>
+                  }
                 </p>
                 <ul className='data__list data__list_margin_top'>
                     <li className='data__item'>
@@ -192,6 +231,10 @@ function CuratorGroupList({ windowWidth, groupInfo }) {
       isOpen={isOpenViewStudentPopup}
       onClose={closePopup}
       currentStudent={currentStudent}
+      onStudentUpdated={handleStudentUpdated}
+      isSaving={isSavingStudent}
+      setIsSaving={setIsSavingStudent}
+      groupId={groupInfo.id}
       />
     }
     </>

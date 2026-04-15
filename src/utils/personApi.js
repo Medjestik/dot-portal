@@ -181,3 +181,16 @@ export const uploadDiploma = ({ token, data }) => {
   })
   .then(res => handleResponse(res))
 };
+
+export const notifyStudentAboutDebts = ({ token, student_id, ych_sem }) => {
+  return fetch(`${API_URL}/notifications/action/notify_student_about_debts`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ student_id, ych_sem })
+  })
+  .then(res => handleResponse(res));
+};

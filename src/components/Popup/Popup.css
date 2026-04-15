@@ -280,6 +280,23 @@
 .popup__field_margin_top {
   margin: 0px;
 }
+.popup__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+.popup__checkbox-input {
+  width: 16px;
+  height: 16px;
+}
+.popup__checkbox-caption {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--main-black-color);
+}
 .popup__field-container {
   margin: 12px 0px 0px 0px;
   display: flex;

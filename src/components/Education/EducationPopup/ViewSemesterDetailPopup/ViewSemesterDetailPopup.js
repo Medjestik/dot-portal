@@ -7,6 +7,7 @@ import PreloaderPopup from '../../../Preloader/PreloaderPopup/PreloaderPopup.js'
 import PopupSelect from '../../../Popup/PopupSelect/PopupSelect.js';
 import AdminSetMarkPopup from '../AdminSetMarkPopup/AdminSetMarkPopup.js';
 import AdminFixStatisticPopup from '../AdminFixStatisticPopup/AdminFixStatisticPopup.js';
+import CuratorViewStudentPopup from '../../../Curator/CuratorPopup/CuratorViewStudentPopup.js';
 import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 
 function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, currentSemesterId, role }) {
@@ -28,7 +29,12 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
   const [currentStudent, setCurrentStudent] = React.useState({});
   const [currentDiscipline, setCurrentDiscipline] = React.useState({});
 
-  const tableWidthRef = React.createRef();
+  const [isOpenEditStudentPopup, setIsOpenEditStudentPopup] = React.useState(false);
+  const [currentStudentForEdit, setCurrentStudentForEdit] = React.useState({});
+  const [isSavingStudent, setIsSavingStudent] = React.useState(false);
+  const [isLoadingStudentInfo, setIsLoadingStudentInfo] = React.useState(false);
+
+  const tableWidthRef = React.useRef(null);
 
   const [tableWidth, setTableWidth] = React.useState(0);
   const [isShowFullWidth, setIsShowFullWidth] = React.useState(false);
@@ -165,6 +171,38 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
     setIsOpenFixStatisticPopup(true);
   }
 
+  async function openEditStudentPopup(student) {
+    if (!student?.id) return;
+    if (isLoadingStudentInfo) return;
+
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+      setIsLoadingStudentInfo(true);
+      const detailed = await curatorApi.getStudentInfo({ token, studentId: student.id });
+      setCurrentStudentForEdit(detailed);
+      setIsOpenEditStudentPopup(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoadingStudentInfo(false);
+    }
+  }
+
+  function closeEditStudentPopup() {
+    setIsOpenEditStudentPopup(false);
+  }
+
+  function handleStudentUpdated(updated) {
+    if (!updated?.id) return;
+    setCurrentData((prev) => ({
+      ...prev,
+      students: (prev.students || []).map((s) => (String(s.id) === String(updated.id) ? { ...s, ...updated } : s)),
+    }));
+    setCurrentStudentForEdit((prev) => (String(prev?.id) === String(updated.id) ? { ...prev, ...updated } : prev));
+  }
+
   function closePopup() {
     setIsOpenSetMarkPopup(false);
     setIsOpenFixStatisticPopup(false);
@@ -225,10 +263,17 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
   };
 
   React.useEffect(() => {
-    if (!isLoadingInfo) {
+    if (isLoadingInfo || isLoadingStudentInfo) return;
+    if (!tableWidthRef.current) return;
+
+    // дождаться применения layout после рендера
+    const id = requestAnimationFrame(() => {
+      if (!tableWidthRef.current) return;
       setTableWidth(tableWidthRef.current.scrollWidth);
-    }
-  }, [isLoadingInfo, tableWidthRef]); 
+    });
+
+    return () => cancelAnimationFrame(id);
+  }, [isLoadingInfo, isLoadingStudentInfo, currentData]); 
 
   React.useEffect(() => {
     setIsLoadingInfo(false);
@@ -249,7 +294,7 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
       <div className='scroll popup__container'>
         <div className={`popup__form popup__form_width_${isShowFullWidth ? '100' : '1440'} popup__form_height_min`} >
         {
-        isLoadingInfo 
+        (isLoadingInfo || isLoadingStudentInfo)
         ?
         <PreloaderPopup />
         :
@@ -316,7 +361,20 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
                         <div className='popup__author-img popup__author-img_size_40'></div>
                         }
                         <div className='table-horizontal__cell-container'>
-                          <p className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_active'>{student.fullname}</p>
+                          <p
+                            className='table-horizontal__text table-horizontal__text_weight_bold table-horizontal__text_type_active'
+                            onClick={() => openEditStudentPopup(student)}
+                          >
+                            {student.fullname}
+                          </p>
+                          {
+                            student.is_corp === true &&
+                            <div className='table-horizontal__cell-badge-list table-horizontal__cell-badge-list_position_bottom'>
+                              <div className='table-horizontal__cell-badge-item'>
+                                <span className='table-horizontal__cell-badge table-horizontal__cell-badge_color_blue'>Корп</span>
+                              </div>
+                            </div>
+                          }
                           {
                             student.is_sub &&
                             <div className='table-horizontal__cell-badge-list table-horizontal__cell-badge-list_position_bottom'>
@@ -374,6 +432,21 @@ function ViewSemesterDetailPopup({ isOpen, onClose, groupId, semesterOptions, cu
         </div>
       </div>
     </div>
+
+    {
+      isOpenEditStudentPopup &&
+      <CuratorViewStudentPopup
+        isOpen={isOpenEditStudentPopup}
+        onClose={closeEditStudentPopup}
+        currentStudent={currentStudentForEdit}
+        onStudentUpdated={handleStudentUpdated}
+        isSaving={isSavingStudent}
+        setIsSaving={setIsSavingStudent}
+        semesterOptions={semesterOptions}
+        defaultSemesterId={currentSemesterOption?.id}
+        groupId={groupId}
+      />
+    }
 
     {
       isOpenSetMarkPopup &&

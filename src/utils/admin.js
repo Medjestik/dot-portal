@@ -419,7 +419,8 @@ export const removeDotStudent = ({ token, data }) => {
       body: JSON.stringify({ 
         user_id: data.userId, 
         dismiss_number: data.number, 
-        dismiss_reason: data.reason
+        dismiss_reason: data.reason,
+        is_another: data.isAnother,
       })
   })
   .then(res => handleResponse(res))

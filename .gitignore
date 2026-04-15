@@ -5,10 +5,16 @@
 /.pnp
 .pnp.js
 
+.vscode/
+
+.cursor
+docs/
 # testing
 /coverage
 
 # production
+
+AGENTS.md
 
 # misc
 .DS_Store
@@ -16,6 +22,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
+
+# local-only: external backend/API checkout / junctions
+/external/
 
 npm-debug.log*
 yarn-debug.log*

@@ -44,6 +44,18 @@ export const getGroupList = ({ token, groupId }) => {
   .then(res => handleResponse(res))
 };
 
+export const getStudentInfo = ({ token, studentId }) => {
+  return fetch(`${API_URL}/curators/action/get_student_info?id=${studentId}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    }
+  })
+  .then(res => handleResponse(res))
+};
+
 export const getGroupAdvertisement = ({ token, groupId }) => {
   return fetch(`${API_URL}/curators/action/announcements/group_id/${groupId}`, {  
     method: 'GET',
@@ -164,6 +176,26 @@ export const getGroupWebinar = ({ token, groupId }) => {
       'Content-Type': 'application/json',
       'Authorization': `Basic ${token}`,
     }
+  })
+  .then(res => handleResponse(res))
+};
+
+export const updateStudentInfo = ({ token, studentId, data }) => {
+  return fetch(`${API_URL}/curators/action/update_student_info?id=${studentId}`, {
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({
+      lastname: data.lastname,
+      firstname: data.firstname,
+      middlename: data.middlename,
+      is_corp: data.is_corp,
+      email: data.email,
+      phone: data.phone,
+    })
   })
   .then(res => handleResponse(res))
 };
