@@ -31,7 +31,8 @@ function Import-DotEnvFile([string]$path) {
 
 # Load local env files (without committing secrets)
 Import-DotEnvFile (Join-Path $PSScriptRoot "..\\.env.local")
-Import-DotEnvFile (Join-Path $PSScriptRoot "..\\.env")
+Import-DotEnvFile (Join-Path $PSScriptRoot "..\\.env.development.local")
+Import-DotEnvFile (Join-Path $PSScriptRoot "..\\.env.development")
 
 if ($ApiUrl.Trim()) {
   $env:REACT_APP_API_URL = $ApiUrl.Trim()
