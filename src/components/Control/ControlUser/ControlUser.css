@@ -6,8 +6,17 @@
 }
 
 .control-user-remove__dismiss-reason-select {
-  width: 50%;
-  min-width: 320px;
+  width: 100%;
+  min-width: 0;
+}
+
+.control-user-remove__dismiss-reason-select .select-search__options-container_status_open {
+  /* Делаем выпадающий список длиннее именно в этой форме */
+  max-height: 320px;
+}
+
+.control-user-remove__dismiss-reason-select .select-search__options-list {
+  max-height: 320px;
 }
 
 @media all and (max-width: 833px) {
