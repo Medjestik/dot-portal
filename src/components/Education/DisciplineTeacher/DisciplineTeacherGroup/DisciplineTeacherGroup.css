@@ -1,9 +1,22 @@
 .discipline-teacher-group {
   width: 100%;
-  margin: 24px 0px 0px;
+  margin: 0px 0px 0px;
   display: flex;
   flex-direction: column;
   flex-grow: 2;
+}
+
+.discipline-teacher-group__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 8px;
+}
+
+.discipline-teacher-group__export-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
 }
 
 @media all and (max-width: 833px) {

@@ -351,6 +351,7 @@ function CuratorDiscipline({ windowWidth, role }) {
                 windowWidth={windowWidth}
                 disciplineInfo={disciplineInfo}
                 disciplineStudents={filteredStudents}
+                groupName={groupInfo.name}
                 onOpenStudent={openStudent}
                 onChooseMark={openChooseMarkPopup}
                 onViewFiles={openViewFilesPopup}

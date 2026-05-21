@@ -20,7 +20,8 @@
     "react-scroll": "^1.8.6",
     "react-select": "^5.2.2",
     "react-simple-star-rating": "^4.0.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "dev": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts\\\\dev.ps1",

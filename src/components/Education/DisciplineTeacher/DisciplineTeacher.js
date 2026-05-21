@@ -309,6 +309,7 @@ function DisciplineTeacher({ windowWidth, currentSemester }) {
                 windowWidth={windowWidth}
                 disciplineInfo={disciplineInfo}
                 disciplineStudents={disciplineStudents}
+                groupName={groupInfo.current_name}
                 onOpenStudent={openStudent}
                 onChooseMark={openChooseMarkPopup}
                 onViewFiles={openViewFilesPopup}

@@ -2,8 +2,9 @@ import React from 'react';
 import './DisciplineTeacherGroup.css';
 import Table from '../../../Table/Table.js';
 import TableCard from '../../../Table/TableCard/TableCard.js';
+import { exportDisciplineStudentsToExcel } from '../../../../utils/exportDisciplineStudentsExcel.js';
 
-function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudents, onOpenStudent, onChooseMark, onViewFiles, onViewTests, onViewComments, onViewStudent }) {
+function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudents, groupName, onOpenStudent, onChooseMark, onViewFiles, onViewTests, onViewComments, onViewStudent }) {
 
   const containerHeightRef = React.createRef();
   const tableHeaderHeightRef = React.createRef();
@@ -48,6 +49,14 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
     }
   }
 
+  function handleExportExcel() {
+    exportDisciplineStudentsToExcel({
+      students: disciplineStudents,
+      disciplineInfo,
+      groupName,
+    });
+  }
+
   function renderCardMark(mark) {
     if (mark === 'Не аттестован') {
       return 'Н/А';
@@ -66,6 +75,16 @@ function DisciplineTeacherGroup({ windowWidth, disciplineInfo, disciplineStudent
 
   return (
     <div className='discipline-teacher-group'>
+      <div className='discipline-teacher-group__toolbar'>
+        <button
+          className='section__header-btn section__header-btn_type_fix discipline-teacher-group__export-btn'
+          type='button'
+          disabled={disciplineStudents.length === 0}
+          onClick={handleExportExcel}
+        >
+          Экспорт в Excel
+        </button>
+      </div>
       {
         windowWidth > 833
         ?
