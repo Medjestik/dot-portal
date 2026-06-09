@@ -1,7 +1,10 @@
 import React from 'react';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext.js';
+import '../../Education/DisciplineMaterials/DisciplineMaterials.css';
 
 function CourseMaterials({ windowWidth, materials, handleOpenMaterial }) {
 
+  const currentUser = React.useContext(CurrentUserContext);
   const [convertMaterials, setConvertMaterials] = React.useState([]);
 
   function convertArr(arr) {
@@ -65,6 +68,7 @@ function CourseMaterials({ windowWidth, materials, handleOpenMaterial }) {
               }
               {renderMaterialStatus(elem)}
             </div>
+            {renderTestExportBtn(elem)}
             {renderMaterialBtn(elem)}
           </li>
           :
@@ -87,7 +91,10 @@ function CourseMaterials({ windowWidth, materials, handleOpenMaterial }) {
             </div>
             <div className='discipline-materials__item-mobile'>
               {renderMaterialStatus(elem)}
-              {renderMaterialBtn(elem)}
+              <div className='discipline-materials__item-actions'>
+                {renderTestExportBtn(elem)}
+                {renderMaterialBtn(elem)}
+              </div>
             </div>
           </li>
         )
@@ -167,6 +174,21 @@ function CourseMaterials({ windowWidth, materials, handleOpenMaterial }) {
         <span className='discipline-materials__item-text discipline-materials__item-status'>Не начат</span>
       ) 
     }
+  }
+
+  function renderTestExportBtn(elem) {
+    if (currentUser.access_role !== 'admin' || elem.type !== 'test' || !elem.assessment_id) {
+      return null;
+    }
+    return (
+      <a
+        className='btn-icon btn-icon_margin_left btn-icon_color_accent-blue btn-icon_type_download'
+        href={`https://course.emiit.ru/view_doc.html?mode=export_test&test_id=${elem.assessment_id}`}
+        target='_blank'
+        rel='noreferrer'
+        title='Скачать'
+      > </a>
+    );
   }
 
   function renderMaterialBtn(elem) {

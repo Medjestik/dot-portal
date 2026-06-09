@@ -169,6 +169,10 @@
   flex-direction: column;
   justify-content: center;
 }
+.discipline-materials__item-actions {
+  display: flex;
+  align-items: center;
+}
 
 @media all and (max-width: 833px) {
   .discipline-materials__list {
