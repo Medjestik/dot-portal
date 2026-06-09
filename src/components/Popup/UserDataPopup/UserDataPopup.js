@@ -212,6 +212,8 @@ function UserDataPopup({ isOpen, onClose, currentUser, onChangeData, isLoadingRe
         </span>
       </div>
 
+      <a href='https://cloud.mail.ru/public/mRCd/2Y6K5T9d6' target='_blank' rel='noreferrer' className='popup__text popup__text-link'>Политика конфиденциальности РУТ (МИИТ)</a>
+
       <label className='checkbox checkbox_margin_top'>
         <input 
         name='user-agreement'
