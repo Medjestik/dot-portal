@@ -21,10 +21,10 @@ function HomePage({ onLogin, requestError, onHideRequestError, isLoadingRequest 
       <div className='home-page__info'>
         <div className='home-page__info-column'>
           <h4 className='home-page__info-title'>Техническая поддержка:</h4>
-          <p className='home-page__info-email'>ief07@bk.ru</p>
+          <p className='home-page__info-email'>ief80@rut-miit.ru</p>
         </div>
         <div className='home-page__info-column'>
-          <p className='home-page__info-copy'>2024, Российский университет транспорта</p>
+          <p className='home-page__info-copy'>{new Date().getFullYear()}, Российский университет транспорта</p>
         </div>
         
 
