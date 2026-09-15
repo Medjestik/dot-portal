@@ -384,6 +384,19 @@ export const createGroupSemester = ({ token, data }) => {
   .then(res => handleResponse(res))
 };
 
+export const removeGroupSemester = ({ token, id }) => {
+  return fetch(`${API_URL}/admin_semesters/action/delete_ych_sem`, { 
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Basic ${token}`,
+    },
+    body: JSON.stringify({ id })
+  })
+  .then(res => handleResponse(res))
+};
+
 export const createDotStudent = ({ token, data }) => {
   return fetch(`${API_URL}/admin/action/create_dot_student/`, {  
       method: 'POST',

@@ -5,6 +5,7 @@ import * as catalogApi from '../../../../utils/catalog.js';
 import Preloader from '../../../Preloader/Preloader';
 import Section from '../../../Section/Section';
 import Table from '../../../Table/Table.js';
+import ConfirmRemovePopup from '../../../Popup/ConfirmRemovePopup/ConfirmRemovePopup.js';
 import ControlSemesterGroupAddPopup from '../ControlSemesterPopup/ControlSemesterGroupAddPopup.js';
 
 function ControlSemesterGroup({ windowWidth }) {
@@ -23,6 +24,7 @@ function ControlSemesterGroup({ windowWidth }) {
 
   const [isOpenAddPopup, setIsOpenAddPopup] = React.useState(false);
   const [isOpenEditPopup, setIsOpenEditPopup] = React.useState(false);
+  const [isOpenRemovePopup, setIsOpenRemovePopup] = React.useState(false);
 
   const [isLoadingData, setIsLoadingData] = React.useState(false);
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
@@ -66,14 +68,38 @@ function ControlSemesterGroup({ windowWidth }) {
     })
     .catch((err) => {
       console.error(err);
-      setIsShowRequestError({ text: 'Произошла ошибка, попробуйте еще раз', isShow: true });
+      setIsShowRequestError({ text: 'Произошла ошибка, попробуйте ещё раз', isShow: true });
     })
     .finally(() => {  
       setIsLoadingRequest(false);
     });
   }
 
+  function handleRemoveGroupSemester(data) {
+    setIsLoadingRequest(true);
+    const token = localStorage.getItem('token');
+
+    adminApi.removeGroupSemester({
+      token: token,
+      id: data.id,
+    })
+      .then(() => {
+        setItems((prevItems) =>
+          prevItems.filter((item) => item.id !== data.id)
+        );
+        closeRemovePopup();
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsShowRequestError({ text: 'Произошла ошибка, попробуйте ещё раз', isShow: true });
+      })
+      .finally(() => {
+        setIsLoadingRequest(false);
+      });
+  }
+
   function openAddPopup() {
+    setIsShowRequestError({ isShow: false, text: '' });
     setIsOpenAddPopup(true);
   }
 
@@ -82,9 +108,19 @@ function ControlSemesterGroup({ windowWidth }) {
     setIsOpenEditPopup(true);
   }
 
+  function openRemovePopup(item) {
+    setIsShowRequestError({ isShow: false, text: '' });
+    setCurrentItem(item);
+    setIsOpenRemovePopup(true);
+  }
+
   function closePopup() {
     setIsOpenAddPopup(false);
     setIsOpenEditPopup(false);
+  }
+
+  function closeRemovePopup() {
+    setIsOpenRemovePopup(false);
   }
 
   React.useEffect(() => {
@@ -139,6 +175,7 @@ function ControlSemesterGroup({ windowWidth }) {
               </div>
               <div className='table__column table__column_type_header table__column_type_btn table__column_type_btn-header'>
                 <div className='btn-icon'></div>
+                <div className='btn-icon btn-icon_margin_left'></div>
               </div>
             </div>
             {
@@ -164,6 +201,7 @@ function ControlSemesterGroup({ windowWidth }) {
                     </div>
                     <div className='table__column table__column_type_btn'>
                       <button className='btn-icon btn-icon_color_accent-blue btn-icon_type_edit' type='button' onClick={() => {}}></button>
+                      <button className='btn-icon btn-icon_margin_left btn-icon_color_accent-orange btn-icon_type_cancel' type='button' onClick={() => openRemovePopup(item)}></button>
                     </div>
                   </li>
                 ))
@@ -186,6 +224,18 @@ function ControlSemesterGroup({ windowWidth }) {
           tutors={tutors}
           groupId={groupId}
           onSubmit={handleCreateSemesterGroup}
+          isLoadingRequest={isLoadingRequest}
+          isShowRequestError={isShowRequestError}
+        />
+      }
+      {
+        isOpenRemovePopup &&
+        <ConfirmRemovePopup
+          isOpen={isOpenRemovePopup}
+          onClose={closeRemovePopup}
+          popupName='remove-group-semester-popup'
+          data={currentItem}
+          onConfirm={handleRemoveGroupSemester}
           isLoadingRequest={isLoadingRequest}
           isShowRequestError={isShowRequestError}
         />
