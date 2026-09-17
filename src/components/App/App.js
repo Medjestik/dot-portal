@@ -39,6 +39,9 @@ function App() {
     api.login({ login, password })
       .then((res) => {
         localStorage.setItem('token', res.token);
+        document.cookie =
+          'student_code=' + encodeURIComponent(login) +
+          '; Domain=.emiit.ru; Path=/; Secure; SameSite=Lax; Max-Age=86400';
         tokenCheck();
       })
       .catch((err) => {
@@ -96,7 +99,7 @@ function App() {
     .then((res) => {
       //console.log('SemesterInfo', res);
       const newArr = res.map((item) => {
-        return ({ ...item, id: item.semesterId, name: 'РЎРµРјРµСЃС‚СЂ ' + item.position})
+        return ({ ...item, id: item.semesterId, name: 'Семестр ' + item.position})
       })
       setSemesterInfo(newArr);
       if (pathname === '/') {
@@ -139,6 +142,8 @@ function App() {
 
   function handleLogout() {
     localStorage.removeItem('token');
+    document.cookie =
+      'student_code=; Domain=.emiit.ru; Path=/; Secure; SameSite=Lax; Max-Age=0';
     setLoggedIn(false);
     setCurrentUser({});
     navigate('/');
@@ -277,7 +282,7 @@ function App() {
                         <Route path='webinars' element={
                           <Webinar
                           windowWidth={windowWidth}
-                          semesterOptions={[{name: 'РќРµ РІС‹Р±СЂР°РЅ', id: 'empty'}, ...semesterInfo.map((elem) => { return { name: elem.semesterName, id: elem.semesterId }}), {name: 'Р”СЂСѓРіРѕРµ', id: ''},]}
+                          semesterOptions={[{name: 'Не выбран', id: 'empty'}, ...semesterInfo.map((elem) => { return { name: elem.semesterName, id: elem.semesterId }}), {name: 'Другое', id: ''},]}
                           onLogout={handleLogout}
                           />
                         }/>
