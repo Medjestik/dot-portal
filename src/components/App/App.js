@@ -25,7 +25,7 @@ function App() {
 
   const [semesterInfo, setSemesterInfo] = React.useState([]);
 
-  const [requestError, setRequestError] = React.useState(false);
+  const [requestError, setRequestError] = React.useState('');
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false);
 
   const [isLoadingPage, setIsLoadingPage] = React.useState(true);
@@ -33,6 +33,16 @@ function App() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [windowWidth, setWindowWidth] = React.useState(0);
+
+  const NETWORK_ERROR_MESSAGE = 'К ѝожалению, произошла ошибка! Убедитеѝь, что у ваѝ отключен VPN или другие ѝервиѝы, влиѝющие на ѝетевое ѝоединение.';
+  const AUTH_ERROR_MESSAGES = {
+    'Wrong login': 'Неверный логин или пароль',
+    'Wrong password': 'Неверный логин или пароль',
+  };
+
+  function mapAuthErrorMessage(backendMessage) {
+    return AUTH_ERROR_MESSAGES[backendMessage] || NETWORK_ERROR_MESSAGE;
+  }
 
   function handleLogin(login, password) {
     setIsLoadingRequest(true);
@@ -44,9 +54,22 @@ function App() {
           '; Domain=.emiit.ru; Path=/; Secure; SameSite=Lax; Max-Age=86400';
         tokenCheck();
       })
-      .catch((err) => {
+      .catch(async (err) => {
         console.log(err);
-        setRequestError(true);
+        if (err && typeof err.status === 'number') {
+          let backendMessage = err.statusText || '';
+          try {
+            const data = await err.json();
+            if (data && data.message) {
+              backendMessage = data.message;
+            }
+          } catch (_) {
+            // keep statusText as fallback
+          }
+          setRequestError(mapAuthErrorMessage(backendMessage));
+          return;
+        }
+        setRequestError(NETWORK_ERROR_MESSAGE);
       })
       .finally(() => {
         setIsLoadingRequest(false);
@@ -137,7 +160,7 @@ function App() {
   }
 
   function handleHideRequestError() {
-    setRequestError(false);
+    setRequestError('');
   }
 
   function handleLogout() {
