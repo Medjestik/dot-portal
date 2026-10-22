@@ -34,7 +34,7 @@ function App() {
   const { pathname } = useLocation();
   const [windowWidth, setWindowWidth] = React.useState(0);
 
-  const NETWORK_ERROR_MESSAGE = 'К ѝожалению, произошла ошибка! Убедитеѝь, что у ваѝ отключен VPN или другие ѝервиѝы, влиѝющие на ѝетевое ѝоединение.';
+  const NETWORK_ERROR_MESSAGE = 'К сожалению, произошла ошибка! Убедитесь, что у вас отключен VPN или другие сервисы, влияющие на сетевое соединение.';
   const AUTH_ERROR_MESSAGES = {
     'Wrong login': 'Неверный логин или пароль',
     'Wrong password': 'Неверный логин или пароль',
@@ -122,7 +122,7 @@ function App() {
     .then((res) => {
       //console.log('SemesterInfo', res);
       const newArr = res.map((item) => {
-        return ({ ...item, id: item.semesterId, name: '������� ' + item.position})
+        return ({ ...item, id: item.semesterId, name: item.semesterName})
       })
       setSemesterInfo(newArr);
       if (pathname === '/') {
@@ -305,7 +305,7 @@ function App() {
                         <Route path='webinars' element={
                           <Webinar
                           windowWidth={windowWidth}
-                          semesterOptions={[{name: '�� ������', id: 'empty'}, ...semesterInfo.map((elem) => { return { name: elem.semesterName, id: elem.semesterId }}), {name: '������', id: ''},]}
+                          semesterOptions={[{name: 'Не выбран', id: 'empty'}, ...semesterInfo.map((elem) => { return { name: elem.semesterName, id: elem.semesterId }}), {name: 'Другое', id: ''},]}
                           onLogout={handleLogout}
                           />
                         }/>
