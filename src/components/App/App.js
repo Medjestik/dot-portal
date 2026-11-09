@@ -186,7 +186,7 @@ function App() {
 
   React.useEffect(() => {
     if (pathname === '/webinar.html') {
-      window.location.replace('https://pruffme.com/landing/u2634840/7220298036932603618');
+      window.location.replace('https://pruffme.com/landing/u2634840/7347753223716862698');
     }
   }, [pathname]);
 
