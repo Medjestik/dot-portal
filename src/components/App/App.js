@@ -190,7 +190,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    if (pathname === '/webinar' || pathname === '/webinar/') {
+    if (pathname === '/webinar.html') {
       window.location.replace('https://pruffme.com/landing/u2634840/7347753359562885461');
     }
   }, [pathname]);
@@ -239,8 +239,6 @@ function App() {
           <div></div>
           :
           <Routes>
-
-            <Route path='/webinar' element={<></>} />
 
             <Route exact path='/' element={
               <HomePage 
