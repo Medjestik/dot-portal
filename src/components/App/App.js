@@ -77,6 +77,11 @@ function App() {
   }
 
   function tokenCheck () {
+    if (pathname === '/webinar' || pathname === '/webinar/') {
+      setIsLoadingPage(false);
+      return;
+    }
+
     const token = localStorage.getItem('token');
     if (token) {
       setIsLoadingPage(true);
@@ -185,7 +190,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    if (pathname === '/webinar.html') {
+    if (pathname === '/webinar' || pathname === '/webinar/') {
       window.location.replace('https://pruffme.com/landing/u2634840/7347753359562885461');
     }
   }, [pathname]);
@@ -234,6 +239,8 @@ function App() {
           <div></div>
           :
           <Routes>
+
+            <Route path='/webinar' element={<></>} />
 
             <Route exact path='/' element={
               <HomePage 
